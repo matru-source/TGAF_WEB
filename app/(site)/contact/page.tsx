@@ -6,7 +6,7 @@ import ContactMap from "@/components/site/ContactMap";
 export const metadata: Metadata = {
   title: "Contact · Goodearth Foods",
   description:
-    "Get in touch with TG Agri Farms / Goodearth Foods — Ikorodu, Lagos. Enquiries for consumer, bulk, export and distribution partnerships.",
+    "Get in touch with TG Agri Farms / Goodearth Foods - Ikorodu, Lagos. Enquiries for consumer, bulk, export and distribution partnerships.",
 };
 
 export default function ContactPage() {

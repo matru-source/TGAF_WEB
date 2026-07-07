@@ -17,7 +17,7 @@ export default function Newsletter() {
       });
       if (!res.ok) throw new Error();
       setStatus("ok");
-      setMsg("You're on the list — thank you!");
+      setMsg("You're on the list - thank you!");
       e.currentTarget.reset();
     } catch {
       setStatus("error");
@@ -29,7 +29,7 @@ export default function Newsletter() {
     <div className="newsletter">
       <div className="nl-copy">
         <h3>Stay in the loop</h3>
-        <p>New products, market updates and partnership news — straight to your inbox.</p>
+        <p>New products, market updates and partnership news - straight to your inbox.</p>
       </div>
       <form className="nl-form" onSubmit={onSubmit}>
         <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address" />

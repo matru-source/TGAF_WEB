@@ -68,7 +68,7 @@ export default async function ProductsPage() {
                     <span className={`badge-pill bp-${p.segment.toLowerCase()}`}>{p.segment}</span>
                   </td>
                   <td style={{ color: "var(--ink-2)", fontSize: ".85rem" }}>
-                    {[...p.sizes, ...p.formats].join(", ") || "—"}
+                    {[...p.sizes, ...p.formats].join(", ") || "-"}
                   </td>
                   <td>
                     <span className={`badge-pill ${p.published ? "bp-on" : "bp-off"}`}>

@@ -13,10 +13,10 @@ export default function MarketOverview() {
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">Market overview</span>
-          <h2>Why Goodearth leads — and what we&apos;re solving</h2>
+          <h2>Why Goodearth leads - and what we&apos;re solving</h2>
           <p className="muted">
             Wide product usage, quality &amp; hygiene, and continuous supply in a category with no major
-            competitor — addressing real gaps in Nigeria&apos;s spice market.
+            competitor - addressing real gaps in Nigeria&apos;s spice market.
           </p>
         </div>
         <div className="swot-grid">

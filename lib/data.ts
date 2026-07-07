@@ -54,7 +54,7 @@ export const DEFAULT_STATS: { key: string; value: number; suffix?: string; label
 export const SPICES: { key: AccentKey; tag: string; name: string; hex: string; body: string }[] = [
   {
     key: "chilli", tag: "Chilli · Peppe", name: "Chilli", hex: "#B5121B",
-    body: "From mild Atarodo to fiery Cameroon Peppe — sun-dried, steam-sterilised and milled to keep its vivid red and bold heat.",
+    body: "From mild Atarodo to fiery Cameroon Peppe - sun-dried, steam-sterilised and milled to keep its vivid red and bold heat.",
   },
   {
     key: "turmeric", tag: "Turmeric", name: "Turmeric", hex: "#E0A52E",
@@ -71,7 +71,7 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
     id: "turmeric", slug: "turmeric-powder", name: "Turmeric Powder", segment: "B2C",
     accent: "turmeric", tagline: "Turmeric", image: "/img/product-turmeric.png",
-    description: "Pure, golden turmeric — rich in colour and warmth for everyday Nigerian cooking.",
+    description: "Pure, golden turmeric - rich in colour and warmth for everyday Nigerian cooking.",
     sizes: ["100 g"], formats: [],
   },
   {
@@ -92,7 +92,7 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
     id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe Powder", segment: "B2C",
     accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/img/product-atarodo.png",
-    description: "Dark-red scotch-bonnet style pepper — a mass-market staple for everyday heat.",
+    description: "Dark-red scotch-bonnet style pepper - a mass-market staple for everyday heat.",
     sizes: ["8 g", "3 g"], formats: [],
     costPositioning: "Low–Medium cost", marketCategory: "Scotch-bonnet · mass-market staple",
     colour: "Dark red", asta: "50–60", scoville: "~60,000 SHU",
@@ -101,10 +101,10 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
     id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe Powder", segment: "B2C",
     accent: "chilli", tagline: "Chilli · Gourmet", image: "/img/product-cameroon-peppe.png",
-    description: "Deep red, smoky and pungent — a gourmet, authentic powder for soups & noodles.",
+    description: "Deep red, smoky and pungent - a gourmet, authentic powder for soups & noodles.",
     sizes: ["100 g", "50 g", "3 g"], formats: [],
     costPositioning: "High cost", marketCategory: "Gourmet / authentic · premium niche",
-    colour: "Deep red & brown", asta: "—", scoville: "~90,000 SHU",
+    colour: "Deep red & brown", asta: "-", scoville: "~90,000 SHU",
     usage: "For soups & noodles",
   },
 ];
@@ -118,7 +118,7 @@ export const B2B_PORTFOLIO: { key: string; letter: string; accent: AccentKey; na
 
 // ---- Process steps ----
 export const PROCESS_STEPS = [
-  { title: "Cultivate & source", body: "We source chilli, turmeric and ginger varieties with the pungency and colour our customers require — supporting smallholder farmers to grow profitably." },
+  { title: "Cultivate & source", body: "We source chilli, turmeric and ginger varieties with the pungency and colour our customers require - supporting smallholder farmers to grow profitably." },
   { title: "Harvest & sun-dry", body: "Matured fruits are plucked and sun-dried to reduce moisture by ~85%, then registered, bagged and moved to our Kaduna warehouse." },
   { title: "Process & sterilise", body: "At our Ikorodu mill, materials pass rigorous stages to remove foreign matter, then are ground, steam-sterilised and packed to spec." },
   { title: "Crush, pack & sell", body: "We crush, kibble, slice, powder and package, then sell to both businesses and consumers across Nigerian markets." },
@@ -136,7 +136,7 @@ export const FACILITY_CAPS = ["Cleaning", "Grinding", "Blending", "Sieving", "St
 export const IMPACT_CARDS = [
   { n: "10,000", suffix: "+", count: 10000, title: "Agricultural & processing jobs", body: "Across farming, processing and distribution networks." },
   { n: "700,000", suffix: "", count: 700000, title: "Man-days of agri employment", body: "Seasonal and year-round work for rural communities." },
-  { n: "95%", suffix: "", count: 0, title: "Nigerian staff", body: "Of total staff — youth and women included across functions." },
+  { n: "95%", suffix: "", count: 0, title: "Nigerian staff", body: "Of total staff - youth and women included across functions." },
   { n: "Women-led", suffix: "", count: 0, title: "B2C micro-distribution", body: "Empowering women through micro-distributor sales, with reduced spoilage and stable food prices." },
 ];
 export const IMPACT_TAGS = ["350+ farmers trained", "12 farmers' markets", "7 aggregators", "300 processing & logistics jobs", "Fair-pricing agreements", "Reduced post-harvest losses", "Export diversification"];
@@ -161,22 +161,23 @@ export const TEAM = [
 ];
 
 // ---- Certifications ----
-export const CERTS = [
-  { abbr: "SON", full: "Standards Organisation of Nigeria" },
-  { abbr: "NAFDAC", full: "Nat. Agency for Food & Drug Admin. & Control" },
-  { abbr: "Halal", full: "Halal Certification Authority" },
-  { abbr: "US FDA", full: "Food & Drug Administration" },
-  { abbr: "MAN", full: "Manufacturers Association of Nigeria" },
-  { abbr: "NEPC", full: "Nigerian Export Promotion Council" },
-  { abbr: "FSSC 22000", full: "Food Safety System Certification" },
-  { abbr: "Farm to Fork", full: "Full traceability, end-to-end" },
+// `logo` points to a file in /public/img/certs/. If the file is missing the
+// card falls back to a styled text badge (see components/site/CertLogo.tsx).
+export const CERTS: { abbr: string; full: string; logo?: string }[] = [
+  { abbr: "SON", full: "Standards Organisation of Nigeria", logo: "/img/certs/son.png" },
+  { abbr: "NAFDAC", full: "Nat. Agency for Food & Drug Admin. & Control", logo: "/img/certs/nafdac.png" },
+  { abbr: "Halal", full: "Halal Certification Authority", logo: "/img/certs/halal.png" },
+  { abbr: "US FDA", full: "Food & Drug Administration", logo: "/img/certs/fda.png" },
+  { abbr: "MAN", full: "Manufacturers Association of Nigeria", logo: "/img/certs/man.png" },
+  { abbr: "NEPC", full: "Nigerian Export Promotion Council", logo: "/img/certs/nepc.png" },
+  { abbr: "FSSC 22000", full: "Food Safety System Certification", logo: "/img/certs/fssc-22000.png" },
 ];
 
 // ---- Value props (why Naija families trust us) ----
 export const VALUE_PROPS: { icon: string; title: string; body: string }[] = [
-  { icon: "sprout", title: "100% Naija sourced", body: "Grown by 350+ local farmers across the country — no imports, pure home-grown goodness." },
+  { icon: "sprout", title: "100% Naija sourced", body: "Grown by 350+ local farmers across the country - no imports, pure home-grown goodness." },
   { icon: "shield", title: "Pure & hygienic", body: "Steam-sterilised and milled to lock in natural colour and aroma. Clean peppe, every time." },
-  { icon: "wallet", title: "For every pocket", body: "From ₦-friendly 3 g sachets to bulk bags — Goodearth dey for everybody." },
+  { icon: "wallet", title: "For every pocket", body: "From ₦-friendly 3 g sachets to bulk bags - Goodearth dey for everybody." },
   { icon: "users", title: "Trusted everywhere", body: "In 170+ markets, 8,700+ retailers and kitchens across 15+ states." },
 ];
 
@@ -184,7 +185,7 @@ export const VALUE_PROPS: { icon: string; title: string; body: string }[] = [
 export const TESTIMONIALS: { quote: string; name: string; role: string; place: string; accent: AccentKey }[] = [
   { quote: "Goodearth peppe na correct one. My customers dey always come back for the colour and the sweet aroma.", name: "Mama Ngozi", role: "Pepper seller", place: "Mile 12 Market, Lagos", accent: "chilli" },
   { quote: "I use the turmeric for my rice and stew. E clean, e pure, and small quantity dey do plenty work.", name: "Aisha Bello", role: "Home cook", place: "Kano", accent: "turmeric" },
-  { quote: "Consistent supply and fair price. Goodearth dey reliable — that's why I stock dem every week.", name: "Emeka Obi", role: "Distributor", place: "Aba, Abia", accent: "ginger" },
+  { quote: "Consistent supply and fair price. Goodearth dey reliable - that's why I stock dem every week.", name: "Emeka Obi", role: "Distributor", place: "Aba, Abia", accent: "ginger" },
   { quote: "The Cameroon Peppe sweet pass! My soup no fit taste the same again without am.", name: "Blessing Eze", role: "Caterer", place: "Onitsha, Anambra", accent: "chilli" },
 ];
 
@@ -226,14 +227,14 @@ export const SOCIALS: { name: string; icon: string; href: string }[] = [
 // ---- Leadership / governance (for bankers & investors) ----
 export const GOVERNANCE = [
   { title: "Board oversight", body: "An experienced board provides strategic direction and governance across finance, operations and market development." },
-  { title: "Financial discipline", body: "Qualified finance leadership, audited accounts and transparent reporting — built for banking and investor confidence." },
+  { title: "Financial discipline", body: "Qualified finance leadership, audited accounts and transparent reporting - built for banking and investor confidence." },
   { title: "Proven management", body: "Decades of combined FMCG and agribusiness experience across international and Nigerian markets." },
 ];
 
 // ---- ESG pillars ----
 export const ESG: { key: string; letter: string; title: string; accent: AccentKey; points: string[] }[] = [
   { key: "environmental", letter: "E", title: "Environmental", accent: "ginger", points: ["Reduced post-harvest losses through modern drying, grinding & packaging", "Efficient, low-waste automated processing at Ikorodu", "Sourcing that protects natural colour and aroma"] },
-  { key: "social", letter: "S", title: "Social", accent: "chilli", points: ["100% support to local farmers — no import dependence", "350+ farmers trained on post-harvest handling & quality", "Women-led B2C micro-distribution; jobs for youth & women"] },
+  { key: "social", letter: "S", title: "Social", accent: "chilli", points: ["100% support to local farmers - no import dependence", "350+ farmers trained on post-harvest handling & quality", "Women-led B2C micro-distribution; jobs for youth & women"] },
   { key: "governance", letter: "G", title: "Governance", accent: "turmeric", points: ["Food-safety systems & full farm-to-fork traceability", "Certified to national and international standards", "Fair-pricing agreements and transparent supply chains"] },
 ];
 
@@ -297,7 +298,7 @@ export const NEWS: {
     slug: "nationwide-market-reach",
     title: "Goodearth now in 170+ markets nationwide",
     date: "2026-01-15", category: "Growth", image: "/img/photo-market.jpg",
-    excerpt: "From farm to shelf across all five geopolitical zones — 8,700+ retailers and 2,600+ wholesalers.",
+    excerpt: "From farm to shelf across all five geopolitical zones - 8,700+ retailers and 2,600+ wholesalers.",
     body: [
       "Our nationwide network now spans 15+ states and 170+ markets, served by 250 distributors and 2,600+ wholesalers.",
       "Women-led micro-distribution brings Goodearth spices to streets and kitchens across Nigeria.",

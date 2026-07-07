@@ -10,7 +10,7 @@ export default function EsgPillars() {
           <span className="eyebrow">ESG framework</span>
           <h2>Environmental, social &amp; governance</h2>
           <p className="muted">
-            Sustainability is built into how we source, process and sell — creating value for farmers,
+            Sustainability is built into how we source, process and sell - creating value for farmers,
             communities and the environment.
           </p>
         </div>

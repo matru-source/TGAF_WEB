@@ -53,45 +53,59 @@ export default function Header() {
   const activeGroup = (children: Leaf[]) => children.some((c) => pathname.startsWith(c.href));
 
   return (
-    <header className={`header${scrolled ? " scrolled" : ""}`}>
-      <div className="container nav">
-        <Brand />
-        <nav className="nav-links" aria-label="Primary">
-          {NAV.map((item) =>
-            item.children ? (
-              <div className={`nav-item has-dd${activeGroup(item.children) ? " active" : ""}`} key={item.label}>
-                <button className="nav-trigger" aria-haspopup="true">
-                  {item.label}
-                  <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
-                </button>
-                <div className="dd">
-                  <div className="dd-inner">
-                    {item.children.map((c) => (
-                      <Link key={c.href} href={c.href} className={activeLeaf(c.href) ? "active" : ""}>
-                        {c.label}
-                      </Link>
-                    ))}
+    <>
+      <header className={`header${scrolled ? " scrolled" : ""}`}>
+        <div className="container nav">
+          <Brand />
+          <nav className="nav-links" aria-label="Primary">
+            {NAV.map((item) =>
+              item.children ? (
+                <div className={`nav-item has-dd${activeGroup(item.children) ? " active" : ""}`} key={item.label}>
+                  <button className="nav-trigger" aria-haspopup="true">
+                    {item.label}
+                    <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </button>
+                  <div className="dd">
+                    <div className="dd-inner">
+                      {item.children.map((c) => (
+                        <Link key={c.href} href={c.href} className={activeLeaf(c.href) ? "active" : ""}>
+                          {c.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ) : (
-              <Link key={item.href} href={item.href!} className={`nav-item${activeLeaf(item.href!) ? " active" : ""}`} aria-current={activeLeaf(item.href!) ? "page" : undefined}>
-                {item.label}
+              ) : (
+                <Link key={item.href} href={item.href!} className={`nav-item${activeLeaf(item.href!) ? " active" : ""}`} aria-current={activeLeaf(item.href!) ? "page" : undefined}>
+                  {item.label}
+                </Link>
+              ),
+            )}
+            <div className="nav-drawer-cta">
+              <Link href="/contact" className="btn btn-primary">
+                Get in touch <span className="arr">→</span>
               </Link>
-            ),
-          )}
-        </nav>
-        <div className="nav-cta">
-          <Link href="/contact" className="btn btn-primary">
-            Get in touch <span className="arr">→</span>
-          </Link>
-          <button className="nav-toggle" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
-            <span></span>
-          </button>
+              <span className="nav-drawer-note">Premium spices, farm to fork.</span>
+            </div>
+          </nav>
+          <div className="nav-cta">
+            <Link href="/contact" className="btn btn-primary">
+              Get in touch <span className="arr">→</span>
+            </Link>
+            <button className="nav-toggle" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
+              <span></span>
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+      <button
+        className="nav-scrim"
+        aria-hidden="true"
+        tabIndex={-1}
+        onClick={() => setOpen(false)}
+      />
+    </>
   );
 }

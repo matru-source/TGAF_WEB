@@ -11,7 +11,7 @@ export default function Hero({ featuredImage = "/img/product-hot-peppe.png" }: {
               Na correct! <em>Naija peppe.</em>
             </h1>
             <p className="lead reveal d2">
-              From the market to your pot — premium chilli, turmeric and ginger, grown by Nigerian hands
+              From the market to your pot - premium chilli, turmeric and ginger, grown by Nigerian hands
               and milled in our world-class Ikorodu facility. <strong>Peppe wey pass peppe.</strong>
             </p>
             <div className="hero-actions reveal d3">

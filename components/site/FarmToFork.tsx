@@ -10,7 +10,7 @@ export default function FarmToFork() {
           <span className="eyebrow">The journey</span>
           <h2>From seed in the soil to spice in your pot</h2>
           <p className="muted">
-            A rigorous, traceable journey that protects natural colour, aroma and quality at every stage —
+            A rigorous, traceable journey that protects natural colour, aroma and quality at every stage -
             the heart of our farm-to-fork model.
           </p>
         </div>
@@ -34,7 +34,7 @@ export default function FarmToFork() {
             <span className="eyebrow">Grown by Nigerian hands</span>
             <h2 style={{ margin: ".4rem 0 1rem" }}>Real farms, real farmers</h2>
             <p className="muted">
-              We support smallholder farmers to grow chilli, turmeric and ginger profitably — cultivating
+              We support smallholder farmers to grow chilli, turmeric and ginger profitably - cultivating
               varieties with the pungency and colour our customers require. Matured fruits are sun-dried to
               reduce moisture by ~85%, registered, and moved to our Kaduna warehouse before processing.
             </p>

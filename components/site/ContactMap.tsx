@@ -5,7 +5,7 @@ export default function ContactMap() {
       <div className="container">
         <div className="contact-map reveal">
           <iframe
-            title="TG Agri Farms — Ikorodu location"
+            title="TG Agri Farms - Ikorodu location"
             src={`https://www.google.com/maps?q=${q}&output=embed`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

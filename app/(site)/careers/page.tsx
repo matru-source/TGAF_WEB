@@ -4,7 +4,7 @@ import Careers from "@/components/site/Careers";
 
 export const metadata: Metadata = {
   title: "Careers · Goodearth Foods",
-  description: "Build a career with purpose at TG Agri Farms — roles across manufacturing, quality, sales and supply chain.",
+  description: "Build a career with purpose at TG Agri Farms - roles across manufacturing, quality, sales and supply chain.",
 };
 
 export default function CareersPage() {

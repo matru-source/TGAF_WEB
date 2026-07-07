@@ -23,7 +23,7 @@ export default function Products({ products }: { products: UIProduct[] }) {
           <span className="eyebrow">Our portfolio</span>
           <h2>Spices for every kitchen &amp; every business</h2>
           <p className="muted">
-            A complete range across consumer packs and bulk B2B formats — chilli, turmeric and ginger in
+            A complete range across consumer packs and bulk B2B formats - chilli, turmeric and ginger in
             powder, whole, crushed, sliced and kibbled forms.
           </p>
         </div>
@@ -126,7 +126,7 @@ export default function Products({ products }: { products: UIProduct[] }) {
                         </td>
                         <td>{p.marketCategory}</td>
                         <td>
-                          {[p.colour, p.asta && p.asta !== "—" ? `ASTA ${p.asta}` : null, p.scoville, p.usage]
+                          {[p.colour, p.asta && p.asta !== "-" ? `ASTA ${p.asta}` : null, p.scoville, p.usage]
                             .filter(Boolean)
                             .join(" · ")}
                         </td>

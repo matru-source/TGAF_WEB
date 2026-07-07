@@ -16,14 +16,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Goodearth Foods · TG Agri Farms Ltd — Farm to Fork Spices, Nigeria",
+  title: "Goodearth Foods · TG Agri Farms Ltd - Farm to Fork Spices, Nigeria",
   description:
-    "Goodearth Foods by TG Agri Farms Ltd — premium farm-to-fork chilli, turmeric and ginger spices, processed in our world-class Ikorodu facility. Na Correct! Naija Peppe.",
+    "Goodearth Foods by TG Agri Farms Ltd - premium farm-to-fork chilli, turmeric and ginger spices, processed in our world-class Ikorodu facility. Na Correct! Naija Peppe.",
   metadataBase: new URL("https://goodearthagriventures.com"),
   openGraph: {
-    title: "Goodearth Foods — Farm to Fork Spices, Nigeria",
+    title: "Goodearth Foods - Farm to Fork Spices, Nigeria",
     description:
-      "Premium chilli, turmeric and ginger — grown by Nigerian hands, processed to world-class standards.",
+      "Premium chilli, turmeric and ginger - grown by Nigerian hands, processed to world-class standards.",
     type: "website",
   },
   // Favicon is served automatically from app/icon.png (and app/apple-icon.png).

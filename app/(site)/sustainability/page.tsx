@@ -6,7 +6,7 @@ import CtaBand from "@/components/site/CtaBand";
 
 export const metadata: Metadata = {
   title: "Sustainability & ESG · Goodearth Foods",
-  description: "Our ESG commitments — 10,000+ jobs, 700,000 man-days, women-led distribution, 100% support to local farmers and food-safety governance.",
+  description: "Our ESG commitments - 10,000+ jobs, 700,000 man-days, women-led distribution, 100% support to local farmers and food-safety governance.",
 };
 
 export default function SustainabilityPage() {
@@ -15,7 +15,7 @@ export default function SustainabilityPage() {
       <PageHero
         eyebrow="Sustainability & ESG"
         title={<>Growing spices, growing communities</>}
-        subtitle="No dependence on imports — strengthening rural economies, farmers and Nigeria's food security."
+        subtitle="No dependence on imports - strengthening rural economies, farmers and Nigeria's food security."
         crumb="Sustainability"
         tone="green"
       />

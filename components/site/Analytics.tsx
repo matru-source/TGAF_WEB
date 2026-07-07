@@ -1,7 +1,7 @@
 "use client";
 import Script from "next/script";
 
-/** Google Analytics 4 — only loads when NEXT_PUBLIC_GA_ID is set. */
+/** Google Analytics 4 - only loads when NEXT_PUBLIC_GA_ID is set. */
 export default function Analytics() {
   const id = process.env.NEXT_PUBLIC_GA_ID;
   if (!id) return null;

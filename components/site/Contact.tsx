@@ -29,7 +29,7 @@ export default function Contact() {
       if (!res.ok) throw new Error("failed");
       const first = String(data.name || "there").split(" ")[0];
       setStatus("ok");
-      setNote(`Thank you, ${first}! Your enquiry has been received — we'll reply within 2 business days.`);
+      setNote(`Thank you, ${first}! Your enquiry has been received - we'll reply within 2 business days.`);
       form.reset();
     } catch {
       setStatus("error");

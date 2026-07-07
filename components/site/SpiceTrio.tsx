@@ -8,7 +8,7 @@ export default function SpiceTrio() {
       <div className="container">
         <div className="section-head center reveal">
           <span className="eyebrow center">Three signature spices</span>
-          <h2>Colour, heat &amp; aroma — in their purest form</h2>
+          <h2>Colour, heat &amp; aroma - in their purest form</h2>
           <p className="muted">
             Every Goodearth product begins with one of three crops, grown by smallholder farmers and
             processed to lock in natural colour and aroma.

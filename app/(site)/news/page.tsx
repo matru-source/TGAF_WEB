@@ -4,7 +4,7 @@ import NewsList from "@/components/site/NewsList";
 
 export const metadata: Metadata = {
   title: "News & Media · Goodearth Foods",
-  description: "Latest news and updates from TG Agri Farms — operations, community and growth.",
+  description: "Latest news and updates from TG Agri Farms - operations, community and growth.",
 };
 
 export default function NewsPage() {

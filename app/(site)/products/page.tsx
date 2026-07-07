@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Products · Goodearth Foods",
   description:
-    "Goodearth chilli, turmeric and ginger — consumer packs and bulk B2B formats. Hot Peppe, Atarodo and Cameroon Peppe powders.",
+    "Goodearth chilli, turmeric and ginger - consumer packs and bulk B2B formats. Hot Peppe, Atarodo and Cameroon Peppe powders.",
 };
 
 export default async function ProductsPage() {
@@ -19,7 +19,7 @@ export default async function ProductsPage() {
       <PageHero
         eyebrow="Our portfolio"
         title={<>Peppe, turmeric &amp; ginger for everybody</>}
-        subtitle="A complete range across consumer packs and bulk formats — sabi quality from farm to pot."
+        subtitle="A complete range across consumer packs and bulk formats - sabi quality from farm to pot."
         crumb="Products"
         tone="chilli"
       />

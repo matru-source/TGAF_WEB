@@ -15,7 +15,7 @@ const accentToKey = (a: string): AccentKey =>
 const DB_URL = process.env.DATABASE_URL || "";
 const DB_DISABLED = !DB_URL || /ep-example|user:password|change-me/i.test(DB_URL);
 
-// Never let a slow/unreachable DB block rendering — fall back after `ms`.
+// Never let a slow/unreachable DB block rendering - fall back after `ms`.
 function withTimeout<T>(p: Promise<T>, ms: number): Promise<T | null> {
   return Promise.race([
     p.catch(() => null),

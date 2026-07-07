@@ -10,7 +10,7 @@ export default function Impact() {
           <span className="eyebrow center">Impact &amp; sustainability</span>
           <h2>Growing spices, growing communities</h2>
           <p style={{ color: "#C7C2B4" }}>
-            No dependence on imports. 100% support to local farmers — strengthening rural economies and
+            No dependence on imports. 100% support to local farmers - strengthening rural economies and
             Nigeria&apos;s food security.
           </p>
         </div>
