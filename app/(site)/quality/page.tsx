@@ -7,7 +7,7 @@ import CtaBand from "@/components/site/CtaBand";
 
 export const metadata: Metadata = {
   title: "Quality & Certifications · Goodearth Foods",
-  description: "Food-safety systems, steam sterilisation, full traceability and certifications — NAFDAC, SON, Halal, US FDA, FSSC 22000 and more.",
+  description: "Food-safety systems, steam sterilisation, full traceability and certifications - NAFDAC, SON, Halal, US FDA, FSSC 22000 and more.",
 };
 
 export default function QualityPage() {
@@ -16,7 +16,7 @@ export default function QualityPage() {
       <PageHero
         eyebrow="Quality & certifications"
         title={<>Certified, hygienic, traceable</>}
-        subtitle="Food safety and traceability are built into every batch — verified by national and international standards."
+        subtitle="Food safety and traceability are built into every batch - verified by national and international standards."
         crumb="Quality"
         tone="warm"
       />

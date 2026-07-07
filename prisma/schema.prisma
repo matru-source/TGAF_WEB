@@ -1,4 +1,4 @@
-// Goodearth Foods — Prisma schema
+// Goodearth Foods - Prisma schema
 // Data store: NeonDB (PostgreSQL, serverless)
 // Use the Neon "Pooled connection" string in DATABASE_URL (.env).
 
@@ -54,7 +54,7 @@ model Category {
   products    Product[]
 }
 
-/// Catalogue item — consumer (B2C) or bulk (B2B).
+/// Catalogue item - consumer (B2C) or bulk (B2B).
 model Product {
   id          String   @id @default(cuid())
   slug        String   @unique

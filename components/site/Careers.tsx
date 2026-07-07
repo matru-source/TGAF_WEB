@@ -33,7 +33,7 @@ export default function Careers() {
       });
       if (!res.ok) throw new Error();
       setStatus("ok");
-      setNote("Thank you — your application has been received. We'll be in touch.");
+      setNote("Thank you - your application has been received. We'll be in touch.");
       e.currentTarget.reset();
       setRole("");
     } catch {
@@ -49,7 +49,7 @@ export default function Careers() {
           <div className="section-head reveal">
             <span className="eyebrow">Why work with us</span>
             <h2>Build a career with purpose</h2>
-            <p className="muted">Join a scaling Nigerian company doing world-class work — from farm to fork.</p>
+            <p className="muted">Join a scaling Nigerian company doing world-class work - from farm to fork.</p>
           </div>
           <div className="feature-grid">
             {CAREER_VALUES.map((v, i) => (

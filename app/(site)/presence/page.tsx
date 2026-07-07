@@ -16,7 +16,7 @@ export default function PresencePage() {
       <PageHero
         eyebrow="Markets & presence"
         title={<>We dey your market</>}
-        subtitle="From farm to processing to shelf — across all five geopolitical zones, 15+ states and 170+ markets."
+        subtitle="From farm to processing to shelf - across all five geopolitical zones, 15+ states and 170+ markets."
         crumb="Markets"
         tone="warm"
       />

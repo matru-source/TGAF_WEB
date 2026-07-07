@@ -13,7 +13,7 @@ export default function About() {
           </div>
           <div className="about-copy reveal d1">
             <span className="eyebrow">About us</span>
-            <h2>We manage the whole journey — farm to fork.</h2>
+            <h2>We manage the whole journey - farm to fork.</h2>
             <p className="lead">
               Goodearth Agriventures is headquartered in Singapore but deeply committed to Africa&apos;s
               spice industry. We manage the entire value chain through farm-gate procurement across{" "}
@@ -31,7 +31,7 @@ export default function About() {
                 <h4>Our Mission</h4>
                 <p>
                   To deliver high-quality, locally-sourced products that drive economic growth and
-                  community prosperity — keeping the aroma and colour of spices in their most natural,
+                  community prosperity - keeping the aroma and colour of spices in their most natural,
                   hygienic form and making them available across Nigeria at a fair cost.
                 </p>
               </div>

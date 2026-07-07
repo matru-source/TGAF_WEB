@@ -1,4 +1,5 @@
 import { CERTS } from "@/lib/data";
+import CertLogo from "./CertLogo";
 
 const DELAY = ["", "d1", "d2", "d3"];
 
@@ -10,15 +11,16 @@ export default function Certifications() {
           <span className="eyebrow center">Quality assurance</span>
           <h2>Certified &amp; trusted</h2>
           <p className="muted">
-            Food safety and traceability are built into every batch — verified by national and
+            Food safety and traceability are built into every batch - verified by national and
             international standards.
           </p>
         </div>
         <div className="certs">
           {CERTS.map((c, i) => (
             <div className={`cert reveal ${DELAY[i % 4]}`} key={c.abbr}>
-              <div className="abbr">{c.abbr}</div>
-              <div className="full">{c.full}</div>
+              <div className="cert-media">
+                <CertLogo src={c.logo} abbr={c.abbr} full={c.full} />
+              </div>
             </div>
           ))}
         </div>

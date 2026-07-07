@@ -9,7 +9,7 @@ export default function Presence() {
             <span className="eyebrow">Our presence</span>
             <h2>A nationwide reach across Nigeria</h2>
             <p className="muted" style={{ margin: "1rem 0 1.6rem" }}>
-              From farm to processing to shelf — across all five geopolitical zones, with sales in 15+
+              From farm to processing to shelf - across all five geopolitical zones, with sales in 15+
               states and a team of 325+ employees.
             </p>
             <ul className="states">

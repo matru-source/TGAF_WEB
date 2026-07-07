@@ -14,7 +14,7 @@ export default function LocalMarketBand() {
           </div>
           <div className="market-copy reveal d1">
             <span className="eyebrow">From the market to your pot</span>
-            <h2>We dey your market — and your kitchen</h2>
+            <h2>We dey your market - and your kitchen</h2>
             <p className="lead">
               Goodearth is born for Naija cooking. You go find our peppe for over <strong>170 markets</strong> across
               the country, sold by the same traders wey sabi correct quality.

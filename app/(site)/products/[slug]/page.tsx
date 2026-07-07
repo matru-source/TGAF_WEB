@@ -21,7 +21,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const a = accentClass(product.accent);
   const specs = [
     ["Colour", product.colour],
-    ["ASTA", product.asta && product.asta !== "—" ? product.asta : null],
+    ["ASTA", product.asta && product.asta !== "-" ? product.asta : null],
     ["Scoville", product.scoville],
     ["Positioning", product.costPositioning],
     ["Category", product.marketCategory],

@@ -14,7 +14,7 @@ export default function Footer() {
           <div>
             <Brand variant="invert" />
             <p style={{ marginTop: "14px" }}>
-              Farm-to-fork chilli, turmeric and ginger — grown by Nigerian hands, processed to
+              Farm-to-fork chilli, turmeric and ginger - grown by Nigerian hands, processed to
               world-class standards.
             </p>
             <div className="socials">

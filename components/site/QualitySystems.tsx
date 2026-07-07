@@ -9,7 +9,7 @@ export default function QualitySystems() {
           <span className="eyebrow">Quality systems</span>
           <h2>Food safety, built into every batch</h2>
           <p className="muted">
-            Hygienic, automated processing with traceability from farm to fork — designed to meet the
+            Hygienic, automated processing with traceability from farm to fork - designed to meet the
             standards our customers and export partners demand.
           </p>
         </div>
