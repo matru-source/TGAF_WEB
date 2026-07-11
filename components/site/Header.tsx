@@ -33,6 +33,7 @@ const NAV: Item[] = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -47,6 +48,7 @@ export default function Header() {
   }, [open]);
   useEffect(() => {
     setOpen(false);
+    setOpenIdx(null);
   }, [pathname]);
 
   const activeLeaf = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
@@ -58,10 +60,19 @@ export default function Header() {
         <div className="container nav">
           <Brand />
           <nav className="nav-links" aria-label="Primary">
-            {NAV.map((item) =>
+            {NAV.map((item, idx) =>
               item.children ? (
-                <div className={`nav-item has-dd${activeGroup(item.children) ? " active" : ""}`} key={item.label}>
-                  <button className="nav-trigger" aria-haspopup="true">
+                <div
+                  className={`nav-item has-dd${activeGroup(item.children) ? " active" : ""}${openIdx === idx ? " open" : ""}`}
+                  key={item.label}
+                  onMouseEnter={() => setOpenIdx(idx)}
+                  onMouseLeave={() => setOpenIdx((v) => (v === idx ? null : v))}
+                  onFocus={() => setOpenIdx(idx)}
+                  onBlur={(e) => {
+                    if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpenIdx((v) => (v === idx ? null : v));
+                  }}
+                >
+                  <button className="nav-trigger" aria-haspopup="true" aria-expanded={openIdx === idx}>
                     {item.label}
                     <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="m6 9 6 6 6-6" />
