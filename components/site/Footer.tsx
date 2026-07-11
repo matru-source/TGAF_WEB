@@ -12,7 +12,7 @@ export default function Footer() {
         <Newsletter />
         <div className="footer-top">
           <div>
-            <Brand variant="invert" />
+            <Brand />
             <p style={{ marginTop: "14px" }}>
               Farm-to-fork chilli, turmeric and ginger - grown by Nigerian hands, processed to
               world-class standards.

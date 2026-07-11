@@ -1,4 +1,19 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
+
+function Words({ text, offset = 0 }: { text: string; offset?: number }) {
+  const words = text.split(" ");
+  const nodes: React.ReactNode[] = [];
+  words.forEach((w, i) => {
+    nodes.push(
+      <span className="hw" style={{ "--i": offset + i } as CSSProperties} key={`w${offset}-${i}`}>
+        {w}
+      </span>,
+    );
+    if (i < words.length - 1) nodes.push(" ");
+  });
+  return <>{nodes}</>;
+}
 
 export default function Hero({ featuredImage = "/img/product-hot-peppe.png" }: { featuredImage?: string }) {
   return (
@@ -7,8 +22,11 @@ export default function Hero({ featuredImage = "/img/product-hot-peppe.png" }: {
         <div className="hero-grid">
           <div className="hero-copy">
             <span className="eyebrow reveal">Farm to Fork · Spices of Nigeria</span>
-            <h1 className="reveal d1">
-              Na correct! <em>Naija peppe.</em>
+            <h1 className="reveal d1 h1-stagger">
+              <Words text="Na correct!" />{" "}
+              <em>
+                <Words text="Naija peppe." offset={2} />
+              </em>
             </h1>
             <p className="lead reveal d2">
               From the market to your pot - premium chilli, turmeric and ginger, grown by Nigerian hands

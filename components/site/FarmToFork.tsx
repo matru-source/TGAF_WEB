@@ -1,6 +1,4 @@
-import { PROCESS_STEPS } from "@/lib/data";
-
-const DELAY = ["", "d1", "d2", "d3"];
+import JourneyTimeline from "./JourneyTimeline";
 
 export default function FarmToFork() {
   return (
@@ -15,14 +13,13 @@ export default function FarmToFork() {
           </p>
         </div>
 
-        <div className="process-grid">
-          {PROCESS_STEPS.map((s, i) => (
-            <div className={`step reveal ${DELAY[i]}`} key={s.title}>
-              <div className="line"></div>
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </div>
-          ))}
+        <div className="journey-wrap">
+          <JourneyTimeline />
+          <figure className="journey-figure reveal">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/img/photo-hero.jpg" alt="A Goodearth vendor selling premium peppe at a Nigerian market" />
+            <figcaption>From our farms to the market stall — every step traceable.</figcaption>
+          </figure>
         </div>
 
         <div className="facility">
