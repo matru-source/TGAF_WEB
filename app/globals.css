@@ -753,12 +753,12 @@ img { -webkit-user-drag: none; }
 .nav-item { position: relative; }
 .nav-trigger { display: inline-flex; align-items: center; gap: 5px; font-size: .92rem; font-weight: 500; color: var(--ink-2); padding: 4px 0; background: none; border: none; cursor: pointer; font-family: var(--sans); }
 .nav-trigger .chev { width: 14px; height: 14px; transition: transform .3s var(--ease); }
-.has-dd:hover .nav-trigger, .has-dd:focus-within .nav-trigger, .has-dd.active .nav-trigger { color: var(--ink); }
-.has-dd:hover .chev { transform: rotate(180deg); }
+.has-dd.open .nav-trigger, .has-dd:hover .nav-trigger, .has-dd.active .nav-trigger { color: var(--ink); }
+.has-dd.open .chev { transform: rotate(180deg); }
 .dd { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); padding-top: 14px; min-width: 240px; opacity: 0; visibility: hidden; transition: opacity .2s var(--ease), visibility .2s; z-index: 120; }
 .dd-inner { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-md); padding: 8px; transform: translateY(6px); transition: transform .2s var(--ease); }
-.has-dd:hover .dd, .has-dd:focus-within .dd { opacity: 1; visibility: visible; }
-.has-dd:hover .dd-inner, .has-dd:focus-within .dd-inner { transform: translateY(0); }
+.has-dd.open .dd { opacity: 1; visibility: visible; }
+.has-dd.open .dd-inner { transform: translateY(0); }
 .dd a { display: block; padding: 10px 12px; border-radius: 9px; font-size: .9rem; font-weight: 500; color: var(--ink-2); }
 .dd a::after { display: none; }
 .dd a:hover { background: var(--cream-2); color: var(--ink); }
