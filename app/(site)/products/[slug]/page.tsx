@@ -32,14 +32,6 @@ export default async function ProductDetail({ params }: { params: { slug: string
     <>
       <section className="pdp">
         <div className="container">
-          <nav className="breadcrumb dark" aria-label="Breadcrumb">
-            <Link href="/">Home</Link>
-            <span>/</span>
-            <Link href="/products">Products</Link>
-            <span>/</span>
-            <span aria-current="page">{product.name}</span>
-          </nav>
-
           <div className="pdp-grid">
             <div className={`pdp-media ${a.well}`}>
               {product.image ? (

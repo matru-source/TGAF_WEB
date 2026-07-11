@@ -26,13 +26,6 @@ export default function NewsArticle({ params }: { params: { slug: string } }) {
     <>
       <section className="page-hero ph-green">
         <div className="container">
-          <nav className="breadcrumb" aria-label="Breadcrumb">
-            <Link href="/">Home</Link>
-            <span>/</span>
-            <Link href="/news">News</Link>
-            <span>/</span>
-            <span aria-current="page">{n.category}</span>
-          </nav>
           <span className="eyebrow">
             {n.category} · {fmt(n.date)}
           </span>

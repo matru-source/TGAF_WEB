@@ -110,10 +110,45 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
 ];
 
 // ---- B2B portfolio (static; formats per crop) ----
-export const B2B_PORTFOLIO: { key: string; letter: string; accent: AccentKey; name: string; desc: string; forms: string[] }[] = [
-  { key: "chilli", letter: "C", accent: "chilli", name: "Chilli", desc: "High-VO chilli with the pungency and colour our customers specify.", forms: ["Powder", "Sliced / Kibbled", "Crushed"] },
-  { key: "turmeric", letter: "T", accent: "turmeric", name: "Turmeric", desc: "Bright, colour-rich turmeric ground to retain natural aroma.", forms: ["Powder", "Sliced / Cut", "Whole"] },
-  { key: "ginger", letter: "G", accent: "ginger", name: "Ginger", desc: "Aromatic ginger supplied in flexible industrial formats.", forms: ["Powder", "Whole", "Crushed"] },
+export const B2B_PORTFOLIO: {
+  key: string; letter: string; accent: AccentKey; name: string; desc: string;
+  forms: { label: string; image: string }[];
+}[] = [
+  {
+    key: "chilli", letter: "C", accent: "chilli", name: "Chilli",
+    desc: "High-VO chilli with the pungency and colour our customers specify.",
+    forms: [
+      { label: "Whole", image: "/img/b2b/chilli-whole.jpg" },
+      { label: "Crushed", image: "/img/b2b/chilli-crushed.jpg" },
+      { label: "Powder", image: "/img/b2b/chilli-powder.jpg" },
+    ],
+  },
+  {
+    key: "turmeric", letter: "T", accent: "turmeric", name: "Turmeric",
+    desc: "Bright, colour-rich turmeric ground to retain natural aroma.",
+    forms: [
+      { label: "Sliced / Kibbled", image: "/img/b2b/turmeric-kibbled.jpg" },
+      { label: "Powder", image: "/img/b2b/turmeric-powder.jpg" },
+    ],
+  },
+  {
+    key: "ginger", letter: "G", accent: "ginger", name: "Ginger",
+    desc: "Aromatic ginger supplied in flexible industrial formats.",
+    forms: [
+      { label: "Sliced / Cut", image: "/img/b2b/ginger-sliced.jpg" },
+      { label: "Powder", image: "/img/b2b/ginger-powder.jpg" },
+    ],
+  },
+];
+
+// ---- B2B customers (from company reference deck) ----
+export const B2B_CUSTOMERS: { name: string; logo: string }[] = [
+  { name: "Nestlé", logo: "/img/customers/nestle.png" },
+  { name: "Freddy Hirsch", logo: "/img/customers/freddy-hirsch.png" },
+  { name: "Minimie Noodles", logo: "/img/customers/minimie-noodles.png" },
+  { name: "Olam", logo: "/img/customers/olam.png" },
+  { name: "Unilever", logo: "/img/customers/unilever.png" },
+  { name: "Chicken Republic", logo: "/img/customers/chicken-republic.png" },
 ];
 
 // ---- Process steps ----

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { B2B_PORTFOLIO, accentClass, type UIProduct } from "@/lib/data";
+import { B2B_PORTFOLIO, B2B_CUSTOMERS, accentClass, type UIProduct } from "@/lib/data";
 
 function pillClass(cost?: string | null) {
   const c = (cost || "").toLowerCase();
@@ -11,7 +11,7 @@ function pillClass(cost?: string | null) {
 }
 
 export default function Products({ products }: { products: UIProduct[] }) {
-  const [tab, setTab] = useState<"b2c" | "b2b">("b2c");
+  const [tab, setTab] = useState<"b2c" | "b2b">("b2b");
   const b2c = products.filter((p) => p.segment === "B2C");
   const classified = b2c.filter((p) => p.costPositioning || p.scoville);
   const delays = ["", "d1", "d2"];
@@ -30,20 +30,20 @@ export default function Products({ products }: { products: UIProduct[] }) {
 
         <div className="tabs reveal" role="tablist" aria-label="Product portfolio">
           <button
-            className={tab === "b2c" ? "active" : ""}
-            role="tab"
-            aria-selected={tab === "b2c"}
-            onClick={() => setTab("b2c")}
-          >
-            Consumer (B2C)
-          </button>
-          <button
             className={tab === "b2b" ? "active" : ""}
             role="tab"
             aria-selected={tab === "b2b"}
             onClick={() => setTab("b2b")}
           >
             Business (B2B)
+          </button>
+          <button
+            className={tab === "b2c" ? "active" : ""}
+            role="tab"
+            aria-selected={tab === "b2c"}
+            onClick={() => setTab("b2c")}
+          >
+            Consumer (B2C)
           </button>
         </div>
 
@@ -141,19 +141,42 @@ export default function Products({ products }: { products: UIProduct[] }) {
 
         {/* B2B */}
         <div className={`tab-panel${tab === "b2b" ? " active" : ""}`} role="tabpanel">
-          <div className="b2b-grid">
-            {B2B_PORTFOLIO.map((c, i) => (
-              <article className={`b2b-card c${i + 1} reveal ${delays[i % 3]}`} key={c.key}>
-                <div className="ico">{c.letter}</div>
-                <h3>{c.name}</h3>
-                <p className="muted">{c.desc}</p>
-                <div className="forms">
-                  {c.forms.map((f) => (
-                    <span key={f}>{f}</span>
+          <div className="b2b-showcase">
+            <div className="b2b-products reveal">
+              <h3 className="b2b-col-title">Our B2B products</h3>
+              <div className="b2b-rows">
+                {B2B_PORTFOLIO.map((c) => (
+                  <div className={`b2b-row b2b-row--${c.accent}`} key={c.key}>
+                    <div className="b2b-row-label">{c.name}</div>
+                    <div className="b2b-forms">
+                      {c.forms.map((f) => (
+                        <div className="b2b-form" key={f.label}>
+                          <span className="b2b-form-photo">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={f.image} alt={`${c.name} - ${f.label}`} loading="lazy" />
+                          </span>
+                          <span className="b2b-form-label">{f.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="b2b-customers reveal d1">
+              <h3 className="b2b-col-title">Our B2B customers</h3>
+              <div className="b2b-customer-marquee">
+                <div className="b2b-customer-track">
+                  {[...B2B_CUSTOMERS, ...B2B_CUSTOMERS].map((cu, i) => (
+                    <div className="b2b-customer-card" key={`${cu.name}-${i}`} aria-hidden={i >= B2B_CUSTOMERS.length}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={cu.logo} alt={i < B2B_CUSTOMERS.length ? cu.name : ""} loading="lazy" />
+                    </div>
                   ))}
                 </div>
-              </article>
-            ))}
+              </div>
+            </div>
           </div>
           <p className="muted reveal" style={{ marginTop: "26px", maxWidth: "60ch" }}>
             We also grind coriander, mixed spices and condiments to specification. Bulk supply is backed by

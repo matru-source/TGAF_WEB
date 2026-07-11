@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { MARKETS } from "@/lib/data";
-import { Icon } from "./icons";
+import MarketsMap from "./MarketsMap";
 
 export default function Markets({ withHead = true }: { withHead?: boolean }) {
   return (
@@ -16,16 +15,8 @@ export default function Markets({ withHead = true }: { withHead?: boolean }) {
             </p>
           </div>
         )}
-        <div className="markets-grid">
-          {MARKETS.map((m, i) => (
-            <div className={`market-chip reveal ${i % 3 ? (i % 3 === 1 ? "d1" : "d2") : ""}`} key={m.name}>
-              <span className="mc-pin" aria-hidden="true"><Icon name="pin" size={18} /></span>
-              <span>
-                <span className="mc-name">{m.name}</span>
-                <span className="mc-place">{m.place}</span>
-              </span>
-            </div>
-          ))}
+        <div className="reveal">
+          <MarketsMap />
         </div>
         <div className="markets-note reveal">
           <p>Be a trader wey carry correct peppe?</p>
