@@ -15,7 +15,7 @@ export default function LocalMarketBand() {
   
   const textVariants = {
     hidden: { opacity: 0, x: 30 },
-    show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 60, damping: 15 } }
+    show: { opacity: 1, x: 0, transition: { type: "spring" as const, stiffness: 60, damping: 15 } }
   };
 
   return (
