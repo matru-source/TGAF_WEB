@@ -2,7 +2,6 @@ import Hero from "@/components/site/Hero";
 import Marquee from "@/components/site/Marquee";
 import StatsStrip from "@/components/site/StatsStrip";
 import LocalMarketBand from "@/components/site/LocalMarketBand";
-import SpiceTrio from "@/components/site/SpiceTrio";
 import FeaturedProducts from "@/components/site/FeaturedProducts";
 import ValueProps from "@/components/site/ValueProps";
 import Testimonials from "@/components/site/Testimonials";
@@ -22,7 +21,6 @@ export default async function HomePage() {
       <Marquee />
       <StatsStrip stats={stats} />
       <LocalMarketBand />
-      <SpiceTrio />
       <FeaturedProducts products={products} />
       <ValueProps />
       <Testimonials />
