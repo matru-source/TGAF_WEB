@@ -165,16 +165,15 @@ export default function Products({ products }: { products: UIProduct[] }) {
             </div>
 
             <div className="b2b-customers reveal d1">
-              <h3 className="b2b-col-title">Our B2B customers</h3>
-              <div className="b2b-customer-marquee">
-                <div className="b2b-customer-track">
-                  {[...B2B_CUSTOMERS, ...B2B_CUSTOMERS].map((cu, i) => (
-                    <div className="b2b-customer-card" key={`${cu.name}-${i}`} aria-hidden={i >= B2B_CUSTOMERS.length}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={cu.logo} alt={i < B2B_CUSTOMERS.length ? cu.name : ""} loading="lazy" />
-                    </div>
-                  ))}
-                </div>
+              <h3 className="b2b-col-title">Trusted B2B Partners</h3>
+              <div className="b2b-partner-grid">
+                {B2B_CUSTOMERS.map((cu) => (
+                  <div className="b2b-partner-card" key={cu.name}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={cu.logo} alt={cu.name} loading="lazy" />
+                    <span className="b2b-partner-name">{cu.name}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

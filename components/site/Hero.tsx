@@ -1,70 +1,143 @@
-import Link from "next/link";
-import type { CSSProperties } from "react";
+"use client";
 
-function Words({ text, offset = 0 }: { text: string; offset?: number }) {
+import Link from "next/link";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+function Words({ text, delay = 0 }: { text: string; delay?: number }) {
   const words = text.split(" ");
-  const nodes: React.ReactNode[] = [];
-  words.forEach((w, i) => {
-    nodes.push(
-      <span className="hw" style={{ "--i": offset + i } as CSSProperties} key={`w${offset}-${i}`}>
-        {w}
-      </span>,
-    );
-    if (i < words.length - 1) nodes.push(" ");
-  });
-  return <>{nodes}</>;
+  return (
+    <>
+      {words.map((w, i) => (
+        <motion.span
+          key={`${delay}-${i}`}
+          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.8, delay: delay + i * 0.1, ease: [0.2, 0.65, 0.3, 0.9] }}
+          style={{ display: "inline-block" }}
+        >
+          {w}
+          {i < words.length - 1 ? "\u00A0" : ""}
+        </motion.span>
+      ))}
+    </>
+  );
 }
 
 export default function Hero({ featuredImage = "/img/product-hot-peppe.png" }: { featuredImage?: string }) {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const opacityOut = useTransform(scrollYProgress, [0, 1], [1, 0]);
+
   return (
-    <section className="hero">
+    <section className="hero" ref={containerRef}>
       <div className="container">
         <div className="hero-grid">
           <div className="hero-copy">
-            <span className="eyebrow reveal">Farm to Fork · Spices of Nigeria</span>
-            <h1 className="reveal d1 h1-stagger">
-              <Words text="Na correct!" />{" "}
+            <motion.span
+              className="eyebrow"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              Farm to Fork · Spices of Nigeria
+            </motion.span>
+            <h1>
+              <Words text="Na correct!" delay={0.2} />{" "}
               <em>
-                <Words text="Naija peppe." offset={2} />
+                <Words text="Naija peppe." delay={0.5} />
               </em>
             </h1>
-            <p className="lead reveal d2">
+            <motion.p
+              className="lead"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
               From the market to your pot - premium chilli, turmeric and ginger, grown by Nigerian hands
               and milled in our world-class Ikorodu facility. <strong>Peppe wey pass peppe.</strong>
-            </p>
-            <div className="hero-actions reveal d3">
+            </motion.p>
+            <motion.div
+              className="hero-actions"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
               <Link href="/products" className="btn btn-primary">
                 Explore our spices <span className="arr">→</span>
               </Link>
               <Link href="/presence" className="btn btn-ghost">
                 Find us for market
               </Link>
-            </div>
-            <div className="hero-trust reveal d4">
+            </motion.div>
+            <motion.div
+              className="hero-trust"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+            >
               <span className="t-label">Certified by</span>
               <div className="t-list">
-                <span className="chip">NAFDAC</span>
-                <span className="chip">SON</span>
-                <span className="chip">Halal</span>
-                <span className="chip">FSSC 22000</span>
+                {["NAFDAC", "SON", "Halal", "FSSC 22000"].map((cert, i) => (
+                  <motion.span
+                    key={cert}
+                    className="chip"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 1.3 + i * 0.1, type: "spring" }}
+                    whileHover={{ scale: 1.1, backgroundColor: "var(--chilli-soft)", color: "var(--chilli-deep)" }}
+                  >
+                    {cert}
+                  </motion.span>
+                ))}
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          <div className="hero-visual reveal d2">
-            <div className="frame">
+          <motion.div
+            className="hero-visual"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            style={{ opacity: opacityOut }}
+          >
+            <motion.div className="frame" style={{ y: imageY }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/img/photo-chilli-hand.jpg" alt="A handful of sun-dried Nigerian chilli peppers" />
-            </div>
+            </motion.div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="pack" src={featuredImage} alt="Goodearth featured product pack" />
-            <div className="stat-card">
+            <motion.img
+              className="pack"
+              src={featuredImage}
+              alt="Goodearth featured product pack"
+              initial={{ opacity: 0, y: 50, rotate: -10 }}
+              animate={{ opacity: 1, y: 0, rotate: 0 }}
+              transition={{ duration: 1, delay: 0.5, type: "spring", bounce: 0.4 }}
+              whileHover={{ scale: 1.05, rotate: 2 }}
+            />
+            <motion.div
+              className="stat-card"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              whileHover={{ y: -5, boxShadow: "0 15px 30px rgba(0,0,0,0.1)" }}
+            >
               <div className="n" data-count="350" data-suffix="+">
                 0
               </div>
               <div className="l">Farmers supported</div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>
