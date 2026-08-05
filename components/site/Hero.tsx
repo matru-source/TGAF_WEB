@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { HERO_SHOWCASE } from "@/lib/data";
 
 function Words({ text, delay = 0 }: { text: string; delay?: number }) {
   const words = text.split(" ");
@@ -25,7 +26,7 @@ function Words({ text, delay = 0 }: { text: string; delay?: number }) {
   );
 }
 
-export default function Hero({ featuredImage = "/img/product-hot-peppe.png" }: { featuredImage?: string }) {
+export default function Hero({ packs = HERO_SHOWCASE }: { packs?: string[] }) {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -34,6 +35,14 @@ export default function Hero({ featuredImage = "/img/product-hot-peppe.png" }: {
 
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const opacityOut = useTransform(scrollYProgress, [0, 1], [1, 0]);
+
+  const [pack, setPack] = useState(0);
+  useEffect(() => {
+    if (packs.length < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => setPack((i) => (i + 1) % packs.length), 4000);
+    return () => clearInterval(t);
+  }, [packs.length]);
 
   return (
     <section className="hero" ref={containerRef}>
@@ -115,16 +124,20 @@ export default function Hero({ featuredImage = "/img/product-hot-peppe.png" }: {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/img/photo-chilli-hand.jpg" alt="A handful of sun-dried Nigerian chilli peppers" />
             </motion.div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <motion.img
-              className="pack"
-              src={featuredImage}
-              alt="Goodearth featured product pack"
-              initial={{ opacity: 0, y: 50, rotate: -10 }}
-              animate={{ opacity: 1, y: 0, rotate: 0 }}
-              transition={{ duration: 1, delay: 0.5, type: "spring", bounce: 0.4 }}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-            />
+            <AnimatePresence mode="wait">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <motion.img
+                key={packs[pack]}
+                className="pack"
+                src={packs[pack]}
+                alt="Goodearth featured product pack"
+                initial={{ opacity: 0, y: 40, rotate: -8 }}
+                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                exit={{ opacity: 0, y: -30, rotate: 6 }}
+                transition={{ duration: 0.7, ease: [0.2, 0.65, 0.3, 0.9] }}
+                whileHover={{ scale: 1.05, rotate: 2 }}
+              />
+            </AnimatePresence>
             <motion.div
               className="stat-card"
               initial={{ opacity: 0, x: 50 }}

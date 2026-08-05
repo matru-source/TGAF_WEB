@@ -13,6 +13,7 @@ export type UIProduct = {
   tagline?: string | null;
   description: string;
   image?: string | null;
+  images?: string[];
   sizes: string[];
   formats: string[];
   costPositioning?: string | null;
@@ -35,8 +36,8 @@ export const BRAND = {
   legal: "TG Agri Farms Ltd",
   tagline: "Peppe wey pass peppe.",
   email: "tgagrifarmsltd1@gmail.com",
-  website: "https://goodearthagriventures.com",
-  websiteLabel: "goodearthagriventures.com",
+  website: "https://tgagrifarms.com",
+  websiteLabel: "tgagrifarms.com",
   address: "KM 5, Itokin Road, Itamope, Ikorodu Expressway, Lagos, Nigeria",
 };
 
@@ -82,7 +83,8 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
   },
   {
     id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe Powder", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Premium staple", image: "/img/product-hot-peppe.png",
+    accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hot-pepe-1.jpeg",
+    images: ["/Product/hot-pepe-1.jpeg", "/Product/hot-pepe-2.jpeg"],
     description: "Bright red, premium pepper powder to add spice and flavour to every meal.",
     sizes: ["100 g", "5 g"], formats: [], featured: true,
     costPositioning: "Medium–High cost", marketCategory: "Premium staple",
@@ -91,7 +93,8 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
   },
   {
     id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe Powder", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/img/product-atarodo.png",
+    accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/Atarodo-1.jpeg",
+    images: ["/Product/Atarodo-1.jpeg", "/Product/Atarodo-2.jpeg", "/Product/Atarodo-3.jpeg", "/Product/Atarodo-mockup.jpeg"],
     description: "Dark-red scotch-bonnet style pepper - a mass-market staple for everyday heat.",
     sizes: ["8 g", "3 g"], formats: [],
     costPositioning: "Low–Medium cost", marketCategory: "Scotch-bonnet · mass-market staple",
@@ -100,13 +103,21 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
   },
   {
     id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe Powder", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Gourmet", image: "/img/product-cameroon-peppe.png",
+    accent: "chilli", tagline: "Chilli · Gourmet", image: "/Product/Cameroon-1.jpeg",
+    images: ["/Product/Cameroon-1.jpeg", "/Product/Cameroon-2.jpeg", "/Product/Cameroon-3.jpeg", "/Product/Cameroon-4.jpeg"],
     description: "Deep red, smoky and pungent - a gourmet, authentic powder for soups & noodles.",
     sizes: ["100 g", "50 g", "3 g"], formats: [],
     costPositioning: "High cost", marketCategory: "Gourmet / authentic · premium niche",
     colour: "Deep red & brown", asta: "-", scoville: "~90,000 SHU",
     usage: "For soups & noodles",
   },
+];
+
+// ---- Homepage hero showcase (auto-rotating pack shots) ----
+export const HERO_SHOWCASE: string[] = [
+  "/Product/hero-hot-peppe.png",
+  "/Product/hero-atarodo.jpeg",
+  "/Product/hero-cameron.png",
 ];
 
 // ---- B2B portfolio (static; formats per crop) ----
@@ -155,8 +166,8 @@ export const B2B_CUSTOMERS: { name: string; logo: string }[] = [
 export const PROCESS_STEPS = [
   { title: "Cultivate & source", body: "We source chilli, turmeric and ginger varieties with the pungency and colour our customers require - supporting smallholder farmers to grow profitably." },
   { title: "Harvest & sun-dry", body: "Matured fruits are plucked and sun-dried to reduce moisture by ~85%, then registered, bagged and moved to our Kaduna warehouse." },
-  { title: "Process & sterilise", body: "At our Ikorodu mill, materials pass rigorous stages to remove foreign matter, then are ground, steam-sterilised and packed to spec." },
-  { title: "Crush, pack & sell", body: "We crush, kibble, slice, powder and package, then sell to both businesses and consumers across Nigerian markets." },
+  { title: "Crush, process & sterilise", body: "At our Ikorodu mill, materials pass rigorous stages to remove foreign matter, then are crushed, kibbled, sliced, ground and steam-sterilised." },
+  { title: "Pack & sell", body: "We package to spec, then sell to both businesses and consumers across Nigerian markets." },
 ];
 
 export const FACILITY_KPIS = [
@@ -188,11 +199,20 @@ export const SWOT = {
 };
 
 // ---- Team ----
-export const TEAM = [
-  { initials: "DC", name: "Deepak Murli Chainani", role: "Managing Director", bio: "Board member since 2017. 15+ years across international markets and ~10 years in Nigerian markets." },
-  { initials: "SS", name: "Swatanter Saraswat", role: "Executive Director", bio: "COO since June 2023, board member since Nov 2024. 15+ years in FMCG, largely with African companies." },
-  { initials: "NS", name: "Narendranath Swain", role: "Finance Controller", bio: "Chartered Accountant with 10+ years in Indian finance & audit, plus 7 years as finance controller in Nigeria." },
-  { initials: "FN", name: "Fredrick Chidi Nze", role: "Sales Capability & Market Development", bio: "Joined 2023. 15+ years of FMCG experience, largely with African companies." },
+export type UITeamMember = {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  initials?: string | null;
+  photo?: string | null;
+};
+
+export const TEAM: UITeamMember[] = [
+  { id: "dc", initials: "DC", name: "Deepak Murli Chainani", role: "Managing Director", bio: "Board member since 2017. 15+ years across international markets and ~10 years in Nigerian markets." },
+  { id: "ss", initials: "SS", name: "Swatanter Saraswat", role: "Executive Director", bio: "COO since June 2023, board member since Nov 2024. 15+ years in FMCG, largely with African companies." },
+  { id: "ns", initials: "NS", name: "Narendranath Swain", role: "Finance Controller", bio: "Chartered Accountant with 10+ years in Indian finance & audit, plus 7 years as finance controller in Nigeria." },
+  { id: "fn", initials: "FN", name: "Fredrick Chidi Nze", role: "Sales Capability & Market Development", bio: "Joined 2023. 15+ years of FMCG experience, largely with African companies." },
 ];
 
 // ---- Certifications ----

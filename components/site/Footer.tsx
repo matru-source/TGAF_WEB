@@ -51,12 +51,16 @@ export default function Footer() {
               <li><a href={`mailto:${BRAND.email}`}>Email us</a></li>
               <li><a href={BRAND.website} target="_blank" rel="noopener noreferrer">Website</a></li>
               <li><Link href="/contact">Ikorodu, Lagos</Link></li>
-              <li><Link href="/admin">Admin / CMS</Link></li>
             </ul>
           </div>
         </div>
         <div className="footer-bottom">
-          <span className="tagline">{BRAND.tagline}</span>
+          <span className="credit">
+            Designed &amp; Developed by{" "}
+            <a href="https://www.nexusinfotech.co/" target="_blank" rel="noopener noreferrer">
+              Nexus Infotech
+            </a>
+          </span>
           <span>
             © {year} {BRAND.legal} · Goodearth Foods. All rights reserved.
           </span>
