@@ -1,8 +1,10 @@
-import { TEAM } from "@/lib/data";
+import { getTeam } from "@/lib/queries";
 
 const DELAY = ["", "d1", "d2", "d3"];
 
-export default function Team() {
+export default async function Team() {
+  const team = await getTeam();
+
   return (
     <section className="section">
       <div className="container">
@@ -11,9 +13,16 @@ export default function Team() {
           <h2>Meet the team</h2>
         </div>
         <div className="team-grid">
-          {TEAM.map((m, i) => (
-            <article className={`member reveal ${DELAY[i]}`} key={m.name}>
-              <div className="avatar">{m.initials}</div>
+          {team.map((m, i) => (
+            <article className={`member reveal ${DELAY[i % DELAY.length]}`} key={m.id}>
+              {m.photo ? (
+                <div className="member-photo">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={m.photo} alt={m.name} loading="lazy" />
+                </div>
+              ) : (
+                <div className="avatar">{m.initials}</div>
+              )}
               <h3>{m.name}</h3>
               <div className="role">{m.role}</div>
               <p>{m.bio}</p>

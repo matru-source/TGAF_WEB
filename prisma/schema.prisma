@@ -65,7 +65,8 @@ model Product {
   category    Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   tagline     String?            // small category line shown on the card
   description String
-  image       String?            // /img/... path or absolute URL
+  image       String?            // /img/... path or absolute URL (cover / thumbnail)
+  images      String[] @default([]) // full gallery, shown as a sliding carousel on the product page
   sizes       String[] @default([]) // e.g. ["100 g", "50 g"]
   formats     String[] @default([]) // B2B: ["Powder", "Whole", "Crushed"]
 
@@ -80,6 +81,20 @@ model Product {
   featured  Boolean  @default(false)
   published Boolean  @default(true)
   order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// Leadership team members shown on the "Meet the team" cards.
+model TeamMember {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  bio       String
+  photo     String?            // /uploads/... path or absolute URL
+  initials  String?            // fallback badge when there is no photo
+  order     Int      @default(0)
+  published Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

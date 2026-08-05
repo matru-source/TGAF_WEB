@@ -32,6 +32,7 @@ export default async function EditProductPage({ params }: { params: { id: string
             tagline: product.tagline,
             description: product.description,
             image: product.image,
+            images: product.images,
             sizes: product.sizes,
             formats: product.formats,
             costPositioning: product.costPositioning,

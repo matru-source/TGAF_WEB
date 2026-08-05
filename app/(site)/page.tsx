@@ -13,11 +13,10 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const [products, stats] = await Promise.all([getProducts(), getStats()]);
-  const featured = products.find((p) => p.featured && p.image) ?? products.find((p) => p.image);
 
   return (
     <>
-      <Hero featuredImage={featured?.image ?? "/img/product-hot-peppe.png"} />
+      <Hero />
       <Marquee />
       <StatsStrip stats={stats} />
       <LocalMarketBand />

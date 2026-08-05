@@ -60,20 +60,11 @@ export default function Contact() {
                 <a className="v" href={`mailto:${BRAND.email}`}>{BRAND.email}</a>
               </div>
             </div>
-            <div className="row">
-              <div className="ico"><Icon name="globe" size={19} /></div>
-              <div>
-                <div className="k">Website</div>
-                <a className="v" href={BRAND.website} target="_blank" rel="noopener noreferrer">{BRAND.websiteLabel}</a>
-              </div>
-            </div>
-
             <div className="people">
               {CONTACTS.map((c) => (
-                <div className="p" key={c.tel}>
+                <div className="p" key={c.name}>
                   <div className="nm">{c.name}</div>
                   <div className="rl">{c.role}</div>
-                  <a href={`tel:${c.tel}`}>{c.phone}</a>
                 </div>
               ))}
             </div>

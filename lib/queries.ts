@@ -3,7 +3,9 @@ import { prisma } from "./prisma";
 import {
   FALLBACK_PRODUCTS,
   DEFAULT_STATS,
+  TEAM,
   type UIProduct,
+  type UITeamMember,
   type AccentKey,
 } from "./data";
 
@@ -25,12 +27,12 @@ function withTimeout<T>(p: Promise<T>, ms: number): Promise<T | null> {
 
 const mapProduct = (p: {
   id: string; slug: string; name: string; segment: "B2C" | "B2B"; accent: string;
-  tagline: string | null; description: string; image: string | null; sizes: string[]; formats: string[];
+  tagline: string | null; description: string; image: string | null; images: string[]; sizes: string[]; formats: string[];
   costPositioning: string | null; marketCategory: string | null; colour: string | null;
   asta: string | null; scoville: string | null; usage: string | null; featured: boolean;
 }): UIProduct => ({
   id: p.id, slug: p.slug, name: p.name, segment: p.segment, accent: accentToKey(p.accent),
-  tagline: p.tagline, description: p.description, image: p.image, sizes: p.sizes, formats: p.formats,
+  tagline: p.tagline, description: p.description, image: p.image, images: p.images, sizes: p.sizes, formats: p.formats,
   costPositioning: p.costPositioning, marketCategory: p.marketCategory, colour: p.colour,
   asta: p.asta, scoville: p.scoville, usage: p.usage, featured: p.featured,
 });
@@ -53,6 +55,19 @@ export async function getProductBySlug(slug: string): Promise<UIProduct | null> 
     if (p) return mapProduct(p);
   }
   return FALLBACK_PRODUCTS.find((p) => p.slug === slug) ?? null;
+}
+
+/** Published leadership team members; falls back to static data if empty/unavailable. */
+export async function getTeam(): Promise<UITeamMember[]> {
+  if (DB_DISABLED) return TEAM;
+  const rows = await withTimeout(
+    prisma.teamMember.findMany({ where: { published: true }, orderBy: [{ order: "asc" }, { createdAt: "asc" }] }),
+    2500,
+  );
+  if (!rows || !rows.length) return TEAM;
+  return rows.map((m) => ({
+    id: m.id, name: m.name, role: m.role, bio: m.bio, initials: m.initials, photo: m.photo,
+  }));
 }
 
 export type StatItem = { key: string; value: number; suffix?: string; label: string };

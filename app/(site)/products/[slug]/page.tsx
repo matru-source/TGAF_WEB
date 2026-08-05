@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProducts } from "@/lib/queries";
 import { accentClass } from "@/lib/data";
+import ProductGallery from "@/components/site/ProductGallery";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const all = await getProducts();
   const related = all.filter((p) => p.segment === "B2C" && p.slug !== product.slug).slice(0, 3);
   const a = accentClass(product.accent);
+  const gallery = [...new Set([product.image, ...(product.images ?? [])].filter(Boolean) as string[])];
   const specs = [
     ["Colour", product.colour],
     ["ASTA", product.asta && product.asta !== "-" ? product.asta : null],
@@ -33,14 +35,13 @@ export default async function ProductDetail({ params }: { params: { slug: string
       <section className="pdp">
         <div className="container">
           <div className="pdp-grid">
-            <div className={`pdp-media ${a.well}`}>
-              {product.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={product.image} alt={product.name} />
-              ) : (
+            {gallery.length > 0 ? (
+              <ProductGallery images={gallery} alt={product.name} wellClass={a.well} />
+            ) : (
+              <div className={`pdp-media ${a.well}`}>
                 <span className="nophoto">{product.name.charAt(0)}</span>
-              )}
-            </div>
+              </div>
+            )}
 
             <div className="pdp-info">
               {product.tagline && <span className="eyebrow">{product.tagline}</span>}

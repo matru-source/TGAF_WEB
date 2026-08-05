@@ -11,6 +11,7 @@ export type ProductInitial = {
   tagline?: string | null;
   description?: string;
   image?: string | null;
+  images?: string[];
   sizes?: string[];
   formats?: string[];
   costPositioning?: string | null;
@@ -24,10 +25,17 @@ export type ProductInitial = {
   order?: number;
 };
 
-const IMAGES = [
-  "/img/product-hot-peppe.png",
-  "/img/product-atarodo.png",
-  "/img/product-cameroon-peppe.png",
+const BUNDLED = [
+  "/Product/hot-pepe-1.jpeg",
+  "/Product/hot-pepe-2.jpeg",
+  "/Product/Atarodo-1.jpeg",
+  "/Product/Atarodo-2.jpeg",
+  "/Product/Atarodo-3.jpeg",
+  "/Product/Atarodo-mockup.jpeg",
+  "/Product/Cameroon-1.jpeg",
+  "/Product/Cameroon-2.jpeg",
+  "/Product/Cameroon-3.jpeg",
+  "/Product/Cameroon-4.jpeg",
   "/img/product-turmeric.png",
   "/img/product-ginger.png",
 ];
@@ -37,7 +45,43 @@ export default function ProductForm({ initial = {} }: { initial?: ProductInitial
   const editing = Boolean(initial.id);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
-  const [image, setImage] = useState(initial.image || "");
+  const [uploading, setUploading] = useState(false);
+  const [manualPath, setManualPath] = useState("");
+
+  // The first entry is the cover image shown on cards; the rest fill the carousel.
+  const [images, setImages] = useState<string[]>(() => {
+    const initialList = [initial.image, ...(initial.images || [])].filter(Boolean) as string[];
+    return [...new Set(initialList)];
+  });
+
+  const addImages = (paths: string[]) =>
+    setImages((prev) => [...new Set([...prev, ...paths.filter(Boolean)])]);
+  const removeImage = (src: string) => setImages((prev) => prev.filter((s) => s !== src));
+  const moveImage = (from: number, to: number) =>
+    setImages((prev) => {
+      if (to < 0 || to >= prev.length) return prev;
+      const next = [...prev];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      return next;
+    });
+
+  async function onUpload(files: FileList | null) {
+    if (!files || !files.length) return;
+    setError("");
+    setUploading(true);
+    const fd = new FormData();
+    Array.from(files).forEach((f) => fd.append("files", f));
+    try {
+      const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+      const json = await res.json();
+      if (!res.ok) setError(json.error || "Upload failed.");
+      else addImages(json.urls as string[]);
+    } catch {
+      setError("Upload failed. Please try again.");
+    }
+    setUploading(false);
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -57,7 +101,8 @@ export default function ProductForm({ initial = {} }: { initial?: ProductInitial
       accent: String(fd.get("accent") || "CHILLI"),
       tagline: String(fd.get("tagline") || ""),
       description: String(fd.get("description") || ""),
-      image: String(fd.get("image") || ""),
+      image: images[0] || "",
+      images,
       sizes: splitList(fd.get("sizes")),
       formats: splitList(fd.get("formats")),
       costPositioning: String(fd.get("costPositioning") || ""),
@@ -153,25 +198,70 @@ export default function ProductForm({ initial = {} }: { initial?: ProductInitial
       </div>
 
       <div>
-        <label htmlFor="image">Image path or URL</label>
-        <input id="image" name="image" value={image} onChange={(e) => setImage(e.target.value)} placeholder="/img/product-hot-peppe.png" />
+        <label htmlFor="imageUpload">Product images</label>
+        <input
+          id="imageUpload"
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/avif"
+          multiple
+          disabled={uploading}
+          onChange={(e) => {
+            onUpload(e.target.files);
+            e.target.value = "";
+          }}
+        />
+        <div className="help">
+          {uploading ? "Uploading…" : "Upload one or more images (JPG, PNG, WebP, AVIF · max 5 MB each). The first image is the cover shown on cards; the rest slide in the product carousel."}
+        </div>
+
+        {images.length > 0 && (
+          <div className="img-manager">
+            {images.map((src, i) => (
+              <div className="img-item" key={src}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt={`Image ${i + 1}`} />
+                {i === 0 && <span className="img-cover">Cover</span>}
+                <div className="img-tools">
+                  <button type="button" onClick={() => moveImage(i, i - 1)} disabled={i === 0} aria-label="Move earlier">←</button>
+                  <button type="button" onClick={() => moveImage(i, i + 1)} disabled={i === images.length - 1} aria-label="Move later">→</button>
+                  <button type="button" onClick={() => removeImage(src)} aria-label="Remove image">✕</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+          <input
+            value={manualPath}
+            onChange={(e) => setManualPath(e.target.value)}
+            placeholder="…or paste an image path / URL"
+          />
+          <button
+            type="button"
+            className="abtn abtn-ghost"
+            onClick={() => {
+              if (manualPath.trim()) addImages([manualPath.trim()]);
+              setManualPath("");
+            }}
+          >
+            Add
+          </button>
+        </div>
+
         <div className="help">
           Bundled images:{" "}
-          {IMAGES.map((src) => (
+          {BUNDLED.map((src) => (
             <button
               type="button"
               key={src}
-              onClick={() => setImage(src)}
+              onClick={() => addImages([src])}
               style={{ color: "var(--chilli)", fontWeight: 600, marginRight: 8, textDecoration: "underline" }}
             >
               {src.split("/").pop()}
             </button>
           ))}
         </div>
-        {image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={image} alt="preview" style={{ height: 90, marginTop: 10, objectFit: "contain", background: "var(--cream-2)", borderRadius: 10, padding: 6 }} />
-        ) : null}
       </div>
 
       <fieldset style={{ border: "1px solid var(--line)", borderRadius: 12, padding: 18 }}>

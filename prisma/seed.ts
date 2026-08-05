@@ -1,6 +1,6 @@
 import { PrismaClient, type Accent, type Segment } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { FALLBACK_PRODUCTS } from "../lib/data";
+import { FALLBACK_PRODUCTS, TEAM } from "../lib/data";
 
 const prisma = new PrismaClient();
 
@@ -41,7 +41,7 @@ async function main() {
   for (const p of FALLBACK_PRODUCTS) {
     await prisma.product.upsert({
       where: { slug: p.slug },
-      update: {},
+      update: { image: p.image ?? null, images: p.images ?? [] },
       create: {
         slug: p.slug,
         name: p.name,
@@ -51,6 +51,7 @@ async function main() {
         tagline: p.tagline ?? null,
         description: p.description,
         image: p.image ?? null,
+        images: p.images ?? [],
         sizes: p.sizes,
         formats: p.formats,
         costPositioning: p.costPositioning ?? null,
@@ -66,6 +67,30 @@ async function main() {
     });
   }
   console.log(`✓ ${FALLBACK_PRODUCTS.length} products ready`);
+
+  // ---- Leadership team ----
+  // Seeded once; photos are uploaded from the admin panel, so an existing
+  // row's photo is never overwritten here.
+  let teamOrder = 0;
+  for (const m of TEAM) {
+    const existing = await prisma.teamMember.findFirst({ where: { name: m.name } });
+    if (existing) {
+      await prisma.teamMember.update({
+        where: { id: existing.id },
+        data: { role: m.role, bio: m.bio, initials: m.initials ?? null },
+      });
+    } else {
+      await prisma.teamMember.create({
+        data: {
+          name: m.name, role: m.role, bio: m.bio,
+          initials: m.initials ?? null, photo: null,
+          published: true, order: teamOrder,
+        },
+      });
+    }
+    teamOrder++;
+  }
+  console.log(`✓ ${TEAM.length} team members ready`);
 
   // ---- Default settings (traction stats) ----
   const stats: Record<string, string> = {
