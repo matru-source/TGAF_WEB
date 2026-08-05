@@ -1,4 +1,22 @@
 import JourneyTimeline from "./JourneyTimeline";
+import PhotoCarousel from "./PhotoCarousel";
+
+// Journey: farm gate through the mill to the market stall.
+const JOURNEY_PHOTOS = [
+  "/img/photo-seedlings.png",
+  "/img/photo-chilli-farm.png",
+  "/img/photo-facility.jpg",
+  "/img/photo-hero.jpg",
+  "/img/photo-market.jpg",
+  "/img/photo-about.jpg",
+];
+
+// The farming side of the story.
+const FARM_PHOTOS = [
+  "/img/photo-drying.jpg",
+  "/img/photo-chilli-hand.jpg",
+  "/img/photo-sundry.jpg",
+];
 
 export default function FarmToFork() {
   return (
@@ -16,16 +34,20 @@ export default function FarmToFork() {
         <div className="journey-wrap">
           <JourneyTimeline />
           <figure className="journey-figure reveal">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/photo-hero.jpg" alt="A Goodearth vendor selling premium peppe at a Nigerian market" />
+            <PhotoCarousel
+              images={JOURNEY_PHOTOS}
+              alt="Goodearth peppe on its journey from our mill to Nigerian market stalls"
+            />
             <figcaption>From our farms to the market stall — every step traceable.</figcaption>
           </figure>
         </div>
 
         <div className="facility">
           <div className="facility-media reveal">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/photo-drying.jpg" alt="Sun-dried chilli at the Goodearth warehouse" />
+            <PhotoCarousel
+              images={FARM_PHOTOS}
+              alt="Nigerian farmers handling sun-dried chilli for Goodearth"
+            />
           </div>
           <div className="reveal d1">
             <span className="eyebrow">Grown by Nigerian hands</span>

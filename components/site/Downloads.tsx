@@ -12,7 +12,7 @@ export default function Downloads() {
         </div>
         <div className="downloads-grid">
           {DOWNLOADS.map((d, i) => (
-            <a className={`dl-card reveal ${i % 3 ? (i % 3 === 1 ? "d1" : "d2") : ""}`} href={d.href} target="_blank" rel="noopener noreferrer" key={d.title} download>
+            <a className={`dl-card reveal ${i % 3 ? (i % 3 === 1 ? "d1" : "d2") : ""}`} href={d.href} target="_blank" rel="noopener noreferrer" key={d.title} download={d.file ?? ""}>
               <span className="dl-icon"><Icon name="download" size={20} /></span>
               <span>
                 <h3>{d.title}</h3>

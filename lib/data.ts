@@ -71,13 +71,15 @@ export const SPICES: { key: AccentKey; tag: string; name: string; hex: string; b
 export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
     id: "turmeric", slug: "turmeric-powder", name: "Turmeric Powder", segment: "B2C",
-    accent: "turmeric", tagline: "Turmeric", image: "/img/product-turmeric.png",
+    accent: "turmeric", tagline: "Turmeric", image: "/Product/turmeric.png",
+    images: ["/Product/turmeric.png"],
     description: "Pure, golden turmeric - rich in colour and warmth for everyday Nigerian cooking.",
     sizes: ["100 g"], formats: [],
   },
   {
     id: "ginger", slug: "ginger-powder", name: "Ginger Powder", segment: "B2C",
-    accent: "ginger", tagline: "Ginger", image: "/img/product-ginger.png",
+    accent: "ginger", tagline: "Ginger", image: "/Product/ginger.png",
+    images: ["/Product/ginger.png"],
     description: "Aromatic, finely milled ginger that brings warmth and depth to soups and stews.",
     sizes: ["100 g"], formats: [],
   },
@@ -304,9 +306,10 @@ export const QUALITY_SYSTEMS: { icon: string; title: string; body: string }[] = 
 ];
 
 // ---- Downloads (brochures / certificates) ----
-export const DOWNLOADS = [
+// `file` overrides the saved filename when the stored path isn't presentable.
+export const DOWNLOADS: { title: string; desc: string; href: string; file?: string }[] = [
   { title: "Company Profile", desc: "Business overview, capability and long-term vision.", href: "/downloads/tg-agri-farms-company-profile.pdf" },
-  { title: "Certifications Pack", desc: "NAFDAC, SON, Halal, US FDA, FSSC 22000 and more.", href: "/downloads/tg-agri-farms-certifications.pdf" },
+  { title: "Certifications Pack", desc: "NAFDAC, SON, Halal, US FDA, FSSC 22000 and more.", href: "/img/certs/Doc1.pdf", file: "tg-agri-farms-certifications.pdf" },
   { title: "Product Catalogue", desc: "B2C consumer packs and B2B bulk formats.", href: "/downloads/tg-agri-farms-product-catalogue.pdf" },
 ];
 

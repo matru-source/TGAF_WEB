@@ -36,8 +36,8 @@ const BUNDLED = [
   "/Product/Cameroon-2.jpeg",
   "/Product/Cameroon-3.jpeg",
   "/Product/Cameroon-4.jpeg",
-  "/img/product-turmeric.png",
-  "/img/product-ginger.png",
+  "/Product/turmeric.png",
+  "/Product/ginger.png",
 ];
 
 export default function ProductForm({ initial = {} }: { initial?: ProductInitial }) {
