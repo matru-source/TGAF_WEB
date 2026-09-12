@@ -211,10 +211,10 @@ export type UITeamMember = {
 };
 
 export const TEAM: UITeamMember[] = [
-  { id: "dc", initials: "DC", name: "Deepak Murli Chainani", role: "Managing Director", bio: "Board member since 2017. 15+ years across international markets and ~10 years in Nigerian markets." },
-  { id: "ss", initials: "SS", name: "Swatanter Saraswat", role: "Executive Director", bio: "COO since June 2023, board member since Nov 2024. 15+ years in FMCG, largely with African companies." },
-  { id: "ns", initials: "NS", name: "Narendranath Swain", role: "Finance Controller", bio: "Chartered Accountant with 10+ years in Indian finance & audit, plus 7 years as finance controller in Nigeria." },
-  { id: "fn", initials: "FN", name: "Fredrick Chidi Nze", role: "Sales Capability & Market Development", bio: "Joined 2023. 15+ years of FMCG experience, largely with African companies." },
+  { id: "dc", initials: "DC", name: "Deepak Murli Chainani", role: "Managing Director", bio: "Board member since 2017. 15+ years across international markets and ~10 years in Nigerian markets.", photo: "/img/team/deepak-portrait.jpg" },
+  { id: "ss", initials: "SS", name: "Swatanter Saraswat", role: "Executive Director", bio: "COO since June 2023, board member since Nov 2024. 15+ years in FMCG, largely with African companies.", photo: "/img/team/swatanter-saraswat.jpg" },
+  { id: "ns", initials: "NS", name: "Narendranath Swain", role: "Finance Controller", bio: "Chartered Accountant with 10+ years in Indian finance & audit, plus 7 years as finance controller in Nigeria.", photo: "/img/team/narendranath-swain.jpg" },
+  { id: "fn", initials: "FN", name: "Fredrick Chidi Nze", role: "Sales Capability & Market Development", bio: "Joined 2023. 15+ years of FMCG experience, largely with African companies.", photo: "/img/team/fred-nze.jpg" },
 ];
 
 // ---- Certifications ----

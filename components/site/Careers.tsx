@@ -60,6 +60,41 @@ export default function Careers() {
               </div>
             ))}
           </div>
+
+          <div className="careers-team-banner reveal">
+            <div className="careers-team-img-wrap">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/img/team-workforce.jpg"
+                alt="Goodearth Foods operations and manufacturing team at the Ikorodu facility"
+                loading="lazy"
+              />
+              <div className="careers-team-overlay-tag">
+                <span className="dot" />
+                <span>Our Team · Manufacturing &amp; Operations Plant, Ikorodu, Lagos</span>
+              </div>
+            </div>
+            <div className="careers-team-content">
+              <div className="careers-team-info">
+                <h3>A dedicated team building Africa&apos;s spice future</h3>
+                <p>
+                  From our state-of-the-art milling facility in Ikorodu to our partner farm gates across 15+ Nigerian
+                  states, our people drive every milestone. We provide safe, automated workplaces, structured skills
+                  development, and real room for young Nigerian talent and women to grow into leadership.
+                </p>
+              </div>
+              <div className="careers-team-stats">
+                <div className="careers-stat-box">
+                  <div className="careers-stat-num">100+</div>
+                  <div className="careers-stat-label">Full-time operational, quality &amp; field staff in Nigeria</div>
+                </div>
+                <div className="careers-stat-box">
+                  <div className="careers-stat-num">Equal</div>
+                  <div className="careers-stat-label">Room for youth and women to build long-term careers</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
