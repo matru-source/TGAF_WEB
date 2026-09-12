@@ -275,10 +275,7 @@ export const CONTACTS = [
 // ---- WhatsApp + socials ----
 export const WHATSAPP = { display: "+234 904 044 3851", href: "https://wa.me/2349040443851" };
 export const SOCIALS: { name: string; icon: string; href: string }[] = [
-  { name: "LinkedIn", icon: "linkedin", href: "#" },
-  { name: "Facebook", icon: "facebook", href: "#" },
-  { name: "Instagram", icon: "instagram", href: "#" },
-  { name: "X", icon: "twitter", href: "#" },
+  { name: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/company/tg-agri-farms-ltd" },
 ];
 
 // ---- Leadership / governance (for bankers & investors) ----
@@ -364,4 +361,58 @@ export const NEWS: {
     ],
   },
 ];
+
+// ---- Awards & National Recognition ----
+export const AWARDS = [
+  {
+    id: "edge-award-2025",
+    title: "Outstanding Indigenous Naija Spice of the Year",
+    event: "13th Edition Marketing Edge Awards",
+    theme: "Excellence Beyond Borders",
+    year: "2025",
+    date: "October 2025",
+    location: "Lagos, Nigeria",
+    brand: "Goodearth Hot Peppe",
+    company: "TG Agri Farm / Goodearth Foods",
+    presentedBy: "Hon. Adeniyi Adebayo (Chief of Staff to Ekiti State Governor)",
+    receivedBy: [
+      { name: "Swatanter Saraswat", role: "Chief Executive Officer, TG Agri Farm" },
+      { name: "Nze Frederick Chidi", role: "Marketing Head, TG Agri Farm" },
+      { name: "Abhishek Manitripathi", role: "Branch Head, TG Agri Farm" },
+      { name: "Victoria Omaku", role: "Sales Coordinator, TG Agri Farm" },
+    ],
+    statement:
+      "It validates years of meticulous planning, substantial investment, and an uncompromising dedication to producing world-class spices from Nigerian soil. The brand demonstrated an exceptional ability to stand out in a highly competitive category, proving that indigenous brands can achieve international standards while maintaining authentic local character.",
+    summary:
+      "Goodearth Hot Peppe from the stable of Goodearth Foods emerged as the winner of the coveted Indigenous Naija Spice of the Year category at the 13th edition of Marketing Edge Awards, affirming that Nigerian brands can compete at the highest standards when backed by world-class infrastructure and unwavering commitment to quality.",
+    ceremonyPhoto: "/img/awards/award-ceremony-clean.jpg",
+    pressFeatures: [
+      {
+        id: "thisday",
+        publication: "THISDAY Newspaper",
+        edition: "Monday, October 20, 2025",
+        page: "Page 37 · News Xtra",
+        headline: "Goodearth Hot Peppe Wins Indigenous Naija Spice Award",
+        photoCaption:
+          "L-R: Sales Coordinator, Victoria Omaku; Chief Executive Officer, TG Agri Farm, Swatanter Saraswat; Chief of Staff to Ekiti State Governor, Adeniyi Adebayo; Branch Head, TG Agri Farm, Abhishek Manitripathi; and Marketing Head, TG Agri Farm, Nze Frederick Chidi, at the 2025 Edge Award, where the company was recognised as Outstanding Indigenous Naija Spice of the Year in Lagos... recently",
+        image: "/img/awards/award-thisday-newspaper.jpg",
+        highlight:
+          "The recognition not only distinguished Goodearth Hot Peppe from other brands in its category but sent ripples of excitement across Nigeria's food and spice industry.",
+      },
+      {
+        id: "punch",
+        publication: "THE PUNCH Newspaper",
+        edition: "Friday, October 24, 2025",
+        page: "Page 6 · Photo News",
+        headline: "Naija Spice of the Year Award...",
+        photoCaption:
+          "L-R: Sales Coordinator, Victoria Omaku; Chief Executive Officer, TG Agri Farm, Swatanter Saraswat; Chief of Staff to Ekiti State Governor, Adeniyi Adebayo; Branch Head, TG Agri Farm, Abhishek Manitripathi; and Marketing Head, TG Agri Farm, Frederick Chidi, during the 2025 Edge Award, where the company was recognised as Outstanding Indigenous Naija Spice of the Year in Lagos... recently. Photo: TG Agri Farm",
+        image: "/img/awards/award-punch-newspaper.jpg",
+        highlight:
+          "National photo news coverage spotlighting TG Agri Farm leadership receiving the 2025 Edge Award trophy on stage in Lagos.",
+      },
+    ],
+  },
+];
+
 

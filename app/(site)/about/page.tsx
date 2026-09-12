@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/site/PageHero";
 import About from "@/components/site/About";
-import MarketOverview from "@/components/site/MarketOverview";
 import CtaBand from "@/components/site/CtaBand";
 
 export const metadata: Metadata = {
@@ -21,7 +20,6 @@ export default function AboutPage() {
         tone="green"
       />
       <About />
-      <MarketOverview />
       <CtaBand title="Partner with a team that knows the land" ctaLabel="Talk to us" />
     </>
   );

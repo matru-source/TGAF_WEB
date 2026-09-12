@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import Analytics from "@/components/site/Analytics";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const playfair = Playfair_Display({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-fraunces",
+  variable: "--font-heading",
   style: ["normal", "italic"],
 });
 const inter = Inter({
@@ -37,7 +37,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body>{children}</body>
       <Analytics />
     </html>

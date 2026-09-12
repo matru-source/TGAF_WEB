@@ -29,6 +29,7 @@ export default function Footer() {
             <h4>Company</h4>
             <ul>
               <li><Link href="/about">About Us</Link></li>
+              <li><Link href="/awards">Awards &amp; Recognition</Link></li>
               <li><Link href="/leadership">Leadership</Link></li>
               <li><Link href="/sustainability">Sustainability &amp; ESG</Link></li>
               <li><Link href="/careers">Careers</Link></li>

@@ -13,6 +13,7 @@ const NAV: Item[] = [
     label: "Company",
     children: [
       { label: "About Us", href: "/about" },
+      { label: "Awards & Recognition", href: "/awards" },
       { label: "Leadership", href: "/leadership" },
       { label: "Sustainability & ESG", href: "/sustainability" },
     ],

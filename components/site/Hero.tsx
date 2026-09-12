@@ -122,7 +122,7 @@ export default function Hero({ packs = HERO_SHOWCASE }: { packs?: string[] }) {
           >
             <motion.div className="frame" style={{ y: imageY }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/img/photo-chilli-hand.jpg" alt="A handful of sun-dried Nigerian chilli peppers" />
+              <img src="/img/photo-farmers-harvest.jpg" alt="Nigerian farmers harvesting fresh red chilli peppers in the field" />
             </motion.div>
             <AnimatePresence mode="wait">
               {/* eslint-disable-next-line @next/next/no-img-element */}
