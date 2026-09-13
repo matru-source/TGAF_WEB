@@ -33,33 +33,73 @@ export default function AwardsView() {
               </div>
             </div>
 
-            {/* Stage Ceremony Banner */}
-            <div className="ceremony-showcase">
-              <div className="ceremony-img-frame">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={award.ceremonyPhoto}
-                  alt="TG Agri Farm leadership receiving the Outstanding Indigenous Naija Spice of the Year trophy"
-                  className="ceremony-img"
-                />
-                <div className="gold-winner-tag">
-                  <span className="year">2025</span>
-                  <span className="status">WINNER</span>
+            {/* 2-Column Editorial Showcase */}
+            <div className="award-editorial-showcase">
+              {/* Left Column: Framed Ceremony Photo at Natural Crisp Resolution */}
+              <div className="ceremony-frame-col">
+                <div className="ceremony-frame-box">
+                  <div className="ceremony-img-wrap">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={award.ceremonyPhoto}
+                      alt="TG Agri Farm leadership receiving the Outstanding Indigenous Naija Spice of the Year trophy"
+                      className="ceremony-img-crisp"
+                    />
+                    <div className="gold-winner-badge">
+                      <span className="year">2025</span>
+                      <span className="status">WINNER</span>
+                    </div>
+                  </div>
+
+                  <div className="ceremony-caption-strip">
+                    <div className="caption-tag">Trophy Presentation on Stage · Lagos</div>
+                    <p className="caption-note">
+                      TG Agri Farm leadership receiving the 2025 Marketing Edge trophy.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Roster & Caption */}
-              <div className="ceremony-caption-bar">
-                <div className="caption-title">Trophy Presentation on Stage in Lagos:</div>
-                <div className="caption-roster">
-                  <span className="roster-item presenter">
-                    <strong>Presented by:</strong> {award.presentedBy}
-                  </span>
-                  {award.receivedBy.map((p) => (
-                    <span className="roster-item" key={p.name}>
-                      <strong>{p.name}</strong> ({p.role.replace(", TG Agri Farm", "")})
-                    </span>
-                  ))}
+              {/* Right Column: Editorial Citation & Official Handover Roster */}
+              <div className="editorial-info-col">
+                <div className="citation-kicker">
+                  <span className="kicker-star">★</span>
+                  <span>Jury Citation &amp; Industry Recognition</span>
+                </div>
+
+                <h3 className="citation-title">
+                  Setting the Benchmark for Indigenous Spice Excellence
+                </h3>
+
+                <blockquote className="citation-quote-box">
+                  <p className="quote-body">&ldquo;{award.statement}&rdquo;</p>
+                </blockquote>
+
+                <div className="handover-roster-box">
+                  <div className="roster-line presenter-line">
+                    <span className="roster-lbl">Presented By:</span>
+                    <span className="roster-who"><strong>{award.presentedBy}</strong></span>
+                  </div>
+
+                  <div className="roster-line team-line">
+                    <span className="roster-lbl">Received On Stage:</span>
+                    <div className="team-pill-list">
+                      {award.receivedBy.map((p) => (
+                        <span className="team-pill" key={p.name}>
+                          <strong>{p.name}</strong> · {p.role.replace(", TG Agri Farm", "")}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="editorial-btn-row">
+                  <a href="#press-coverage" className="btn btn-primary btn-sm">
+                    Read Newspaper Press Scans ↓
+                  </a>
+                  <Link href="/products/hot-pepe-powder" className="btn btn-secondary btn-sm">
+                    View Winning Product Specs →
+                  </Link>
                 </div>
               </div>
             </div>
@@ -82,13 +122,35 @@ export default function AwardsView() {
               </div>
 
               <div className="award-statement-card">
-                <div className="statement-quote-mark">&ldquo;</div>
-                <blockquote className="statement-quote">
-                  {award.statement}
-                </blockquote>
-                <div className="statement-footer">
-                  <div className="author-org">Official Statement · TG Agri Farm / Goodearth Foods</div>
-                  <div className="author-summary">{award.summary}</div>
+                <div className="criteria-header">
+                  <span className="criteria-eyebrow">Evaluation Pillars</span>
+                  <h3>Why Goodearth Hot Peppe Won</h3>
+                </div>
+                <div className="criteria-list">
+                  <div className="criteria-item">
+                    <div className="criteria-num">01</div>
+                    <div className="criteria-text">
+                      <strong>100% Indigenous Sourcing:</strong> Directly procured from Nigerian pepper farmers, supporting local agricultural outgrower livelihoods.
+                    </div>
+                  </div>
+                  <div className="criteria-item">
+                    <div className="criteria-num">02</div>
+                    <div className="criteria-text">
+                      <strong>Automated Processing Infrastructure:</strong> US$10M facility in Ikorodu with steam sterilization retaining natural volatile oils and vivid colour.
+                    </div>
+                  </div>
+                  <div className="criteria-item">
+                    <div className="criteria-num">03</div>
+                    <div className="criteria-text">
+                      <strong>Food-Safety Accreditations:</strong> Full compliance with NAFDAC, SON, US FDA, Halal, and FSSC 22000 manufacturing norms.
+                    </div>
+                  </div>
+                  <div className="criteria-item">
+                    <div className="criteria-num">04</div>
+                    <div className="criteria-text">
+                      <strong>Rapid Consumer &amp; Market Adoption:</strong> Over 250 distributors and 170+ open markets nationwide embracing Goodearth within 18 months.
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -97,7 +159,7 @@ export default function AwardsView() {
       </section>
 
       {/* National Press Coverage Section */}
-      <section className="section section--cream2">
+      <section className="section section--cream2" id="press-coverage">
         <div className="container">
           <div className="section-head center">
             <span className="eyebrow center">National Press Coverage</span>
@@ -283,95 +345,227 @@ export default function AwardsView() {
           color: var(--line-strong);
         }
 
-        /* Ceremony Frame */
-        .ceremony-showcase {
-          background: #191410;
-          border-radius: var(--radius);
-          border: 1px solid #3d332a;
-          overflow: hidden;
+        /* 2-Column Editorial Showcase */
+        .award-editorial-showcase {
+          display: grid;
+          grid-template-columns: 500px 1fr;
+          gap: clamp(24px, 3.5vw, 44px);
+          background: #171310;
+          border: 1px solid #382D22;
+          border-radius: var(--radius-lg);
+          padding: clamp(22px, 3vw, 36px);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
           margin-bottom: 36px;
-          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.16);
+          align-items: center;
         }
 
-        .ceremony-img-frame {
+        @media (max-width: 980px) {
+          .award-editorial-showcase {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .ceremony-frame-box {
+          background: #0E0B09;
+          border: 1px solid #453728;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        .ceremony-img-wrap {
           position: relative;
-          width: 100%;
-          background: #110e0c;
+          overflow: hidden;
+          aspect-ratio: 16 / 10;
+          background: #000;
         }
 
-        .ceremony-img {
+        .ceremony-img-crisp {
           width: 100%;
-          height: auto;
-          max-height: 460px;
+          height: 100%;
           object-fit: cover;
+          object-position: center 20%;
           display: block;
+          filter: contrast(1.08) brightness(1.02) saturate(1.12);
+          transition: transform 0.4s var(--ease);
         }
 
-        .gold-winner-tag {
+        .ceremony-img-wrap:hover .ceremony-img-crisp {
+          transform: scale(1.03);
+        }
+
+        .gold-winner-badge {
           position: absolute;
-          top: 18px;
-          right: 18px;
-          background: linear-gradient(135deg, #ffd768 0%, #d49514 100%);
-          color: #1a1205;
-          padding: 8px 16px;
+          top: 14px;
+          left: 14px;
+          background: linear-gradient(135deg, #FFD768 0%, #D49514 100%);
+          color: #1A1205;
+          padding: 6px 14px;
           border-radius: 999px;
           font-weight: 800;
           display: flex;
           flex-direction: column;
           align-items: center;
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
           border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
-        .gold-winner-tag .year {
-          font-size: 1rem;
+        .gold-winner-badge .year {
+          font-size: 0.95rem;
           line-height: 1;
         }
 
-        .gold-winner-tag .status {
-          font-size: 0.65rem;
-          letter-spacing: 0.14em;
-        }
-
-        .ceremony-caption-bar {
-          padding: 16px 24px;
-          background: #241d17;
-          border-top: 1px solid #3d332a;
-          color: #e2dbd1;
-        }
-
-        .caption-title {
-          font-size: 0.78rem;
-          text-transform: uppercase;
+        .gold-winner-badge .status {
+          font-size: 0.6rem;
           letter-spacing: 0.12em;
-          color: #d4a552;
-          font-weight: 700;
-          margin-bottom: 8px;
         }
 
-        .caption-roster {
+        .ceremony-caption-strip {
+          padding: 12px 18px;
+          background: #221A14;
+          border-top: 1px solid #382D22;
+        }
+
+        .caption-tag {
+          font-size: 0.74rem;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: #E8A838;
+          font-weight: 700;
+          margin-bottom: 2px;
+        }
+
+        .caption-note {
+          font-size: 0.8rem;
+          color: #C7BEAE;
+          margin: 0;
+          line-height: 1.4;
+        }
+
+        /* Editorial Info Column */
+        .editorial-info-col {
+          display: flex;
+          flex-direction: column;
+          color: #FFFFFF;
+        }
+
+        .citation-kicker {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.74rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--turmeric);
+          margin-bottom: 10px;
+        }
+
+        .kicker-star {
+          color: var(--turmeric);
+        }
+
+        .citation-title {
+          font-family: var(--serif);
+          font-size: clamp(1.4rem, 2.3vw, 1.95rem);
+          color: #FFFFFF;
+          line-height: 1.22;
+          margin: 0 0 14px 0;
+        }
+
+        .citation-quote-box {
+          position: relative;
+          background: rgba(255, 255, 255, 0.04);
+          border-left: 3px solid var(--turmeric);
+          border-radius: 0 8px 8px 0;
+          padding: 14px 18px;
+          margin: 0 0 18px 0;
+        }
+
+        .quote-body {
+          font-family: var(--serif);
+          font-style: italic;
+          font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+          color: #EBE4D5;
+          line-height: 1.58;
+          margin: 0;
+        }
+
+        .handover-roster-box {
+          display: grid;
+          gap: 8px;
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.09);
+          border-radius: 8px;
+          padding: 12px 16px;
+          margin-bottom: 22px;
+        }
+
+        .roster-line {
           display: flex;
           flex-wrap: wrap;
-          gap: 8px 12px;
+          align-items: baseline;
+          gap: 8px;
+          font-size: 0.84rem;
         }
 
-        .roster-item {
-          font-size: 0.82rem;
-          color: #cfc6b8;
+        .roster-lbl {
+          color: var(--turmeric);
+          font-weight: 700;
+          font-size: 0.74rem;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          min-width: 130px;
+        }
+
+        .roster-who {
+          color: #FFFFFF;
+        }
+
+        .team-pill-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px 8px;
+        }
+
+        .team-pill {
+          font-size: 0.78rem;
+          color: #DDD6C8;
           background: rgba(255, 255, 255, 0.06);
-          padding: 4px 10px;
-          border-radius: 6px;
+          padding: 3px 8px;
+          border-radius: 4px;
           border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .roster-item.presenter {
-          background: rgba(212, 149, 20, 0.15);
-          color: #f7d58a;
-          border-color: rgba(212, 149, 20, 0.35);
+        .team-pill strong {
+          color: #FFFFFF;
         }
 
-        .roster-item strong {
-          color: #ffffff;
+        .editorial-btn-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        .editorial-btn-row .btn-secondary {
+          background: rgba(255, 255, 255, 0.1);
+          color: #FFFFFF;
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          border-radius: var(--radius);
+          padding: 8px 18px;
+          font-size: 0.84rem;
+          display: inline-flex;
+          align-items: center;
+          text-decoration: none;
+          transition: all 0.25s ease;
+        }
+
+        .editorial-btn-row .btn-secondary:hover {
+          background: rgba(255, 255, 255, 0.18);
+          border-color: var(--turmeric);
+          color: var(--turmeric);
         }
 
         /* Story Grid */
@@ -437,44 +631,61 @@ export default function AwardsView() {
         .award-statement-card {
           background: var(--cream-2);
           border: 1px solid var(--line);
-          border-left: 4px solid var(--gold);
+          border-left: 4px solid var(--turmeric-deep);
           border-radius: 0 var(--radius) var(--radius) 0;
           padding: clamp(24px, 3vw, 36px);
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: center;
         }
 
-        .statement-quote-mark {
-          font-family: var(--serif);
-          font-size: 3.5rem;
-          line-height: 0.6;
-          color: var(--gold);
-          margin-bottom: 8px;
+        .criteria-header {
+          margin-bottom: 18px;
         }
 
-        .statement-quote {
-          font-family: var(--serif);
-          font-style: italic;
-          font-size: clamp(1.05rem, 1.4vw, 1.25rem);
-          line-height: 1.55;
-          color: var(--ink);
-          margin-bottom: 16px;
-        }
-
-        .author-org {
-          font-size: 0.8rem;
+        .criteria-eyebrow {
+          font-size: 0.72rem;
           font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.12em;
           color: var(--chilli);
+          display: block;
           margin-bottom: 4px;
         }
 
-        .author-summary {
+        .criteria-header h3 {
+          font-family: var(--serif);
+          font-size: 1.35rem;
+          color: var(--ink);
+          margin: 0;
+        }
+
+        .criteria-list {
+          display: grid;
+          gap: 12px;
+        }
+
+        .criteria-item {
+          display: flex;
+          gap: 12px;
+          align-items: flex-start;
           font-size: 0.88rem;
-          color: var(--ink-2);
           line-height: 1.5;
+          color: var(--ink-2);
+        }
+
+        .criteria-num {
+          font-family: var(--serif);
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: var(--turmeric-deep);
+          line-height: 1;
+          min-width: 22px;
+          padding-top: 2px;
+        }
+
+        .criteria-text strong {
+          color: var(--ink);
         }
 
         /* Press Columns */
