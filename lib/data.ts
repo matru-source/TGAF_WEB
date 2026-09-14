@@ -117,9 +117,9 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
 
 // ---- Homepage hero showcase (auto-rotating pack shots) ----
 export const HERO_SHOWCASE: string[] = [
-  "/Product/hero-hot-peppe.png",
-  "/Product/hero-atarodo.jpeg",
-  "/Product/hero-cameron.png",
+  "/Product/hero-hot-peppe-studio.png",
+  "/Product/hero-atarodo-studio.png",
+  "/Product/hero-cameroon-studio.png",
 ];
 
 // ---- B2B portfolio (static; formats per crop) ----
