@@ -564,81 +564,179 @@ p { font-size: 1rem; line-height: 1.68; color: var(--ink-2); }
 .swot ul li { font-size: .92rem; color: var(--ink-2); padding: 7px 0 7px 20px; position: relative; }
 .swot ul li::before { content:""; position:absolute; left:0; top:14px; width: 8px; height:1.6px; background: var(--gold); }
 
-/* ----------  Team  ---------- */
-.team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(16px,2.4vw,24px); }
-@media (max-width: 900px){ .team-grid{ grid-template-columns: repeat(2,1fr);} }
-@media (max-width: 480px){ .team-grid{ grid-template-columns:1fr;} }
+/* ----------  Team (Client Slide Reference)  ---------- */
+.leadership-team-section {
+  background-color: #F8F5EE;
+  padding: 64px 0 96px;
+}
+.leadership-team-head {
+  text-align: left;
+  margin-bottom: 44px;
+}
+.leadership-team-title {
+  font-family: var(--sans);
+  font-size: clamp(2.1rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 1.8vw, 24px);
+  padding-top: 60px; /* Space for the floating portrait badges */
+}
+@media (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 76px 24px;
+  }
+}
+@media (max-width: 580px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+}
+
 .member {
-  border: 1px solid rgba(229, 168, 35, 0.28);
-  border-radius: 20px 20px 46px 20px;
-  padding: 34px 22px 32px;
-  background: #ffffff;
   position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  filter: drop-shadow(14px 18px 26px rgba(0, 0, 0, 0.08));
+  transition: transform .35s var(--ease), filter .35s var(--ease);
 }
-.member:hover { transform: translateY(-5px); box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09); }
-/* Bottom right golden curve accent matching client slide reference */
-.member::after {
-  content: "";
+.member:hover {
+  transform: translateY(-6px);
+  filter: drop-shadow(18px 24px 34px rgba(0, 0, 0, 0.12));
+}
+
+/* Golden bottom backing plate matching client slide reference */
+.member-gold-accent {
   position: absolute;
-  bottom: 0;
+  left: 0;
   right: 0;
-  width: 48px;
-  height: 28px;
-  background: #E5A823;
-  border-top-left-radius: 28px;
+  bottom: -11px;
+  height: 70px;
+  background: linear-gradient(180deg, #E09F15 0%, #D48E0D 100%);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 46px;
+  z-index: 1;
   pointer-events: none;
 }
-/* Framed golden square portrait badge matching slide reference */
+
+/* White card body with custom asymmetrical corners */
+.member-card-body {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  border-top-left-radius: 48px;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 44px;
+  padding: 72px 20px 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Floating framed golden square portrait badge matching slide reference */
 .member-photo {
-  width: 118px;
-  height: 118px;
-  margin: 0 auto 18px;
+  position: absolute;
+  top: -56px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 126px;
   border-radius: 18px;
-  border: 2.5px solid #E5A823;
-  box-shadow: 0 6px 18px rgba(229, 168, 35, 0.22);
+  border: 2px solid #E5A823;
   overflow: hidden;
   background: #ffffff;
-  flex-shrink: 0;
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
-.member-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .4s var(--ease); }
-.member:hover .member-photo img { transform: scale(1.05); }
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  transition: transform .4s var(--ease);
+}
+.member:hover .member-photo img {
+  transform: scale(1.05);
+}
+
 .member .avatar {
-  width: 118px;
-  height: 118px;
-  margin: 0 auto 18px;
+  position: absolute;
+  top: -56px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 126px;
   border-radius: 18px;
-  border: 2.5px solid #E5A823;
+  border: 2px solid #E5A823;
   display: grid;
   place-items: center;
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.8rem;
   color: #fff;
-  flex-shrink: 0;
+  z-index: 5;
 }
-.member:nth-child(1) .avatar{ background: var(--chilli);} .member:nth-child(2) .avatar{ background: var(--farm);}
-.member:nth-child(3) .avatar{ background: var(--turmeric-deep);} .member:nth-child(4) .avatar{ background: var(--ginger-deep);}
-.member h3 { font-size: 1.15rem; font-weight: 700; text-align: center; color: var(--ink); margin: 0 0 4px; line-height: 1.25; }
-.member .role { font-size: 0.86rem; font-style: italic; text-align: center; color: #555555; margin: 0 0 18px; min-height: 2.3em; display: flex; align-items: center; justify-content: center; }
+.member:nth-child(1) .avatar { background: var(--chilli); }
+.member:nth-child(2) .avatar { background: var(--farm); }
+.member:nth-child(3) .avatar { background: var(--turmeric-deep); }
+.member:nth-child(4) .avatar { background: var(--ginger-deep); }
+
+.member h3 {
+  font-family: var(--sans);
+  font-size: 1.12rem;
+  font-weight: 800;
+  text-align: center;
+  color: #111111;
+  margin: 0;
+  line-height: 1.25;
+}
+
+/* Gold divider bar between name and designation */
+.member-divider {
+  width: 44px;
+  height: 2px;
+  background: #E5A823;
+  margin: 7px auto 8px;
+  border-radius: 1px;
+}
+
+.member .role {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-style: italic;
+  font-weight: 400;
+  text-align: center;
+  color: #222222;
+  margin: 0 0 20px;
+  min-height: 2.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .member-bullets {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 16px;
   flex-grow: 1;
 }
 .member-bullets li {
   position: relative;
   padding-left: 18px;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: #374151;
+  font-family: var(--sans);
+  font-size: 0.83rem;
+  line-height: 1.52;
+  color: #1a1a1a;
   text-align: left;
 }
 .member-bullets li::before {
@@ -647,9 +745,15 @@ p { font-size: 1rem; line-height: 1.68; color: var(--ink-2); }
   left: 0;
   top: -1px;
   font-size: 1.15rem;
-  color: #111827;
+  color: #111111;
 }
-.member p { font-size: 0.88rem; line-height: 1.55; color: #374151; text-align: left; }
+.member p {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #1a1a1a;
+  text-align: left;
+}
 
 /* ----------  Certifications  ---------- */
 .certs { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
