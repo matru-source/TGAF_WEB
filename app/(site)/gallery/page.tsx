@@ -6,7 +6,7 @@ import CtaBand from "@/components/site/CtaBand";
 export const metadata: Metadata = {
   title: "Visual Gallery & Operations · Goodearth Foods",
   description:
-    "Explore Goodearth's authentic journey in pictures: from Nigerian outgrower farm communities and modern Ikorodu processing facilities to metropolitan Lagos transit campaigns and award-winning retail spices.",
+    "Explore Goodearth's authentic journey in pictures: from Nigerian outgrower farm communities and harvest depots to modern Ikorodu processing facilities and metropolitan Lagos transit campaigns.",
 };
 
 export default function GalleryPage() {
@@ -15,7 +15,7 @@ export default function GalleryPage() {
       <PageHero
         eyebrow="Authentic Visual Archive"
         title={<>Our Journey in Pictures</>}
-        subtitle="From Nigerian outgrower fields and modern factory floors to bustling Lagos transit corridors and consumer kitchens nationwide."
+        subtitle="From Nigerian outgrower farming communities and sun-dried harvest depots to modern Ikorodu processing facilities and metropolitan Lagos transit campaigns."
         crumb="Gallery"
         tone="warm"
       />

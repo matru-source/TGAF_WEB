@@ -434,9 +434,7 @@ export type GalleryCategory =
   | "facility"
   | "community"
   | "harvest"
-  | "transit"
-  | "products"
-  | "awards";
+  | "transit";
 
 export interface GalleryItem {
   id: string;
@@ -456,8 +454,6 @@ export const GALLERY_CATEGORIES: { key: GalleryCategory; label: string }[] = [
   { key: "community", label: "Farm & Community" },
   { key: "harvest", label: "Harvest & Sourcing" },
   { key: "transit", label: "Transit & Market" },
-  { key: "products", label: "Retail Sachets" },
-  { key: "awards", label: "Awards & Recognition" },
 ];
 
 export const GALLERY_ITEMS: GalleryItem[] = [
@@ -628,90 +624,6 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     location: "Ikorodu Central Arterial, Lagos",
     aspect: "landscape",
     tag: "Fleet Presence",
-  },
-  {
-    id: "hot-peppe-sachet",
-    title: "Goodearth Hot Peppe Sachet (50g)",
-    category: "products",
-    categoryLabel: "Retail Sachets",
-    image: "/Product/hot-peppe-studio.jpg",
-    caption:
-      "Flagship 50g retail sachet milled from authentic sun-dried red chillies with zero artificial additives.",
-    location: "Retail Distribution Nationwide",
-    aspect: "portrait",
-    tag: "Retail Sachet",
-  },
-  {
-    id: "atarodo-sachet",
-    title: "Goodearth Atarodo Chilli Sachet (50g)",
-    category: "products",
-    categoryLabel: "Retail Sachets",
-    image: "/Product/atarodo-studio.jpg",
-    caption:
-      "Pure Scotch Bonnet / Atarodo chilli powder delivering fruity aroma and unmistakable authentic Nigerian heat.",
-    location: "Retail Distribution Nationwide",
-    aspect: "portrait",
-    tag: "Retail Sachet",
-  },
-  {
-    id: "cameroon-sachet",
-    title: "Goodearth Cameroon Peppe Sachet (50g)",
-    category: "products",
-    categoryLabel: "Retail Sachets",
-    image: "/Product/cameroon-studio.jpg",
-    caption:
-      "Slow-roasted dark aromatic Cameroon pepper delivering smoky depth to Nigerian stews and regional delicacies.",
-    location: "Retail Distribution Nationwide",
-    aspect: "portrait",
-    tag: "Retail Sachet",
-  },
-  {
-    id: "supa-pack",
-    title: "Goodearth Hot Peppe Supa Pack (100g)",
-    category: "products",
-    categoryLabel: "Retail Sachets",
-    image: "/Product/hot-peppe-supa-pack.jpg",
-    caption:
-      "High-value 100g Supa Pack engineered for active household kitchens, caterers, and food service vendors.",
-    location: "Retail Distribution Nationwide",
-    aspect: "portrait",
-    tag: "Supa Pack",
-  },
-  {
-    id: "master-carton",
-    title: "Goodearth Master Shipper Carton (100 Sachets)",
-    category: "products",
-    categoryLabel: "Retail Sachets",
-    image: "/Product/hot-peppe-carton.jpg",
-    caption:
-      "Commercial distribution master shipper carton packed with 100 individual retail sachets for wholesale and retail trade.",
-    location: "Wholesale Distribution Hubs",
-    aspect: "landscape",
-    tag: "Wholesale Carton",
-  },
-  {
-    id: "awards-ceremony",
-    title: "Marketing Edge Awards Stage Presentation",
-    category: "awards",
-    categoryLabel: "Awards & Recognition",
-    image: "/img/awards/award-ceremony-hd.png",
-    caption:
-      "CEO Swatanter Saraswat and TG Agri Farm leadership receiving the 'Outstanding Indigenous Naija Spice of the Year' award on stage in Lagos.",
-    location: "Lagos, Nigeria",
-    aspect: "landscape",
-    tag: "National Trophy",
-  },
-  {
-    id: "awards-press-thisday",
-    title: "THISDAY National Press Feature",
-    category: "awards",
-    categoryLabel: "Awards & Recognition",
-    image: "/img/awards/award-thisday-newspaper.jpg",
-    caption:
-      "National press editorial coverage spotlighting Goodearth Hot Peppe's milestone industry recognition.",
-    location: "National Newspaper Archive",
-    aspect: "landscape",
-    tag: "National Press",
   },
 ];
 
