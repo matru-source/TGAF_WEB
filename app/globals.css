@@ -585,18 +585,18 @@ p { font-size: 1rem; line-height: 1.68; color: var(--ink-2); }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(16px, 1.8vw, 24px);
-  padding-top: 60px; /* Space for the floating portrait badges */
+  padding-top: 82px; /* Space for the larger floating portrait badges */
 }
 @media (max-width: 1024px) {
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 76px 24px;
+    gap: 92px 24px;
   }
 }
 @media (max-width: 580px) {
   .team-grid {
     grid-template-columns: 1fr;
-    gap: 80px;
+    gap: 96px;
   }
 }
 
@@ -635,7 +635,7 @@ p { font-size: 1rem; line-height: 1.68; color: var(--ink-2); }
   border-top-right-radius: 6px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 44px;
-  padding: 72px 20px 28px;
+  padding: 98px 20px 28px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -644,17 +644,17 @@ p { font-size: 1rem; line-height: 1.68; color: var(--ink-2); }
 /* Floating framed golden square portrait badge matching slide reference */
 .member-photo {
   position: absolute;
-  top: -56px;
+  top: -76px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 126px;
-  border-radius: 18px;
-  border: 2px solid #E5A823;
+  width: 154px;
+  height: 160px;
+  border-radius: 22px;
+  border: 2.5px solid #E5A823;
   overflow: hidden;
   background: #ffffff;
   z-index: 5;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
 }
 .member-photo img {
   width: 100%;
@@ -669,13 +669,13 @@ p { font-size: 1rem; line-height: 1.68; color: var(--ink-2); }
 
 .member .avatar {
   position: absolute;
-  top: -56px;
+  top: -76px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 126px;
-  border-radius: 18px;
-  border: 2px solid #E5A823;
+  width: 154px;
+  height: 160px;
+  border-radius: 22px;
+  border: 2.5px solid #E5A823;
   display: grid;
   place-items: center;
   font-family: var(--sans);
