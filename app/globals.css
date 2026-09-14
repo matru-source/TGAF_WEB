@@ -317,22 +317,56 @@ p { font-size: 1rem; line-height: 1.68; color: var(--ink-2); }
 .product-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(18px,2.4vw,28px); }
 @media (max-width: 920px){ .product-grid { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 560px){ .product-grid { grid-template-columns: 1fr; } }
-.pcard { position: relative; border-radius: var(--radius-lg); padding: 26px 26px 28px; background: var(--paper); border: 1px solid var(--line); overflow: hidden; transition: transform .5s var(--ease), box-shadow .5s, border-color .5s; }
+.pcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  padding: 24px 24px 26px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  color: inherit;
+  transition: transform .45s var(--ease), box-shadow .45s, border-color .45s;
+}
 .pcard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
-.pcard .well { position: relative; height: 230px; border-radius: var(--radius); display: grid; place-items: center; margin-bottom: 20px; overflow: hidden; }
+.pcard .well {
+  position: relative;
+  height: 230px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
 .pcard .well::before { content:""; position:absolute; inset:0; opacity:.9; }
-.pcard .well img { position: relative; height: 92%; max-height: 92%; width: 92%; max-width: 92%; object-fit: contain; filter: drop-shadow(0 18px 24px rgba(0,0,0,.22)); transition: transform .6s var(--ease); }
-.pcard:hover .well img { transform: translateY(-6px) scale(1.04); }
-.well--chilli   { background: radial-gradient(circle at 50% 30%, var(--chilli-soft), #fbeeec); }
+.pcard .well img {
+  position: relative;
+  height: 90%;
+  max-height: 90%;
+  width: auto;
+  max-width: 86%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 20px rgba(0,0,0,.22));
+  transition: transform .5s var(--ease), filter .5s var(--ease);
+}
+.pcard:hover .well img {
+  transform: translateY(-6px) scale(1.05);
+  filter: drop-shadow(0 20px 26px rgba(0,0,0,.26));
+}
+.well--chilli   { background: radial-gradient(circle at 50% 30%, #fdf0ed, #fae2dc); }
 .well--turmeric { background: radial-gradient(circle at 50% 30%, var(--turmeric-soft), #fdf7e7); }
 .well--ginger   { background: radial-gradient(circle at 50% 30%, var(--ginger-soft), #f8efe3); }
 .pcard .cat { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--chilli); }
 .pcard.t-turmeric .cat { color: var(--turmeric-deep); }
 .pcard.t-ginger .cat { color: var(--ginger-deep); }
-.pcard h3 { margin: .35rem 0 .5rem; font-size: 1.4rem; }
-.pcard p { font-size: 0.96rem; line-height: 1.55; color: var(--ink-2); min-height: 2.8em; }
-.pcard .sizes { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
-.pcard .sizes span { font-size: .76rem; font-weight: 600; color: var(--ink-2); background: var(--cream-2); border: 1px solid var(--line); padding: .3em .7em; border-radius: 100px; }
+.pcard h3 { margin: .35rem 0 .5rem; font-size: 1.35rem; line-height: 1.25; }
+.pcard p { font-size: 0.94rem; line-height: 1.55; color: var(--ink-2); flex-grow: 1; margin-bottom: 14px; }
+.pcard .sizes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.pcard .sizes span { font-size: .74rem; font-weight: 600; color: var(--ink-2); background: var(--cream-2); border: 1px solid var(--line); padding: .25em .65em; border-radius: 100px; }
 .pcard .nophoto { font-family: var(--serif); font-size: 3rem; color: var(--chilli); opacity: .5; }
 
 /* ---- B2B showcase: products (dot-labelled rows) + customer logos ---- */
@@ -982,11 +1016,20 @@ img { -webkit-user-drag: none; }
 .vp-card p { font-size: .9rem; color: var(--ink-2); }
 
 /* ---- Featured / product 'view' affordance ---- */
-.pcard { display: block; color: inherit; }
-.pcard-view { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-size: .82rem; font-weight: 700; color: var(--chilli); opacity: 0; transform: translateY(4px); transition: opacity .35s var(--ease), transform .35s var(--ease); }
+.pcard-view {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: .84rem;
+  font-weight: 700;
+  color: var(--chilli);
+  opacity: 0.85;
+  transition: opacity .35s var(--ease), transform .35s var(--ease), color .35s;
+}
 .pcard.t-turmeric .pcard-view { color: var(--turmeric-deep); }
 .pcard.t-ginger .pcard-view { color: var(--ginger-deep); }
-.pcard:hover .pcard-view { opacity: 1; transform: none; }
+.pcard:hover .pcard-view { opacity: 1; color: var(--chilli-deep); }
 .pcard-view .arr { transition: transform .3s var(--ease); }
 .pcard:hover .pcard-view .arr { transform: translateX(4px); }
 

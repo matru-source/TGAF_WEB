@@ -70,11 +70,47 @@ export const SPICES: { key: AccentKey; tag: string; name: string; hex: string; b
 // ---- B2C product fallback ----
 export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
-    id: "turmeric", slug: "turmeric-powder", name: "Turmeric Powder", segment: "B2C",
-    accent: "turmeric", tagline: "Turmeric", image: "/Product/turmeric.png",
-    images: ["/Product/turmeric.png"],
-    description: "Pure, golden turmeric - rich in colour and warmth for everyday Nigerian cooking.",
-    sizes: ["100 g"], formats: [],
+    id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe Powder", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hero-hot-peppe-studio.png",
+    images: [
+      "/Product/hero-hot-peppe-studio.png",
+      "/Product/hot-peppe-studio.jpg",
+      "/Product/hot-peppe-supa-pack.jpg",
+      "/Product/hot-peppe-carton.jpg",
+    ],
+    description: "Bright red, premium pepper powder to add spice and flavour to every meal.",
+    sizes: ["100 g", "5 g", "Supa Pack"], formats: [], featured: true,
+    costPositioning: "Medium–High cost", marketCategory: "Premium staple",
+    colour: "Red", asta: "40–55", scoville: "55,000–60,000 SHU",
+    usage: "Adds spice & flavour to all meals",
+  },
+  {
+    id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe Powder", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/hero-atarodo-studio.png",
+    images: [
+      "/Product/hero-atarodo-studio.png",
+      "/Product/atarodo-studio.jpg",
+      "/Product/atarodo-carton.jpg",
+    ],
+    description: "Dark-red scotch-bonnet style pepper - a mass-market staple for everyday heat.",
+    sizes: ["8 g", "3 g", "Carton"], formats: [], featured: true,
+    costPositioning: "Low–Medium cost", marketCategory: "Scotch-bonnet · mass-market staple",
+    colour: "Dark red", asta: "50–60", scoville: "~60,000 SHU",
+    usage: "Adds spice to all meals",
+  },
+  {
+    id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe Powder", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Gourmet", image: "/Product/hero-cameroon-studio.png",
+    images: [
+      "/Product/hero-cameroon-studio.png",
+      "/Product/cameroon-studio.jpg",
+      "/Product/cameroon-carton.jpg",
+    ],
+    description: "Deep red, smoky and pungent - a gourmet, authentic powder for soups & noodles.",
+    sizes: ["100 g", "50 g", "3 g"], formats: [], featured: true,
+    costPositioning: "High cost", marketCategory: "Gourmet / authentic · premium niche",
+    colour: "Deep red & brown", asta: "-", scoville: "~90,000 SHU",
+    usage: "For soups & noodles",
   },
   {
     id: "ginger", slug: "ginger-powder", name: "Ginger Powder", segment: "B2C",
@@ -84,44 +120,11 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     sizes: ["100 g"], formats: [],
   },
   {
-    id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe Powder", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hot-peppe-studio.jpg",
-    images: [
-      "/Product/hot-peppe-studio.jpg",
-      "/Product/hot-peppe-supa-pack.jpg",
-      "/Product/hot-peppe-carton.jpg",
-    ],
-    description: "Bright red, premium pepper powder to add spice and flavour to every meal.",
-    sizes: ["100 g", "5 g", "Supa Pack", "Carton"], formats: [], featured: true,
-    costPositioning: "Medium–High cost", marketCategory: "Premium staple",
-    colour: "Red", asta: "40–55", scoville: "55,000–60,000 SHU",
-    usage: "Adds spice & flavour to all meals",
-  },
-  {
-    id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe Powder", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/atarodo-studio.jpg",
-    images: [
-      "/Product/atarodo-studio.jpg",
-      "/Product/atarodo-carton.jpg",
-    ],
-    description: "Dark-red scotch-bonnet style pepper - a mass-market staple for everyday heat.",
-    sizes: ["8 g", "3 g", "Carton"], formats: [],
-    costPositioning: "Low–Medium cost", marketCategory: "Scotch-bonnet · mass-market staple",
-    colour: "Dark red", asta: "50–60", scoville: "~60,000 SHU",
-    usage: "Adds spice to all meals",
-  },
-  {
-    id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe Powder", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Gourmet", image: "/Product/cameroon-studio.jpg",
-    images: [
-      "/Product/cameroon-studio.jpg",
-      "/Product/cameroon-carton.jpg",
-    ],
-    description: "Deep red, smoky and pungent - a gourmet, authentic powder for soups & noodles.",
-    sizes: ["100 g", "50 g", "3 g", "Carton"], formats: [],
-    costPositioning: "High cost", marketCategory: "Gourmet / authentic · premium niche",
-    colour: "Deep red & brown", asta: "-", scoville: "~90,000 SHU",
-    usage: "For soups & noodles",
+    id: "turmeric", slug: "turmeric-powder", name: "Turmeric Powder", segment: "B2C",
+    accent: "turmeric", tagline: "Turmeric", image: "/Product/turmeric.png",
+    images: ["/Product/turmeric.png"],
+    description: "Pure, golden turmeric - rich in colour and warmth for everyday Nigerian cooking.",
+    sizes: ["100 g"], formats: [],
   },
 ];
 
@@ -395,7 +398,7 @@ export const AWARDS = [
       "It validates years of meticulous planning, substantial investment, and an uncompromising dedication to producing world-class spices from Nigerian soil. The brand demonstrated an exceptional ability to stand out in a highly competitive category, proving that indigenous brands can achieve international standards while maintaining authentic local character.",
     summary:
       "Goodearth Hot Peppe from the stable of Goodearth Foods emerged as the winner of the coveted Indigenous Naija Spice of the Year category at the 13th edition of Marketing Edge Awards, affirming that Nigerian brands can compete at the highest standards when backed by world-class infrastructure and unwavering commitment to quality.",
-    ceremonyPhoto: "/img/awards/award-ceremony-clean.jpg",
+    ceremonyPhoto: "/img/awards/award-ceremony-hd.png",
     pressFeatures: [
       {
         id: "thisday",

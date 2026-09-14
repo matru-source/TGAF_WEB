@@ -23,7 +23,14 @@ const cardVariants = {
 };
 
 export default function FeaturedProducts({ products }: { products: UIProduct[] }) {
-  const items = products.filter((p) => p.segment === "B2C").slice(0, 3);
+  // Always showcase Goodearth's 3 flagship Nigerian Pepper powders on the homepage
+  const items = [...products.filter((p) => p.segment === "B2C")]
+    .sort((a, b) => {
+      const rank = (slug: string) =>
+        slug.includes("hot-peppe") ? 0 : slug.includes("atarodo") ? 1 : slug.includes("cameroon") ? 2 : 9;
+      return rank(a.slug) - rank(b.slug);
+    })
+    .slice(0, 3);
 
   return (
     <section className="section">
@@ -55,7 +62,7 @@ export default function FeaturedProducts({ products }: { products: UIProduct[] }
           {items.map((p) => {
             const a = accentClass(p.accent);
             return (
-              <motion.div variants={cardVariants} key={p.id}>
+              <motion.div variants={cardVariants} key={p.id} style={{ height: "100%", display: "flex" }}>
                 <Link href={`/products/${p.slug}`} className={`pcard ${a.card}`}>
                   <motion.div
                     className={`well ${a.well}`}
