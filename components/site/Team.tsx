@@ -25,7 +25,15 @@ export default async function Team() {
               )}
               <h3>{m.name}</h3>
               <div className="role">{m.role}</div>
-              <p>{m.bio}</p>
+              {m.bullets && m.bullets.length > 0 ? (
+                <ul className="member-bullets">
+                  {m.bullets.map((b, idx) => (
+                    <li key={idx}>{b}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>{m.bio}</p>
+              )}
             </article>
           ))}
         </div>

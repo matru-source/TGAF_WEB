@@ -65,9 +65,18 @@ export async function getTeam(): Promise<UITeamMember[]> {
     2500,
   );
   if (!rows || !rows.length) return TEAM;
-  return rows.map((m) => ({
-    id: m.id, name: m.name, role: m.role, bio: m.bio, initials: m.initials, photo: m.photo,
-  }));
+  return rows.map((m) => {
+    const fallback = TEAM.find((t) => t.id === m.id || t.name.toLowerCase() === m.name.toLowerCase());
+    return {
+      id: m.id,
+      name: m.name,
+      role: m.role,
+      bio: m.bio,
+      bullets: fallback?.bullets,
+      initials: m.initials,
+      photo: fallback?.photo || m.photo,
+    };
+  });
 }
 
 export type StatItem = { key: string; value: number; suffix?: string; label: string };

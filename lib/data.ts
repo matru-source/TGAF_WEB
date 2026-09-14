@@ -219,15 +219,60 @@ export type UITeamMember = {
   name: string;
   role: string;
   bio: string;
+  bullets?: string[];
   initials?: string | null;
   photo?: string | null;
 };
 
 export const TEAM: UITeamMember[] = [
-  { id: "dc", initials: "DC", name: "Deepak Murli Chainani", role: "Managing Director", bio: "Board member since 2017. 15+ years across international markets and ~10 years in Nigerian markets.", photo: "/img/team/deepak-portrait.jpg" },
-  { id: "ss", initials: "SS", name: "Swatanter Saraswat", role: "Executive Director", bio: "COO since June 2023, board member since Nov 2024. 15+ years in FMCG, largely with African companies.", photo: "/img/team/swatanter-saraswat.jpg" },
-  { id: "ns", initials: "NS", name: "Narendranath Swain", role: "Finance Controller", bio: "Chartered Accountant with 10+ years in Indian finance & audit, plus 7 years as finance controller in Nigeria.", photo: "/img/team/narendranath-swain.jpg" },
-  { id: "fn", initials: "FN", name: "Fredrick Chidi Nze", role: "Sales Capability & Market Development", bio: "Joined 2023. 15+ years of FMCG experience, largely with African companies.", photo: "/img/team/fred-nze.jpg" },
+  {
+    id: "dc",
+    initials: "DC",
+    name: "Deepak Murli Chainani",
+    role: "Managing Director",
+    bio: "Appointed to the board of directors on 18th Dec 2017. He has more than 15 years of experience in various verticals of international markets and almost 10 years of experience in Nigerian markets.",
+    bullets: [
+      "Appointed to the board of directors on 18th Dec 2017.",
+      "He has more than 15 years of experience in various verticals of international markets and almost 10 years of experience in Nigerian markets.",
+    ],
+    photo: "/img/team/deepak-portrait.jpg",
+  },
+  {
+    id: "ss",
+    initials: "SS",
+    name: "Swatanter Saraswat",
+    role: "Executive Director",
+    bio: "Appointed as COO in June,2023 and to the board of directors in Nov 2024. He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+    bullets: [
+      "Appointed as COO in June,2023 and to the board of directors in Nov 2024.",
+      "He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+    ],
+    photo: "/img/team/swatanter-saraswat.jpg",
+  },
+  {
+    id: "ns",
+    initials: "NS",
+    name: "Narendranath Swain",
+    role: "Finance Controller",
+    bio: "Joined the Company in 2024. He is Qualified Chartered Accountant from India with more than Ten years of experience in Indian accounts, audit and finance with additional 7 years of experience as Finance controller in Nigerian companies.",
+    bullets: [
+      "Joined the Company in 2024.",
+      "He is Qualified Chartered Accountant from India with more than Ten years of experience in Indian accounts, audit and finance with additional 7 years of experience as Finance controller in Nigerian companies.",
+    ],
+    photo: "/img/team/narendranath-swain.jpg",
+  },
+  {
+    id: "fn",
+    initials: "FN",
+    name: "Fredrick Chidi Nze",
+    role: "Sales Capability & Market Development",
+    bio: "Joined the Company in 2023. He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+    bullets: [
+      "Joined the Company in 2023.",
+      "He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+    ],
+    photo: "/img/team/fred-nze.jpg",
+  },
 ];
 
 // ---- Certifications ----
