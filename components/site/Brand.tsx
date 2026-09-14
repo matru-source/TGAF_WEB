@@ -5,7 +5,7 @@ export default function Brand({ variant = "default" }: { variant?: "default" | "
   return (
     <Link href="/" className="brand" aria-label="Good Earth Foods - home">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="brand-logo" src={src} alt="Good Earth Foods" width={62} height={46} />
+      <img className="brand-logo" src={src} alt="Good Earth Foods" width={98} height={66} />
     </Link>
   );
 }
