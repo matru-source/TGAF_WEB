@@ -92,7 +92,7 @@ export default function AwardsView() {
                 <div className="prod-badge">Winning Product</div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/Product/hot-pepe-1.jpeg"
+                  src="/Product/hot-peppe-studio.jpg"
                   alt="Goodearth Hot Peppe Powder retail pack"
                   className="award-prod-img"
                 />
