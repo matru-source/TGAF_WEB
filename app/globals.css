@@ -148,6 +148,8 @@ p { font-size: 1rem; line-height: 1.68; color: var(--ink-2); }
 .header.scrolled { background: var(--cream); border-bottom-color: var(--line); }
 .nav { display: flex; align-items: center; justify-content: space-between; height: 76px; }
 .brand { display: flex; align-items: center; gap: .65rem; font-family: var(--serif); font-size: 1.32rem; font-weight: 600; letter-spacing: -.01em; }
+.brand-logo { display: block; width: auto; height: 50px; max-height: 50px; object-fit: contain; transition: transform .3s var(--ease); }
+.brand:hover .brand-logo { transform: scale(1.02); }
 .brand .mark { width: 34px; height: 34px; flex: none; }
 .brand small { display:block; font-family: var(--sans); font-size: .58rem; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-top: 2px; }
 .nav-links { display: flex; align-items: center; gap: clamp(1rem, 2.2vw, 2.1rem); }
