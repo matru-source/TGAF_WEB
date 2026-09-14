@@ -19,7 +19,8 @@ export default function SiteEffects() {
       reveals.forEach((el) => el.classList.add("in"));
       counters.forEach((el) => {
         const t = Number(el.dataset.count || "0");
-        el.textContent = t.toLocaleString("en-US") + (el.dataset.suffix || "");
+        const noComma = el.dataset.noComma === "true";
+        el.textContent = (noComma ? String(t) : t.toLocaleString("en-US")) + (el.dataset.suffix || "");
       });
       return;
     }
@@ -37,10 +38,11 @@ export default function SiteEffects() {
     );
     reveals.forEach((el) => revealIO.observe(el));
 
-    const fmt = (n: number) => n.toLocaleString("en-US");
     const animate = (el: HTMLElement) => {
       const target = Number(el.dataset.count || "0");
       const suffix = el.dataset.suffix || "";
+      const noComma = el.dataset.noComma === "true";
+      const fmt = (n: number) => (noComma ? String(n) : n.toLocaleString("en-US"));
       const dur = 1500;
       let start: number | null = null;
       const ease = (t: number) => 1 - Math.pow(1 - t, 3);

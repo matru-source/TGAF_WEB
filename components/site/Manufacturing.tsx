@@ -1,5 +1,5 @@
 import { FACILITY_KPIS, FACILITY_CAPS } from "@/lib/data";
-import { Icon } from "./icons";
+import FacilityCarousel from "./FacilityCarousel";
 
 const MODULES = [
   { t: "Steam steriliser", d: "Microbial safety for high-VO spices while preserving natural colour and aroma." },
@@ -20,12 +20,8 @@ export default function Manufacturing() {
           </p>
         </div>
 
-        <div className="mfg-hero-media reveal">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/photo-facility.jpg" alt="Automated spice processing line at Ikorodu" />
-          <a className="video-play" href="/contact" aria-label="Watch our facility story">
-            <Icon name="play" size={30} />
-          </a>
+        <div className="reveal" style={{ marginBottom: "clamp(24px, 3vw, 36px)" }}>
+          <FacilityCarousel />
         </div>
 
         <div className="kpi-grid reveal">

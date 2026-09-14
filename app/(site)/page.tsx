@@ -4,6 +4,7 @@ import StatsStrip from "@/components/site/StatsStrip";
 import LocalMarketBand from "@/components/site/LocalMarketBand";
 import FeaturedProducts from "@/components/site/FeaturedProducts";
 import ValueProps from "@/components/site/ValueProps";
+import TrustMetricsStrip from "@/components/site/TrustMetricsStrip";
 import Testimonials from "@/components/site/Testimonials";
 import Markets from "@/components/site/Markets";
 import CtaBand from "@/components/site/CtaBand";
@@ -21,6 +22,7 @@ export default async function HomePage() {
       <StatsStrip stats={stats} />
       <LocalMarketBand />
       <FeaturedProducts products={products} />
+      <TrustMetricsStrip />
       <ValueProps />
       <Testimonials />
       <Markets />
