@@ -31,6 +31,7 @@ export default function Footer() {
               <li><Link href="/about">About Us</Link></li>
               <li><Link href="/awards">Awards &amp; Recognition</Link></li>
               <li><Link href="/leadership">Leadership</Link></li>
+              <li><Link href="/gallery">Company Gallery</Link></li>
               <li><Link href="/sustainability">Sustainability &amp; ESG</Link></li>
               <li><Link href="/careers">Careers</Link></li>
               <li><Link href="/news">News &amp; Media</Link></li>

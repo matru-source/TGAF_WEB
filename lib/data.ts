@@ -428,4 +428,291 @@ export const AWARDS = [
   },
 ];
 
+// ---- Gallery Data ----
+export type GalleryCategory =
+  | "all"
+  | "facility"
+  | "community"
+  | "harvest"
+  | "transit"
+  | "products"
+  | "awards";
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  category: GalleryCategory;
+  categoryLabel: string;
+  image: string;
+  caption: string;
+  location?: string;
+  aspect?: "portrait" | "landscape" | "wide";
+  tag?: string;
+}
+
+export const GALLERY_CATEGORIES: { key: GalleryCategory; label: string }[] = [
+  { key: "all", label: "All Imagery" },
+  { key: "facility", label: "Factory & Workforce" },
+  { key: "community", label: "Farm & Community" },
+  { key: "harvest", label: "Harvest & Sourcing" },
+  { key: "transit", label: "Transit & Market" },
+  { key: "products", label: "Retail Sachets" },
+  { key: "awards", label: "Awards & Recognition" },
+];
+
+export const GALLERY_ITEMS: GalleryItem[] = [
+  {
+    id: "facility-aerial",
+    title: "Good Earth Agro-Processing Complex",
+    category: "facility",
+    categoryLabel: "Processing Facility",
+    image: "/img/gallery/goodearth-facility-aerial.png",
+    caption:
+      "Aerial overview of the modern Good Earth agro-processing and spice milling facility located in Ikorodu, Lagos State.",
+    location: "Ikorodu Expressway, Lagos State",
+    aspect: "landscape",
+    tag: "Facility Architecture",
+  },
+  {
+    id: "workforce-group",
+    title: "Ikorodu Plant Workforce & Production Team",
+    category: "facility",
+    categoryLabel: "Team & Workforce",
+    image: "/img/gallery/ikorodu-workforce-group.jpg",
+    caption:
+      "The passionate operations, milling, and packaging workforce driving daily production of authentic Nigerian spices.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Workforce",
+  },
+  {
+    id: "factory-staff",
+    title: "Operations & Packaging Personnel",
+    category: "facility",
+    categoryLabel: "Team & Workforce",
+    image: "/img/gallery/factory-staff-front.jpg",
+    caption:
+      "Factory floor technicians and packaging operators outside the main facility in branded company uniforms.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Operations",
+  },
+  {
+    id: "plant-management",
+    title: "Plant Management & Engineering Team",
+    category: "facility",
+    categoryLabel: "Leadership & Engineering",
+    image: "/img/gallery/plant-management-team.jpg",
+    caption:
+      "Engineering leads and plant supervisors overseeing international milling precision, sanitation, and safety.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Engineering",
+  },
+  {
+    id: "engineering-leadership",
+    title: "Facility Operations & Technical Leadership",
+    category: "facility",
+    categoryLabel: "Leadership & Engineering",
+    image: "/img/gallery/engineering-leadership.jpg",
+    caption:
+      "Production supervisors ensuring consistent particle granularity, aroma retention, and HACCP compliance.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Leadership",
+  },
+  {
+    id: "operations-crew",
+    title: "Operations & Logistics Crew",
+    category: "facility",
+    categoryLabel: "Operations & Logistics",
+    image: "/img/gallery/operations-team-green.jpg",
+    caption:
+      "Logistics and handling coordinators in Good Earth signature green uniform apparel.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Logistics",
+  },
+  {
+    id: "qa-team-yellow",
+    title: "Quality Assurance & Retail Packaging Crew",
+    category: "facility",
+    categoryLabel: "Quality Assurance",
+    image: "/img/gallery/qa-packaging-team-yellow.jpg",
+    caption:
+      "Production specialists sporting 'Na Correct Naija Peppe' yellow team apparel outside the facility grounds.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Quality Team",
+  },
+  {
+    id: "farmer-elder-meeting",
+    title: "Outgrower Farmer Dialogue & Community Council",
+    category: "community",
+    categoryLabel: "Community & Sourcing",
+    image: "/img/gallery/farmer-elder-meeting.jpg",
+    caption:
+      "Company directors and field coordinators engaging in open stakeholder dialogue with rural farming elders under the village tree.",
+    location: "Northern Agricultural Outgrower Belt",
+    aspect: "landscape",
+    tag: "Community Partnership",
+  },
+  {
+    id: "farmer-riverbank",
+    title: "Riverbank Farming Outgrower Community",
+    category: "community",
+    categoryLabel: "Community & Sourcing",
+    image: "/img/gallery/farmer-community-riverbank.jpg",
+    caption:
+      "TG Agri Farm leadership alongside smallholder farmer families and rural outgrower partners along the riverbank agricultural basin.",
+    location: "River Valley Farming Basin, Nigeria",
+    aspect: "landscape",
+    tag: "Outgrower Network",
+  },
+  {
+    id: "community-outreach",
+    title: "Rural Cooperative Empowerment & Outreach",
+    category: "community",
+    categoryLabel: "Community & Sourcing",
+    image: "/img/gallery/outgrower-community-outreach.jpg",
+    caption:
+      "Direct village engagement and social welfare outreach with farming families and agricultural cooperatives.",
+    location: "Rural Farming Cooperative, Nigeria",
+    aspect: "landscape",
+    tag: "Social Impact",
+  },
+  {
+    id: "pepper-harvest-sundrying",
+    title: "Chilli Harvest & Sun-Drying Procurement Depot",
+    category: "harvest",
+    categoryLabel: "Harvest & Sourcing",
+    image: "/img/gallery/pepper-harvest-sundrying.png",
+    caption:
+      "Massive mounds of sun-dried red chillies undergoing grading and moisture verification by field procurement officers.",
+    location: "Regional Spice Procurement Depot",
+    aspect: "portrait",
+    tag: "Harvest Depot",
+  },
+  {
+    id: "transit-bus-rear",
+    title: "Lagos Transit Campaign — Correct Peppe, Correct Taste",
+    category: "transit",
+    categoryLabel: "Transit & Market",
+    image: "/img/gallery/lagos-transit-bus-rear.jpg",
+    caption:
+      "Good Earth full rear transit bus wrap on Ikorodu Road, Lagos, bringing authentic Naija spices to daily commuters.",
+    location: "Ikorodu Road, Lagos (GPS Verified)",
+    aspect: "portrait",
+    tag: "Transit Wrap",
+  },
+  {
+    id: "transit-bus-side",
+    title: "Lagos Commuter Bus Full Side Wrap",
+    category: "transit",
+    categoryLabel: "Transit & Market",
+    image: "/img/gallery/lagos-transit-bus-side.jpg",
+    caption:
+      "Full side wrap branding featuring Goodearth Hot Peppe and Cameroon Peppe across the Lagos transit corridor.",
+    location: "Ikorodu Expressway, Lagos",
+    aspect: "landscape",
+    tag: "Commuter Bus",
+  },
+  {
+    id: "transit-bus-road",
+    title: "Transit Advertising Fleet along Ikorodu Corridor",
+    category: "transit",
+    categoryLabel: "Transit & Market",
+    image: "/img/gallery/lagos-transit-bus-road.jpg",
+    caption:
+      "Good Earth transit campaign fleet in active commercial transit on the bustling Ikorodu highway arterial.",
+    location: "Ikorodu Central Arterial, Lagos",
+    aspect: "landscape",
+    tag: "Fleet Presence",
+  },
+  {
+    id: "hot-peppe-sachet",
+    title: "Goodearth Hot Peppe Sachet (50g)",
+    category: "products",
+    categoryLabel: "Retail Sachets",
+    image: "/Product/hot-peppe-studio.jpg",
+    caption:
+      "Flagship 50g retail sachet milled from authentic sun-dried red chillies with zero artificial additives.",
+    location: "Retail Distribution Nationwide",
+    aspect: "portrait",
+    tag: "Retail Sachet",
+  },
+  {
+    id: "atarodo-sachet",
+    title: "Goodearth Atarodo Chilli Sachet (50g)",
+    category: "products",
+    categoryLabel: "Retail Sachets",
+    image: "/Product/atarodo-studio.jpg",
+    caption:
+      "Pure Scotch Bonnet / Atarodo chilli powder delivering fruity aroma and unmistakable authentic Nigerian heat.",
+    location: "Retail Distribution Nationwide",
+    aspect: "portrait",
+    tag: "Retail Sachet",
+  },
+  {
+    id: "cameroon-sachet",
+    title: "Goodearth Cameroon Peppe Sachet (50g)",
+    category: "products",
+    categoryLabel: "Retail Sachets",
+    image: "/Product/cameroon-studio.jpg",
+    caption:
+      "Slow-roasted dark aromatic Cameroon pepper delivering smoky depth to Nigerian stews and regional delicacies.",
+    location: "Retail Distribution Nationwide",
+    aspect: "portrait",
+    tag: "Retail Sachet",
+  },
+  {
+    id: "supa-pack",
+    title: "Goodearth Hot Peppe Supa Pack (100g)",
+    category: "products",
+    categoryLabel: "Retail Sachets",
+    image: "/Product/hot-peppe-supa-pack.jpg",
+    caption:
+      "High-value 100g Supa Pack engineered for active household kitchens, caterers, and food service vendors.",
+    location: "Retail Distribution Nationwide",
+    aspect: "portrait",
+    tag: "Supa Pack",
+  },
+  {
+    id: "master-carton",
+    title: "Goodearth Master Shipper Carton (100 Sachets)",
+    category: "products",
+    categoryLabel: "Retail Sachets",
+    image: "/Product/hot-peppe-carton.jpg",
+    caption:
+      "Commercial distribution master shipper carton packed with 100 individual retail sachets for wholesale and retail trade.",
+    location: "Wholesale Distribution Hubs",
+    aspect: "landscape",
+    tag: "Wholesale Carton",
+  },
+  {
+    id: "awards-ceremony",
+    title: "Marketing Edge Awards Stage Presentation",
+    category: "awards",
+    categoryLabel: "Awards & Recognition",
+    image: "/img/awards/award-ceremony-hd.png",
+    caption:
+      "CEO Swatanter Saraswat and TG Agri Farm leadership receiving the 'Outstanding Indigenous Naija Spice of the Year' award on stage in Lagos.",
+    location: "Lagos, Nigeria",
+    aspect: "landscape",
+    tag: "National Trophy",
+  },
+  {
+    id: "awards-press-thisday",
+    title: "THISDAY National Press Feature",
+    category: "awards",
+    categoryLabel: "Awards & Recognition",
+    image: "/img/awards/award-thisday-newspaper.jpg",
+    caption:
+      "National press editorial coverage spotlighting Goodearth Hot Peppe's milestone industry recognition.",
+    location: "National Newspaper Archive",
+    aspect: "landscape",
+    tag: "National Press",
+  },
+];
+
 
