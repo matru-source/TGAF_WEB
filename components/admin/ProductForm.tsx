@@ -26,18 +26,18 @@ export type ProductInitial = {
 };
 
 const BUNDLED = [
-  "/Product/hot-pepe-1.jpeg",
-  "/Product/hot-pepe-2.jpeg",
-  "/Product/Atarodo-1.jpeg",
-  "/Product/Atarodo-2.jpeg",
-  "/Product/Atarodo-3.jpeg",
-  "/Product/Atarodo-mockup.jpeg",
-  "/Product/Cameroon-1.jpeg",
-  "/Product/Cameroon-2.jpeg",
-  "/Product/Cameroon-3.jpeg",
-  "/Product/Cameroon-4.jpeg",
+  "/Product/hot-peppe-studio.jpg",
+  "/Product/hot-peppe-supa-pack.jpg",
+  "/Product/hot-peppe-carton.jpg",
+  "/Product/atarodo-studio.jpg",
+  "/Product/atarodo-carton.jpg",
+  "/Product/cameroon-studio.jpg",
+  "/Product/cameroon-carton.jpg",
   "/Product/turmeric.png",
   "/Product/ginger.png",
+  "/Product/hot-pepe-1.jpeg",
+  "/Product/Atarodo-1.jpeg",
+  "/Product/Cameroon-1.jpeg",
 ];
 
 export default function ProductForm({ initial = {} }: { initial?: ProductInitial }) {

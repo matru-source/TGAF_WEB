@@ -48,8 +48,18 @@ export async function getProducts(): Promise<UIProduct[]> {
   return rows.map(mapProduct);
 }
 
+const SLUG_ALIASES: Record<string, string> = {
+  "hot-pepe-powder": "hot-peppe-powder",
+  "hot-pepe": "hot-peppe-powder",
+  "atarodo-powder": "atarodo-peppe-powder",
+  "atarodo": "atarodo-peppe-powder",
+  "cameroon-powder": "cameroon-peppe-powder",
+  "cameroon": "cameroon-peppe-powder",
+};
+
 /** One product by slug; falls back to static data. Returns null if not found. */
-export async function getProductBySlug(slug: string): Promise<UIProduct | null> {
+export async function getProductBySlug(rawSlug: string): Promise<UIProduct | null> {
+  const slug = SLUG_ALIASES[rawSlug] || rawSlug;
   if (!DB_DISABLED) {
     const p = await withTimeout(prisma.product.findUnique({ where: { slug } }), 2500);
     if (p) return mapProduct(p);
@@ -65,9 +75,18 @@ export async function getTeam(): Promise<UITeamMember[]> {
     2500,
   );
   if (!rows || !rows.length) return TEAM;
-  return rows.map((m) => ({
-    id: m.id, name: m.name, role: m.role, bio: m.bio, initials: m.initials, photo: m.photo,
-  }));
+  return rows.map((m) => {
+    const fallback = TEAM.find((t) => t.id === m.id || t.name.toLowerCase() === m.name.toLowerCase());
+    return {
+      id: m.id,
+      name: m.name,
+      role: m.role,
+      bio: m.bio,
+      bullets: fallback?.bullets,
+      initials: m.initials,
+      photo: fallback?.photo || m.photo,
+    };
+  });
 }
 
 export type StatItem = { key: string; value: number; suffix?: string; label: string };

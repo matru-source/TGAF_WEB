@@ -79,7 +79,7 @@ export default function AwardsView() {
                   <a href="#press-coverage" className="btn btn-primary btn-sm">
                     Read Newspaper Press Scans ↓
                   </a>
-                  <Link href="/products/hot-pepe-powder" className="btn btn-secondary btn-sm">
+                  <Link href="/products/hot-peppe-powder" className="btn btn-secondary btn-sm">
                     View Winning Product Specs →
                   </Link>
                 </div>
@@ -92,13 +92,13 @@ export default function AwardsView() {
                 <div className="prod-badge">Winning Product</div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/Product/hot-pepe-1.jpeg"
+                  src="/Product/hot-peppe-studio.jpg"
                   alt="Goodearth Hot Peppe Powder retail pack"
                   className="award-prod-img"
                 />
                 <h3>Goodearth Hot Peppe</h3>
                 <p className="prod-tagline">100% Naija Grown &amp; Milled</p>
-                <Link href="/products/hot-pepe-powder" className="btn btn-primary btn-sm">
+                <Link href="/products/hot-peppe-powder" className="btn btn-primary btn-sm">
                   View Product Specs <span className="arr">→</span>
                 </Link>
               </div>

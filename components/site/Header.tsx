@@ -27,6 +27,7 @@ const NAV: Item[] = [
     ],
   },
   { label: "Products", href: "/products" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Careers", href: "/careers" },
   { label: "News", href: "/news" },
 ];

@@ -26,7 +26,13 @@ export const metadata: Metadata = {
       "Premium chilli, turmeric and ginger - grown by Nigerian hands, processed to world-class standards.",
     type: "website",
   },
-  // Favicon is served automatically from app/icon.png (and app/apple-icon.png).
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=2" },
+      { url: "/icon.png?v=2", type: "image/png" },
+    ],
+    apple: "/apple-icon.png?v=2",
+  },
 };
 
 export const viewport: Viewport = {

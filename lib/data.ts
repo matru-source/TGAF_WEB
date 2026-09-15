@@ -70,11 +70,47 @@ export const SPICES: { key: AccentKey; tag: string; name: string; hex: string; b
 // ---- B2C product fallback ----
 export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
-    id: "turmeric", slug: "turmeric-powder", name: "Turmeric Powder", segment: "B2C",
-    accent: "turmeric", tagline: "Turmeric", image: "/Product/turmeric.png",
-    images: ["/Product/turmeric.png"],
-    description: "Pure, golden turmeric - rich in colour and warmth for everyday Nigerian cooking.",
-    sizes: ["100 g"], formats: [],
+    id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe Powder", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hero-hot-peppe-studio.png",
+    images: [
+      "/Product/hero-hot-peppe-studio.png",
+      "/Product/hot-peppe-studio.jpg",
+      "/Product/hot-peppe-supa-pack.jpg",
+      "/Product/hot-peppe-carton.jpg",
+    ],
+    description: "Bright red, premium pepper powder to add spice and flavour to every meal.",
+    sizes: ["100 g", "5 g", "Supa Pack"], formats: [], featured: true,
+    costPositioning: "Medium–High cost", marketCategory: "Premium staple",
+    colour: "Red", asta: "40–55", scoville: "55,000–60,000 SHU",
+    usage: "Adds spice & flavour to all meals",
+  },
+  {
+    id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe Powder", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/hero-atarodo-studio.png",
+    images: [
+      "/Product/hero-atarodo-studio.png",
+      "/Product/atarodo-studio.jpg",
+      "/Product/atarodo-carton.jpg",
+    ],
+    description: "Dark-red scotch-bonnet style pepper - a mass-market staple for everyday heat.",
+    sizes: ["8 g", "3 g", "Carton"], formats: [], featured: true,
+    costPositioning: "Low–Medium cost", marketCategory: "Scotch-bonnet · mass-market staple",
+    colour: "Dark red", asta: "50–60", scoville: "~60,000 SHU",
+    usage: "Adds spice to all meals",
+  },
+  {
+    id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe Powder", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Gourmet", image: "/Product/hero-cameroon-studio.png",
+    images: [
+      "/Product/hero-cameroon-studio.png",
+      "/Product/cameroon-studio.jpg",
+      "/Product/cameroon-carton.jpg",
+    ],
+    description: "Deep red, smoky and pungent - a gourmet, authentic powder for soups & noodles.",
+    sizes: ["100 g", "50 g", "3 g"], formats: [], featured: true,
+    costPositioning: "High cost", marketCategory: "Gourmet / authentic · premium niche",
+    colour: "Deep red & brown", asta: "-", scoville: "~90,000 SHU",
+    usage: "For soups & noodles",
   },
   {
     id: "ginger", slug: "ginger-powder", name: "Ginger Powder", segment: "B2C",
@@ -84,34 +120,11 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     sizes: ["100 g"], formats: [],
   },
   {
-    id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe Powder", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hot-pepe-1.jpeg",
-    images: ["/Product/hot-pepe-1.jpeg", "/Product/hot-pepe-2.jpeg"],
-    description: "Bright red, premium pepper powder to add spice and flavour to every meal.",
-    sizes: ["100 g", "5 g"], formats: [], featured: true,
-    costPositioning: "Medium–High cost", marketCategory: "Premium staple",
-    colour: "Red", asta: "40–55", scoville: "55,000–60,000 SHU",
-    usage: "Adds spice & flavour to all meals",
-  },
-  {
-    id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe Powder", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/Atarodo-1.jpeg",
-    images: ["/Product/Atarodo-1.jpeg", "/Product/Atarodo-2.jpeg", "/Product/Atarodo-3.jpeg", "/Product/Atarodo-mockup.jpeg"],
-    description: "Dark-red scotch-bonnet style pepper - a mass-market staple for everyday heat.",
-    sizes: ["8 g", "3 g"], formats: [],
-    costPositioning: "Low–Medium cost", marketCategory: "Scotch-bonnet · mass-market staple",
-    colour: "Dark red", asta: "50–60", scoville: "~60,000 SHU",
-    usage: "Adds spice to all meals",
-  },
-  {
-    id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe Powder", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Gourmet", image: "/Product/Cameroon-1.jpeg",
-    images: ["/Product/Cameroon-1.jpeg", "/Product/Cameroon-2.jpeg", "/Product/Cameroon-3.jpeg", "/Product/Cameroon-4.jpeg"],
-    description: "Deep red, smoky and pungent - a gourmet, authentic powder for soups & noodles.",
-    sizes: ["100 g", "50 g", "3 g"], formats: [],
-    costPositioning: "High cost", marketCategory: "Gourmet / authentic · premium niche",
-    colour: "Deep red & brown", asta: "-", scoville: "~90,000 SHU",
-    usage: "For soups & noodles",
+    id: "turmeric", slug: "turmeric-powder", name: "Turmeric Powder", segment: "B2C",
+    accent: "turmeric", tagline: "Turmeric", image: "/Product/turmeric.png",
+    images: ["/Product/turmeric.png"],
+    description: "Pure, golden turmeric - rich in colour and warmth for everyday Nigerian cooking.",
+    sizes: ["100 g"], formats: [],
   },
 ];
 
@@ -206,15 +219,60 @@ export type UITeamMember = {
   name: string;
   role: string;
   bio: string;
+  bullets?: string[];
   initials?: string | null;
   photo?: string | null;
 };
 
 export const TEAM: UITeamMember[] = [
-  { id: "dc", initials: "DC", name: "Deepak Murli Chainani", role: "Managing Director", bio: "Board member since 2017. 15+ years across international markets and ~10 years in Nigerian markets.", photo: "/img/team/deepak-portrait.jpg" },
-  { id: "ss", initials: "SS", name: "Swatanter Saraswat", role: "Executive Director", bio: "COO since June 2023, board member since Nov 2024. 15+ years in FMCG, largely with African companies.", photo: "/img/team/swatanter-saraswat.jpg" },
-  { id: "ns", initials: "NS", name: "Narendranath Swain", role: "Finance Controller", bio: "Chartered Accountant with 10+ years in Indian finance & audit, plus 7 years as finance controller in Nigeria.", photo: "/img/team/narendranath-swain.jpg" },
-  { id: "fn", initials: "FN", name: "Fredrick Chidi Nze", role: "Sales Capability & Market Development", bio: "Joined 2023. 15+ years of FMCG experience, largely with African companies.", photo: "/img/team/fred-nze.jpg" },
+  {
+    id: "dc",
+    initials: "DC",
+    name: "Deepak Murli Chainani",
+    role: "Managing Director",
+    bio: "Appointed to the board of directors on 18th Dec 2017. He has more than 15 years of experience in various verticals of international markets and almost 10 years of experience in Nigerian markets.",
+    bullets: [
+      "Appointed to the board of directors on 18th Dec 2017.",
+      "He has more than 15 years of experience in various verticals of international markets and almost 10 years of experience in Nigerian markets.",
+    ],
+    photo: "/img/team/deepak-portrait.jpg",
+  },
+  {
+    id: "ss",
+    initials: "SS",
+    name: "Swatanter Saraswat",
+    role: "Executive Director",
+    bio: "Appointed as COO in June,2023 and to the board of directors in Nov 2024. He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+    bullets: [
+      "Appointed as COO in June,2023 and to the board of directors in Nov 2024.",
+      "He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+    ],
+    photo: "/img/team/swatanter-saraswat.jpg",
+  },
+  {
+    id: "ns",
+    initials: "NS",
+    name: "Narendranath Swain",
+    role: "Finance Controller",
+    bio: "Joined the Company in 2024. He is Qualified Chartered Accountant from India with more than Ten years of experience in Indian accounts, audit and finance with additional 7 years of experience as Finance controller in Nigerian companies.",
+    bullets: [
+      "Joined the Company in 2024.",
+      "He is Qualified Chartered Accountant from India with more than Ten years of experience in Indian accounts, audit and finance with additional 7 years of experience as Finance controller in Nigerian companies.",
+    ],
+    photo: "/img/team/narendranath-swain.jpg",
+  },
+  {
+    id: "fn",
+    initials: "FN",
+    name: "Fredrick Chidi Nze",
+    role: "Sales Capability & Market Development",
+    bio: "Joined the Company in 2023. He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+    bullets: [
+      "Joined the Company in 2023.",
+      "He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+    ],
+    photo: "/img/team/fred-nze.jpg",
+  },
 ];
 
 // ---- Certifications ----
@@ -385,7 +443,7 @@ export const AWARDS = [
       "It validates years of meticulous planning, substantial investment, and an uncompromising dedication to producing world-class spices from Nigerian soil. The brand demonstrated an exceptional ability to stand out in a highly competitive category, proving that indigenous brands can achieve international standards while maintaining authentic local character.",
     summary:
       "Goodearth Hot Peppe from the stable of Goodearth Foods emerged as the winner of the coveted Indigenous Naija Spice of the Year category at the 13th edition of Marketing Edge Awards, affirming that Nigerian brands can compete at the highest standards when backed by world-class infrastructure and unwavering commitment to quality.",
-    ceremonyPhoto: "/img/awards/award-ceremony-clean.jpg",
+    ceremonyPhoto: "/img/awards/award-ceremony-hd.png",
     pressFeatures: [
       {
         id: "thisday",
@@ -412,6 +470,205 @@ export const AWARDS = [
           "National photo news coverage spotlighting TG Agri Farm leadership receiving the 2025 Edge Award trophy on stage in Lagos.",
       },
     ],
+  },
+];
+
+// ---- Gallery Data ----
+export type GalleryCategory =
+  | "all"
+  | "facility"
+  | "community"
+  | "harvest"
+  | "transit";
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  category: GalleryCategory;
+  categoryLabel: string;
+  image: string;
+  caption: string;
+  location?: string;
+  aspect?: "portrait" | "landscape" | "wide";
+  tag?: string;
+}
+
+export const GALLERY_CATEGORIES: { key: GalleryCategory; label: string }[] = [
+  { key: "all", label: "All Imagery" },
+  { key: "facility", label: "Factory & Workforce" },
+  { key: "community", label: "Farm & Community" },
+  { key: "harvest", label: "Harvest & Sourcing" },
+  { key: "transit", label: "Transit & Market" },
+];
+
+export const GALLERY_ITEMS: GalleryItem[] = [
+  {
+    id: "facility-aerial",
+    title: "Good Earth Agro-Processing Complex",
+    category: "facility",
+    categoryLabel: "Processing Facility",
+    image: "/img/gallery/goodearth-facility-aerial.png",
+    caption:
+      "Aerial overview of the modern Good Earth agro-processing and spice milling facility located in Ikorodu, Lagos State.",
+    location: "Ikorodu Expressway, Lagos State",
+    aspect: "landscape",
+    tag: "Facility Architecture",
+  },
+  {
+    id: "workforce-group",
+    title: "Ikorodu Plant Workforce & Production Team",
+    category: "facility",
+    categoryLabel: "Team & Workforce",
+    image: "/img/gallery/ikorodu-workforce-group.jpg",
+    caption:
+      "The passionate operations, milling, and packaging workforce driving daily production of authentic Nigerian spices.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Workforce",
+  },
+  {
+    id: "factory-staff",
+    title: "Operations & Packaging Personnel",
+    category: "facility",
+    categoryLabel: "Team & Workforce",
+    image: "/img/gallery/factory-staff-front.jpg",
+    caption:
+      "Factory floor technicians and packaging operators outside the main facility in branded company uniforms.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Operations",
+  },
+  {
+    id: "plant-management",
+    title: "Plant Management & Engineering Team",
+    category: "facility",
+    categoryLabel: "Leadership & Engineering",
+    image: "/img/gallery/plant-management-team.jpg",
+    caption:
+      "Engineering leads and plant supervisors overseeing international milling precision, sanitation, and safety.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Engineering",
+  },
+  {
+    id: "engineering-leadership",
+    title: "Facility Operations & Technical Leadership",
+    category: "facility",
+    categoryLabel: "Leadership & Engineering",
+    image: "/img/gallery/engineering-leadership.jpg",
+    caption:
+      "Production supervisors ensuring consistent particle granularity, aroma retention, and HACCP compliance.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Leadership",
+  },
+  {
+    id: "operations-crew",
+    title: "Operations & Logistics Crew",
+    category: "facility",
+    categoryLabel: "Operations & Logistics",
+    image: "/img/gallery/operations-team-green.jpg",
+    caption:
+      "Logistics and handling coordinators in Good Earth signature green uniform apparel.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Logistics",
+  },
+  {
+    id: "qa-team-yellow",
+    title: "Quality Assurance & Retail Packaging Crew",
+    category: "facility",
+    categoryLabel: "Quality Assurance",
+    image: "/img/gallery/qa-packaging-team-yellow.jpg",
+    caption:
+      "Production specialists sporting 'Na Correct Naija Peppe' yellow team apparel outside the facility grounds.",
+    location: "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: "Quality Team",
+  },
+  {
+    id: "farmer-elder-meeting",
+    title: "Outgrower Farmer Dialogue & Community Council",
+    category: "community",
+    categoryLabel: "Community & Sourcing",
+    image: "/img/gallery/farmer-elder-meeting.jpg",
+    caption:
+      "Company directors and field coordinators engaging in open stakeholder dialogue with rural farming elders under the village tree.",
+    location: "Northern Agricultural Outgrower Belt",
+    aspect: "landscape",
+    tag: "Community Partnership",
+  },
+  {
+    id: "farmer-riverbank",
+    title: "Riverbank Farming Outgrower Community",
+    category: "community",
+    categoryLabel: "Community & Sourcing",
+    image: "/img/gallery/farmer-community-riverbank.jpg",
+    caption:
+      "TG Agri Farm leadership alongside smallholder farmer families and rural outgrower partners along the riverbank agricultural basin.",
+    location: "River Valley Farming Basin, Nigeria",
+    aspect: "landscape",
+    tag: "Outgrower Network",
+  },
+  {
+    id: "community-outreach",
+    title: "Rural Cooperative Empowerment & Outreach",
+    category: "community",
+    categoryLabel: "Community & Sourcing",
+    image: "/img/gallery/outgrower-community-outreach.jpg",
+    caption:
+      "Direct village engagement and social welfare outreach with farming families and agricultural cooperatives.",
+    location: "Rural Farming Cooperative, Nigeria",
+    aspect: "landscape",
+    tag: "Social Impact",
+  },
+  {
+    id: "pepper-harvest-sundrying",
+    title: "Chilli Harvest & Sun-Drying Procurement Depot",
+    category: "harvest",
+    categoryLabel: "Harvest & Sourcing",
+    image: "/img/gallery/pepper-harvest-sundrying.png",
+    caption:
+      "Massive mounds of sun-dried red chillies undergoing grading and moisture verification by field procurement officers.",
+    location: "Regional Spice Procurement Depot",
+    aspect: "portrait",
+    tag: "Harvest Depot",
+  },
+  {
+    id: "transit-bus-rear",
+    title: "Lagos Transit Campaign — Correct Peppe, Correct Taste",
+    category: "transit",
+    categoryLabel: "Transit & Market",
+    image: "/img/gallery/lagos-transit-bus-rear.jpg",
+    caption:
+      "Good Earth full rear transit bus wrap on Ikorodu Road, Lagos, bringing authentic Naija spices to daily commuters.",
+    location: "Ikorodu Road, Lagos (GPS Verified)",
+    aspect: "portrait",
+    tag: "Transit Wrap",
+  },
+  {
+    id: "transit-bus-side",
+    title: "Lagos Commuter Bus Full Side Wrap",
+    category: "transit",
+    categoryLabel: "Transit & Market",
+    image: "/img/gallery/lagos-transit-bus-side.jpg",
+    caption:
+      "Full side wrap branding featuring Goodearth Hot Peppe and Cameroon Peppe across the Lagos transit corridor.",
+    location: "Ikorodu Expressway, Lagos",
+    aspect: "landscape",
+    tag: "Commuter Bus",
+  },
+  {
+    id: "transit-bus-road",
+    title: "Transit Advertising Fleet along Ikorodu Corridor",
+    category: "transit",
+    categoryLabel: "Transit & Market",
+    image: "/img/gallery/lagos-transit-bus-road.jpg",
+    caption:
+      "Good Earth transit campaign fleet in active commercial transit on the bustling Ikorodu highway arterial.",
+    location: "Ikorodu Central Arterial, Lagos",
+    aspect: "landscape",
+    tag: "Fleet Presence",
   },
 ];
 
