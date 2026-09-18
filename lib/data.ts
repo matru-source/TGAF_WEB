@@ -45,10 +45,10 @@ export const BRAND = {
 export const DEFAULT_STATS: { key: string; value: number; suffix?: string; label: string }[] = [
   { key: "distributors", value: 250, label: "Distributors" },
   { key: "wholesalers", value: 2600, suffix: "+", label: "Wholesalers" },
-  { key: "retailers", value: 8700, suffix: "+", label: "Retailers" },
-  { key: "states", value: 15, suffix: "+", label: "States" },
+  { key: "retailers", value: 12000, suffix: "+", label: "Retailers" },
+  { key: "states", value: 17, suffix: "+", label: "States" },
   { key: "regions", value: 5, label: "Regions" },
-  { key: "markets", value: 170, suffix: "+", label: "Markets" },
+  { key: "markets", value: 100, suffix: "+", label: "Farmer Markets" },
 ];
 
 // ---- Spice trio ----
@@ -186,8 +186,8 @@ export const PROCESS_STEPS = [
 ];
 
 export const FACILITY_KPIS = [
-  { n: "$10M", l: "Invested in automation" },
-  { n: "20 MT", l: "Finished product / day" },
+  { n: "$12M", l: "Invested in automated factory" },
+  { n: "3,000 MT", l: "Annual plant capacity" },
   { n: "2,000 MT", l: "Warehousing capacity" },
   { n: "85%", l: "Moisture reduced via sun-dry" },
 ];
@@ -195,15 +195,15 @@ export const FACILITY_CAPS = ["Cleaning", "Grinding", "Blending", "Sieving", "St
 
 // ---- Impact ----
 export const IMPACT_CARDS = [
-  { n: "10,000", suffix: "+", count: 10000, title: "Agricultural & processing jobs", body: "Across farming, processing and distribution networks." },
-  { n: "700,000", suffix: "", count: 700000, title: "Man-days of agri employment", body: "Seasonal and year-round work for rural communities." },
+  { n: "50,000", suffix: "+", count: 50000, title: "Smallholder farmers engaged", body: "Across direct sourcing, cultivation and aggregation networks." },
+  { n: "10,000", suffix: "+", count: 10000, title: "Farmers trained on quality", body: "Structured post-harvest handling and food-safety practices." },
   { n: "95%", suffix: "", count: 0, title: "Nigerian staff", body: "Of total staff - youth and women included across functions." },
   { n: "Women-led", suffix: "", count: 0, title: "B2C micro-distribution", body: "Empowering women through micro-distributor sales, with reduced spoilage and stable food prices." },
 ];
-export const IMPACT_TAGS = ["350+ farmers trained", "12 farmers' markets", "7 aggregators", "300 processing & logistics jobs", "Fair-pricing agreements", "Reduced post-harvest losses", "Export diversification"];
+export const IMPACT_TAGS = ["10,000+ farmers trained", "100 farmer markets", "25 aggregators", "Grown by 50,000+ farmers", "Fair-pricing agreements", "Reduced post-harvest losses", "Export diversification"];
 
 // ---- Presence ----
-export const STATES = ["Ogun", "Ondo", "Ekiti", "Anambra", "Lagos", "Osun", "Imo", "Rivers", "Abia", "Edo", "Enugu", "Akwa Ibom", "Delta", "Oyo", "Kwara"];
+export const STATES = ["Ogun", "Ondo", "Ekiti", "Anambra", "Lagos", "Osun", "Imo", "Rivers", "Abia", "Edo", "Enugu", "Akwa Ibom", "Delta", "Oyo", "Kwara", "Kaduna", "Kano", "Abuja FCT"];
 
 // ---- SWOT ----
 export const SWOT = {
@@ -275,6 +275,46 @@ export const TEAM: UITeamMember[] = [
   },
 ];
 
+export type ExpatLeader = {
+  name: string;
+  role: string;
+  division: string;
+  photo: string;
+  badge: string;
+  highlight: string;
+  bio: string;
+};
+
+export const EXPAT_LEADERS: ExpatLeader[] = [
+  {
+    name: "Deepak Murli Chainani",
+    role: "Managing Director",
+    division: "Executive Leadership",
+    photo: "/img/team/deepak-portrait.jpg",
+    badge: "Singapore / Nigeria",
+    highlight: "15+ Yrs International Trade & Agribusiness",
+    bio: "Appointed to the board in Dec 2017. Brings 15+ years in international commodity markets and over 10 years steering agro-industrial manufacturing and supply chains across Nigeria.",
+  },
+  {
+    name: "Swatanter Saraswat",
+    role: "Executive Director & COO",
+    division: "Plant Operations & Processing",
+    photo: "/img/team/swatanter-saraswat.jpg",
+    badge: "Operations & Engineering",
+    highlight: "15+ Yrs African FMCG Manufacturing",
+    bio: "Appointed COO in June 2023 and to the board in Nov 2024. Over 15 years leading automated FMCG manufacturing plants across Africa, championing technical precision, hygiene, and engineer mentoring.",
+  },
+  {
+    name: "Narendranath Swain",
+    role: "Finance Controller",
+    division: "Corporate Governance & Audit",
+    photo: "/img/team/narendranath-swain.jpg",
+    badge: "Corporate Governance",
+    highlight: "Chartered Accountant · 17+ Yrs Exp.",
+    bio: "Qualified Chartered Accountant with 10+ years in Indian corporate finance and audit, plus 7+ years managing finance control, cost engineering, and statutory governance for Nigerian industrial leaders.",
+  },
+];
+
 // ---- Certifications ----
 // `logo` points to a file in /public/img/certs/. If the file is missing the
 // card falls back to a styled text badge (see components/site/CertLogo.tsx).
@@ -290,10 +330,10 @@ export const CERTS: { abbr: string; full: string; logo?: string }[] = [
 
 // ---- Value props (why Naija families trust us) ----
 export const VALUE_PROPS: { icon: string; title: string; body: string }[] = [
-  { icon: "sprout", title: "100% Naija sourced", body: "Grown by 350+ local farmers across the country - no imports, pure home-grown goodness." },
+  { icon: "sprout", title: "100% Naija sourced", body: "Grown by 50,000+ local farmers across the country - no imports, pure home-grown goodness." },
   { icon: "shield", title: "Pure & hygienic", body: "Steam-sterilised and milled to lock in natural colour and aroma. Clean peppe, every time." },
   { icon: "wallet", title: "For every pocket", body: "From ₦-friendly 3 g sachets to bulk bags - Goodearth dey for everybody." },
-  { icon: "users", title: "Trusted everywhere", body: "In 170+ markets, 8,700+ retailers and kitchens across 15+ states." },
+  { icon: "users", title: "Trusted everywhere", body: "In 100+ farmer markets, 12,000+ retailers and kitchens across 17+ states." },
 ];
 
 // ---- Local-market testimonials (local voices) ----
@@ -346,8 +386,8 @@ export const GOVERNANCE = [
 // ---- ESG pillars ----
 export const ESG: { key: string; letter: string; title: string; accent: AccentKey; points: string[] }[] = [
   { key: "environmental", letter: "E", title: "Environmental", accent: "ginger", points: ["Reduced post-harvest losses through modern drying, grinding & packaging", "Efficient, low-waste automated processing at Ikorodu", "Sourcing that protects natural colour and aroma"] },
-  { key: "social", letter: "S", title: "Social", accent: "chilli", points: ["100% support to local farmers - no import dependence", "350+ farmers trained on post-harvest handling & quality", "Women-led B2C micro-distribution; jobs for youth & women"] },
-  { key: "governance", letter: "G", title: "Governance", accent: "turmeric", points: ["Food-safety systems & full farm-to-fork traceability", "Certified to national and international standards", "Fair-pricing agreements and transparent supply chains"] },
+  { key: "social", letter: "S", title: "Social", accent: "chilli", points: ["100% support to local farmers - no import dependence", "Grown by 50,000+ farmers, with 10,000+ trained on quality handling", "Women-led B2C micro-distribution; jobs for youth & women"] },
+  { key: "governance", letter: "G", title: "Governance", accent: "turmeric", points: ["Food-safety systems & full farm-to-fork traceability", "Certified to national and international standards", "Fair-pricing agreements across 25 aggregators"] },
 ];
 
 // ---- Quality systems ----
@@ -357,7 +397,7 @@ export const QUALITY_SYSTEMS: { icon: string; title: string; body: string }[] = 
   { icon: "award", title: "FSSC 22000 aligned", body: "Food Safety System Certification-aligned processes across cleaning, grinding, blending and packing." },
   { icon: "shield", title: "In-line quality checks", body: "Foreign-matter removal, sieving and checks at each stage with minimal human intervention." },
   { icon: "award", title: "ASTA & Scoville profiling", body: "Colour and pungency profiling to meet customer and export specifications." },
-  { icon: "sprout", title: "Hygienic automation", body: "A US$10M automated plant designed around every food-safety norm our customers demand." },
+  { icon: "sprout", title: "Hygienic automation", body: "A US$12M automated plant designed around every food-safety norm our customers demand." },
 ];
 
 // ---- Downloads (brochures / certificates) ----
@@ -387,35 +427,35 @@ export const NEWS: {
 }[] = [
   {
     slug: "ikorodu-facility-scales-up",
-    title: "Ikorodu facility scales up to 20 MT/day",
+    title: "Ikorodu facility scales to 3,000 MT annual capacity",
     date: "2026-05-18", category: "Operations", image: "/img/photo-facility.jpg",
-    excerpt: "Our automated processing plant reaches full stride, producing up to 20 metric tonnes of finished spice per day.",
+    excerpt: "Our automated processing plant reaches full stride with 3,000 MT annual plant capacity of finished spice.",
     body: [
-      "Our US$10M automated processing facility in Ikorodu has reached full production stride, with a capacity of 20 metric tonnes of finished product per day.",
+      "Our US$12M automated processing facility in Ikorodu has reached full production stride, with an annual capacity of 3,000 metric tonnes of finished product.",
       "The line grinds chilli, turmeric, ginger and other spices, retaining natural aroma and colour through careful steam sterilisation, sieving and hygienic material handling.",
       "The investment cements TG Agri Farms as an integrated, farm-to-fork spice manufacturer built for scale and export.",
     ],
   },
   {
-    slug: "350-farmers-trained",
-    title: "350+ farmers trained on post-harvest quality",
+    slug: "10000-farmers-trained",
+    title: "10,000+ farmers trained across 100 markets & 25 aggregators",
     date: "2026-03-02", category: "Community", image: "/img/photo-drying.jpg",
-    excerpt: "Training across 12 farmers' markets and 7 aggregators lifts quality and farmer incomes.",
+    excerpt: "Training across 100 farmer markets and 25 aggregators lifts quality and farmer incomes for 50,000+ growers.",
     body: [
-      "We continue to invest in the farmers at the heart of our supply chain, with training programmes reaching more than 350 farmers.",
+      "We continue to invest in the farmers at the heart of our supply chain, with training programmes reaching more than 10,000 farmers and supporting over 50,000 growers nationwide.",
       "Fair-pricing agreements and modern post-harvest handling reduce losses and raise the quality of raw materials entering our mill.",
       "The programme strengthens rural economies while securing a reliable, high-quality supply of chilli, turmeric and ginger.",
     ],
   },
   {
     slug: "nationwide-market-reach",
-    title: "Goodearth now in 170+ markets nationwide",
+    title: "Goodearth expands to 12,000+ retailers across 17+ states",
     date: "2026-01-15", category: "Growth", image: "/img/photo-market.jpg",
-    excerpt: "From farm to shelf across all five geopolitical zones - 8,700+ retailers and 2,600+ wholesalers.",
+    excerpt: "From farm to shelf across all five geopolitical zones - 12,000+ retailers and 2,600+ wholesalers.",
     body: [
-      "Our nationwide network now spans 15+ states and 170+ markets, served by 250 distributors and 2,600+ wholesalers.",
+      "Our nationwide network now spans 17+ states and 100+ farmer markets, served by 250 distributors, 2,600+ wholesalers, and 12,000+ retailers.",
       "Women-led micro-distribution brings Goodearth spices to streets and kitchens across Nigeria.",
-      "The reach reflects six years of building a robust, trusted consumer brand anchored by our Ikorodu facility.",
+      "The reach reflects six years of building a robust, trusted consumer brand anchored by our US$12M Ikorodu facility.",
     ],
   },
 ];

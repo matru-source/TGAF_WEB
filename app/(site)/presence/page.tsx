@@ -7,7 +7,7 @@ import CtaBand from "@/components/site/CtaBand";
 export const metadata: Metadata = {
   title: "Markets & Presence · Goodearth Foods",
   description:
-    "Goodearth reaches 170+ markets across 15+ Nigerian states and all five geopolitical zones. Find a market near you.",
+    "Goodearth reaches 100+ farmer markets across 17+ Nigerian states and all five geopolitical zones. Find a market near you.",
 };
 
 export default function PresencePage() {
@@ -16,7 +16,7 @@ export default function PresencePage() {
       <PageHero
         eyebrow="Markets & presence"
         title={<>We dey your market</>}
-        subtitle="From farm to processing to shelf - across all five geopolitical zones, 15+ states and 170+ markets."
+        subtitle="From farm to processing to shelf - across all five geopolitical zones, 17+ states and 100+ farmer markets."
         crumb="Markets"
         tone="warm"
       />

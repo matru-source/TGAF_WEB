@@ -58,9 +58,10 @@ export default function FarmToFork() {
               reduce moisture by ~85%, registered, and moved to our Kaduna warehouse before processing.
             </p>
             <div className="cap-list">
-              <span>350+ farmers</span>
-              <span>12 farmers&apos; markets</span>
-              <span>7 aggregators</span>
+              <span>Grown by 50,000+ farmers</span>
+              <span>10,000+ farmers trained</span>
+              <span>100 farmer markets</span>
+              <span>25 aggregators</span>
               <span>Fair-pricing agreements</span>
               <span>Full traceability</span>
             </div>

@@ -44,11 +44,11 @@ const TRUST_METRICS: TrustMetric[] = [
     icon: "package",
   },
   {
-    count: 20,
+    count: 3000,
     suffix: " MT",
-    badge: "Industrial Scale",
-    title: "Daily Plant Capacity",
-    subtitle: "US$10M automated milling & steam sterilization facility at Ikorodu",
+    badge: "Annual Capacity",
+    title: "Annual Plant Capacity",
+    subtitle: "US$12M automated milling & steam sterilization facility at Ikorodu",
     href: "/manufacturing",
     linkLabel: "Inspect Ikorodu Plant",
     icon: "factory",
@@ -110,7 +110,7 @@ export default function TrustMetricsStrip() {
             Certified Quality. Awarded Excellence. Built for Scale.
           </h2>
           <p className="trust-metrics-sub">
-            From our US$10M automated factory in Ikorodu to national FMCG honours and rigorous food-safety accreditations, our numbers speak to our commitment.
+            From our US$12M automated factory in Ikorodu to national FMCG honours and rigorous food-safety accreditations, our numbers speak to our commitment.
           </p>
         </div>
 

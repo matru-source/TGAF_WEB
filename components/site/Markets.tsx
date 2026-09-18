@@ -10,7 +10,7 @@ export default function Markets({ withHead = true }: { withHead?: boolean }) {
             <span className="eyebrow">Where to buy</span>
             <h2>Find Goodearth for market near you</h2>
             <p className="muted">
-              Our spices move through 170+ markets across 15+ states. Here are some of the big ones where
+              Our spices move through 100+ markets across 17+ states. Here are some of the big ones where
               traders stock Goodearth.
             </p>
           </div>

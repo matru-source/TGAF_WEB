@@ -64,24 +64,18 @@ export default function FeaturedProducts({ products }: { products: UIProduct[] }
             return (
               <motion.div variants={cardVariants} key={p.id} style={{ height: "100%", display: "flex" }}>
                 <Link href={`/products/${p.slug}`} className={`pcard ${a.card}`}>
-                  <motion.div
-                    className={`well ${a.well}`}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  >
+                  <div className={`well ${a.well}`}>
                     {p.image ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <motion.img 
+                      <img 
                         src={p.image} 
                         alt={p.name} 
                         loading="lazy" 
-                        whileHover={{ scale: 1.1, rotate: 2 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
                       />
                     ) : (
                       <span className="nophoto">{p.name.charAt(0)}</span>
                     )}
-                  </motion.div>
+                  </div>
                   {p.tagline && <span className="cat">{p.tagline}</span>}
                   <h3>{p.name}</h3>
                   <p>{p.description}</p>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/site/PageHero";
-import QualitySystems from "@/components/site/QualitySystems";
 import Certifications from "@/components/site/Certifications";
 import Downloads from "@/components/site/Downloads";
 import CtaBand from "@/components/site/CtaBand";
@@ -20,7 +19,6 @@ export default function QualityPage() {
         crumb="Quality"
         tone="warm"
       />
-      <QualitySystems />
       <Certifications />
       <Downloads />
       <CtaBand title="Exporting or sourcing at scale?" text="Request our certifications pack and technical specifications." ctaLabel="Request documents" />
