@@ -6,7 +6,7 @@ export default function About() {
         <div className="about-grid">
           <div className="about-media reveal">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/photo-drying.jpg" alt="Bags of dried chilli at the Goodearth warehouse" />
+            <img src="/img/factory-overview.png" alt="Good Earth automated processing factory complex at Ikorodu, Lagos" />
             <div className="badge">
               <div className="n">6 yrs</div>
               <div className="l">Building Nigeria&apos;s spice supply chain</div>
@@ -18,8 +18,8 @@ export default function About() {
             <p className="lead">
               Goodearth Agriventures is headquartered in Singapore and deeply committed to Africa&apos;s
               spice industry. We manage the entire value chain through farm-gate procurement across{" "}
-              <strong>7 aggregators</strong> and <strong>12 farmers&apos; markets</strong>, supporting almost{" "}
-              <strong>350+ farmers</strong> and their families.
+              <strong>25 aggregators</strong> and <strong>100 farmer markets</strong>, grown by over{" "}
+              <strong>50,000+ farmers</strong> and their families with <strong>10,000+ farmers trained</strong>.
             </p>
             <p style={{ marginTop: "1rem", color: "var(--ink-2)" }}>
               Our Ikorodu processing plant ensures strict food safety and traceability throughout the
@@ -85,8 +85,8 @@ export default function About() {
               <div className="presence-img-wrap">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/img/photo-facility.jpg"
-                  alt="TG Agri Farms automated stainless-steel processing facility at Ikorodu, Lagos"
+                  src="/img/facility/packaging-line.jpg"
+                  alt="TG Agri Farms automated high-speed sachet packaging line at Ikorodu, Lagos"
                   className="presence-img"
                 />
                 <span className="location-pill pill-ng">🇳🇬 Manufacturing &amp; Operations</span>
@@ -95,12 +95,12 @@ export default function About() {
                 <span className="entity-sub">TG Agri Farms Ltd</span>
                 <h3>Ikorodu Plant &amp; Farm Network</h3>
                 <p>
-                  Our US$10M automated milling plant in Ikorodu, Lagos produces 20 MT/day of steam-sterilised finished spice, supplied by our Kaduna aggregation network and 350+ local farmers.
+                  Our US$12M automated milling plant in Ikorodu, Lagos has 3,000 MT annual capacity of steam-sterilised finished spice, supplied by our Kaduna aggregation network and 50,000+ local farmers.
                 </p>
                 <div className="presence-tags">
-                  <span>US$10M Automated Mill</span>
-                  <span>20 MT / Day Capacity</span>
-                  <span>350+ Sourcing Farmers</span>
+                  <span>US$12M Automated Plant</span>
+                  <span>3,000 MT Annual Capacity</span>
+                  <span>50,000+ Sourcing Farmers</span>
                 </div>
               </div>
             </div>

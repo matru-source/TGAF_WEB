@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { CAREER_VALUES, JOB_OPENINGS } from "@/lib/data";
+import { CAREER_VALUES, JOB_OPENINGS, EXPAT_LEADERS } from "@/lib/data";
 import { Icon, type IconName } from "./icons";
 
 export default function Careers() {
@@ -61,6 +61,7 @@ export default function Careers() {
             ))}
           </div>
 
+          {/* Nigerian Operational Workforce Banner */}
           <div className="careers-team-banner reveal">
             <div className="careers-team-img-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -71,15 +72,15 @@ export default function Careers() {
               />
               <div className="careers-team-overlay-tag">
                 <span className="dot" />
-                <span>Our Team · Manufacturing &amp; Operations Plant, Ikorodu, Lagos</span>
+                <span>Nigerian Operational Workforce · Manufacturing Plant, Ikorodu</span>
               </div>
             </div>
             <div className="careers-team-content">
               <div className="careers-team-info">
                 <h3>A dedicated team building Africa&apos;s spice future</h3>
                 <p>
-                  From our state-of-the-art milling facility in Ikorodu to our partner farm gates across 15+ Nigerian
-                  states, our people drive every milestone. We provide safe, automated workplaces, structured skills
+                  From our state-of-the-art milling facility in Ikorodu to our partner farm gates across 17+ Nigerian
+                  states, our local people drive every milestone. We provide safe, automated workplaces, structured skills
                   development, and real room for young Nigerian talent and women to grow into leadership.
                 </p>
               </div>
@@ -93,6 +94,37 @@ export default function Careers() {
                   <div className="careers-stat-label">Room for youth and women to build long-term careers</div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Expatriate Leadership & Mentorship Grid */}
+          <div className="careers-expat-section reveal">
+            <div className="section-head text-center" style={{ maxWidth: 740, margin: "0 auto 36px" }}>
+              <span className="eyebrow">Leadership &amp; Mentorship</span>
+              <h2>Expatriate Leadership &amp; Management</h2>
+              <p className="muted">
+                Decades of international experience guiding technology investments, industrial governance, and continuous on-the-job mentorship for our workforce.
+              </p>
+            </div>
+
+            <div className="careers-expat-grid">
+              {EXPAT_LEADERS.map((leader, i) => (
+                <div className={`careers-expat-card reveal ${["", "d1", "d2"][i]}`} key={leader.name}>
+                  <div className="careers-expat-img-wrap">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={leader.photo} alt={leader.name} loading="lazy" />
+                  </div>
+                  <div className="careers-expat-body">
+                    <div className="careers-expat-role">{leader.role}</div>
+                    <h4>{leader.name}</h4>
+                    <p className="careers-expat-bio">{leader.bio}</p>
+                    <div className="careers-expat-meta">
+                      <Icon name="award" size={15} />
+                      <span>{leader.highlight}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

@@ -132,10 +132,10 @@ export default function Hero({ packs = HERO_SHOWCASE }: { packs?: string[] }) {
                 src={packs[pack]}
                 alt="Goodearth featured product pack"
                 initial={{ opacity: 0, y: 40, rotate: -8 }}
-                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                animate={{ opacity: 1, y: 0, rotate: -3.5 }}
                 exit={{ opacity: 0, y: -30, rotate: 6 }}
                 transition={{ duration: 0.7, ease: [0.2, 0.65, 0.3, 0.9] }}
-                whileHover={{ scale: 1.05, rotate: 2 }}
+                whileHover={{ scale: 1.06, rotate: 0 }}
               />
             </AnimatePresence>
             <motion.div

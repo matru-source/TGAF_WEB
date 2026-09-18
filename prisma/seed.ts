@@ -96,10 +96,10 @@ async function main() {
   const stats: Record<string, string> = {
     "stat:distributors": "250",
     "stat:wholesalers": "2600",
-    "stat:retailers": "8700",
-    "stat:states": "15",
+    "stat:retailers": "12000",
+    "stat:states": "17",
     "stat:regions": "5",
-    "stat:markets": "170",
+    "stat:markets": "100",
   };
   for (const [key, value] of Object.entries(stats)) {
     await prisma.setting.upsert({ where: { key }, update: { value }, create: { key, value } });

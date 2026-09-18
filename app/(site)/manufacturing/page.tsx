@@ -5,7 +5,7 @@ import CtaBand from "@/components/site/CtaBand";
 
 export const metadata: Metadata = {
   title: "Manufacturing Facility · Goodearth Foods",
-  description: "Our US$10M automated processing facility in Ikorodu - 20 MT/day capacity, steam sterilisation, hygienic automation and 2,000 MT storage.",
+  description: "Our US$12M automated processing facility in Ikorodu - 3,000 MT annual plant capacity, steam sterilisation, hygienic automation and 2,000 MT storage.",
 };
 
 export default function ManufacturingPage() {
@@ -14,7 +14,7 @@ export default function ManufacturingPage() {
       <PageHero
         eyebrow="Manufacturing"
         title={<>World-class processing at Ikorodu</>}
-        subtitle="A US$10M automated plant built around every food-safety norm, producing up to 20 MT of finished spice per day."
+        subtitle="A US$12M automated plant built around every food-safety norm, with 3,000 MT annual plant capacity of finished spice."
         crumb="Manufacturing"
         tone="green"
       />

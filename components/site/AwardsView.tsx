@@ -118,7 +118,7 @@ export default function AwardsView() {
                   <div className="criteria-item">
                     <div className="criteria-num">02</div>
                     <div className="criteria-text">
-                      <strong>Automated Processing Infrastructure:</strong> US$10M facility in Ikorodu with steam sterilization retaining natural volatile oils and vivid colour.
+                      <strong>Automated Processing Infrastructure:</strong> US$12M facility in Ikorodu with steam sterilization retaining natural volatile oils and vivid colour.
                     </div>
                   </div>
                   <div className="criteria-item">
@@ -215,15 +215,15 @@ export default function AwardsView() {
           <div className="pillars-trio">
             <div className="pillar-item">
               <div className="pillar-num">01</div>
-              <h3>350+ Smallholder Farmers</h3>
+              <h3>50,000+ Smallholder Farmers</h3>
               <p>
-                Every pack represents direct local procurement across 12 farmers&apos; markets and 7 aggregators — empowering local farming families without foreign crop imports.
+                Every pack represents direct local procurement across 100 farmer markets and 25 aggregators, grown by 50,000+ farmers with 10,000+ trained — empowering local farming families without foreign crop imports.
               </p>
             </div>
 
             <div className="pillar-item">
               <div className="pillar-num">02</div>
-              <h3>US$10M Automated Plant</h3>
+              <h3>US$12M Automated Plant</h3>
               <p>
                 Processed at our Ikorodu mill with state-of-the-art steam sterilisation, sieving, and hygienic material handling meeting the highest international benchmarks.
               </p>
