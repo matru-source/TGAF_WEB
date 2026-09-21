@@ -37,12 +37,12 @@ export default function LocalMarketBand() {
             <motion.span className="eyebrow" variants={textVariants}>The Complete Journey</motion.span>
             <motion.h2 variants={textVariants}>From Nigerian farms to your kitchen</motion.h2>
             <motion.p className="lead" variants={textVariants}>
-              Goodearth is born for Naija cooking. Sourced from smallholder outgrower farms, milled to world-class standards at our US$12M Ikorodu plant, and distributed across <strong>100 farmer markets</strong> in{" "}
+              Goodearth is crafted for everyday cooking. Sourced from smallholder outgrower farms, milled to world-class standards at our modern Ikorodu plant, and distributed across <strong>100 farmer markets</strong> in{" "}
               <strong>17+ states</strong>.
             </motion.p>
             <motion.ul className="market-points" variants={textVariants}>
               <li><strong>Grown by 50,000+ farmers</strong> across direct sourcing &amp; aggregation networks</li>
-              <li><strong>US$12M Ikorodu milling complex</strong> processing 3,000 MT annually with zero manual contact</li>
+              <li><strong>Automated Ikorodu milling complex</strong> processing 3,000 MT annually with zero manual contact</li>
               <li><strong>12,000+ retailers</strong> and 2,600+ wholesalers stocking Goodearth across 17+ states</li>
             </motion.ul>
             <motion.div variants={textVariants}>

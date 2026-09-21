@@ -43,7 +43,7 @@ export default function SiteEffects() {
       const suffix = el.dataset.suffix || "";
       const noComma = el.dataset.noComma === "true";
       const fmt = (n: number) => (noComma ? String(n) : n.toLocaleString("en-US"));
-      const dur = 1500;
+      const dur = 5000;
       let start: number | null = null;
       const ease = (t: number) => 1 - Math.pow(1 - t, 3);
       const tick = (ts: number) => {

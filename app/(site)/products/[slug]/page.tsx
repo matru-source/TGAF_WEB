@@ -25,7 +25,6 @@ export default async function ProductDetail({ params }: { params: { slug: string
     ["Colour", product.colour],
     ["ASTA", product.asta && product.asta !== "-" ? product.asta : null],
     ["Scoville", product.scoville],
-    ["Positioning", product.costPositioning],
     ["Category", product.marketCategory],
     ["Best for", product.usage],
   ].filter(([, v]) => Boolean(v)) as [string, string][];

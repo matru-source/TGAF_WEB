@@ -47,10 +47,10 @@ export default function About() {
         {/* Dual Presence: Singapore HQ & Nigeria Plant */}
         <div className="dual-presence-section reveal">
           <div className="section-head center" style={{ marginTop: "clamp(48px, 6vw, 84px)" }}>
-            <span className="eyebrow center">Global Strength · Local Roots</span>
-            <h2>Our Dual Presence</h2>
+            <span className="eyebrow center">Global Leadership · Local Roots</span>
+            <h2>Singapore Corporate HQ &amp; Nigerian Processing</h2>
             <p className="lead center" style={{ maxWidth: "720px", margin: "0 auto" }}>
-              Combining Singapore&apos;s world-class corporate governance with Nigeria&apos;s rich agricultural heritage and automated processing capability.
+              Combining Singapore&apos;s strategic governance and international trade networks with Nigeria&apos;s rich agricultural heritage and automated processing capability.
             </p>
           </div>
 

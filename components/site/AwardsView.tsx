@@ -112,25 +112,25 @@ export default function AwardsView() {
                   <div className="criteria-item">
                     <div className="criteria-num">01</div>
                     <div className="criteria-text">
-                      <strong>100% Indigenous Sourcing:</strong> Directly procured from Nigerian pepper farmers, supporting local agricultural outgrower livelihoods.
+                      <strong>100% Indigenous Sourcing:</strong> Sourced directly from local pepper farmers to support sustainable domestic agriculture.
                     </div>
                   </div>
                   <div className="criteria-item">
                     <div className="criteria-num">02</div>
                     <div className="criteria-text">
-                      <strong>Automated Processing Infrastructure:</strong> US$12M facility in Ikorodu with steam sterilization retaining natural volatile oils and vivid colour.
+                      <strong>Automated Processing:</strong> Advanced Ikorodu plant using steam sterilisation to lock in natural volatile oils and rich red colour.
                     </div>
                   </div>
                   <div className="criteria-item">
                     <div className="criteria-num">03</div>
                     <div className="criteria-text">
-                      <strong>Food-Safety Accreditations:</strong> Full compliance with NAFDAC, SON, US FDA, Halal, and FSSC 22000 manufacturing norms.
+                      <strong>Certified Food Safety:</strong> Full accreditation under NAFDAC, SON, US FDA, Halal, and FSSC 22000 standards.
                     </div>
                   </div>
                   <div className="criteria-item">
                     <div className="criteria-num">04</div>
                     <div className="criteria-text">
-                      <strong>Rapid Consumer &amp; Market Adoption:</strong> Over 250 distributors and 170+ open markets nationwide embracing Goodearth within 18 months.
+                      <strong>Market Reach:</strong> 250+ distributors and 100+ wholesale markets adopting Goodearth across 17+ states.
                     </div>
                   </div>
                 </div>

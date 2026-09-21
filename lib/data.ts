@@ -70,7 +70,7 @@ export const SPICES: { key: AccentKey; tag: string; name: string; hex: string; b
 // ---- B2C product fallback ----
 export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
-    id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe Powder", segment: "B2C",
+    id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe", segment: "B2C",
     accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hero-hot-peppe-studio.png",
     images: [
       "/Product/hero-hot-peppe-studio.png",
@@ -78,53 +78,53 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
       "/Product/hot-peppe-supa-pack.jpg",
       "/Product/hot-peppe-carton.jpg",
     ],
-    description: "Bright red, premium pepper powder to add spice and flavour to every meal.",
-    sizes: ["100 g", "5 g", "Supa Pack"], formats: [], featured: true,
-    costPositioning: "Medium–High cost", marketCategory: "Premium staple",
-    colour: "Red", asta: "40–55", scoville: "55,000–60,000 SHU",
+    description: "Rich red, premium grounded pepe to add bold heat, aroma and flavour to every meal.",
+    sizes: ["100 g", "5 g", "Supa Pack"], formats: ["Grounded Pepe"], featured: true,
+    marketCategory: "Premium staple",
+    colour: "Rich red", asta: "40–55", scoville: "55,000–60,000 SHU",
     usage: "Adds spice & flavour to all meals",
   },
   {
-    id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe Powder", segment: "B2C",
+    id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe", segment: "B2C",
     accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/hero-atarodo-studio.png",
     images: [
       "/Product/hero-atarodo-studio.png",
       "/Product/atarodo-studio.jpg",
       "/Product/atarodo-carton.jpg",
     ],
-    description: "Dark-red scotch-bonnet style pepper - a mass-market staple for everyday heat.",
-    sizes: ["8 g", "3 g", "Carton"], formats: [], featured: true,
-    costPositioning: "Low–Medium cost", marketCategory: "Scotch-bonnet · mass-market staple",
+    description: "Dark-red scotch-bonnet style grounded pepe - a mass-market staple for everyday Nigerian heat.",
+    sizes: ["8 g", "3 g", "Carton"], formats: ["Grounded Pepe"], featured: true,
+    marketCategory: "Scotch-bonnet · mass-market staple",
     colour: "Dark red", asta: "50–60", scoville: "~60,000 SHU",
     usage: "Adds spice to all meals",
   },
   {
-    id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe Powder", segment: "B2C",
+    id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe", segment: "B2C",
     accent: "chilli", tagline: "Chilli · Gourmet", image: "/Product/hero-cameroon-studio.png",
     images: [
       "/Product/hero-cameroon-studio.png",
       "/Product/cameroon-studio.jpg",
       "/Product/cameroon-carton.jpg",
     ],
-    description: "Deep red, smoky and pungent - a gourmet, authentic powder for soups & noodles.",
-    sizes: ["100 g", "50 g", "3 g"], formats: [], featured: true,
-    costPositioning: "High cost", marketCategory: "Gourmet / authentic · premium niche",
+    description: "Deep red, smoky and pungent - a gourmet, authentic grounded pepe for soups, stews & noodles.",
+    sizes: ["100 g", "50 g", "3 g"], formats: ["Smoked Grounded Pepe"], featured: true,
+    marketCategory: "Gourmet / authentic · premium niche",
     colour: "Deep red & brown", asta: "-", scoville: "~90,000 SHU",
-    usage: "For soups & noodles",
+    usage: "For soups, stews & noodles",
   },
   {
-    id: "ginger", slug: "ginger-powder", name: "Ginger Powder", segment: "B2C",
+    id: "ginger", slug: "ginger-powder", name: "Ginger", segment: "B2C",
     accent: "ginger", tagline: "Ginger", image: "/Product/ginger.png",
     images: ["/Product/ginger.png"],
-    description: "Aromatic, finely milled ginger that brings warmth and depth to soups and stews.",
-    sizes: ["100 g"], formats: [],
+    description: "Aromatic, finely grounded ginger that brings warmth and depth to soups, marinades and stews.",
+    sizes: ["100 g"], formats: ["Grounded Ginger"],
   },
   {
-    id: "turmeric", slug: "turmeric-powder", name: "Turmeric Powder", segment: "B2C",
+    id: "turmeric", slug: "turmeric-powder", name: "Turmeric", segment: "B2C",
     accent: "turmeric", tagline: "Turmeric", image: "/Product/turmeric.png",
     images: ["/Product/turmeric.png"],
-    description: "Pure, golden turmeric - rich in colour and warmth for everyday Nigerian cooking.",
-    sizes: ["100 g"], formats: [],
+    description: "Pure, golden grounded turmeric - rich in colour and warmth for everyday cooking.",
+    sizes: ["100 g"], formats: ["Grounded Turmeric"],
   },
 ];
 
@@ -241,37 +241,13 @@ export const TEAM: UITeamMember[] = [
     id: "ss",
     initials: "SS",
     name: "Swatanter Saraswat",
-    role: "Executive Director",
-    bio: "Appointed as COO in June,2023 and to the board of directors in Nov 2024. He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+    role: "Executive Director & COO",
+    bio: "Appointed COO in June 2023 and to the board of directors in Nov 2024. Over 15 years leading automated FMCG manufacturing plants across Africa.",
     bullets: [
-      "Appointed as COO in June,2023 and to the board of directors in Nov 2024.",
-      "He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+      "Appointed COO in June 2023 and to the board of directors in Nov 2024.",
+      "Over 15 years leading automated FMCG manufacturing plants across Africa.",
     ],
     photo: "/img/team/swatanter-saraswat.jpg",
-  },
-  {
-    id: "ns",
-    initials: "NS",
-    name: "Narendranath Swain",
-    role: "Finance Controller",
-    bio: "Joined the Company in 2024. He is Qualified Chartered Accountant from India with more than Ten years of experience in Indian accounts, audit and finance with additional 7 years of experience as Finance controller in Nigerian companies.",
-    bullets: [
-      "Joined the Company in 2024.",
-      "He is Qualified Chartered Accountant from India with more than Ten years of experience in Indian accounts, audit and finance with additional 7 years of experience as Finance controller in Nigerian companies.",
-    ],
-    photo: "/img/team/narendranath-swain.jpg",
-  },
-  {
-    id: "fn",
-    initials: "FN",
-    name: "Fredrick Chidi Nze",
-    role: "Sales Capability & Market Development",
-    bio: "Joined the Company in 2023. He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
-    bullets: [
-      "Joined the Company in 2023.",
-      "He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
-    ],
-    photo: "/img/team/fred-nze.jpg",
   },
 ];
 
@@ -303,15 +279,6 @@ export const EXPAT_LEADERS: ExpatLeader[] = [
     badge: "Operations & Engineering",
     highlight: "15+ Yrs African FMCG Manufacturing",
     bio: "Appointed COO in June 2023 and to the board in Nov 2024. Over 15 years leading automated FMCG manufacturing plants across Africa, championing technical precision, hygiene, and engineer mentoring.",
-  },
-  {
-    name: "Narendranath Swain",
-    role: "Finance Controller",
-    division: "Corporate Governance & Audit",
-    photo: "/img/team/narendranath-swain.jpg",
-    badge: "Corporate Governance",
-    highlight: "Chartered Accountant · 17+ Yrs Exp.",
-    bio: "Qualified Chartered Accountant with 10+ years in Indian corporate finance and audit, plus 7+ years managing finance control, cost engineering, and statutory governance for Nigerian industrial leaders.",
   },
 ];
 
@@ -385,9 +352,39 @@ export const GOVERNANCE = [
 
 // ---- ESG pillars ----
 export const ESG: { key: string; letter: string; title: string; accent: AccentKey; points: string[] }[] = [
-  { key: "environmental", letter: "E", title: "Environmental", accent: "ginger", points: ["Reduced post-harvest losses through modern drying, grinding & packaging", "Efficient, low-waste automated processing at Ikorodu", "Sourcing that protects natural colour and aroma"] },
-  { key: "social", letter: "S", title: "Social", accent: "chilli", points: ["100% support to local farmers - no import dependence", "Grown by 50,000+ farmers, with 10,000+ trained on quality handling", "Women-led B2C micro-distribution; jobs for youth & women"] },
-  { key: "governance", letter: "G", title: "Governance", accent: "turmeric", points: ["Food-safety systems & full farm-to-fork traceability", "Certified to national and international standards", "Fair-pricing agreements across 25 aggregators"] },
+  { 
+    key: "environmental", 
+    letter: "E", 
+    title: "Environmental", 
+    accent: "ginger", 
+    points: [
+      "Solar & Gas Powered: Clean energy replaces diesel at our modern Ikorodu processing plant",
+      "Low-Waste Milling: Closed-loop cool-grind milling preventing post-harvest spice loss",
+      "Sustainable Agriculture: Protecting soil vitality and natural essential oils"
+    ] 
+  },
+  { 
+    key: "social", 
+    letter: "S", 
+    title: "Social", 
+    accent: "chilli", 
+    points: [
+      "100% support to Nigerian farmers - zero import dependence across our core spice supply chain",
+      "Grown by 50,000+ local smallholders with 10,000+ trained on quality agricultural practices",
+      "Women-led micro-distribution and packaging operations generating sustainable family livelihoods"
+    ] 
+  },
+  { 
+    key: "governance", 
+    letter: "G", 
+    title: "Governance", 
+    accent: "turmeric", 
+    points: [
+      "Full seed-to-shelf traceability and rigorous batch-coded quality compliance",
+      "Multi-standard certified excellence meeting NAFDAC, SON and global export benchmarks",
+      "Transparent fair-pricing agreements guaranteeing financial stability for aggregators"
+    ] 
+  },
 ];
 
 // ---- Quality systems ----
@@ -397,7 +394,7 @@ export const QUALITY_SYSTEMS: { icon: string; title: string; body: string }[] = 
   { icon: "award", title: "FSSC 22000 aligned", body: "Food Safety System Certification-aligned processes across cleaning, grinding, blending and packing." },
   { icon: "shield", title: "In-line quality checks", body: "Foreign-matter removal, sieving and checks at each stage with minimal human intervention." },
   { icon: "award", title: "ASTA & Scoville profiling", body: "Colour and pungency profiling to meet customer and export specifications." },
-  { icon: "sprout", title: "Hygienic automation", body: "A US$12M automated plant designed around every food-safety norm our customers demand." },
+  { icon: "sprout", title: "Hygienic automation", body: "An advanced automated processing plant engineered around international food-safety standards." },
 ];
 
 // ---- Downloads (brochures / certificates) ----
@@ -619,17 +616,6 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     tag: "Logistics Team",
   },
   {
-    id: "machine-rotary-line",
-    title: "High-Speed Rotary Sachet Packaging Line",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/machine-12.jpg",
-    caption: "Automated multi-track rotary pouch packaging line filling and hermetically sealing retail sachets.",
-    location: "Packaging Hall, Ikorodu",
-    aspect: "landscape",
-    tag: "Packaging Automation",
-  },
-  {
     id: "machine-pulverizer",
     title: "Industrial Impact Pulverizer & Pin Mill",
     category: "factory",
@@ -674,39 +660,6 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     tag: "VFFS Packaging",
   },
   {
-    id: "machine-bagging",
-    title: "Bulk Discharge & Commercial Bagging Station",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/machine-07.jpg",
-    caption: "Heavy-duty discharge hopper and precision scale bagging system for 25kg & 50kg multi-wall commercial sacks.",
-    location: "Bulk Fulfillment, Ikorodu",
-    aspect: "landscape",
-    tag: "Bulk Bagging",
-  },
-  {
-    id: "machine-sifter",
-    title: "Rotary Vibratory Sifter & Classifier",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/machine-02.jpg",
-    caption: "Precision sifting system ensuring uniform mesh size and foreign matter exclusion.",
-    location: "Milling Hall, Ikorodu",
-    aspect: "landscape",
-    tag: "Sifting System",
-  },
-  {
-    id: "machine-pneumatic-line",
-    title: "Closed-Loop Pneumatic Transfer Line",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/machine-03.jpg",
-    caption: "Stainless steel pneumatic transfer pipes maintaining sealed sanitary conditions between milling and packaging.",
-    location: "Processing Hall, Ikorodu",
-    aspect: "landscape",
-    tag: "Pneumatic Line",
-  },
-  {
     id: "machine-grinder-mill",
     title: "Industrial Coarse Grinder & Feeding Mill",
     category: "factory",
@@ -738,17 +691,6 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     location: "Holding Bay, Ikorodu",
     aspect: "landscape",
     tag: "Storage Silo",
-  },
-  {
-    id: "machine-form-fill",
-    title: "Automated Sachet Form-Fill-Seal Packaging Line",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/machine-09.jpg",
-    caption: "High-accuracy volumetric packaging machine packing consumer spices at high speeds.",
-    location: "Packaging Hall, Ikorodu",
-    aspect: "landscape",
-    tag: "Sachet Packaging",
   },
   {
     id: "machine-multi-spout",

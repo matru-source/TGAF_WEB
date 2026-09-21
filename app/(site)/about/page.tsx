@@ -14,8 +14,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="Our story"
-        title={<>Nigeria&apos;s integrated spice company</>}
-        subtitle="We manage the whole journey - from smallholder farms to the markets and kitchens of Nigeria."
+        title={<>Nigeria&apos;s Integrated Spice Manufacturer</>}
+        subtitle="Managing the entire journey from local smallholder farms to commercial markets and family kitchens."
         crumb="About"
         tone="green"
       />
