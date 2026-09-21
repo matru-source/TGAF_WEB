@@ -1,0 +1,128 @@
+// Goodearth Foods - Prisma schema
+// Data store: NeonDB (PostgreSQL, serverless)
+// Use the Neon "Pooled connection" string in DATABASE_URL (.env).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+}
+
+enum Segment {
+  B2C
+  B2B
+}
+
+enum Accent {
+  CHILLI
+  TURMERIC
+  GINGER
+}
+
+enum EnquiryStatus {
+  NEW
+  IN_PROGRESS
+  CLOSED
+}
+
+/// Admin / editor users for the CMS.
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         Role     @default(EDITOR)
+  createdAt    DateTime @default(now())
+  lastLogin    DateTime?
+}
+
+/// Product crop categories (Chilli, Turmeric, Ginger).
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  order       Int       @default(0)
+  products    Product[]
+}
+
+/// Catalogue item - consumer (B2C) or bulk (B2B).
+model Product {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  segment     Segment  @default(B2C)
+  accent      Accent   @default(CHILLI)
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  tagline     String?            // small category line shown on the card
+  description String
+  image       String?            // /img/... path or absolute URL (cover / thumbnail)
+  images      String[] @default([]) // full gallery, shown as a sliding carousel on the product page
+  sizes       String[] @default([]) // e.g. ["100 g", "50 g"]
+  formats     String[] @default([]) // B2B: ["Powder", "Whole", "Crushed"]
+
+  // Pepper classification (optional, shown on detail / table)
+  costPositioning String?
+  marketCategory  String?
+  colour          String?
+  asta            String?
+  scoville        String?
+  usage           String?
+
+  featured  Boolean  @default(false)
+  published Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// Leadership team members shown on the "Meet the team" cards.
+model TeamMember {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  bio       String
+  photo     String?            // /uploads/... path or absolute URL
+  initials  String?            // fallback badge when there is no photo
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// Lead capture from the public contact / enquiry forms.
+model Enquiry {
+  id        String        @id @default(cuid())
+  type      String        @default("contact") // contact | b2b | partner
+  name      String
+  email     String
+  company   String?
+  interest  String?
+  message   String
+  status    EnquiryStatus @default(NEW)
+  createdAt DateTime      @default(now())
+}
+
+/// Newsletter subscribers.
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  consent   Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+/// Key/value site settings editable from the admin (hero stats, contact, etc.).
+model Setting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
