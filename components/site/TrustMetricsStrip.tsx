@@ -1,159 +1,125 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
-interface TrustMetric {
-  count: number;
-  suffix?: string;
-  noComma?: boolean;
-  badge: string;
-  title: string;
-  subtitle: string;
-  href: string;
-  linkLabel: string;
-  icon: "trophy" | "shield" | "package" | "factory";
-}
-
-const TRUST_METRICS: TrustMetric[] = [
+const METRICS_CARDS = [
   {
-    count: 2025,
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+        <path d="M4 22h16" />
+        <path d="M10 14.66V17c0 .55-.45 1-1 1H7v4h10v-4h-2c-.55 0-1-.45-1-1v-2.34" />
+        <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" />
+      </svg>
+    ),
+    value: "2025",
+    suffix: "",
     noComma: true,
-    badge: "National Recognition",
-    title: "Edge Award Winner",
-    subtitle: "Outstanding Indigenous Naija Spice of the Year (13th Marketing Edge Awards)",
+    label: "Award Winner",
+    desc: "Outstanding Indigenous Spice Brand of the Year",
     href: "/awards",
-    linkLabel: "View Award & Press",
-    icon: "trophy",
   },
   {
-    count: 7,
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <polyline points="9 12 11 14 15 10" />
+      </svg>
+    ),
+    value: "7",
     suffix: "+",
-    badge: "Regulatory Trust",
-    title: "Accredited Certifications",
-    subtitle: "NAFDAC, SON, US FDA, Halal, FSSC 22000, MAN & NEPC standards",
+    label: "Accredited Certifications",
+    desc: "NAFDAC, SON, Halal & FSSC 22000 compliant",
     href: "/quality",
-    linkLabel: "View Accreditations",
-    icon: "shield",
   },
   {
-    count: 15,
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+        <line x1="12" y1="22.08" x2="12" y2="12" />
+      </svg>
+    ),
+    value: "15",
     suffix: "+",
-    badge: "Market Portfolio",
-    title: "Commercial SKUs",
-    subtitle: "15g retail sachets, family pouches & bulk institutional packs",
+    label: "Commercial SKUs",
+    desc: "Sachets, rolls, pouches & institutional bags",
     href: "/products",
-    linkLabel: "Explore Product Range",
-    icon: "package",
   },
   {
-    count: 3000,
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 21h18" />
+        <path d="M5 21V7l8-4v18" />
+        <path d="M19 21V11l-6-4" />
+        <line x1="9" y1="9" x2="9" y2="9.01" />
+        <line x1="9" y1="13" x2="9" y2="13.01" />
+        <line x1="9" y1="17" x2="9" y2="17.01" />
+      </svg>
+    ),
+    value: "3000",
     suffix: " MT",
-    badge: "Annual Capacity",
-    title: "Annual Plant Capacity",
-    subtitle: "US$12M automated milling & steam sterilization facility at Ikorodu",
-    href: "/manufacturing",
-    linkLabel: "Inspect Ikorodu Plant",
-    icon: "factory",
+    label: "Annual Plant Capacity",
+    desc: "Automated Ikorodu milling & sterilization mill",
+    href: "/farm-to-fork",
   },
 ];
 
-function MetricIcon({ type }: { type: TrustMetric["icon"] }) {
-  switch (type) {
-    case "trophy":
-      return (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-          <path d="M4 22h16" />
-          <path d="M10 14.66V17c0 .55-.45 1-1 1H7v4h10v-4h-2c-.55 0-1-.45-1-1v-2.34" />
-          <path d="M6 4h12v7a6 6 0 0 1-12 0V4Z" />
-        </svg>
-      );
-    case "shield":
-      return (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          <path d="m9 12 2 2 4-4" />
-        </svg>
-      );
-    case "package":
-      return (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="m7.5 4.27 9 5.15" />
-          <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-          <path d="m3.3 7 8.7 5 8.7-5" />
-          <path d="M12 22V12" />
-        </svg>
-      );
-    case "factory":
-      return (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
-          <path d="M17 18h1" />
-          <path d="M12 18h1" />
-          <path d="M7 18h1" />
-        </svg>
-      );
-  }
-}
-
 export default function TrustMetricsStrip() {
   return (
-    <section className="trust-metrics-section" aria-label="Certifications, Awards & Scale">
+    <section className="quality-magical-section" aria-label="Why Choose Goodearth">
       <div className="container">
-        {/* Header Eyebrow */}
-        <div className="trust-metrics-head reveal">
-          <div className="trust-metrics-eyebrow">
-            <span className="gold-bullet">★</span>
-            <span>Credibility &amp; Scale Metrics</span>
-            <span className="gold-bullet">★</span>
-          </div>
-          <h2 className="trust-metrics-title">
-            Certified Quality. Awarded Excellence. Built for Scale.
-          </h2>
-          <p className="trust-metrics-sub">
-            From our US$12M automated factory in Ikorodu to national FMCG honours and rigorous food-safety accreditations, our numbers speak to our commitment.
+        {/* Section Header */}
+        <div className="quality-magical-head">
+          <span className="eyebrow-gold">WHY CHOOSE GOODEARTH</span>
+          <h2>Certified Quality. Awarded Excellence. Built for Scale.</h2>
+          <p className="lead-gold">
+            From our 3,000 MT integrated processing facility to international certifications, we ensure purity, traceability, and sustainable growth at every step.
           </p>
         </div>
 
-        {/* 4 Stat Cards Grid */}
-        <div className="trust-metrics-grid">
-          {TRUST_METRICS.map((m, i) => (
-            <Link
-              href={m.href}
-              key={m.title}
-              className={`trust-card reveal d${(i % 3) + 1}`}
-              aria-label={`${m.count}${m.suffix || ""} ${m.title} - ${m.linkLabel}`}
+        {/* 4 Golden Bordered Cards */}
+        <motion.div
+          className="quality-cards-grid"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8, staggerChildren: 0.12 }}
+        >
+          {METRICS_CARDS.map((card, i) => (
+            <motion.div
+              key={card.label}
+              className="quality-gold-card"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              whileHover={{ y: -6, borderColor: "rgba(234, 179, 8, 0.6)" }}
             >
-              <div className="trust-card-top">
-                <span className="trust-card-badge">{m.badge}</span>
-                <span className="trust-card-icon">
-                  <MetricIcon type={m.icon} />
+              <div className="card-gold-icon" aria-hidden="true">
+                {card.icon}
+              </div>
+              <div className="card-gold-number">
+                <span
+                  className="n"
+                  data-count={card.value}
+                  data-suffix={card.suffix}
+                  {...(card.noComma ? { "data-no-comma": "true" } : {})}
+                >
+                  {card.noComma ? card.value : Number(card.value).toLocaleString()}{card.suffix}
                 </span>
               </div>
-
-              <div className="trust-card-number-row">
-                <div
-                  className="trust-number"
-                  data-count={m.count}
-                  data-suffix={m.suffix || ""}
-                  data-no-comma={m.noComma ? "true" : undefined}
-                >
-                  0
-                </div>
-              </div>
-
-              <h3 className="trust-card-title">{m.title}</h3>
-              <p className="trust-card-desc">{m.subtitle}</p>
-
-              <div className="trust-card-action">
-                <span>{m.linkLabel}</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
+              <h3 className="card-gold-label">{card.label}</h3>
+              <p className="card-gold-desc">{card.desc}</p>
+              <Link href={card.href} className="card-gold-link">
+                <span>Learn more</span>
+                <span className="arr">→</span>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

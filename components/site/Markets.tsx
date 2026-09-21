@@ -1,29 +1,67 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import MarketsMap from "./MarketsMap";
 
-export default function Markets({ withHead = true }: { withHead?: boolean }) {
+export default function Markets({
+  withHead = true,
+  withNote = true,
+}: {
+  withHead?: boolean;
+  withNote?: boolean;
+}) {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
-    <section className="section">
+    <section className="markets-magical-section">
       <div className="container">
         {withHead && (
-          <div className="section-head reveal">
-            <span className="eyebrow">Where to buy</span>
+          <div className="markets-magical-head">
+            <span className="eyebrow-accent">- WHERE TO BUY</span>
             <h2>Find Goodearth for market near you</h2>
-            <p className="muted">
-              Our spices move through 100+ markets across 17+ states. Here are some of the big ones where
-              traders stock Goodearth.
+            <p className="lead-muted">
+              Our spices are available across 100+ markets in 17+ states. Find a retailer or distributor near you.
             </p>
+
+            {/* Search Bar matching mockup */}
+            <div className="market-search-bar">
+              <span className="search-icon" aria-hidden="true">
+                🔍
+              </span>
+              <input
+                type="text"
+                placeholder="Enter your city or state (e.g., Lagos, Kano, Rivers...)"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="market-search-input"
+                aria-label="Search city or market"
+              />
+              <button type="button" className="market-search-btn">
+                Search
+              </button>
+            </div>
           </div>
         )}
-        <div className="reveal">
+
+        <div className="markets-map-stage-wrap">
           <MarketsMap />
+
+          {/* Handwritten Script Accent */}
+          <div className="map-script-accent" aria-hidden="true">
+            <span className="map-script-txt">Global reach, Local impact.</span>
+            <span className="map-script-curl">〰️</span>
+          </div>
         </div>
-        <div className="markets-note reveal">
-          <p>Be a trader wey carry correct peppe?</p>
-          <Link href="/contact" className="btn btn-ghost">
-            Become a distributor <span className="arr">→</span>
-          </Link>
-        </div>
+
+        {withNote && (
+          <div className="markets-note">
+            <p>Be a trader wey carry correct peppe?</p>
+            <Link href="/contact" className="btn btn-ghost">
+              Become a distributor <span className="arr">→</span>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

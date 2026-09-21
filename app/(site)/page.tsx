@@ -19,14 +19,16 @@ export default async function HomePage() {
     <>
       <Hero />
       <Marquee />
-      <StatsStrip stats={stats} />
-      <LocalMarketBand />
+      <section className="home-sec-2-wrap" aria-label="Our Traction and Farm Story">
+        <StatsStrip stats={stats} />
+        <LocalMarketBand />
+      </section>
       <FeaturedProducts products={products} />
       <TrustMetricsStrip />
       <ValueProps />
       <Testimonials />
-      <Markets />
-      <CtaBand />
+      <Markets withNote={false} />
+      <CtaBand isHomeSec7={true} />
     </>
   );
 }

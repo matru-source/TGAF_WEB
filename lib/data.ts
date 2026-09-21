@@ -128,10 +128,10 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
   },
 ];
 
-// ---- Homepage hero showcase (auto-rotating pack shots) ----
+// ---- Homepage hero showcase (scroll arc packs: 1 Atarodo -> 2 Hot Peppe -> 3 Cameroon) ----
 export const HERO_SHOWCASE: string[] = [
-  "/Product/hero-hot-peppe-studio.png",
   "/Product/hero-atarodo-studio.png",
+  "/Product/hero-hot-peppe-studio.png",
   "/Product/hero-cameroon-studio.png",
 ];
 

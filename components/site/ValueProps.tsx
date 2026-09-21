@@ -25,10 +25,10 @@ const cardVariants = {
 
 export default function ValueProps() {
   return (
-    <section className="section section--cream2">
+    <section className="value-props-magical-section" aria-label="Why Naija Families Trust Goodearth">
       <div className="container">
         <motion.div 
-          className="section-head center"
+          className="section-head center vp-magical-head"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
@@ -36,7 +36,7 @@ export default function ValueProps() {
         >
           <span className="eyebrow center">Why Naija families trust Goodearth</span>
           <h2>Correct peppe, every single time</h2>
-          <p className="muted">Quality you can see, smell and taste - at a price that works for every home.</p>
+          <p className="lead-text">Quality you can see, smell and taste - at a price that works for every home.</p>
         </motion.div>
         
         <motion.div 
@@ -52,7 +52,7 @@ export default function ValueProps() {
               className="vp-card" 
               key={v.title}
               variants={cardVariants}
-              whileHover={{ scale: 1.05, y: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.08)" }}
+              whileHover={{ scale: 1.04, y: -6 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <div className="vp-icon">
