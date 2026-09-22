@@ -237,12 +237,24 @@ export default function Hero({ packs = HERO_SHOWCASE }: { packs?: string[] }) {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 1, delay: 0.35, ease: "easeOut" }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/img/hero-pepper-basket-trimmed.png"
-                  alt="Fresh harvest chillies and spices"
-                  className="harvest-basket-img"
-                />
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster="/img/hero-chili-plant-poster.png"
+                  className="harvest-basket-video"
+                  aria-label="Fresh harvest chilies and pepper plant swaying in the breeze"
+                >
+                  <source src="/video/hero-chili-plant.webm" type="video/webm" />
+                  <source src="/video/hero-chili-plant.mp4" type="video/mp4" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/img/hero-chili-plant-poster.png"
+                    alt="Fresh harvest chillies and spices"
+                    className="harvest-basket-img"
+                  />
+                </video>
               </motion.div>
 
               {/* Scroll-Driven Half-Circle Pack Carousel */}

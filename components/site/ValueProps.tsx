@@ -47,21 +47,29 @@ export default function ValueProps() {
           viewport={{ once: true, margin: "-10%" }}
           style={{ perspective: "1000px" }}
         >
-          {VALUE_PROPS.map((v) => (
-            <motion.div 
-              className="vp-card" 
-              key={v.title}
-              variants={cardVariants}
-              whileHover={{ scale: 1.04, y: -6 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            >
-              <div className="vp-icon">
-                <Icon name={v.icon as IconName} size={26} />
-              </div>
-              <h3>{v.title}</h3>
-              <p>{v.body}</p>
-            </motion.div>
-          ))}
+          {VALUE_PROPS.map((v, index) => {
+            const cardThemes = [
+              "vp-card-chilli",
+              "vp-card-farm",
+              "vp-card-turmeric",
+              "vp-card-earth",
+            ];
+            return (
+              <motion.div 
+                className={`vp-card ${cardThemes[index] || ""}`} 
+                key={v.title}
+                variants={cardVariants}
+                whileHover={{ scale: 1.04, y: -6 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <div className="vp-icon">
+                  <Icon name={v.icon as IconName} size={26} />
+                </div>
+                <h3>{v.title}</h3>
+                <p>{v.body}</p>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

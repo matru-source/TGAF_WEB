@@ -3,74 +3,163 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const METRICS_CARDS = [
+interface OrbitNote {
+  text: string;
+  arrow: "down-right" | "right" | "up-right" | "down-left" | "left" | "up-left";
+}
+
+interface MetricCard {
+  id: string;
+  number: string;
+  titleLine1: string;
+  titleLine2: string;
+  href: string;
+  leftNotes: OrbitNote[];
+  rightNotes: OrbitNote[];
+}
+
+const CARDS_DATA: MetricCard[] = [
   {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-        <path d="M4 22h16" />
-        <path d="M10 14.66V17c0 .55-.45 1-1 1H7v4h10v-4h-2c-.55 0-1-.45-1-1v-2.34" />
-        <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" />
-      </svg>
-    ),
-    value: "2025",
-    suffix: "",
-    noComma: true,
-    label: "Award Winner",
-    desc: "Outstanding Indigenous Spice Brand of the Year",
+    id: "awards",
+    number: "2025",
+    titleLine1: "Award",
+    titleLine2: "Winner",
     href: "/awards",
+    leftNotes: [
+      { text: "Indigenous\nBrand", arrow: "down-right" },
+      { text: "Industry\nChoice", arrow: "right" },
+      { text: "Best\nQuality", arrow: "up-right" },
+    ],
+    rightNotes: [
+      { text: "Naija\nPride", arrow: "down-left" },
+      { text: "Pure\nSpices", arrow: "left" },
+      { text: "Nationwide\nStandard", arrow: "up-left" },
+    ],
   },
   {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <polyline points="9 12 11 14 15 10" />
-      </svg>
-    ),
-    value: "7",
-    suffix: "+",
-    label: "Accredited Certifications",
-    desc: "NAFDAC, SON, Halal & FSSC 22000 compliant",
+    id: "certifications",
+    number: "7+",
+    titleLine1: "Accredited",
+    titleLine2: "Certifications",
     href: "/quality",
+    leftNotes: [
+      { text: "NAFDAC\nCompliant", arrow: "down-right" },
+      { text: "SON\nCertified", arrow: "right" },
+      { text: "Halal\nApproved", arrow: "up-right" },
+    ],
+    rightNotes: [
+      { text: "FSSC\nStandards", arrow: "down-left" },
+      { text: "Global\nQuality", arrow: "left" },
+      { text: "Trusted\nWorldwide", arrow: "up-left" },
+    ],
   },
   {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-        <line x1="12" y1="22.08" x2="12" y2="12" />
-      </svg>
-    ),
-    value: "15",
-    suffix: "+",
-    label: "Commercial SKUs",
-    desc: "Sachets, rolls, pouches & institutional bags",
+    id: "skus",
+    number: "15+",
+    titleLine1: "Commercial",
+    titleLine2: "SKUs",
     href: "/products",
+    leftNotes: [
+      { text: "₦-Friendly\nPacks", arrow: "down-right" },
+      { text: "Pocket\nSachets", arrow: "right" },
+      { text: "Catering\nPouches", arrow: "up-right" },
+    ],
+    rightNotes: [
+      { text: "15+\nRolls", arrow: "down-left" },
+      { text: "Market\nGiants", arrow: "left" },
+      { text: "Bulk\nBags", arrow: "up-left" },
+    ],
   },
   {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 21h18" />
-        <path d="M5 21V7l8-4v18" />
-        <path d="M19 21V11l-6-4" />
-        <line x1="9" y1="9" x2="9" y2="9.01" />
-        <line x1="9" y1="13" x2="9" y2="13.01" />
-        <line x1="9" y1="17" x2="9" y2="17.01" />
-      </svg>
-    ),
-    value: "3000",
-    suffix: " MT",
-    label: "Annual Plant Capacity",
-    desc: "Automated Ikorodu milling & sterilization mill",
+    id: "capacity",
+    number: "3,000 MT",
+    titleLine1: "Annual Plant",
+    titleLine2: "Capacity",
     href: "/farm-to-fork",
+    leftNotes: [
+      { text: "Ikorodu\nFacility", arrow: "down-right" },
+      { text: "Automated\nMilling", arrow: "right" },
+      { text: "Zero\nWaste", arrow: "up-right" },
+    ],
+    rightNotes: [
+      { text: "Steam\nSterilized", arrow: "down-left" },
+      { text: "Quality\nAssured", arrow: "left" },
+      { text: "Built For\nScale", arrow: "up-left" },
+    ],
   },
 ];
+
+function OrbitArrow({ type }: { type: OrbitNote["arrow"] }) {
+  switch (type) {
+    case "down-right":
+      return (
+        <svg width="18" height="13" viewBox="0 0 28 20" fill="none" className="orbit-arrow">
+          <path d="M3 3 C 15 3, 20 8, 22 15" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" />
+          <polyline points="17 11 22 16 25 10" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case "right":
+      return (
+        <svg width="18" height="12" viewBox="0 0 28 18" fill="none" className="orbit-arrow">
+          <path d="M3 5 C 14 3, 19 7, 23 11" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" />
+          <polyline points="18 8 23 11 20 15" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case "up-right":
+      return (
+        <svg width="18" height="13" viewBox="0 0 28 20" fill="none" className="orbit-arrow">
+          <path d="M3 17 C 15 17, 20 12, 22 5" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" />
+          <polyline points="17 9 22 4 25 10" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case "down-left":
+      return (
+        <svg width="18" height="13" viewBox="0 0 28 20" fill="none" className="orbit-arrow">
+          <path d="M25 3 C 13 3, 8 8, 6 15" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" />
+          <polyline points="11 11 6 16 3 10" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case "left":
+      return (
+        <svg width="18" height="12" viewBox="0 0 28 18" fill="none" className="orbit-arrow">
+          <path d="M25 5 C 14 3, 9 7, 5 11" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" />
+          <polyline points="10 8 5 11 8 15" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case "up-left":
+      return (
+        <svg width="18" height="13" viewBox="0 0 28 20" fill="none" className="orbit-arrow">
+          <path d="M25 17 C 13 17, 8 12, 6 5" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" />
+          <polyline points="11 9 6 4 3 10" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+  }
+}
+
+function LeafDoodle({ className = "" }: { className?: string }) {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className={`orbit-leaf-sketch ${className}`} aria-hidden="true">
+      <path
+        d="M4 14 C 4 6, 14 2, 20 2 C 20 8, 16 18, 10 20 C 6 20, 4 18, 4 14 Z"
+        stroke="#A3E635"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 14 C 10 12, 14 8, 20 2"
+        stroke="#A3E635"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
 export default function TrustMetricsStrip() {
   return (
     <section className="quality-magical-section" aria-label="Why Choose Goodearth">
-      <div className="container">
+      <div className="container quality-container">
         {/* Section Header */}
         <div className="quality-magical-head">
           <span className="eyebrow-gold">WHY CHOOSE GOODEARTH</span>
@@ -80,43 +169,95 @@ export default function TrustMetricsStrip() {
           </p>
         </div>
 
-        {/* 4 Golden Bordered Cards */}
+        {/* 4 In A Single Row: Holographic Emerald Glass Cards */}
         <motion.div
-          className="quality-cards-grid"
+          className="holographic-cards-grid"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, staggerChildren: 0.12 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.8, staggerChildren: 0.1 }}
         >
-          {METRICS_CARDS.map((card, i) => (
+          {CARDS_DATA.map((card, i) => (
             <motion.div
-              key={card.label}
-              className="quality-gold-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              key={card.id}
+              className="holographic-glass-card"
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ y: -6, borderColor: "rgba(234, 179, 8, 0.6)" }}
+              transition={{ duration: 0.6, delay: i * 0.08 }}
+              whileHover={{ y: -6, scale: 1.015 }}
             >
-              <div className="card-gold-icon" aria-hidden="true">
-                {card.icon}
+              {/* Floating Leaf Doodles */}
+              <div className="floating-leaf-slot slot-top">
+                <LeafDoodle />
               </div>
-              <div className="card-gold-number">
-                <span
-                  className="n"
-                  data-count={card.value}
-                  data-suffix={card.suffix}
-                  {...(card.noComma ? { "data-no-comma": "true" } : {})}
-                >
-                  {card.noComma ? card.value : Number(card.value).toLocaleString()}{card.suffix}
-                </span>
+              <div className="floating-leaf-slot slot-mid-left">
+                <LeafDoodle />
               </div>
-              <h3 className="card-gold-label">{card.label}</h3>
-              <p className="card-gold-desc">{card.desc}</p>
-              <Link href={card.href} className="card-gold-link">
-                <span>Learn more</span>
-                <span className="arr">→</span>
-              </Link>
+              <div className="floating-leaf-slot slot-bot-left">
+                <LeafDoodle />
+              </div>
+              <div className="floating-leaf-slot slot-mid-right">
+                <LeafDoodle />
+              </div>
+              <div className="floating-leaf-slot slot-bot-right">
+                <LeafDoodle />
+              </div>
+
+              {/* Main Stage Grid: Left Orbit Column | Center Sunburst Hub | Right Orbit Column */}
+              <div className="holographic-inner-stage">
+                {/* Left Orbit Notes */}
+                <div className="orbit-col orbit-col-left">
+                  {card.leftNotes.map((note) => (
+                    <div key={note.text} className="orbit-item item-left">
+                      <div className="orbit-float-wrap">
+                        <span className="orbit-text">{note.text}</span>
+                        <OrbitArrow type={note.arrow} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Central Sunburst Hub */}
+                <div className="orbit-center-hub">
+                  {/* Luminous Brush Number */}
+                  <div className="hub-glowing-number">
+                    {card.number}
+                  </div>
+
+                  {/* Serif Title */}
+                  <h3 className="hub-title">
+                    <span>{card.titleLine1}</span>
+                    <span>{card.titleLine2}</span>
+                  </h3>
+
+                  {/* Double Stroke Underline Flourish */}
+                  <svg width="92" height="8" viewBox="0 0 110 9" fill="none" className="hub-flourish-svg" aria-hidden="true">
+                    <path d="M3 3 C 35 1, 75 1, 107 3" stroke="#84CC16" strokeWidth="1.8" strokeLinecap="round" />
+                    <path d="M12 7 C 40 5, 72 5, 98 7" stroke="#84CC16" strokeWidth="1.4" strokeLinecap="round" opacity="0.9" />
+                  </svg>
+                </div>
+
+                {/* Right Orbit Notes */}
+                <div className="orbit-col orbit-col-right">
+                  {card.rightNotes.map((note) => (
+                    <div key={note.text} className="orbit-item item-right">
+                      <div className="orbit-float-wrap">
+                        <OrbitArrow type={note.arrow} />
+                        <span className="orbit-text">{note.text}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Centered Capsule CTA */}
+              <div className="holographic-bottom-cta">
+                <Link href={card.href} className="holographic-pill-btn">
+                  <span>Learn more</span>
+                  <span className="arr">→</span>
+                </Link>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -124,3 +265,4 @@ export default function TrustMetricsStrip() {
     </section>
   );
 }
+
