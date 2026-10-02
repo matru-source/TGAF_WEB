@@ -22,13 +22,15 @@ export default function Footer() {
               Farm-to-fork chilli, turmeric and ginger - grown by Nigerian hands, processed to
               world-class standards.
             </p>
-            <div className="socials">
-              {SOCIALS.map((s) => (
-                <a key={s.name} href={s.href} aria-label={s.name} target="_blank" rel="noopener noreferrer">
-                  <BrandIcon name={s.icon} size={18} />
-                </a>
-              ))}
-            </div>
+            {SOCIALS.length > 0 && (
+              <div className="socials">
+                {SOCIALS.map((s) => (
+                  <a key={s.name} href={s.href} aria-label={s.name} target="_blank" rel="noopener noreferrer">
+                    <BrandIcon name={s.icon} size={18} />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
           <div>
             <h4>Company</h4>

@@ -399,9 +399,7 @@ export const CONTACTS = [
 
 // ---- WhatsApp + socials ----
 export const WHATSAPP = { display: "+234 904 044 3851", href: "https://wa.me/2349040443851" };
-export const SOCIALS: { name: string; icon: string; href: string }[] = [
-  { name: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/company/tg-agri-farms-ltd" },
-];
+export const SOCIALS: { name: string; icon: string; href: string }[] = [];
 
 // ---- Leadership / governance (for bankers & investors) ----
 export const GOVERNANCE = [
