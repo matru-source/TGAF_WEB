@@ -19,7 +19,7 @@ export default async function ProductsPage() {
       <PageHero
         eyebrow="Our portfolio"
         title={<>Peppe, turmeric &amp; ginger for everybody</>}
-        subtitle="A complete range across consumer packs and bulk formats - sabi quality from farm to pot."
+        subtitle="A complete range across consumer packs and bulk formats — proven quality from farm to kitchen."
         crumb="Products"
         tone="chilli"
       />

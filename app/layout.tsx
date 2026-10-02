@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display, Inter, Caveat } from "next/font/google";
 import Analytics from "@/components/site/Analytics";
 import "./globals.css";
 
@@ -13,6 +13,12 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+const caveat = Caveat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-handwriting",
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -37,13 +43,13 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#B5121B",
-  width: 1200,
-  initialScale: 0.1,
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} ${caveat.variable}`}>
       <body>{children}</body>
       <Analytics />
     </html>

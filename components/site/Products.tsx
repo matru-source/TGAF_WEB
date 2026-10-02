@@ -1,20 +1,106 @@
 "use client";
-import { useState } from "react";
-import Link from "next/link";
-import { B2B_PORTFOLIO, B2B_CUSTOMERS, accentClass, type UIProduct } from "@/lib/data";
 
-function pillClass(cost?: string | null) {
-  const c = (cost || "").toLowerCase();
-  if (c.startsWith("low")) return "pill--hi";
-  if (c.startsWith("medium")) return "pill--mid";
-  return "pill--prem";
-}
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { motion, useInView } from "framer-motion";
+import { B2B_PORTFOLIO, B2B_CUSTOMERS, type UIProduct } from "@/lib/data";
+import {
+  ProductPedestalCard,
+  getProductTagline,
+  getProductStageClass,
+} from "@/components/site/FeaturedProducts";
 
 export default function Products({ products }: { products: UIProduct[] }) {
-  const [tab, setTab] = useState<"b2c" | "b2b">("b2b");
+  const [tab, setTab] = useState<"b2c" | "b2b">("b2c");
   const b2c = products.filter((p) => p.segment === "B2C");
-  const classified = b2c.filter((p) => p.costPositioning || p.scoville);
-  const delays = ["", "d1", "d2"];
+
+  // Complete B2C range: Flagship Nigerian peppers + Ginger + Turmeric
+  const items = [...b2c]
+    .sort((a, b) => {
+      const rank = (slug: string) =>
+        slug.includes("hot-peppe")
+          ? 0
+          : slug.includes("atarodo")
+          ? 1
+          : slug.includes("cameroon")
+          ? 2
+          : slug.includes("ginger")
+          ? 3
+          : slug.includes("turmeric")
+          ? 4
+          : 9;
+      return rank(a.slug) - rank(b.slug);
+    });
+
+  const b2cSectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(b2cSectionRef, { amount: 0.2, once: false });
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [activePopIndex, setActivePopIndex] = useState<number | null>(null);
+  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(false);
+
+  // Sync tab with URL hash if provided (#b2b or #b2c)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      if (hash === "#b2b") setTab("b2b");
+      else if (hash === "#b2c") setTab("b2c");
+    }
+  }, []);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Desktop only: Trigger sequential pop-up wave when B2C tab is active & enters view
+  useEffect(() => {
+    if (isMobile || tab !== "b2c") return;
+    if (!isInView) {
+      setActivePopIndex(null);
+      setIsAutoPlaying(false);
+      return;
+    }
+
+    // Start auto wave across all 5 products: 1.2s per card
+    setIsAutoPlaying(true);
+    setActivePopIndex(0); // Card 1 (Hot Peppe) 0.0s - 1.2s
+
+    const t1 = setTimeout(() => {
+      setActivePopIndex(1); // Card 2 (Atarodo) 1.2s - 2.4s
+    }, 1200);
+
+    const t2 = setTimeout(() => {
+      setActivePopIndex(2); // Card 3 (Cameroon) 2.4s - 3.6s
+    }, 2400);
+
+    const t3 = setTimeout(() => {
+      setActivePopIndex(3); // Card 4 (Ginger) 3.6s - 4.8s
+    }, 3600);
+
+    const t4 = setTimeout(() => {
+      setActivePopIndex(4); // Card 5 (Turmeric) 4.8s - 6.0s
+    }, 4800);
+
+    const t5 = setTimeout(() => {
+      setActivePopIndex(null); // Return to rest
+    }, 6000);
+
+    const t6 = setTimeout(() => {
+      setIsAutoPlaying(false); // Hover lock releases
+    }, 6400);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      clearTimeout(t5);
+      clearTimeout(t6);
+    };
+  }, [isInView, isMobile, tab]);
 
   return (
     <section className="section" id="products">
@@ -23,7 +109,7 @@ export default function Products({ products }: { products: UIProduct[] }) {
           <span className="eyebrow">Our portfolio</span>
           <h2>Spices for every kitchen &amp; every business</h2>
           <p className="muted">
-            A complete range across consumer packs and bulk B2B formats - chilli, turmeric and ginger in
+            A complete range across consumer packs and bulk B2B formats — chilli, turmeric and ginger in
             powder, whole, crushed, sliced and kibbled forms.
           </p>
         </div>
@@ -49,94 +135,145 @@ export default function Products({ products }: { products: UIProduct[] }) {
 
         {/* B2C */}
         <div className={`tab-panel${tab === "b2c" ? " active" : ""}`} role="tabpanel">
-          <div className="product-grid">
-            {b2c.map((p, i) => {
-              const a = accentClass(p.accent);
-              return (
-                <Link href={`/products/${p.slug}`} className={`pcard ${a.card} reveal ${delays[i % 3]}`} key={p.id}>
-                  <div className={`well ${a.well}`}>
-                    {p.image ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={p.image} alt={p.name} loading="lazy" />
-                    ) : (
-                      <span className="nophoto">{p.name.charAt(0)}</span>
-                    )}
-                  </div>
-                  {p.tagline && <span className="cat">{p.tagline}</span>}
-                  <h3>{p.name}</h3>
-                  <p>{p.description}</p>
-                  {p.sizes.length > 0 && (
-                    <div className="sizes">
-                      {p.sizes.map((s) => (
-                        <span key={s}>{s}</span>
-                      ))}
-                    </div>
-                  )}
-                  <span className="pcard-view">View product <span className="arr">→</span></span>
-                </Link>
-              );
-            })}
+          {/* Exact Home Page View: Magical Showcase Canvas with 3D Pedestal Cards */}
+          <div ref={b2cSectionRef} className="products-magical-section b2c-magical-showcase">
+            <div className="container">
+              {/* Section Header matching Home Page */}
+              <div className="products-magical-head">
+                <div>
+                  <span className="eyebrow">OUR PRODUCTS</span>
+                  <h2 style={{ marginBottom: 0 }}>Kitchen staples, ready for your cooking pot</h2>
+                </div>
+              </div>
 
-            <article
-              className="pcard t-turmeric reveal d2"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                background: "linear-gradient(160deg,var(--turmeric-soft),#fff)",
-                borderStyle: "dashed",
-              }}
-            >
-              <span className="cat">More on the way</span>
-              <h3 style={{ marginTop: ".4rem" }}>Brand extensions &amp; blends</h3>
-              <p>
-                Our category leadership and supply reliability open wide possibilities for new blends and
-                formats.
-              </p>
-              <Link href="/contact" className="link-arrow" style={{ marginTop: "14px" }}>
-                Enquire about partnerships <span className="arr">→</span>
-              </Link>
-            </article>
+              {/* Pedestal Cards Grid */}
+              <motion.div
+                className={`pedestal-grid--5 ${isAutoPlaying ? "is-auto-playing" : ""}`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, staggerChildren: 0.15 }}
+              >
+                {items.map((prod, index) => (
+                  <ProductPedestalCard
+                    key={prod.id}
+                    product={prod}
+                    tagline={getProductTagline(prod.slug)}
+                    stageClass={getProductStageClass(prod.slug)}
+                    isAutoPopped={activePopIndex === index}
+                    isAutoPlaying={isAutoPlaying}
+                    isMobile={isMobile}
+                  />
+                ))}
+              </motion.div>
+            </div>
           </div>
 
-          {classified.length > 0 && (
-            <div style={{ marginTop: "clamp(30px,4vw,52px)" }} className="reveal">
-              <h3 style={{ marginBottom: "6px" }}>Pepper classification</h3>
-              <p className="muted" style={{ marginBottom: "22px" }}>
-                Cost positioning, market category and characteristics across our chilli range.
-              </p>
-              <div className="table-wrap">
-                <table className="spec-table">
-                  <thead>
-                    <tr>
-                      <th>Product</th>
-                      <th>Positioning</th>
-                      <th>Category</th>
-                      <th>Colour &amp; characteristics</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {classified.map((p) => (
+          {/* Brand Extensions & Partnership Strip */}
+          <div
+            className="reveal"
+            style={{
+              marginTop: "clamp(24px, 3.5vw, 40px)",
+              marginBottom: "clamp(36px, 4.5vw, 56px)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "20px",
+                background: "linear-gradient(135deg, rgba(251, 240, 212, 0.45) 0%, #FFFFFF 100%)",
+                border: "1.5px dashed rgba(224, 165, 46, 0.4)",
+                borderRadius: "20px",
+                padding: "24px 32px",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.03)",
+              }}
+            >
+              <div style={{ maxWidth: "680px" }}>
+                <span
+                  style={{
+                    fontSize: "0.72rem",
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    fontWeight: 700,
+                    color: "var(--turmeric-deep)",
+                    display: "inline-block",
+                  }}
+                >
+                  More on the way
+                </span>
+                <h3 style={{ marginTop: "6px", marginBottom: "6px", fontSize: "1.25rem" }}>
+                  Brand extensions &amp; custom retail blends
+                </h3>
+                <p style={{ margin: 0, fontSize: "0.95rem", color: "var(--ink-2)" }}>
+                  Our category leadership and supply reliability open wide possibilities for new blends, private
+                  labels, and custom retail formats.
+                </p>
+              </div>
+              <Link href="/contact" className="btn btn-ghost" style={{ flexShrink: 0 }}>
+                Enquire about partnerships <span className="arr">→</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Consolidated Packaging & Product Specifications Table */}
+          <div style={{ marginTop: "clamp(32px,4.5vw,56px)" }} className="reveal">
+            <h3 style={{ marginBottom: "8px" }}>Consolidated Packaging &amp; Product Specifications</h3>
+            <p className="muted" style={{ marginBottom: "22px" }}>
+              Standard pack weights, sachet counts, carton rolls, and culinary heat metrics across our retail range.
+            </p>
+            <div className="table-wrap">
+              <table className="spec-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Pack Weights</th>
+                    <th>Packaging &amp; Carton Rolls</th>
+                    <th>Category</th>
+                    <th>Heat &amp; Profile</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {b2c.map((p) => {
+                    const packagingRolls = p.slug.includes("atarodo")
+                      ? "10 sachets/roll · 100 rolls/carton"
+                      : p.slug.includes("cameroon")
+                      ? "10 sachets/roll · Stand-up retail pouches"
+                      : p.slug.includes("hot-peppe")
+                      ? "10 sachets/roll · 100 rolls/carton · Supa Pack"
+                      : "Multi-layer barrier pouches · Export bags";
+
+                    return (
                       <tr key={p.id}>
-                        <td className="prod">{p.name}</td>
-                        <td>
-                          {p.costPositioning && (
-                            <span className={`pill ${pillClass(p.costPositioning)}`}>{p.costPositioning}</span>
-                          )}
+                        <td className="prod">
+                          <Link href={`/products/${p.slug}`} style={{ color: "var(--chilli)", fontWeight: 700 }}>
+                            {p.name}
+                          </Link>
                         </td>
-                        <td>{p.marketCategory}</td>
+                        <td>
+                          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                            {p.sizes.map((s) => (
+                              <span key={s} className="pdp-size" style={{ fontSize: "0.76rem" }}>
+                                {s}
+                              </span>
+                            ))}
+                          </div>
+                        </td>
+                        <td>{packagingRolls}</td>
+                        <td>{p.marketCategory || p.tagline}</td>
                         <td>
                           {[p.colour, p.asta && p.asta !== "-" ? `ASTA ${p.asta}` : null, p.scoville, p.usage]
                             .filter(Boolean)
                             .join(" · ")}
                         </td>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
-          )}
+          </div>
         </div>
 
         {/* B2B */}

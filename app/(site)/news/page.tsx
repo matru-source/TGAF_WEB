@@ -12,8 +12,8 @@ export default function NewsPage() {
     <>
       <PageHero
         eyebrow="News & media"
-        title={<>What&apos;s happening at Goodearth</>}
-        subtitle="Updates from our farms, facility and markets across Nigeria."
+        title={<>Latest Updates &amp; Company Dispatches</>}
+        subtitle="Official stories from our farming communities, processing facilities, and national distribution network."
         crumb="News"
         tone="green"
       />

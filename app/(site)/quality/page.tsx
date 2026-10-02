@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/site/PageHero";
 import Certifications from "@/components/site/Certifications";
-import Downloads from "@/components/site/Downloads";
-import CtaBand from "@/components/site/CtaBand";
 
 export const metadata: Metadata = {
   title: "Quality & Certifications · Goodearth Foods",
@@ -20,8 +18,6 @@ export default function QualityPage() {
         tone="warm"
       />
       <Certifications />
-      <Downloads />
-      <CtaBand title="Exporting or sourcing at scale?" text="Request our certifications pack and technical specifications." ctaLabel="Request documents" />
     </>
   );
 }

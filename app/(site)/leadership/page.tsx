@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import PageHero from "@/components/site/PageHero";
 import Governance from "@/components/site/Governance";
 import Team from "@/components/site/Team";
-import CtaBand from "@/components/site/CtaBand";
 
 export const metadata: Metadata = {
   title: "Leadership · Goodearth Foods",
@@ -21,7 +20,6 @@ export default function LeadershipPage() {
       />
       <Governance />
       <Team />
-      <CtaBand title="Want to meet the team?" ctaLabel="Contact us" />
     </>
   );
 }

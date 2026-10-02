@@ -1,4 +1,4 @@
-import { FACILITY_KPIS, FACILITY_CAPS } from "@/lib/data";
+import { FACILITY_CAPS } from "@/lib/data";
 import FacilityCarousel from "./FacilityCarousel";
 import { Icon } from "./icons";
 
@@ -49,68 +49,83 @@ const EQUIPMENT_MODULES = [
 
 export default function Manufacturing() {
   return (
-    <section className="section">
-      <div className="container">
-        <div className="section-head reveal">
-          <span className="eyebrow">World-class facility · Ikorodu</span>
-          <h2>A US$12M automated processing plant</h2>
-          <p className="muted">
-            Built around every food-safety norm our customers demand, with 3,000 MT annual plant capacity of finished
-            product. Grinding technology for high-VO spices retains natural aroma and colour.
-          </p>
+    <>
+      <section className="section manufacturing-plant-wrap" id="plant-facility">
+        {/* Ambient atmospheric particles */}
+        <div className="ph-particles-wrap" aria-hidden="true" style={{ opacity: 0.65 }}>
+          <span className="ph-particle p1" />
+          <span className="ph-particle p2" />
+          <span className="ph-particle p3" />
+          <span className="ph-particle p4" />
+          <span className="ph-particle p5" />
         </div>
 
-        <div className="reveal" style={{ marginBottom: "clamp(24px, 3vw, 36px)" }}>
-          <FacilityCarousel />
+        <div className="container">
+          <div className="section-head reveal">
+            <span className="eyebrow">World-class facility · Ikorodu</span>
+            <h2>State-of-the-art automated processing plant</h2>
+            <p className="muted">
+              Built around every food-safety norm our customers demand, with 3,000 MT annual plant capacity of finished
+              product. Grinding technology for high-VO spices retains natural aroma and colour.
+            </p>
+          </div>
+
+          <div className="reveal" style={{ marginBottom: "clamp(24px, 3vw, 36px)" }}>
+            <FacilityCarousel />
+          </div>
+
+          <div className="cap-list reveal" style={{ marginTop: "24px" }}>
+            {FACILITY_CAPS.map((c) => (
+              <span key={c}>{c}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Advanced Plant Machinery Section */}
+      <section className="section manufacturing-machinery-wrap" id="machinery">
+        {/* Ambient atmospheric particles */}
+        <div className="ph-particles-wrap" aria-hidden="true" style={{ opacity: 0.65 }}>
+          <span className="ph-particle p1" />
+          <span className="ph-particle p2" />
+          <span className="ph-particle p3" />
+          <span className="ph-particle p4" />
+          <span className="ph-particle p5" />
         </div>
 
-        <div className="kpi-grid reveal">
-          {FACILITY_KPIS.map((k) => (
-            <div className="kpi-box" key={k.l}>
-              <div className="n">{k.n}</div>
-              <div className="l">{k.l}</div>
-            </div>
-          ))}
-        </div>
+        <div className="container">
+          <div className="section-head reveal" style={{ marginBottom: "clamp(24px, 3vw, 36px)" }}>
+            <span className="eyebrow">Advanced Machinery</span>
+            <h2>Industrial Processing &amp; Packaging Technology</h2>
+            <p className="muted">
+              Inside our Ikorodu plant: high-throughput, automated machinery engineered for microbial safety, volatile oil preservation, and hermetic packaging.
+            </p>
+          </div>
 
-        <div className="cap-list reveal" style={{ marginTop: "24px" }}>
-          {FACILITY_CAPS.map((c) => (
-            <span key={c}>{c}</span>
-          ))}
-        </div>
-
-        {/* Advanced Plant Machinery Section */}
-        <div className="section-head reveal" style={{ marginTop: "clamp(52px, 6vw, 80px)", marginBottom: "clamp(24px, 3vw, 36px)" }}>
-          <span className="eyebrow">Advanced Machinery</span>
-          <h2>Industrial Processing &amp; Packaging Technology</h2>
-          <p className="muted">
-            Inside our Ikorodu plant: high-throughput, automated machinery engineered for microbial safety, volatile oil preservation, and hermetic packaging.
-          </p>
-        </div>
-
-        <div className="equipment-grid reveal">
-          {EQUIPMENT_MODULES.map((m, idx) => (
-            <div className={`equipment-card reveal ${["", "d1", "d2"][idx % 3]}`} key={m.title}>
-              <div className="equipment-img-wrap">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={m.image} alt={m.title} loading="lazy" />
-                <span className="equipment-stage-tag">{m.stage}</span>
-              </div>
-              <div className="equipment-card-body">
-                <h3>{m.title}</h3>
-                <p>{m.description}</p>
-                <div className="equipment-spec-row">
-                  {m.specs.map((spec) => (
-                    <span className="equipment-spec-pill" key={spec}>
-                      <Icon name="award" size={12} /> {spec}
-                    </span>
-                  ))}
+          <div className="equipment-grid reveal">
+            {EQUIPMENT_MODULES.map((m, idx) => (
+              <div className={`equipment-card reveal ${["", "d1", "d2"][idx % 3]}`} key={m.title}>
+                <div className="equipment-img-wrap">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={m.image} alt={m.title} loading="lazy" />
+                  <span className="equipment-stage-tag">{m.stage}</span>
+                </div>
+                <div className="equipment-card-body">
+                  <h3>{m.title}</h3>
+                  <p>{m.description}</p>
+                  <div className="equipment-spec-row">
+                    {m.specs.map((spec) => (
+                      <span className="equipment-spec-pill" key={spec}>
+                        <Icon name="award" size={12} /> {spec}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

@@ -70,68 +70,65 @@ export const SPICES: { key: AccentKey; tag: string; name: string; hex: string; b
 // ---- B2C product fallback ----
 export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
-    id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe Powder", segment: "B2C",
+    id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe", segment: "B2C",
     accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hero-hot-peppe-studio.png",
     images: [
       "/Product/hero-hot-peppe-studio.png",
-      "/Product/hot-peppe-studio.jpg",
       "/Product/hot-peppe-supa-pack.jpg",
       "/Product/hot-peppe-carton.jpg",
     ],
-    description: "Bright red, premium pepper powder to add spice and flavour to every meal.",
-    sizes: ["100 g", "5 g", "Supa Pack"], formats: [], featured: true,
-    costPositioning: "Medium–High cost", marketCategory: "Premium staple",
-    colour: "Red", asta: "40–55", scoville: "55,000–60,000 SHU",
+    description: "Rich red, premium grounded peppe to add bold heat, aroma and fresh flavour to every meal.",
+    sizes: ["100 g", "5 g", "Supa Pack"], formats: ["Grounded Peppe"], featured: true,
+    marketCategory: "Premium staple",
+    colour: "Rich red", asta: "40–55", scoville: "55,000–60,000 SHU",
     usage: "Adds spice & flavour to all meals",
   },
   {
-    id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe Powder", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/hero-atarodo-studio.png",
+    id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/atarodo-new.png",
     images: [
-      "/Product/hero-atarodo-studio.png",
-      "/Product/atarodo-studio.jpg",
+      "/Product/atarodo-new.png",
       "/Product/atarodo-carton.jpg",
     ],
-    description: "Dark-red scotch-bonnet style pepper - a mass-market staple for everyday heat.",
-    sizes: ["8 g", "3 g", "Carton"], formats: [], featured: true,
-    costPositioning: "Low–Medium cost", marketCategory: "Scotch-bonnet · mass-market staple",
+    description: "Dark-red scotch-bonnet style grounded pepe - a mass-market staple for everyday Nigerian heat.",
+    sizes: ["8 g", "3 g", "Carton"], formats: ["Grounded Pepe"], featured: true,
+    marketCategory: "Scotch-bonnet · mass-market staple",
     colour: "Dark red", asta: "50–60", scoville: "~60,000 SHU",
     usage: "Adds spice to all meals",
   },
   {
-    id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe Powder", segment: "B2C",
+    id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe", segment: "B2C",
     accent: "chilli", tagline: "Chilli · Gourmet", image: "/Product/hero-cameroon-studio.png",
     images: [
       "/Product/hero-cameroon-studio.png",
-      "/Product/cameroon-studio.jpg",
       "/Product/cameroon-carton.jpg",
     ],
-    description: "Deep red, smoky and pungent - a gourmet, authentic powder for soups & noodles.",
-    sizes: ["100 g", "50 g", "3 g"], formats: [], featured: true,
-    costPositioning: "High cost", marketCategory: "Gourmet / authentic · premium niche",
+    description: "Deep red, smoky and pungent - a gourmet, authentic grounded pepe for soups, stews & noodles.",
+    sizes: ["100 g", "50 g", "3 g"], formats: ["Smoked Grounded Pepe"], featured: true,
+    marketCategory: "Gourmet / authentic · premium niche",
     colour: "Deep red & brown", asta: "-", scoville: "~90,000 SHU",
-    usage: "For soups & noodles",
+    usage: "For soups, stews & noodles",
   },
   {
-    id: "ginger", slug: "ginger-powder", name: "Ginger Powder", segment: "B2C",
+    id: "ginger", slug: "ginger-powder", name: "Ginger", segment: "B2C",
     accent: "ginger", tagline: "Ginger", image: "/Product/ginger.png",
     images: ["/Product/ginger.png"],
-    description: "Aromatic, finely milled ginger that brings warmth and depth to soups and stews.",
-    sizes: ["100 g"], formats: [],
+    description: "Aromatic, finely grounded ginger that brings warmth and depth to soups, marinades and stews.",
+    sizes: ["100 g"], formats: ["Grounded Ginger"],
   },
   {
-    id: "turmeric", slug: "turmeric-powder", name: "Turmeric Powder", segment: "B2C",
+    id: "turmeric", slug: "turmeric-powder", name: "Turmeric", segment: "B2C",
     accent: "turmeric", tagline: "Turmeric", image: "/Product/turmeric.png",
     images: ["/Product/turmeric.png"],
-    description: "Pure, golden turmeric - rich in colour and warmth for everyday Nigerian cooking.",
-    sizes: ["100 g"], formats: [],
+    description: "Pure, golden grounded turmeric - rich in colour and warmth for everyday cooking.",
+    sizes: ["100 g"], formats: ["Grounded Turmeric"],
   },
 ];
 
-// ---- Homepage hero showcase (auto-rotating pack shots) ----
+// ---- Homepage hero showcase (scroll arc packs: 1 Atarodo -> 2 Hot Peppe -> 3 Cameroon) ----
 export const HERO_SHOWCASE: string[] = [
+  "/Product/atarodo-new.png",
   "/Product/hero-hot-peppe-studio.png",
-  "/Product/hero-atarodo-studio.png",
   "/Product/hero-cameroon-studio.png",
 ];
 
@@ -177,12 +174,63 @@ export const B2B_CUSTOMERS: { name: string; logo: string }[] = [
   { name: "Chicken Republic", logo: "/img/customers/chicken-republic.png" },
 ];
 
-// ---- Process steps ----
-export const PROCESS_STEPS = [
-  { title: "Cultivate & source", body: "We source chilli, turmeric and ginger varieties with the pungency and colour our customers require - supporting smallholder farmers to grow profitably." },
-  { title: "Harvest & sun-dry", body: "Matured fruits are plucked and sun-dried to reduce moisture by ~85%, then registered, bagged and moved to our Kaduna warehouse." },
-  { title: "Crush, process & sterilise", body: "At our Ikorodu mill, materials pass rigorous stages to remove foreign matter, then are crushed, kibbled, sliced, ground and steam-sterilised." },
-  { title: "Pack & sell", body: "We package to spec, then sell to both businesses and consumers across Nigerian markets." },
+// ---- Process steps (Farm-to-Fork 5-Step Scrollytelling) ----
+export interface ProcessStep {
+  step: string;
+  tag: string;
+  title: string;
+  body: string;
+  image: string;
+  imageAlt: string;
+  caption: string;
+}
+
+export const PROCESS_STEPS: ProcessStep[] = [
+  {
+    step: "01",
+    tag: "Cultivation & Agronomy",
+    title: "Cultivate & source",
+    body: "50,000+ smallholder farmers engaged with certified GAP seeds and fair off-take.",
+    image: "/img/farm-to-fork/cultivation.png",
+    imageAlt: "Nigerian smallholder farmers cultivating and harvesting mature red chilli crops in agricultural fields",
+    caption: "Cultivated with 50,000+ Nigerian farmers under sustainable GAP agronomy standards.",
+  },
+  {
+    step: "02",
+    tag: "Harvest & Moisture Reduction",
+    title: "Harvest & sun-dry",
+    body: "Hand-plucked and sun-dried to reduce moisture by ~85%, locking in natural heat.",
+    image: "/img/farm-to-fork/harvest-sun-dry.png",
+    imageAlt: "Sun-drying fresh harvest red chillies on raised yards to reduce moisture and lock in pungency",
+    caption: "Sun-drying reduces moisture by ~85%, locking in natural essential oils and heat.",
+  },
+  {
+    step: "03",
+    tag: "Aggregation & Quality Testing",
+    title: "Clean, grade & warehouse",
+    body: "Multi-stage destoning, magnetic cleaning, and secured Kaduna bulk warehousing.",
+    image: "/img/facility/bulk-bagging.jpg",
+    imageAlt: "Bulk bagging and secured storage at Good Earth Kaduna aggregation warehouse",
+    caption: "2,000 MT warehousing capacity with strict inspection and foreign matter removal.",
+  },
+  {
+    step: "04",
+    tag: "Industrial Milling & Food Safety",
+    title: "Crush, process & sterilise",
+    body: "Precision micro-milling and continuous automated steam sterilisation.",
+    image: "/img/facility/sterilization.png",
+    imageAlt: "World-class industrial milling, pulverizing and continuous steam sterilisation line",
+    caption: "3,000 MT annual plant capacity with automated continuous steam sterilisation.",
+  },
+  {
+    step: "05",
+    tag: "Automated Packaging & Delivery",
+    title: "Pack & market distribution",
+    body: "High-speed automated VFFS packaging into retail pouches and master cartons.",
+    image: "/img/gallery/machine-12.jpg",
+    imageAlt: "Automated high-speed VFFS packaging machine sealing Good Earth spice pouches with branded film rolls",
+    caption: "From automated packaging to market stalls and top food brands — every step traceable.",
+  },
 ];
 
 export const FACILITY_KPIS = [
@@ -196,14 +244,17 @@ export const FACILITY_CAPS = ["Cleaning", "Grinding", "Blending", "Sieving", "St
 // ---- Impact ----
 export const IMPACT_CARDS = [
   { n: "50,000", suffix: "+", count: 50000, title: "Smallholder farmers engaged", body: "Across direct sourcing, cultivation and aggregation networks." },
-  { n: "10,000", suffix: "+", count: 10000, title: "Farmers trained on quality", body: "Structured post-harvest handling and food-safety practices." },
+  { n: "20,000", suffix: "+", count: 20000, title: "Farmers & employees trained", body: "Structured capacity building in good agricultural practices, food safety, and operations." },
   { n: "95%", suffix: "", count: 0, title: "Nigerian staff", body: "Of total staff - youth and women included across functions." },
-  { n: "Women-led", suffix: "", count: 0, title: "B2C micro-distribution", body: "Empowering women through micro-distributor sales, with reduced spoilage and stable food prices." },
+  { n: "60,000", suffix: "+", count: 60000, title: "Jobs & livelihoods created", body: "Direct and indirect employment across agriculture, manufacturing, and distribution." },
 ];
-export const IMPACT_TAGS = ["10,000+ farmers trained", "100 farmer markets", "25 aggregators", "Grown by 50,000+ farmers", "Fair-pricing agreements", "Reduced post-harvest losses", "Export diversification"];
+export const IMPACT_TAGS = ["Grown by 50,000+ farmers", "20,000+ farmers & employees trained", "60,000+ livelihoods created", "Fair-pricing agreements", "Reduced post-harvest losses", "Export diversification"];
 
 // ---- Presence ----
-export const STATES = ["Ogun", "Ondo", "Ekiti", "Anambra", "Lagos", "Osun", "Imo", "Rivers", "Abia", "Edo", "Enugu", "Akwa Ibom", "Delta", "Oyo", "Kwara", "Kaduna", "Kano", "Abuja FCT"];
+export const STATES = [
+  "Ogun", "Ondo", "Ekiti", "Anambra", "Lagos", "Osun", "Imo", "Rivers",
+  "Abia", "Edo", "Enugu", "Akwa Ibom", "Delta", "Oyo", "Kwara", "Ebonyi", "Bayelsa"
+];
 
 // ---- SWOT ----
 export const SWOT = {
@@ -241,37 +292,13 @@ export const TEAM: UITeamMember[] = [
     id: "ss",
     initials: "SS",
     name: "Swatanter Saraswat",
-    role: "Executive Director",
-    bio: "Appointed as COO in June,2023 and to the board of directors in Nov 2024. He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+    role: "Executive Director & COO",
+    bio: "Appointed COO in June 2023 and to the board of directors in Nov 2024. Over 15 years leading automated FMCG manufacturing plants across Africa.",
     bullets: [
-      "Appointed as COO in June,2023 and to the board of directors in Nov 2024.",
-      "He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
+      "Appointed COO in June 2023 and to the board of directors in Nov 2024.",
+      "Over 15 years leading automated FMCG manufacturing plants across Africa.",
     ],
     photo: "/img/team/swatanter-saraswat.jpg",
-  },
-  {
-    id: "ns",
-    initials: "NS",
-    name: "Narendranath Swain",
-    role: "Finance Controller",
-    bio: "Joined the Company in 2024. He is Qualified Chartered Accountant from India with more than Ten years of experience in Indian accounts, audit and finance with additional 7 years of experience as Finance controller in Nigerian companies.",
-    bullets: [
-      "Joined the Company in 2024.",
-      "He is Qualified Chartered Accountant from India with more than Ten years of experience in Indian accounts, audit and finance with additional 7 years of experience as Finance controller in Nigerian companies.",
-    ],
-    photo: "/img/team/narendranath-swain.jpg",
-  },
-  {
-    id: "fn",
-    initials: "FN",
-    name: "Fredrick Chidi Nze",
-    role: "Sales Capability & Market Development",
-    bio: "Joined the Company in 2023. He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
-    bullets: [
-      "Joined the Company in 2023.",
-      "He comes with more than 15 years of experience in FMCG sector majorly with African companies.",
-    ],
-    photo: "/img/team/fred-nze.jpg",
   },
 ];
 
@@ -304,15 +331,6 @@ export const EXPAT_LEADERS: ExpatLeader[] = [
     highlight: "15+ Yrs African FMCG Manufacturing",
     bio: "Appointed COO in June 2023 and to the board in Nov 2024. Over 15 years leading automated FMCG manufacturing plants across Africa, championing technical precision, hygiene, and engineer mentoring.",
   },
-  {
-    name: "Narendranath Swain",
-    role: "Finance Controller",
-    division: "Corporate Governance & Audit",
-    photo: "/img/team/narendranath-swain.jpg",
-    badge: "Corporate Governance",
-    highlight: "Chartered Accountant · 17+ Yrs Exp.",
-    bio: "Qualified Chartered Accountant with 10+ years in Indian corporate finance and audit, plus 7+ years managing finance control, cost engineering, and statutory governance for Nigerian industrial leaders.",
-  },
 ];
 
 // ---- Certifications ----
@@ -330,9 +348,9 @@ export const CERTS: { abbr: string; full: string; logo?: string }[] = [
 
 // ---- Value props (why Naija families trust us) ----
 export const VALUE_PROPS: { icon: string; title: string; body: string }[] = [
-  { icon: "sprout", title: "100% Naija sourced", body: "Grown by 50,000+ local farmers across the country - no imports, pure home-grown goodness." },
-  { icon: "shield", title: "Pure & hygienic", body: "Steam-sterilised and milled to lock in natural colour and aroma. Clean peppe, every time." },
-  { icon: "wallet", title: "For every pocket", body: "From ₦-friendly 3 g sachets to bulk bags - Goodearth dey for everybody." },
+  { icon: "sprout", title: "100% Naija sourced", body: "Grown by 50,000+ local smallholders across Nigeria, delivering pure home-grown goodness." },
+  { icon: "shield", title: "Pure & fresh", body: "Steam-sterilised and milled to lock in natural colour and aroma. Fresh peppe, every time." },
+  { icon: "wallet", title: "For every packet", body: "From everyday 3 g sachets to commercial bulk sacks - Goodearth is built for every kitchen and business." },
   { icon: "users", title: "Trusted everywhere", body: "In 100+ farmer markets, 12,000+ retailers and kitchens across 17+ states." },
 ];
 
@@ -346,14 +364,23 @@ export const TESTIMONIALS: { quote: string; name: string; role: string; place: s
 
 // ---- Where to buy / markets (local market feel) ----
 export const MARKETS: { name: string; place: string }[] = [
-  { name: "Mile 12 Market", place: "Lagos" },
-  { name: "Oyingbo Market", place: "Lagos" },
+  { name: "Kuto & Sagamu Markets", place: "Ogun" },
+  { name: "Oja Oba & Ore Central", place: "Ondo" },
+  { name: "Oja Bisi (King's Market)", place: "Ekiti" },
   { name: "Onitsha Main Market", place: "Anambra" },
-  { name: "Ariaria International Market", place: "Aba, Abia" },
-  { name: "Aba Main Market", place: "Abia" },
+  { name: "Mile 12 & Oyingbo Markets", place: "Lagos" },
+  { name: "Oja Oba & Orisunbare", place: "Osun" },
+  { name: "Relief Market / Eke Ukwu", place: "Imo" },
+  { name: "Oil Mill & Mile 1 Markets", place: "Rivers" },
+  { name: "Ariaria International Market", place: "Abia" },
+  { name: "Oba Market / New Benin", place: "Edo" },
   { name: "Ogbete Main Market", place: "Enugu" },
-  { name: "Oba Market", place: "Benin, Edo" },
-  { name: "Wuse Market", place: "Abuja" },
+  { name: "Itam Central Market", place: "Akwa Ibom" },
+  { name: "Warri Main & Asaba Market", place: "Delta" },
+  { name: "Bodija & Dugbe Markets", place: "Oyo" },
+  { name: "Oja Tuntun / Mandate Market", place: "Kwara" },
+  { name: "Abakaliki Central Market", place: "Ebonyi" },
+  { name: "Swali Ultra-Modern Market", place: "Bayelsa" },
 ];
 
 // short pidgin-flavoured marquee of staples
@@ -385,9 +412,39 @@ export const GOVERNANCE = [
 
 // ---- ESG pillars ----
 export const ESG: { key: string; letter: string; title: string; accent: AccentKey; points: string[] }[] = [
-  { key: "environmental", letter: "E", title: "Environmental", accent: "ginger", points: ["Reduced post-harvest losses through modern drying, grinding & packaging", "Efficient, low-waste automated processing at Ikorodu", "Sourcing that protects natural colour and aroma"] },
-  { key: "social", letter: "S", title: "Social", accent: "chilli", points: ["100% support to local farmers - no import dependence", "Grown by 50,000+ farmers, with 10,000+ trained on quality handling", "Women-led B2C micro-distribution; jobs for youth & women"] },
-  { key: "governance", letter: "G", title: "Governance", accent: "turmeric", points: ["Food-safety systems & full farm-to-fork traceability", "Certified to national and international standards", "Fair-pricing agreements across 25 aggregators"] },
+  { 
+    key: "environmental", 
+    letter: "E", 
+    title: "Environmental", 
+    accent: "ginger", 
+    points: [
+      "Clean Energy: Solar & gas powered Ikorodu plant replacing diesel.",
+      "Low-Waste Milling: Closed-loop cool-grind preventing spice loss.",
+      "Sustainable Farming: Soil vitality & regenerative agriculture."
+    ] 
+  },
+  { 
+    key: "social", 
+    letter: "S", 
+    title: "Social", 
+    accent: "chilli", 
+    points: [
+      "100% Local Sourcing: Zero import dependence across core spices.",
+      "Farmer Empowerment: 50,000+ growers & 20,000+ trained.",
+      "Women-Led Distribution: Micro-sales driving family livelihoods."
+    ] 
+  },
+  { 
+    key: "governance", 
+    letter: "G", 
+    title: "Governance", 
+    accent: "turmeric", 
+    points: [
+      "Traceability: Rigorous seed-to-shelf batch-coded compliance.",
+      "Certified Standards: NAFDAC, SON & global export benchmarks.",
+      "Fair Pricing: Transparent contracts protecting farmer incomes."
+    ] 
+  },
 ];
 
 // ---- Quality systems ----
@@ -397,7 +454,7 @@ export const QUALITY_SYSTEMS: { icon: string; title: string; body: string }[] = 
   { icon: "award", title: "FSSC 22000 aligned", body: "Food Safety System Certification-aligned processes across cleaning, grinding, blending and packing." },
   { icon: "shield", title: "In-line quality checks", body: "Foreign-matter removal, sieving and checks at each stage with minimal human intervention." },
   { icon: "award", title: "ASTA & Scoville profiling", body: "Colour and pungency profiling to meet customer and export specifications." },
-  { icon: "sprout", title: "Hygienic automation", body: "A US$12M automated plant designed around every food-safety norm our customers demand." },
+  { icon: "sprout", title: "Hygienic automation", body: "An advanced automated processing plant engineered around international food-safety standards." },
 ];
 
 // ---- Downloads (brochures / certificates) ----
@@ -426,12 +483,37 @@ export const NEWS: {
   slug: string; title: string; date: string; category: string; excerpt: string; image: string; body: string[];
 }[] = [
   {
+    slug: "coming-soon-ose-di-oku-hot-peppe",
+    title: "Coming Soon: Goodearth unveils 'Ose Dị Ọkụ' 100% natural Hot Peppe Powder",
+    date: "2026-07-15",
+    category: "New Product",
+    image: "/img/news/ose-di-oku-launch.jpg",
+    excerpt: "A celebration of indigenous spice heritage — 100% natural, preservative-free, and crafted from farm-fresh Nigerian red chillies.",
+    body: [
+      "Goodearth Foods is proud to announce the upcoming launch of its latest retail spice innovation: 'Ose Dị Ọkụ' Hot Peppe Powder, crafted specifically to satisfy Nigeria's passion for authentic, fiery heat.",
+      "Rooted in indigenous agricultural heritage, 'Ose Dị Ọkụ' (meaning 'Fiery Hot Pepper') is produced with zero artificial preservatives, zero added colourants, and 100% pure, sun-dried Nigerian red peppers sourced directly from our outgrower smallholder farmers.",
+      "Milled and steam-sterilised at our state-of-the-art automated Ikorodu processing plant, Ose Dị Ọkụ preserves natural capsaicin pungency and rich red colour in airtight, moisture-proof retail pouches.",
+      "The new product will soon be available in open-air markets, neighborhood kiosks, and major retail supermarket shelves across Nigeria.",
+    ],
+  },
+  {
+    slug: "new-retail-spice-range-launch",
+    title: "Goodearth launches new flagship Grounded Peppe & family pack formats",
+    date: "2026-06-10", category: "Products", image: "/img/news/retail-spice-range-launch-v2.jpg",
+    excerpt: "New consumer sachets, retail standing pouches, and institutional bulk packs hit markets across 17+ Nigerian states.",
+    body: [
+      "Goodearth Foods has officially unveiled its expanded retail portfolio, introducing hermetically sealed sachets and family pouches for Hot Peppe, Pure Atarodo, and smoked Cameroon Peppe.",
+      "Engineered to retain volatile aromatic oils through low-temperature milling, each pack delivers authentic heat and rich red colour with zero artificial adulterants.",
+      "The newly packaged formats are currently rolling out through our network of 250+ wholesale distributors and leading supermarket shelves nationwide.",
+    ],
+  },
+  {
     slug: "ikorodu-facility-scales-up",
     title: "Ikorodu facility scales to 3,000 MT annual capacity",
-    date: "2026-05-18", category: "Operations", image: "/img/photo-facility.jpg",
+    date: "2026-05-18", category: "Operations", image: "/img/gallery/goodearth-facility-aerial.png",
     excerpt: "Our automated processing plant reaches full stride with 3,000 MT annual plant capacity of finished spice.",
     body: [
-      "Our US$12M automated processing facility in Ikorodu has reached full production stride, with an annual capacity of 3,000 metric tonnes of finished product.",
+      "Our automated processing facility in Ikorodu has reached full production stride, with an annual capacity of 3,000 metric tonnes of finished product.",
       "The line grinds chilli, turmeric, ginger and other spices, retaining natural aroma and colour through careful steam sterilisation, sieving and hygienic material handling.",
       "The investment cements TG Agri Farms as an integrated, farm-to-fork spice manufacturer built for scale and export.",
     ],
@@ -455,7 +537,18 @@ export const NEWS: {
     body: [
       "Our nationwide network now spans 17+ states and 100+ farmer markets, served by 250 distributors, 2,600+ wholesalers, and 12,000+ retailers.",
       "Women-led micro-distribution brings Goodearth spices to streets and kitchens across Nigeria.",
-      "The reach reflects six years of building a robust, trusted consumer brand anchored by our US$12M Ikorodu facility.",
+      "The reach reflects six years of building a robust, trusted consumer brand anchored by our world-class Ikorodu facility.",
+    ],
+  },
+  {
+    slug: "marketing-edge-award-winner",
+    title: "Goodearth Hot Peppe named Outstanding Indigenous Naija Spice of the Year",
+    date: "2025-11-20", category: "Awards", image: "/img/awards/award-ceremony-hd.png",
+    excerpt: "Recognised at the 13th Marketing Edge Annual Awards of Excellence as Nigeria's benchmark for locally milled spice purity.",
+    body: [
+      "Goodearth Hot Peppe has emerged as the winner in the coveted Indigenous Spice category at the 13th Marketing Edge National Awards of Excellence.",
+      "The jury commended Goodearth's seed-to-shelf traceability, hygienic steam sterilisation, and commitment to domestic agricultural backward integration.",
+      "The honour highlights the growing acceptance of Nigerian-milled FMCG brands competing successfully at world-class food safety standards.",
     ],
   },
 ];
@@ -516,8 +609,10 @@ export const AWARDS = [
 // ---- Gallery Data ----
 export type GalleryCategory =
   | "all"
-  | "factory"
   | "farm"
+  | "warehousing"
+  | "loading-unloading"
+  | "packaging"
   | "marketing";
 
 export interface GalleryItem {
@@ -534,8 +629,10 @@ export interface GalleryItem {
 
 export const GALLERY_CATEGORIES: { key: GalleryCategory; label: string }[] = [
   { key: "all", label: "All Photos" },
-  { key: "factory", label: "Factory" },
   { key: "farm", label: "Farm" },
+  { key: "warehousing", label: "Warehousing" },
+  { key: "loading-unloading", label: "Loading & Unloading" },
+  { key: "packaging", label: "Packaging" },
   { key: "marketing", label: "Marketing" },
 ];
 
@@ -544,30 +641,19 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "facility-aerial-drone",
     title: "Good Earth Agro-Processing Complex",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/drone-facility-01.jpg",
-    caption: "Aerial drone overview of the modern Good Earth agro-processing and spice milling facility in Ikorodu, Lagos State.",
+    category: "warehousing",
+    categoryLabel: "Warehousing",
+    image: "/img/gallery/goodearth-facility-aerial.png",
+    caption: "Aerial perspective of the modern Good Earth agro-processing and spice milling facility in Ikorodu, Lagos State.",
     location: "Ikorodu, Lagos State",
     aspect: "landscape",
     tag: "Plant Architecture",
   },
   {
-    id: "facility-overview-render",
-    title: "Factory Master Architectural Layout",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/drone-facility-03.jpg",
-    caption: "Full campus view of the automated processing plant, administration building, and storage warehouses.",
-    location: "Ikorodu, Lagos State",
-    aspect: "landscape",
-    tag: "Master Layout",
-  },
-  {
     id: "facility-bco-layout",
     title: "Factory Architectural Plan & Blueprint",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/corporate-bco-overview.png",
     caption: "Master architectural layout and engineering blueprint for the US$12M Ikorodu agro-processing plant.",
     location: "Engineering Division, Lagos",
@@ -577,8 +663,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "plant-mgmt-team",
     title: "Expatriate Technical & Plant Management Team",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/team/expat-plant-team.jpg",
     caption: "Seasoned expatriate engineers and technical operations supervisors on-site at the Ikorodu facility.",
     location: "Ikorodu Plant, Lagos",
@@ -588,8 +674,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "plant-workforce-team",
     title: "Nigerian Operational Workforce & Production Staff",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/team-workforce.jpg",
     caption: "The passionate operations, milling, and packaging workforce driving round-the-clock spice production.",
     location: "Ikorodu Facility, Lagos",
@@ -599,8 +685,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "factory-staff-front",
     title: "Operations & Packaging Personnel",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/factory-staff-front.jpg",
     caption: "Factory floor technicians and packaging operators outside the main facility in branded company uniforms.",
     location: "Ikorodu Facility, Lagos",
@@ -610,8 +696,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "team-qa-yellow",
     title: "Quality Assurance & Production Crew",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/qa-packaging-team-yellow.jpg",
     caption: "Production specialists sporting 'Na Correct Naija Peppe' yellow apparel outside the facility grounds.",
     location: "Ikorodu Facility, Lagos",
@@ -621,8 +707,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "team-ops-green",
     title: "Operations & Logistics Team",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "loading-unloading",
+    categoryLabel: "Loading & Unloading",
     image: "/img/gallery/operations-team-green.jpg",
     caption: "Handling coordinators and operations personnel in Good Earth signature green uniform apparel.",
     location: "Ikorodu Facility, Lagos",
@@ -630,21 +716,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     tag: "Logistics Team",
   },
   {
-    id: "machine-rotary-line",
-    title: "High-Speed Rotary Sachet Packaging Line",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/machine-12.jpg",
-    caption: "Automated multi-track rotary pouch packaging line filling and hermetically sealing retail sachets.",
-    location: "Packaging Hall, Ikorodu",
-    aspect: "landscape",
-    tag: "Packaging Automation",
-  },
-  {
     id: "machine-pulverizer",
     title: "Industrial Impact Pulverizer & Pin Mill",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/machine-11.jpg",
     caption: "Multi-stage cool-grind milling machine preserving volatile oils (high-VO) and natural spice aroma.",
     location: "Milling Hall, Ikorodu",
@@ -654,8 +729,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "machine-cyclone",
     title: "Pneumatic Cyclone Separator & Filtration",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/machine-10.jpg",
     caption: "Closed-loop negative pressure conveyance separating fine spice particles under hygienic vacuum.",
     location: "Processing Hall, Ikorodu",
@@ -665,8 +740,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "machine-ribbon-blender",
     title: "Stainless Steel Ribbon Blender",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/machine-14.jpg",
     caption: "Heavy-duty helical ribbon agitators ensuring homogenous particle distribution and uniform heat levels.",
     location: "Blending Section, Ikorodu",
@@ -676,8 +751,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "machine-vffs",
     title: "Continuous VFFS Automated Packaging Machine",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/machine-08.jpg",
     caption: "Roll-fed vertical form-fill-seal unit with automated batch coding and nitrogen flushing capability.",
     location: "Packaging Hall, Ikorodu",
@@ -685,43 +760,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     tag: "VFFS Packaging",
   },
   {
-    id: "machine-bagging",
-    title: "Bulk Discharge & Commercial Bagging Station",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/machine-07.jpg",
-    caption: "Heavy-duty discharge hopper and precision scale bagging system for 25kg & 50kg multi-wall commercial sacks.",
-    location: "Bulk Fulfillment, Ikorodu",
-    aspect: "landscape",
-    tag: "Bulk Bagging",
-  },
-  {
-    id: "machine-sifter",
-    title: "Rotary Vibratory Sifter & Classifier",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/machine-02.jpg",
-    caption: "Precision sifting system ensuring uniform mesh size and foreign matter exclusion.",
-    location: "Milling Hall, Ikorodu",
-    aspect: "landscape",
-    tag: "Sifting System",
-  },
-  {
-    id: "machine-pneumatic-line",
-    title: "Closed-Loop Pneumatic Transfer Line",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/machine-03.jpg",
-    caption: "Stainless steel pneumatic transfer pipes maintaining sealed sanitary conditions between milling and packaging.",
-    location: "Processing Hall, Ikorodu",
-    aspect: "landscape",
-    tag: "Pneumatic Line",
-  },
-  {
     id: "machine-grinder-mill",
     title: "Industrial Coarse Grinder & Feeding Mill",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/machine-01.jpg",
     caption: "Primary intake grinder breaking whole dried chillies prior to fine micro-pulverization.",
     location: "Intake Station, Ikorodu",
@@ -731,8 +773,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "machine-conveyor-unit",
     title: "Enclosed Screw Conveyor & Elevator System",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "loading-unloading",
+    categoryLabel: "Loading & Unloading",
     image: "/img/gallery/machine-05.jpg",
     caption: "Automated sanitary screw elevators transferring graded spices between processing modules.",
     location: "Milling Hall, Ikorodu",
@@ -742,8 +784,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "machine-silo-chute",
     title: "Stainless Steel Holding Silo & Chute",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "warehousing",
+    categoryLabel: "Warehousing",
     image: "/img/gallery/machine-13.jpg",
     caption: "Sanitary stainless steel storage silo for buffer holding of sterilised ground spices prior to packaging.",
     location: "Holding Bay, Ikorodu",
@@ -751,21 +793,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     tag: "Storage Silo",
   },
   {
-    id: "machine-form-fill",
-    title: "Automated Sachet Form-Fill-Seal Packaging Line",
-    category: "factory",
-    categoryLabel: "Factory",
-    image: "/img/gallery/machine-09.jpg",
-    caption: "High-accuracy volumetric packaging machine packing consumer spices at high speeds.",
-    location: "Packaging Hall, Ikorodu",
-    aspect: "landscape",
-    tag: "Sachet Packaging",
-  },
-  {
     id: "machine-multi-spout",
     title: "Multi-Spout Pouch Packaging Unit",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/machine-16.jpg",
     caption: "High-output packaging machine delivering consistent weight and hermetic seal integrity.",
     location: "Packaging Hall, Ikorodu",
@@ -775,8 +806,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "machine-powder-line",
     title: "Commercial Powder Packaging Station",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/machine-15.jpg",
     caption: "Automated spice packaging station with integrated optical sensors and heat-sealing jaws.",
     location: "Packaging Hall, Ikorodu",
@@ -786,8 +817,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "machine-secondary-mill",
     title: "Secondary Fine-Milling Pulverizer",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/machine-06.jpg",
     caption: "Secondary grinding mill calibrated for fine spice powders to meet international culinary specifications.",
     location: "Milling Hall, Ikorodu",
@@ -797,8 +828,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "machine-feeder-hopper",
     title: "Stainless Steel Hopper & Feeding Station",
-    category: "factory",
-    categoryLabel: "Factory",
+    category: "loading-unloading",
+    categoryLabel: "Loading & Unloading",
     image: "/img/gallery/machine-04.jpg",
     caption: "Heavy-duty food-grade hopper delivering controlled continuous feed to the primary processing line.",
     location: "Processing Hall, Ikorodu",
@@ -832,8 +863,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "farm-harvest-mountains",
     title: "Chilli Harvest & Sun-Drying Procurement Yard",
-    category: "farm",
-    categoryLabel: "Farm",
+    category: "warehousing",
+    categoryLabel: "Warehousing",
     image: "/img/gallery/farm-harvest-yard.png",
     caption: "Vast mountains of sun-dried red chillies undergoing grading and moisture testing at regional aggregation depots.",
     location: "Northern Spice Aggregation Depot",
@@ -887,8 +918,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "farm-sundry-inspection",
     title: "Field Procurement Quality Inspection",
-    category: "farm",
-    categoryLabel: "Farm",
+    category: "warehousing",
+    categoryLabel: "Warehousing",
     image: "/img/photo-sundry.jpg",
     caption: "Field officers inspecting sun-dried chilli batches for moisture content before transport to Kaduna warehouse.",
     location: "Field Aggregation Center",
@@ -900,7 +931,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: "Outgrower Farmer Community Outreach & Engagement",
     category: "farm",
     categoryLabel: "Farm",
-    image: "/img/gallery/outgrower-community-outreach.jpg",
+    image: "/img/gallery/outgrower-community-hot-peppe.jpg",
     caption: "Direct community engagement, input support, and fair-pricing transparency with rural spice cultivating households.",
     location: "Rural Farming Cluster, Nigeria",
     aspect: "landscape",
@@ -986,21 +1017,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     tag: "Open-Air Market",
   },
   {
-    id: "market-trader-02",
-    title: "Retail Market Mama with Goodearth Stock",
-    category: "marketing",
-    categoryLabel: "Marketing",
-    image: "/img/gallery/market-02.jpg",
-    caption: "Authentic Nigerian market trader proudly displaying commercial bags of pure Good Earth peppe.",
-    location: "Ketu Retail Market, Lagos",
-    aspect: "landscape",
-    tag: "Market Trader",
-  },
-  {
     id: "market-bulk-03",
     title: "Wholesale Spice Distribution Stall",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "warehousing",
+    categoryLabel: "Warehousing",
     image: "/img/gallery/market-03.jpg",
     caption: "Bulk spice retailer servicing restaurants, caterers, and neighbourhood grocery kiosks.",
     location: "Bodija Market, Ibadan",
@@ -1021,8 +1041,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "market-depot-06",
     title: "Bustling Regional Spice Procurement Depot",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "warehousing",
+    categoryLabel: "Warehousing",
     image: "/img/gallery/market-06.jpg",
     caption: "Heavy market footfall and active trading of premium spices packaged for commercial kitchens.",
     location: "Kaduna Central Market",
@@ -1062,23 +1082,13 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     aspect: "landscape",
     tag: "Brand Award",
   },
-  {
-    id: "award-press",
-    title: "National FMCG Media & Press Acclaim",
-    category: "marketing",
-    categoryLabel: "Marketing",
-    image: "/img/gallery/award-02.jpg",
-    caption: "Media coverage highlighting Good Earth's contribution to import substitution and backward integration.",
-    location: "National Press Feature",
-    aspect: "landscape",
-    tag: "Media Recognition",
-  },
+
   {
     id: "prod-atarodo-pack",
     title: "Goodearth Pure Atarodo Retail Pack",
-    category: "marketing",
-    categoryLabel: "Marketing",
-    image: "/img/gallery/prod-atarodo.jpg",
+    category: "packaging",
+    categoryLabel: "Packaging",
+    image: "/img/gallery/prod-atarodo-new.jpg",
     caption: "Retail pack of 100% pure dried Scotch Bonnet (Atarodo) offering blazing fruity heat for soups and stews.",
     location: "Retail Distribution",
     aspect: "portrait",
@@ -1087,8 +1097,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "prod-cameroon-pack",
     title: "Goodearth Cameroon Peppe Retail Pack",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/prod-cameroon-peppe.jpg",
     caption: "Smoked dark pepper with pungent earthy aroma, a staple in Nigerian cooking.",
     location: "Retail Distribution",
@@ -1098,8 +1108,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "prod-hot-peppe-pack",
     title: "Goodearth Hot Peppe Powder Retail Pack",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/prod-hot-peppe-powder.jpg",
     caption: "Everyday fine red pepper powder providing sharp, clean heat for Nigerian family meals.",
     location: "Retail Distribution",
@@ -1109,8 +1119,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "prod-supa-pack",
     title: "Goodearth Hot Peppe Supa Pack",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "packaging",
+    categoryLabel: "Packaging",
     image: "/img/gallery/prod-hot-peppe-powder-supa-pack.jpg",
     caption: "Value family pack designed for frequent home cooking and commercial caterers.",
     location: "Retail Distribution",
@@ -1120,8 +1130,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "prod-carton-case",
     title: "Goodearth Master Distribution Cartons",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "loading-unloading",
+    categoryLabel: "Loading & Unloading",
     image: "/img/gallery/prod-hot-peppe-powder-carton.jpg",
     caption: "Corrugated master shipping cases supplying over 12,000 retail stores and supermarkets nationwide.",
     location: "Wholesale Logistics",
@@ -1131,8 +1141,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "prod-atarodo-carton-case",
     title: "Goodearth Pure Atarodo Master Shipping Cartons",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "loading-unloading",
+    categoryLabel: "Loading & Unloading",
     image: "/img/gallery/prod-atarodo-carton.jpg",
     caption: "Bulk packaged corrugated master cartons of Good Earth Pure Atarodo ready for nationwide transport.",
     location: "Central Warehouse, Lagos",
@@ -1142,8 +1152,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "prod-cameroon-carton-case",
     title: "Goodearth Cameroon Peppe Master Shipping Cartons",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "loading-unloading",
+    categoryLabel: "Loading & Unloading",
     image: "/img/gallery/prod-cameroon-peppe-carton.jpg",
     caption: "Factory-sealed master distribution cartons of authentic smoked Cameroon Peppe for commercial wholesale.",
     location: "Central Warehouse, Lagos",
@@ -1153,8 +1163,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "prod-supa-carton-case",
     title: "Goodearth Hot Peppe Supa Pack Master Cartons",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "loading-unloading",
+    categoryLabel: "Loading & Unloading",
     image: "/img/gallery/prod-hot-peppe-powder-supa-pack-carton.jpg",
     caption: "Commercial shipping boxes containing Good Earth Hot Peppe Supa Packs for supermarket chains.",
     location: "Logistics Fulfillment Center",
@@ -1164,8 +1174,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "transit-brt-fleet-lagos",
     title: "Lagos Highway Fleet Transit Advertising",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "loading-unloading",
+    categoryLabel: "Loading & Unloading",
     image: "/img/gallery/transit-07.jpg",
     caption: "Good Earth branded transit buses connecting mainland residential hubs with commercial districts.",
     location: "Lagos Major Highway Corridor",
@@ -1208,8 +1218,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "market-traders-stocking",
     title: "Nigerian Market Women Stocking Good Earth Spices",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "loading-unloading",
+    categoryLabel: "Loading & Unloading",
     image: "/img/gallery/market-09.jpg",
     caption: "Market retail traders receiving fresh shipments of sealed Good Earth spice sachets and containers.",
     location: "Bodija Market, Ibadan",
@@ -1219,8 +1229,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "market-wholesale-depot",
     title: "Open-Air Spice Wholesale Depot & Stalls",
-    category: "marketing",
-    categoryLabel: "Marketing",
+    category: "warehousing",
+    categoryLabel: "Warehousing",
     image: "/img/gallery/market-10.jpg",
     caption: "High-volume commodity distribution hub where spices from Northern farms are distributed to retailers.",
     location: "Mile 12 Commercial Hub, Lagos",
@@ -1249,26 +1259,5 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     aspect: "landscape",
     tag: "Community Market",
   },
-  {
-    id: "award-trophy-display",
-    title: "Marketing Edge Winner Trophy Showcase",
-    category: "marketing",
-    categoryLabel: "Marketing",
-    image: "/img/gallery/award-03.jpg",
-    caption: "The coveted Edge Award trophy awarded to Good Earth as Outstanding Indigenous Naija Spice of the Year.",
-    location: "Marketing Edge Awards, Lagos",
-    aspect: "landscape",
-    tag: "Industry Award",
-  },
-  {
-    id: "award-certificate-display",
-    title: "Marketing Edge 2025 Certificate of Recognition",
-    category: "marketing",
-    categoryLabel: "Marketing",
-    image: "/img/gallery/award-04.jpg",
-    caption: "Official certificate conferred by Marketing Edge honoring Good Earth's excellence in spice processing.",
-    location: "Marketing Edge Awards, Lagos",
-    aspect: "landscape",
-    tag: "Award Certificate",
-  },
+
 ];

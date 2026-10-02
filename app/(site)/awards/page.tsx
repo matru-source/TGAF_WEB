@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/site/PageHero";
 import AwardsView from "@/components/site/AwardsView";
-import CtaBand from "@/components/site/CtaBand";
 
 export const metadata: Metadata = {
   title: "Awards & Recognition · Goodearth Foods",
@@ -17,14 +16,9 @@ export default function AwardsPage() {
         title={<>Honouring Indigenous Excellence</>}
         subtitle="Goodearth Hot Peppe recognised as the Outstanding Indigenous Naija Spice of the Year at the 13th Marketing Edge Awards."
         crumb="Awards"
-        tone="warm"
+        tone="awards"
       />
       <AwardsView />
-      <CtaBand
-        title="Partner with an award-winning indigenous brand"
-        text="From smallholder farms to national acclaim - experience the highest standards of Nigerian spice processing."
-        ctaLabel="Contact our team"
-      />
     </>
   );
 }
