@@ -74,7 +74,15 @@ export default function Header() {
                     if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpenIdx((v) => (v === idx ? null : v));
                   }}
                 >
-                  <button className="nav-trigger" aria-haspopup="true" aria-expanded={openIdx === idx}>
+                  <button
+                    className="nav-trigger"
+                    aria-haspopup="true"
+                    aria-expanded={openIdx === idx}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpenIdx(openIdx === idx ? null : idx);
+                    }}
+                  >
                     {item.label}
                     <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="m6 9 6 6 6-6" />
@@ -83,7 +91,15 @@ export default function Header() {
                   <div className="dd">
                     <div className="dd-inner">
                       {item.children.map((c) => (
-                        <Link key={c.href} href={c.href} className={activeLeaf(c.href) ? "active" : ""}>
+                        <Link
+                          key={c.href}
+                          href={c.href}
+                          className={activeLeaf(c.href) ? "active" : ""}
+                          onClick={() => {
+                            setOpen(false);
+                            setOpenIdx(null);
+                          }}
+                        >
                           {c.label}
                         </Link>
                       ))}
@@ -91,7 +107,16 @@ export default function Header() {
                   </div>
                 </div>
               ) : (
-                <Link key={item.href} href={item.href!} className={`nav-item${activeLeaf(item.href!) ? " active" : ""}`} aria-current={activeLeaf(item.href!) ? "page" : undefined}>
+                <Link
+                  key={item.href}
+                  href={item.href!}
+                  className={`nav-item${activeLeaf(item.href!) ? " active" : ""}`}
+                  aria-current={activeLeaf(item.href!) ? "page" : undefined}
+                  onClick={() => {
+                    setOpen(false);
+                    setOpenIdx(null);
+                  }}
+                >
                   {item.label}
                 </Link>
               ),

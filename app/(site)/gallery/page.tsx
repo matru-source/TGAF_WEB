@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/site/PageHero";
 import GalleryView from "@/components/site/GalleryView";
-import CtaBand from "@/components/site/CtaBand";
 
 export const metadata: Metadata = {
   title: "Visual Gallery & Operations · Goodearth Foods",
@@ -20,12 +19,6 @@ export default function GalleryPage() {
         tone="warm"
       />
       <GalleryView />
-      <CtaBand
-        title="Partner with an award-winning indigenous spice producer"
-        text="From smallholder farming partnerships to high-capacity milling in Ikorodu — experience the finest standards in Nigerian spice processing."
-        ctaLabel="Contact our team"
-        ctaHref="/contact"
-      />
     </>
   );
 }

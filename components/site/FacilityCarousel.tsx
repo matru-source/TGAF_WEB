@@ -40,7 +40,7 @@ const FACILITY_SLIDES: FacilitySlide[] = [
     spec: "Uniform Recipe Blending",
   },
   {
-    src: "/img/facility/industrial-pulverizer.jpg",
+    src: "/img/facility/sterilization.png",
     title: "Heavy-Duty Industrial Milling Pulverizer",
     badge: "Cryogenic Milling",
     desc: "Industrial cryogenic spice pulverization chamber with high-voltage induction motor, engineered for uniform mesh consistency and volatile oil (VO) retention.",

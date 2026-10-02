@@ -29,6 +29,7 @@ const BUNDLED = [
   "/Product/hot-peppe-studio.jpg",
   "/Product/hot-peppe-supa-pack.jpg",
   "/Product/hot-peppe-carton.jpg",
+  "/Product/atarodo-new.png",
   "/Product/atarodo-studio.jpg",
   "/Product/atarodo-carton.jpg",
   "/Product/cameroon-studio.jpg",

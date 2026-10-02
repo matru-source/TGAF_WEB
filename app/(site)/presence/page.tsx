@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import PageHero from "@/components/site/PageHero";
 import Presence from "@/components/site/Presence";
 import Markets from "@/components/site/Markets";
-import CtaBand from "@/components/site/CtaBand";
 
 export const metadata: Metadata = {
   title: "Markets & Presence · Goodearth Foods",
@@ -22,7 +21,6 @@ export default function PresencePage() {
       />
       <Presence />
       <Markets />
-      <CtaBand title="Carry correct peppe for your market" text="Join 250 distributors and 2,600+ wholesalers already moving Goodearth." ctaLabel="Become a distributor" />
     </>
   );
 }

@@ -10,83 +10,40 @@ export interface MarketSlide {
 }
 
 export const MARKET_SLIDES: MarketSlide[] = [
+  // 1. Farm
   {
-    src: "/img/market/market-001.jpg",
-    title: "Open-Air Market Retail Activation",
+    src: "/img/gallery/farm-community-01.jpg",
+    title: "Nigerian Outgrower Farming Communities",
+    location: "River Valley Farming Basin · Nigeria",
+    tag: "Farm Cultivation",
+  },
+  // 2. Factory Drone Shot
+  {
+    src: "/img/gallery/goodearth-facility-aerial.png",
+    title: "Ikorodu Agro-Processing Complex & Mill",
+    location: "Ikorodu · Lagos State",
+    tag: "Factory Drone Shot",
+  },
+  // 3. Market
+  {
+    src: "/img/gallery/market-01.jpg",
+    title: "Authentic Nigerian Open-Air Spice Stalls",
     location: "Mile 12 Market · Lagos",
-    tag: "Retail Stall",
+    tag: "Market Distribution",
   },
+  // 4. Farm (Harvest Yard)
   {
-    src: "/img/market/market-002.jpg",
-    title: "Direct Spice Trade & Vendor Distribution",
-    location: "Oyingbo Market · Lagos",
-    tag: "Trade Hub",
+    src: "/img/gallery/farm-harvest-yard.png",
+    title: "Chilli Harvest & Sun-Drying Procurement Yard",
+    location: "Northern Spice Aggregation Depot",
+    tag: "Harvest Sun-Drying",
   },
+  // 5. Market (Wholesale & Retail Network)
   {
-    src: "/img/market/market-003.jpg",
-    title: "Goodearth Retail Pouch Display",
-    location: "Commercial Trading Corridor",
-    tag: "Counter Activation",
-  },
-  {
-    src: "/img/market/market-004.jpg",
-    title: "Fresh Wholesale Sourcing & Packaging",
-    location: "Onitsha Main Market · Anambra",
-    tag: "Wholesale Trade",
-  },
-  {
-    src: "/img/market/market-005.jpg",
-    title: "Market Trader Stock & Shelving",
-    location: "Aba Commercial Hub · Abia",
-    tag: "Distribution Hub",
-  },
-  {
-    src: "/img/market/market-006.jpg",
-    title: "Everyday Consumers Sourcing Pure Peppe",
-    location: "Lagos Retail Center",
-    tag: "Consumer Demand",
-  },
-  {
-    src: "/img/market/market-007.jpg",
-    title: "Branded Stall & Retail Shelf Placement",
-    location: "Regional Wholesale Market",
-    tag: "Retail Partner",
-  },
-  {
-    src: "/img/market/market-008.jpg",
-    title: "High-Volume Spice Distribution",
-    location: "Kano Agricultural Market Hub",
-    tag: "Regional Transit",
-  },
-  {
-    src: "/img/market/market-009.jpg",
-    title: "Local Spice Traders & Authentic Stockists",
+    src: "/img/gallery/market-03.jpg",
+    title: "Wholesale Spice Depots & Neighborhood Retailers",
     location: "Bodija Market · Ibadan, Oyo",
-    tag: "Community Partner",
-  },
-  {
-    src: "/img/market/market-010.jpg",
-    title: "Community Trade & Neighborhood Stalls",
-    location: "Enugu Central Market",
-    tag: "Direct Access",
-  },
-  {
-    src: "/img/market/market-011.jpg",
-    title: "Retail Partner Shelves & Sachets",
-    location: "Port Harcourt · Rivers State",
-    tag: "Pocket-Friendly Packs",
-  },
-  {
-    src: "/img/market/market-012.jpg",
-    title: "Direct Market Outlets Across States",
-    location: "Benin City Market · Edo State",
-    tag: "Statewide Network",
-  },
-  {
-    src: "/img/market/market-013.jpg",
-    title: "Authentic Nigerian Cooking Staples",
-    location: "Nationwide Market Network",
-    tag: "Kitchen Favorite",
+    tag: "Local Market Trade",
   },
 ];
 
@@ -158,11 +115,11 @@ export default function MarketCarousel() {
           );
         })}
 
-        {/* Top Badges: Live Tag + Counter */}
+        {/* Top Badges: Dynamic Tag + Counter */}
         <div className="market-carousel-top">
           <div className="market-live-pill">
             <span className="dot" />
-            <span>Live from the market</span>
+            <span>{activeSlide.tag}</span>
           </div>
           <div className="market-counter-pill">
             <span className="current-num">{String(current + 1).padStart(2, "0")}</span>

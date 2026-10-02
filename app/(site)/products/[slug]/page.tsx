@@ -20,12 +20,13 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const all = await getProducts();
   const related = all.filter((p) => p.segment === "B2C" && p.slug !== product.slug).slice(0, 3);
   const a = accentClass(product.accent);
-  const gallery = [...new Set([product.image, ...(product.images ?? [])].filter(Boolean) as string[])];
+  const gallery = [...new Set([product.image, ...(product.images ?? [])].filter(Boolean) as string[])].filter(
+    (src) => !src.includes("-studio.jpg"),
+  );
   const specs = [
     ["Colour", product.colour],
     ["ASTA", product.asta && product.asta !== "-" ? product.asta : null],
     ["Scoville", product.scoville],
-    ["Positioning", product.costPositioning],
     ["Category", product.marketCategory],
     ["Best for", product.usage],
   ].filter(([, v]) => Boolean(v)) as [string, string][];

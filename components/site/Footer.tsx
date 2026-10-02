@@ -1,13 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Brand from "./Brand";
 import Newsletter from "./Newsletter";
 import { BrandIcon } from "./icons";
 import { BRAND, SOCIALS } from "@/lib/data";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const year = new Date().getFullYear();
   return (
-    <footer className="footer">
+    <footer className={`footer ${isHome ? "footer--home" : "footer--inner"}`}>
       <div className="container">
         <Newsletter />
         <div className="footer-top">

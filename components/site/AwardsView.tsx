@@ -86,52 +86,87 @@ export default function AwardsView() {
               </div>
             </div>
 
-            {/* Award Significance & Product Spotlight Grid */}
+            {/* Award Significance & Trophy Spotlight Grid */}
             <div className="award-story-grid">
-              <div className="award-product-card">
-                <div className="prod-badge">Winning Product</div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/Product/hot-peppe-studio.jpg"
-                  alt="Goodearth Hot Peppe Powder retail pack"
-                  className="award-prod-img"
-                />
-                <h3>Goodearth Hot Peppe</h3>
-                <p className="prod-tagline">100% Naija Grown &amp; Milled</p>
-                <Link href="/products/hot-peppe-powder" className="btn btn-primary btn-sm">
-                  View Product Specs <span className="arr">→</span>
-                </Link>
+              <div className="award-product-card award-trophy-card">
+                <div className="prod-badge">Winning Award</div>
+                <div className="award-trophy-wrap">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/img/awards/award.png"
+                    alt="Nigeria's Leading Consulting Award presented to TG Agri Farms"
+                    className="award-trophy-img"
+                  />
+                </div>
               </div>
 
               <div className="award-statement-card">
                 <div className="criteria-header">
                   <span className="criteria-eyebrow">Evaluation Pillars</span>
-                  <h3>Why Goodearth Hot Peppe Won</h3>
+                  <h3>The Winning Standard &amp; Industry Impact</h3>
                 </div>
-                <div className="criteria-list">
-                  <div className="criteria-item">
-                    <div className="criteria-num">01</div>
-                    <div className="criteria-text">
-                      <strong>100% Indigenous Sourcing:</strong> Directly procured from Nigerian pepper farmers, supporting local agricultural outgrower livelihoods.
+                <div className="criteria-boxes-grid">
+                  <div className="criteria-box">
+                    <div className="criteria-box-top">
+                      <div className="criteria-box-icon criteria-icon--green">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M7 20h10" />
+                          <path d="M12 20v-8" />
+                          <path d="M12 12c0-4 4-7 8-7 0 4-3 8-8 8Z" />
+                          <path d="M12 12c0-3-3-6-7-6 0 3.5 2.5 6 7 6Z" />
+                        </svg>
+                      </div>
+                      <h4 className="criteria-box-title">100% Indigenous Sourcing</h4>
                     </div>
+                    <p className="criteria-box-desc">
+                      Direct smallholder farm procurement supporting sustainable Nigerian agriculture.
+                    </p>
                   </div>
-                  <div className="criteria-item">
-                    <div className="criteria-num">02</div>
-                    <div className="criteria-text">
-                      <strong>Automated Processing Infrastructure:</strong> US$12M facility in Ikorodu with steam sterilization retaining natural volatile oils and vivid colour.
+
+                  <div className="criteria-box">
+                    <div className="criteria-box-top">
+                      <div className="criteria-box-icon criteria-icon--chilli">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="3" />
+                          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        </svg>
+                      </div>
+                      <h4 className="criteria-box-title">Automated Processing</h4>
                     </div>
+                    <p className="criteria-box-desc">
+                      Steam sterilisation at Ikorodu locking in natural volatile oils and vibrant colour.
+                    </p>
                   </div>
-                  <div className="criteria-item">
-                    <div className="criteria-num">03</div>
-                    <div className="criteria-text">
-                      <strong>Food-Safety Accreditations:</strong> Full compliance with NAFDAC, SON, US FDA, Halal, and FSSC 22000 manufacturing norms.
+
+                  <div className="criteria-box">
+                    <div className="criteria-box-top">
+                      <div className="criteria-box-icon criteria-icon--gold">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                          <path d="m9 12 2 2 4-4" />
+                        </svg>
+                      </div>
+                      <h4 className="criteria-box-title">Certified Food Safety</h4>
                     </div>
+                    <p className="criteria-box-desc">
+                      Full accreditation across NAFDAC, SON, US FDA, Halal, and FSSC 22000.
+                    </p>
                   </div>
-                  <div className="criteria-item">
-                    <div className="criteria-num">04</div>
-                    <div className="criteria-text">
-                      <strong>Rapid Consumer &amp; Market Adoption:</strong> Over 250 distributors and 170+ open markets nationwide embracing Goodearth within 18 months.
+
+                  <div className="criteria-box">
+                    <div className="criteria-box-top">
+                      <div className="criteria-box-icon criteria-icon--blue">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                          <path d="M2 12h20" />
+                        </svg>
+                      </div>
+                      <h4 className="criteria-box-title">Pan-Nigeria Reach</h4>
                     </div>
+                    <p className="criteria-box-desc">
+                      250+ active distributors &amp; 100+ wholesale markets across 17+ states.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -204,41 +239,6 @@ export default function AwardsView() {
         </div>
       </section>
 
-      {/* Pillars Section */}
-      <section className="section">
-        <div className="container">
-          <div className="section-head center">
-            <span className="eyebrow center">The Goodearth Advantage</span>
-            <h2>Why This Award Matters to Nigeria</h2>
-          </div>
-
-          <div className="pillars-trio">
-            <div className="pillar-item">
-              <div className="pillar-num">01</div>
-              <h3>50,000+ Smallholder Farmers</h3>
-              <p>
-                Every pack represents direct local procurement across 100 farmer markets and 25 aggregators, grown by 50,000+ farmers with 10,000+ trained — empowering local farming families without foreign crop imports.
-              </p>
-            </div>
-
-            <div className="pillar-item">
-              <div className="pillar-num">02</div>
-              <h3>US$12M Automated Plant</h3>
-              <p>
-                Processed at our Ikorodu mill with state-of-the-art steam sterilisation, sieving, and hygienic material handling meeting the highest international benchmarks.
-              </p>
-            </div>
-
-            <div className="pillar-item">
-              <div className="pillar-num">03</div>
-              <h3>Uncompromised Pungency</h3>
-              <p>
-                Preserving authentic heat, colour, and aroma that Nigerian kitchens trust every day — proving indigenous spices can lead the FMCG market.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Lightbox Modal */}
       {activeModalImg && (

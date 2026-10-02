@@ -1,16 +1,6 @@
 import JourneyTimeline from "./JourneyTimeline";
 import PhotoCarousel from "./PhotoCarousel";
 
-// Journey: farm gate through the mill to the market stall.
-const JOURNEY_PHOTOS = [
-  "/img/photo-seedlings.png",
-  "/img/photo-chilli-farm.png",
-  "/img/photo-facility.jpg",
-  "/img/photo-hero.jpg",
-  "/img/photo-market.jpg",
-  "/img/photo-about.jpg",
-];
-
 // The farming side of the story.
 const FARM_PHOTOS = [
   "/img/photo-drying.jpg",
@@ -20,49 +10,51 @@ const FARM_PHOTOS = [
 
 export default function FarmToFork() {
   return (
-    <section className="section">
+    <section className="section farm-to-fork-wrap" id="journey">
+      {/* Floating golden/warm light particles */}
+      <div className="ph-particles-wrap" aria-hidden="true">
+        <span className="ph-particle p1" />
+        <span className="ph-particle p2" />
+        <span className="ph-particle p3" />
+        <span className="ph-particle p4" />
+        <span className="ph-particle p5" />
+      </div>
+
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">The journey</span>
-          <h2>From seed in the soil to spice in your pot</h2>
-          <p className="muted">
+          <span className="eyebrow" style={{ color: "var(--chilli, #B5121B)" }}>The journey</span>
+          <h2>From seed in the soil to spice in your cooking pot</h2>
+          <p className="farm-lead" style={{ color: "#2F3E33", maxWidth: "740px", margin: "0 0 1rem", hyphens: "none" }}>
             A rigorous, traceable journey that protects natural colour, aroma and quality at every stage -
             the heart of our farm-to-fork model.
           </p>
         </div>
 
-        <div className="journey-wrap">
-          <JourneyTimeline />
-          <figure className="journey-figure reveal">
-            <PhotoCarousel
-              images={JOURNEY_PHOTOS}
-              alt="Goodearth peppe on its journey from our mill to Nigerian market stalls"
-            />
-            <figcaption>From our farms to the market stall — every step traceable.</figcaption>
-          </figure>
-        </div>
+        <JourneyTimeline />
 
         <div className="facility">
           <div className="facility-media reveal">
-            <PhotoCarousel
-              images={FARM_PHOTOS}
-              alt="Nigerian farmers handling sun-dried chilli for Goodearth"
-            />
+            <div className="journey-carousel-card">
+              <PhotoCarousel
+                images={FARM_PHOTOS}
+                alt="Nigerian farmers handling sun-dried chilli for Goodearth"
+              />
+            </div>
           </div>
-          <div className="reveal d1">
-            <span className="eyebrow">Grown by Nigerian hands</span>
+          <div className="reveal d1 facility-info-card">
+            <span className="eyebrow" style={{ color: "var(--chilli, #B5121B)" }}>Grown by Nigerian hands</span>
             <h2 style={{ margin: ".4rem 0 1rem" }}>Real farms, real farmers</h2>
-            <p className="muted">
+            <p className="farm-text" style={{ color: "#2F3E33" }}>
               We support smallholder farmers to grow chilli, turmeric and ginger profitably - cultivating
               varieties with the pungency and colour our customers require. Matured fruits are sun-dried to
               reduce moisture by ~85%, registered, and moved to our Kaduna warehouse before processing.
             </p>
             <div className="cap-list">
               <span>Grown by 50,000+ farmers</span>
-              <span>10,000+ farmers trained</span>
-              <span>100 farmer markets</span>
-              <span>25 aggregators</span>
+              <span>20,000+ farmers &amp; employees trained</span>
+              <span>60,000+ livelihoods created</span>
               <span>Fair-pricing agreements</span>
+              <span>Reduced post-harvest losses</span>
               <span>Full traceability</span>
             </div>
           </div>
