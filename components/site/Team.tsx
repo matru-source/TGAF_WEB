@@ -1,113 +1,271 @@
 import { getTeam } from "@/lib/queries";
+import { TEAM } from "@/lib/data";
 
 export default async function Team() {
-  const allTeam = await getTeam();
+  const members = (await getTeam()) || TEAM;
 
-  // Tier 1: Directors (Deepak Murli Chainani & Swatanter Saraswat)
-  const directors = allTeam.filter(
-    (m) =>
-      m.name.toLowerCase().includes("deepak") ||
-      m.name.toLowerCase().includes("swatanter") ||
-      m.role.toLowerCase().includes("director"),
-  );
+  const deepak = members.find((m) => m.id === "dc" || m.name.toLowerCase().includes("deepak")) || TEAM[0];
+  const swatanter = members.find((m) => m.id === "ss" || m.name.toLowerCase().includes("swatanter")) || TEAM[1];
+  const jagdeep = members.find((m) => m.id === "jr" || m.name.toLowerCase().includes("jagdeep")) || TEAM[2];
+  const amit = members.find((m) => m.id === "ag" || m.name.toLowerCase().includes("amit")) || TEAM[3];
+  const yoganand = members.find((m) => m.id === "yr" || m.name.toLowerCase().includes("yoganand")) || TEAM[4];
+  const stella = members.find((m) => m.id === "si" || m.name.toLowerCase().includes("stella")) || TEAM[5];
+  const fred = members.find((m) => m.id === "fn" || m.name.toLowerCase().includes("fred")) || TEAM[6] || {
+    id: "fn",
+    name: "Fred Nze",
+    role: "Head of Marketing",
+    credentials: "Marketing Head · Brand Growth",
+    photo: "/img/team/fred-nze.jpg",
+    bio: "With over 14 years of commercial marketing leadership, driving consumer brand visibility, distributor activations, retail execution, and nationwide campaign growth.",
+  };
 
   return (
-    <section className="section leadership-team-section">
+    <section className="section org-hierarchy-section" id="leadership-hierarchy">
       <div className="container">
-        {/* Tier 1: Board of Directors */}
-        <div className="leadership-team-head reveal center" style={{ textAlign: "center", marginBottom: "32px" }}>
-          <span className="eyebrow center">Governance &amp; Strategy</span>
-          <h2 className="leadership-team-title">Board of Directors</h2>
-          <p className="lead center" style={{ maxWidth: "680px", margin: "0 auto" }}>
-            Steering corporate governance, international trade expansion, and high-precision agro-industrial manufacturing.
+        {/* Section Header */}
+        <div className="section-head reveal center" style={{ textAlign: "center", marginBottom: "48px" }}>
+          <span className="eyebrow center">Governance &amp; Operational Command</span>
+          <h2 style={{ fontSize: "clamp(2rem, 3.5vw, 2.8rem)", marginBottom: "12px" }}>Corporate Hierarchy</h2>
+          <p className="lead center" style={{ maxWidth: "720px", margin: "0 auto", color: "var(--ink-2)" }}>
+            Clear executive accountability steering strategic governance, sterile agro-industrial manufacturing, 
+            disciplined financial control, and pan-Nigerian commercial distribution.
           </p>
         </div>
 
-        <div className="directors-pyramid-grid">
-          {directors.map((m, i) => (
-            <article className={`director-card reveal ${i === 0 ? "d1" : "d2"}`} key={m.id}>
-              <div className="director-card-inner">
-                <span className="director-gold-badge">Director</span>
-                {m.photo ? (
-                  <div className="director-photo-wrap">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={m.photo} alt={m.name} loading="lazy" />
-                  </div>
-                ) : (
-                  <div className="avatar" style={{ margin: "0 auto 18px", width: "120px", height: "120px", borderRadius: "50%", background: "var(--farm)", display: "grid", placeItems: "center", color: "#fff", fontSize: "1.8rem" }}>{m.initials}</div>
-                )}
-                <div className="director-info">
-                  <h3>{m.name}</h3>
-                  <div className="director-role">{m.role}</div>
-                  <p className="director-bio">{m.bio}</p>
-                  {m.bullets && m.bullets.length > 0 && (
-                    <ul className="director-bullets" style={{ marginTop: "14px", listStyle: "disc", paddingLeft: "20px", textAlign: "left" }}>
-                      {m.bullets.map((b, idx) => (
-                        <li key={idx} style={{ fontSize: "0.9rem", color: "var(--ink-2)", marginBottom: "6px" }}>{b}</li>
-                      ))}
-                    </ul>
-                  )}
+        {/* The Organogram Hierarchy Tree */}
+        <div className="org-tree-wrapper">
+          
+          {/* TIER 1: Deepak & Swatanter Together (Board & Executive Directors) */}
+          <div className="org-tree-level org-tree-level--duo">
+            <div className="org-level-tag">Board of Directors &amp; Executive Leadership</div>
+            <div className="org-duo-grid">
+              
+              {/* Deepak Chainani - Managing Director */}
+              <article className="org-card org-card--executive reveal">
+                <div className="org-card-badge org-card-badge--blue">
+                  <span>Managing Director</span>
                 </div>
+                <div className="org-card-grid">
+                  {deepak.photo && (
+                    <div className="org-card-photo-wrap">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={deepak.photo} alt={deepak.name} loading="lazy" />
+                    </div>
+                  )}
+                  <div className="org-card-info">
+                    <h3 className="org-card-name">{deepak.name}</h3>
+                    <div className="org-card-role-title">{deepak.role}</div>
+                    <div className="org-card-division">Board of Directors</div>
+                    {deepak.bio && <p className="org-card-bio">{deepak.bio}</p>}
+                    {deepak.bullets && deepak.bullets.length > 0 && (
+                      <ul className="org-card-bullets">
+                        {deepak.bullets.map((b, idx) => (
+                          <li key={idx}>{b}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              </article>
+
+              {/* Swatanter Saraswat - CEO & Director */}
+              <article className="org-card org-card--executive reveal d1">
+                <div className="org-card-badge org-card-badge--slate">
+                  <span>Chief Executive Officer &amp; Director</span>
+                </div>
+                <div className="org-card-grid">
+                  {swatanter.photo && (
+                    <div className="org-card-photo-wrap">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={swatanter.photo} alt={swatanter.name} loading="lazy" />
+                    </div>
+                  )}
+                  <div className="org-card-info">
+                    <h3 className="org-card-name">{swatanter.name}</h3>
+                    <div className="org-card-role-title">{swatanter.role}</div>
+                    <div className="org-card-division">Executive Management &amp; Board</div>
+                    {swatanter.bio && <p className="org-card-bio">{swatanter.bio}</p>}
+                    {swatanter.bullets && swatanter.bullets.length > 0 && (
+                      <ul className="org-card-bullets">
+                        {swatanter.bullets.map((b, idx) => (
+                          <li key={idx}>{b}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          {/* Connector Stem: Tier 1 -> Tier 2 (3 Columns) */}
+          <div className="org-tree-branch-connector" aria-hidden="true">
+            <span className="org-branch-stem-down"></span>
+            <div className="org-branch-crossbar">
+              <span className="org-branch-node org-branch-node--left"></span>
+              <span className="org-branch-node org-branch-node--mid"></span>
+              <span className="org-branch-node org-branch-node--right"></span>
+            </div>
+          </div>
+
+          {/* TIER 2: 3 Functional Heads - GM Sales, GM Factory, CFO */}
+          <div className="org-tree-level org-tree-level--trio">
+            <div className="org-level-tag org-level-tag--full">General Management &amp; Financial Control</div>
+            <div className="org-trio-grid">
+
+              {/* 1. GM Sales: Amit Gautam */}
+              <div className="org-tree-col">
+                <span className="org-col-drop-line" aria-hidden="true"></span>
+                <article className="org-card org-card--functional org-card--active reveal d1">
+                  <div className="org-card-badge org-card-badge--amber">
+                    <span>GM Sales</span>
+                  </div>
+                  <div className="org-card-compact-body">
+                    {amit.photo ? (
+                      <div className="org-card-photo-wrap org-card-photo-wrap--compact">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={amit.photo} alt={amit.name} loading="lazy" />
+                      </div>
+                    ) : (
+                      <div className="org-avatar-monogram"><span>AG</span></div>
+                    )}
+                    <div className="org-card-info">
+                      <h3 className="org-card-name">{amit.name}</h3>
+                      <div className="org-card-role-title">{amit.role}</div>
+                      {amit.credentials && (
+                        <div className="org-credential-badge">{amit.credentials}</div>
+                      )}
+                      {amit.bio && <p className="org-card-bio org-card-bio--tight">{amit.bio}</p>}
+                    </div>
+                  </div>
+                </article>
               </div>
-            </article>
-          ))}
-        </div>
 
-        {/* Tier 2: Executive Management */}
-        <div className="leadership-subhead reveal center" style={{ textAlign: "center", marginTop: "clamp(48px, 6vw, 72px)", marginBottom: "28px" }}>
-          <span className="eyebrow center">Operational Command</span>
-          <h3 style={{ fontSize: "1.8rem", marginBottom: "8px" }}>Executive Leadership Team</h3>
-          <p className="muted center" style={{ maxWidth: "620px", margin: "0 auto" }}>
-            Driving continuous processing throughput, supply-chain logistics, and pan-Nigerian commercial expansion.
-          </p>
-        </div>
+              {/* 2. GM Factory: Jagdeep Rana */}
+              <div className="org-tree-col">
+                <span className="org-col-drop-line" aria-hidden="true"></span>
+                <article className="org-card org-card--functional org-card--blank reveal d2">
+                  <div className="org-card-badge org-card-badge--grey">
+                    <span>GM Factory</span>
+                  </div>
+                  <div className="org-card-compact-body">
+                    <div className="org-avatar-monogram" aria-hidden="true">
+                      <span>JR</span>
+                    </div>
+                    <div className="org-card-info">
+                      <h3 className="org-card-name">{jagdeep.name}</h3>
+                      <div className="org-card-role-title">{jagdeep.role}</div>
+                      <div className="org-card-division">Ikorodu Processing Facility</div>
+                      <div className="org-placeholder-note">
+                        <span className="org-status-pulse"></span>
+                        <span>Profile &amp; photo in progress</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
 
-        <div className="exec-pyramid-grid">
-          <div className="exec-card reveal d1">
-            <div className="exec-avatar-badge">CEO</div>
-            <h4>Chief Executive Officer</h4>
-            <span className="exec-dept">Executive Office</span>
-            <p>Directing holistic corporate strategy, stakeholder relations, and West African market expansion.</p>
-          </div>
-          <div className="exec-card reveal d2">
-            <div className="exec-avatar-badge">GM</div>
-            <h4>General Manager</h4>
-            <span className="exec-dept">Plant &amp; Facility</span>
-            <p>Overseeing 3,000 MT milling throughput, plant uptime, and automation reliability at Ikorodu.</p>
-          </div>
-          <div className="exec-card reveal d3">
-            <div className="exec-avatar-badge">CFO</div>
-            <h4>Chief Financial Officer</h4>
-            <span className="exec-dept">Finance &amp; Audit</span>
-            <p>Guiding financial discipline, statutory audit compliance, and trade capital governance.</p>
-          </div>
-          <div className="exec-card reveal d4">
-            <div className="exec-avatar-badge">HEAD</div>
-            <h4>Head of Commercial Sales</h4>
-            <span className="exec-dept">Sales &amp; Distribution</span>
-            <p>Expanding 250+ distributor networks, supermarket retail listings, and bulk export partnerships.</p>
-          </div>
-        </div>
+              {/* 3. CFO: Yoganand Raj */}
+              <div className="org-tree-col">
+                <span className="org-col-drop-line" aria-hidden="true"></span>
+                <article className="org-card org-card--functional org-card--blank reveal d3">
+                  <div className="org-card-badge org-card-badge--grey">
+                    <span>Chief Financial Officer</span>
+                  </div>
+                  <div className="org-card-compact-body">
+                    <div className="org-avatar-monogram" aria-hidden="true">
+                      <span>YR</span>
+                    </div>
+                    <div className="org-card-info">
+                      <h3 className="org-card-name">{yoganand.name}</h3>
+                      <div className="org-card-role-title">{yoganand.role}</div>
+                      <div className="org-card-division">Finance, Audit &amp; Trade Capital</div>
+                      <div className="org-placeholder-note">
+                        <span className="org-status-pulse"></span>
+                        <span>Profile &amp; photo in progress</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
 
-        {/* Tier 3: Operations & Local Leadership */}
-        <div className="leadership-subhead reveal center" style={{ textAlign: "center", marginTop: "clamp(44px, 5vw, 68px)", marginBottom: "24px" }}>
-          <span className="eyebrow center">Frontline Leadership</span>
-          <h3 style={{ fontSize: "1.6rem", marginBottom: "8px" }}>Customer Service &amp; Local Operations</h3>
-        </div>
+            </div>
+          </div>
 
-        <div className="ops-team-grid">
-          <div className="ops-card reveal d1">
-            <div className="ops-avatar-init">ST</div>
-            <h4>Customer Care &amp; Grievance Management</h4>
-            <span className="ops-role">Sales Coordination &amp; Service</span>
-            <p>Managing responsive wholesale customer communication, distributor order fulfillment, and trade support.</p>
+          {/* Connector Stem: Tier 2 -> Tier 3 (2 Columns) */}
+          <div className="org-tree-branch-connector org-tree-branch-connector--duo" aria-hidden="true">
+            <span className="org-branch-stem-down"></span>
+            <div className="org-branch-crossbar org-branch-crossbar--duo">
+              <span className="org-branch-node org-branch-node--left"></span>
+              <span className="org-branch-node org-branch-node--right"></span>
+            </div>
           </div>
-          <div className="ops-card reveal d2">
-            <div className="ops-avatar-init">OPS</div>
-            <h4>Floor Operations &amp; Production Crew</h4>
-            <span className="ops-role">Ikorodu Processing Division</span>
-            <p>200+ trained Nigerian technicians and operators maintaining sterile clean-room processing around the clock.</p>
+
+          {/* TIER 3: Stella & Fred Together (Marketing & Sales Coordination) */}
+          <div className="org-tree-level org-tree-level--duo-bottom">
+            <div className="org-level-tag">Commercial Operations &amp; Marketing Execution</div>
+            <div className="org-duo-bottom-grid">
+              
+              {/* Stella Ikpe - Sales & Marketing Coordinator */}
+              <div className="org-tree-col">
+                <span className="org-col-drop-line" aria-hidden="true"></span>
+                <article className="org-card org-card--coord reveal d1">
+                  <div className="org-card-badge org-card-badge--green">
+                    <span>Sales &amp; Marketing Coordinator</span>
+                  </div>
+                  <div className="org-card-compact-body">
+                    {stella.photo ? (
+                      <div className="org-card-photo-wrap org-card-photo-wrap--compact">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={stella.photo} alt={stella.name} loading="lazy" />
+                      </div>
+                    ) : (
+                      <div className="org-avatar-monogram"><span>SI</span></div>
+                    )}
+                    <div className="org-card-info">
+                      <h3 className="org-card-name">{stella.name}</h3>
+                      <div className="org-card-role-title">{stella.role}</div>
+                      {stella.credentials && (
+                        <div className="org-credential-badge">{stella.credentials}</div>
+                      )}
+                      {stella.bio && <p className="org-card-bio org-card-bio--tight">{stella.bio}</p>}
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              {/* Fred Nze - Head of Marketing */}
+              <div className="org-tree-col">
+                <span className="org-col-drop-line" aria-hidden="true"></span>
+                <article className="org-card org-card--coord reveal d2">
+                  <div className="org-card-badge org-card-badge--chilli">
+                    <span>Head of Marketing</span>
+                  </div>
+                  <div className="org-card-compact-body">
+                    {fred.photo ? (
+                      <div className="org-card-photo-wrap org-card-photo-wrap--compact">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={fred.photo} alt={fred.name} loading="lazy" />
+                      </div>
+                    ) : (
+                      <div className="org-avatar-monogram"><span>FN</span></div>
+                    )}
+                    <div className="org-card-info">
+                      <h3 className="org-card-name">{fred.name}</h3>
+                      <div className="org-card-role-title">{fred.role}</div>
+                      {fred.credentials && (
+                        <div className="org-credential-badge">{fred.credentials}</div>
+                      )}
+                      {fred.bio && <p className="org-card-bio org-card-bio--tight">{fred.bio}</p>}
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+            </div>
           </div>
+
         </div>
       </div>
     </section>

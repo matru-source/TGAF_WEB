@@ -76,7 +76,13 @@ export async function getTeam(): Promise<UITeamMember[]> {
   );
   if (!rows || !rows.length) return TEAM;
   return rows.map((m) => {
-    const fallback = TEAM.find((t) => t.id === m.id || t.name.toLowerCase() === m.name.toLowerCase());
+    const fallback = TEAM.find(
+      (t) =>
+        t.id === m.id ||
+        t.name.toLowerCase() === m.name.toLowerCase() ||
+        (m.initials && m.initials.toUpperCase() === t.initials?.toUpperCase()) ||
+        m.name.toLowerCase().includes(t.name.toLowerCase().split(" ")[0])
+    );
     return {
       id: m.id,
       name: m.name,
