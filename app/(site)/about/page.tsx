@@ -16,7 +16,7 @@ export default function AboutPage() {
         title={<>Nigeria&apos;s Integrated Spice Manufacturer</>}
         subtitle="Managing the entire journey from local smallholder farms to commercial markets and family kitchens."
         crumb="About"
-        tone="green"
+        tone="about"
       />
       <About />
     </>
