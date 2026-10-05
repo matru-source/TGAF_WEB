@@ -273,18 +273,23 @@ export type UITeamMember = {
   bullets?: string[];
   initials?: string | null;
   photo?: string | null;
+  credentials?: string;
+  department?: string;
+  tier?: number;
 };
 
 export const TEAM: UITeamMember[] = [
   {
     id: "dc",
     initials: "DC",
-    name: "Deepak Murli Chainani",
+    name: "Deepak Chainani",
     role: "Managing Director",
-    bio: "Appointed to the board of directors on 18th Dec 2017. He has more than 15 years of experience in various verticals of international markets and almost 10 years of experience in Nigerian markets.",
+    department: "Board Leadership",
+    tier: 1,
+    bio: "Appointed to the board of directors on 18th Dec 2017. He brings over 15 years of experience in international commodity markets and 10+ years steering agro-industrial manufacturing and supply chains across Nigeria.",
     bullets: [
       "Appointed to the board of directors on 18th Dec 2017.",
-      "He has more than 15 years of experience in various verticals of international markets and almost 10 years of experience in Nigerian markets.",
+      "15+ years in international trade and 10+ years in Nigerian FMCG & agribusiness.",
     ],
     photo: "/img/team/deepak-portrait.jpg",
   },
@@ -292,13 +297,82 @@ export const TEAM: UITeamMember[] = [
     id: "ss",
     initials: "SS",
     name: "Swatanter Saraswat",
-    role: "Executive Director & COO",
-    bio: "Appointed COO in June 2023 and to the board of directors in Nov 2024. Over 15 years leading automated FMCG manufacturing plants across Africa.",
+    role: "Chief Executive Officer & Director",
+    department: "Executive Management",
+    tier: 2,
+    bio: "Appointed COO in June 2023 and to the board of directors in Nov 2024. Over 15 years leading automated FMCG manufacturing plants across Africa, driving operations, milling technology, and engineer mentoring.",
     bullets: [
-      "Appointed COO in June 2023 and to the board of directors in Nov 2024.",
-      "Over 15 years leading automated FMCG manufacturing plants across Africa.",
+      "Appointed to the board of directors in Nov 2024; serving as Chief Executive Officer.",
+      "Over 15 years leading automated FMCG processing and milling plants across Africa.",
     ],
     photo: "/img/team/swatanter-saraswat.jpg",
+  },
+  {
+    id: "jr",
+    initials: "JR",
+    name: "Jagdeep Rana",
+    role: "Factory General Manager",
+    department: "Plant Operations & Milling",
+    tier: 3,
+    bio: "",
+    bullets: [],
+    photo: null,
+  },
+  {
+    id: "ag",
+    initials: "AG",
+    name: "Amit Gautam",
+    role: "Sales General Manager",
+    department: "Commercial Sales & Distribution",
+    credentials: "MBA · Durham Business School, UK",
+    tier: 3,
+    bio: "With 22 years of FMCG experience across India and Nigeria including Unilever, ITC, VBL and SNF Foods Ltd. He brings strong expertise in sales, business development, distribution, and P&L management. He holds an MBA degree from Durham Business School, UK.",
+    bullets: [
+      "22 years FMCG leadership across India and Nigeria (Unilever, ITC, VBL, SNF Foods Ltd).",
+      "MBA from Durham Business School, UK; specialist in sales expansion, distribution, and P&L management.",
+    ],
+    photo: "/img/team/amit-gautam.jpg?v=20261005",
+  },
+  {
+    id: "yr",
+    initials: "YR",
+    name: "Yoganand Raj",
+    role: "Chief Financial Officer",
+    department: "Finance & Corporate Governance",
+    tier: 3,
+    bio: "",
+    bullets: [],
+    photo: null,
+  },
+  {
+    id: "si",
+    initials: "SI",
+    name: "Stella Ikpe",
+    role: "Sales and Marketing Coordinator",
+    department: "Sales Operations & Market Coordination",
+    credentials: "B.Sc. Marketing · Since June 2023",
+    tier: 3,
+    bio: "With over 15 years of expertise in driving sales growth, managing market operations, analyzing business performance, and using data-driven insights to support strategic decision-making.",
+    bullets: [
+      "B.Sc. Marketing; driving commercial operations and sales growth since June 2023.",
+      "15+ years expertise in business analytics, distributor operations, and strategic marketing.",
+    ],
+    photo: "/img/team/stella-ikpe.jpg?v=20261005",
+  },
+  {
+    id: "fn",
+    initials: "FN",
+    name: "Fred Nze",
+    role: "Head of Marketing",
+    department: "Marketing & Brand Growth",
+    credentials: "Marketing Head · Brand Growth",
+    tier: 3,
+    bio: "With over 14 years of commercial marketing leadership, driving consumer brand visibility, distributor activations, retail execution, and nationwide campaign growth.",
+    bullets: [
+      "Leading nationwide retail brand campaigns and consumer awareness for Goodearth spices.",
+      "Spearheading trade activations, supermarket distribution marketing, and media outreach.",
+    ],
+    photo: "/img/team/fred-nze.jpg",
   },
 ];
 

@@ -5,7 +5,7 @@
   "description": "Goodearth Foods · TG Agri Farms Ltd - Next.js + Prisma + NeonDB website with admin panel",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "node scripts/build.js",
     "start": "next start",
     "lint": "next lint",
     "db:push": "prisma db push",
