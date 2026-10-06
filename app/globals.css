@@ -2958,7 +2958,9 @@ body:has(.news-grid) .footer::after,
 body:has(.cta-magical-section) .footer::after,
 body:has(.cta-magical-banner) .footer::after,
 body:has(.pdp-related-section) .footer::after,
-body:has(.pdp) .footer::after {
+body:has(.pdp) .footer::after,
+body:has(.gallery-section) .footer::after,
+body:has(.gallery-grid) .footer::after {
   display: none !important;
 }
 
@@ -7009,8 +7011,37 @@ img { -webkit-user-drag: none; }
    Company Gallery Showcase & Lightbox Styles
    ========================================================== */
 .gallery-section {
-  padding: clamp(36px, 5vw, 72px) 0 clamp(64px, 8vw, 100px);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(36px, 5vw, 72px) 0 clamp(110px, 15vw, 200px);
   background: var(--cream);
+}
+
+/* Seamless exponential gradient blend into dark-green footer (#062316) */
+.gallery-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(140px, 18vw, 240px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 35, 22, 0.03) 15%,
+    rgba(6, 35, 22, 0.14) 32%,
+    rgba(6, 35, 22, 0.42) 55%,
+    rgba(6, 35, 22, 0.78) 78%,
+    rgba(6, 35, 22, 0.95) 92%,
+    #062316 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.gallery-section .container {
+  position: relative;
+  z-index: 3;
 }
 
 .gallery-filter-bar {
