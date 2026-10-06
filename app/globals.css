@@ -1944,6 +1944,28 @@ p {
   z-index: 1;
 }
 
+/* Seamless exponential gradient blend into dark-green footer (#062316) */
+.sustainability-unified-canvas::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(150px, 20vw, 260px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 35, 22, 0.03) 14%,
+    rgba(6, 35, 22, 0.14) 30%,
+    rgba(6, 35, 22, 0.40) 52%,
+    rgba(6, 35, 22, 0.76) 75%,
+    rgba(6, 35, 22, 0.94) 90%,
+    #062316 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
 /* Inside unified canvas, both sections share the single continuous background */
 .sustainability-unified-canvas .impact-section-wrap {
   background: transparent;
@@ -1961,7 +1983,9 @@ p {
 .sustainability-unified-canvas .esg-pillars-wrap {
   background: transparent;
   padding-top: clamp(32px, 3.5vw, 48px);
-  padding-bottom: clamp(84px, 9.5vw, 130px);
+  padding-bottom: clamp(120px, 15vw, 200px);
+  position: relative;
+  z-index: 3;
 }
 .sustainability-unified-canvas .esg-pillars-wrap::before,
 .sustainability-unified-canvas .esg-pillars-wrap::after {
@@ -2840,7 +2864,9 @@ body:not(:has(.home-sec-7-wrap)) .footer::after {
 body:has(.home-sec-7-wrap) .footer.footer--home::after,
 body:has(.dual-presence-wrap) .footer::after,
 body:has(.awards-press-section) .footer::after,
-body:has(.org-hierarchy-section) .footer::after {
+body:has(.org-hierarchy-section) .footer::after,
+body:has(.sustainability-unified-canvas) .footer::after,
+body:has(.esg-pillars-wrap) .footer::after {
   display: none !important;
 }
 
@@ -3694,6 +3720,91 @@ img { -webkit-user-drag: none; }
   z-index: -1;
 }
 
+/* ---- Sustainability & ESG Page Hero: "heading bg.png" Artwork with Feathered Blur Blend ---- */
+.ph-sustainability {
+  background-color: #052619;
+  background-image: url('/img/sustainability-hero-bg.jpg');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* Atmospheric feathered blur behind the text portion for sustainability */
+.ph-sustainability-blur-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/sustainability-hero-bg-blur.jpg');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
+  /* Feathered mask: fully blurred over the text (left and center-left), 
+     smoothly blending to transparent on the right so the nature/plants artwork is sharp */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.96) 28%,
+    rgba(0, 0, 0, 0.72) 48%,
+    rgba(0, 0, 0, 0.28) 68%,
+    rgba(0, 0, 0, 0.05) 82%,
+    transparent 92%
+  );
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.96) 28%,
+    rgba(0, 0, 0, 0.72) 48%,
+    rgba(0, 0, 0, 0.28) 68%,
+    rgba(0, 0, 0, 0.05) 82%,
+    transparent 92%
+  );
+}
+
+/* Elegant dark vignette & contrast gradient over text, plus bottom transition into Impact section */
+.ph-sustainability::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(
+      to right,
+      rgba(5, 30, 20, 0.88) 0%,
+      rgba(5, 30, 20, 0.75) 35%,
+      rgba(5, 30, 20, 0.38) 58%,
+      rgba(5, 30, 20, 0.10) 78%,
+      transparent 95%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 70%,
+      rgba(5, 38, 25, 0.6) 90%,
+      #052619 100%
+    );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Localized runtime backdrop-filter behind the text block for micro-refinement */
+.ph-sustainability .ph-content {
+  position: relative;
+  z-index: 3;
+}
+.ph-sustainability .ph-content::before {
+  content: "";
+  position: absolute;
+  inset: -28px -40px;
+  border-radius: 28px;
+  background: radial-gradient(ellipse at 35% 50%, rgba(5, 32, 20, 0.42) 0%, rgba(5, 32, 20, 0.12) 65%, transparent 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  -webkit-mask-image: radial-gradient(ellipse at 40% 50%, black 40%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+  mask-image: radial-gradient(ellipse at 40% 50%, black 40%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 @media (max-width: 768px) {
   .page-hero {
     background-position: 75% center;
@@ -3792,6 +3903,33 @@ img { -webkit-user-drag: none; }
         rgba(7, 24, 15, 0.88) 0%,
         rgba(7, 24, 15, 0.72) 75%,
         #FAF8F5 100%
+      );
+  }
+  .ph-sustainability {
+    background-position: 70% center;
+  }
+  .ph-sustainability-blur-backdrop {
+    background-position: 70% center;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.90) 65%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.90) 65%,
+      transparent 100%
+    );
+  }
+  .ph-sustainability::before {
+    background: 
+      linear-gradient(
+        to bottom,
+        rgba(5, 30, 20, 0.88) 0%,
+        rgba(5, 30, 20, 0.72) 75%,
+        #052619 100%
       );
   }
 }
@@ -4346,15 +4484,31 @@ img { -webkit-user-drag: none; }
   background-position: center top;
   background-repeat: no-repeat;
   padding-top: clamp(48px, 5.5vw, 76px);
-  padding-bottom: clamp(92px, 10vw, 136px);
+  padding-bottom: clamp(120px, 15vw, 200px);
   overflow: hidden;
   color: var(--ink);
 }
 
-/* Seamless blend from Section 1 with zero artificial white foggy line */
-/* Removed floating dark bar: clean transition into footer */
+/* Seamless exponential gradient blend into dark-green footer (#062316) */
 .esg-pillars-wrap::after {
-  display: none;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(150px, 20vw, 260px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 35, 22, 0.03) 14%,
+    rgba(6, 35, 22, 0.14) 30%,
+    rgba(6, 35, 22, 0.40) 52%,
+    rgba(6, 35, 22, 0.76) 75%,
+    rgba(6, 35, 22, 0.94) 90%,
+    #062316 100%
+  );
+  pointer-events: none;
+  z-index: 2;
 }
 
 .esg-pillars-wrap .container {
