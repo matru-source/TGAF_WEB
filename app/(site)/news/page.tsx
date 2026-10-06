@@ -15,7 +15,7 @@ export default function NewsPage() {
         title={<>Latest Updates &amp; Company Dispatches</>}
         subtitle="Official stories from our farming communities, processing facilities, and national distribution network."
         crumb="News"
-        tone="green"
+        tone="news"
       />
       <NewsList />
     </>

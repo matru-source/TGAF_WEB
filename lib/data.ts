@@ -431,7 +431,6 @@ export const CERTS: { abbr: string; full: string; logo?: string }[] = [
   { abbr: "MAN", full: "Manufacturers Association of Nigeria", logo: "/img/certs/man.png" },
   { abbr: "NEPC", full: "Nigerian Export Promotion Council", logo: "/img/certs/nepc.png" },
   { abbr: "FSSC 22000", full: "Food Safety System Certification", logo: "/img/certs/fssc-22000.png" },
-  { abbr: "Leading Spices", full: "Nigeria's Leading Spice Manufacturers", logo: "/img/certs/nigerias-leading-spice-manufacturers.png" },
 ];
 
 // ---- Value props (why Naija families trust us) ----

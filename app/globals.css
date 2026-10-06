@@ -2737,31 +2737,48 @@ p {
   z-index: 3;
 }
 
-/* Nigeria's Leading Spice Manufacturers Prestige Emblem */
-.quality-prestige-badge {
-  display: inline-flex;
+/* Quality Assurance Section Heading with Floating Emblem on Right (no box, no border) */
+.quality-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.quality-header-text {
+  flex: 1;
+  max-width: 700px;
+}
+.quality-header-text .eyebrow {
+  color: var(--chilli, #B5121B);
+}
+.quality-header-badge {
+  flex-shrink: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto clamp(16px, 2.5vw, 24px);
-  padding: 10px 24px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(15, 76, 156, 0.18);
-  border-radius: 999px;
-  box-shadow: 0 14px 34px -8px rgba(15, 76, 156, 0.14), 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
-.quality-prestige-badge:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 20px 42px -6px rgba(15, 76, 156, 0.24), 0 4px 12px rgba(0, 0, 0, 0.06);
-}
-.quality-prestige-img {
-  width: clamp(130px, 16vw, 180px);
+.quality-header-badge-img {
+  width: clamp(120px, 15vw, 175px);
   height: auto;
   display: block;
   object-fit: contain;
-  filter: drop-shadow(0 2px 6px rgba(15, 76, 156, 0.16));
+  filter: drop-shadow(0 6px 16px rgba(15, 76, 156, 0.16));
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.quality-header-badge:hover .quality-header-badge-img {
+  transform: translateY(-2px) scale(1.04);
+}
+@media (max-width: 768px) {
+  .quality-header-row {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 18px;
+  }
 }
 
 .quality-cert-wrap .section-head h2 {
@@ -2937,7 +2954,11 @@ body:has(#certifications) .footer::after,
 body:has(.career-apply-section) .footer::after,
 body:has(#apply) .footer::after,
 body:has(.news-section-wrap) .footer::after,
-body:has(.news-grid) .footer::after {
+body:has(.news-grid) .footer::after,
+body:has(.cta-magical-section) .footer::after,
+body:has(.cta-magical-banner) .footer::after,
+body:has(.pdp-related-section) .footer::after,
+body:has(.pdp) .footer::after {
   display: none !important;
 }
 
@@ -3879,8 +3900,8 @@ img { -webkit-user-drag: none; }
 /* ---- Manufacturing Page Hero: Panoramic Processing Line Artwork with Feathered Blur Blend ---- */
 .ph-manufacturing {
   background-color: #121e14;
-  background-image: url('/img/manufacturing-hero-bg.jpg');
-  background-size: cover;
+  background-image: url('/img/manufacturing-hero-bg.jpg') !important;
+  background-size: cover !important;
   background-position: center right;
   background-repeat: no-repeat;
   position: relative;
@@ -3951,6 +3972,89 @@ img { -webkit-user-drag: none; }
   inset: -28px -40px;
   border-radius: 28px;
   background: radial-gradient(ellipse at 35% 50%, rgba(9, 24, 16, 0.42) 0%, rgba(9, 24, 16, 0.12) 65%, transparent 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  -webkit-mask-image: radial-gradient(ellipse at 40% 50%, black 40%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+  mask-image: radial-gradient(ellipse at 40% 50%, black 40%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ---- News & Media Page Hero: "head - bg.png" Artwork with Feathered Blur Blend ---- */
+.ph-news {
+  background-color: #1a1208;
+  background-image: url('/img/news-hero-bg.jpg') !important;
+  background-size: cover !important;
+  background-position: center right;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* Atmospheric feathered blur behind the text portion for news */
+.ph-news-blur-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/news-hero-bg-blur.jpg');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.96) 28%,
+    rgba(0, 0, 0, 0.72) 48%,
+    rgba(0, 0, 0, 0.28) 68%,
+    rgba(0, 0, 0, 0.05) 82%,
+    transparent 92%
+  );
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.96) 28%,
+    rgba(0, 0, 0, 0.72) 48%,
+    rgba(0, 0, 0, 0.28) 68%,
+    rgba(0, 0, 0, 0.05) 82%,
+    transparent 92%
+  );
+}
+
+/* Dark vignette & contrast gradient over text, plus bottom transition into News section */
+.ph-news::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(
+      to right,
+      rgba(24, 14, 6, 0.88) 0%,
+      rgba(24, 14, 6, 0.75) 35%,
+      rgba(24, 14, 6, 0.38) 58%,
+      rgba(24, 14, 6, 0.10) 78%,
+      transparent 95%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 70%,
+      rgba(250, 248, 245, 0.4) 92%,
+      #FAF8F5 100%
+    );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Localized runtime backdrop-filter behind the text block for micro-refinement */
+.ph-news .ph-content {
+  position: relative;
+  z-index: 3;
+}
+.ph-news .ph-content::before {
+  content: "";
+  position: absolute;
+  inset: -28px -40px;
+  border-radius: 28px;
+  background: radial-gradient(ellipse at 35% 50%, rgba(26, 14, 6, 0.42) 0%, rgba(26, 14, 6, 0.12) 65%, transparent 100%);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   -webkit-mask-image: radial-gradient(ellipse at 40% 50%, black 40%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
@@ -4110,6 +4214,33 @@ img { -webkit-user-drag: none; }
         to bottom,
         rgba(9, 22, 14, 0.88) 0%,
         rgba(9, 22, 14, 0.72) 75%,
+        #FAF8F5 100%
+      );
+  }
+  .ph-news {
+    background-position: 70% center;
+  }
+  .ph-news-blur-backdrop {
+    background-position: 70% center;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.90) 65%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.90) 65%,
+      transparent 100%
+    );
+  }
+  .ph-news::before {
+    background: 
+      linear-gradient(
+        to bottom,
+        rgba(24, 14, 6, 0.88) 0%,
+        rgba(24, 14, 6, 0.72) 75%,
         #FAF8F5 100%
       );
   }
@@ -4633,9 +4764,29 @@ img { -webkit-user-drag: none; }
 .pdp-info h1 { font-size: clamp(2rem,4.4vw,3rem); margin: .4rem 0 1rem; }
 .pdp-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 24px; }
 .pdp-size { font-size: .8rem; font-weight: 600; padding: .4em .9em; border-radius: 100px; background: var(--paper); border: 1px solid var(--line); }
-.pdp-specs { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 26px; }
-@media (max-width: 520px){ .pdp-specs { grid-template-columns: 1fr; } }
-.pdp-specs > div { background: var(--paper); padding: 14px 18px; }
+.pdp-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 26px;
+  background: transparent;
+  border: none;
+}
+.pdp-specs.pdp-specs--single,
+.pdp-specs:has(> :only-child) {
+  grid-template-columns: 1fr !important;
+}
+@media (max-width: 520px) {
+  .pdp-specs {
+    grid-template-columns: 1fr;
+  }
+}
+.pdp-specs > div {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+}
 .pdp-specs dt { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
 .pdp-specs dd { font-size: .95rem; color: var(--ink); margin-top: 3px; }
 .pdp-actions { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -9474,6 +9625,67 @@ img { -webkit-user-drag: none; }
 .cta-magical-section {
   padding: 0 0 clamp(60px, 8vw, 100px);
 }
+.cta-magical-section:not(.home-sec-7-wrap) {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(32px, 4.5vw, 56px) 0 clamp(110px, 15vw, 200px);
+}
+.cta-magical-section:not(.home-sec-7-wrap)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(140px, 18vw, 240px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 35, 22, 0.03) 15%,
+    rgba(6, 35, 22, 0.14) 32%,
+    rgba(6, 35, 22, 0.42) 55%,
+    rgba(6, 35, 22, 0.78) 78%,
+    rgba(6, 35, 22, 0.95) 92%,
+    #062316 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+.cta-magical-section:not(.home-sec-7-wrap) .container {
+  position: relative;
+  z-index: 3;
+}
+
+/* Related Products on Product Details: smooth blend into footer */
+.pdp-related-section {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: clamp(110px, 15vw, 200px) !important;
+}
+.pdp-related-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(140px, 18vw, 240px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 35, 22, 0.03) 15%,
+    rgba(6, 35, 22, 0.14) 32%,
+    rgba(6, 35, 22, 0.42) 55%,
+    rgba(6, 35, 22, 0.78) 78%,
+    rgba(6, 35, 22, 0.95) 92%,
+    #062316 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+.pdp-related-section .container {
+  position: relative;
+  z-index: 3;
+}
+
 .cta-magical-section.home-sec-7-wrap {
   position: relative;
   background-color: #FAF5EC;

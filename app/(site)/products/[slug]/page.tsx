@@ -62,7 +62,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
               </div>
 
               {specs.length > 0 && (
-                <dl className="pdp-specs">
+                <dl className={`pdp-specs ${specs.length === 1 ? "pdp-specs--single" : ""}`}>
                   {specs.map(([k, v]) => (
                     <div key={k}>
                       <dt>{k}</dt>
@@ -86,7 +86,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
       </section>
 
       {related.length > 0 && (
-        <section className="section section--cream2">
+        <section className="section section--cream2 pdp-related-section">
           <div className="container">
             <div className="section-head reveal">
               <span className="eyebrow">More from the range</span>

@@ -55,6 +55,8 @@ const SLUG_ALIASES: Record<string, string> = {
   "atarodo": "atarodo-peppe-powder",
   "cameroon-powder": "cameroon-peppe-powder",
   "cameroon": "cameroon-peppe-powder",
+  "ginger": "ginger-powder",
+  "turmeric": "turmeric-powder",
 };
 
 /** One product by slug; falls back to static data. Returns null if not found. */
