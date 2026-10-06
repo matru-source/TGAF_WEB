@@ -1795,7 +1795,7 @@ p {
   background-repeat: no-repeat;
   background-attachment: fixed;
   padding-top: clamp(48px, 5.5vw, 84px);
-  padding-bottom: clamp(52px, 6vw, 92px);
+  padding-bottom: clamp(120px, 15vw, 200px);
   overflow: visible;
   overflow-x: clip;
   color: var(--ink);
@@ -1822,14 +1822,31 @@ p {
   z-index: 1;
 }
 
-/* Removed floating dark bar: clean transition into footer */
+/* Seamless exponential gradient blend into dark-green footer (#062316) */
 .farm-to-fork-wrap::after {
-  display: none;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(150px, 20vw, 260px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 35, 22, 0.03) 14%,
+    rgba(6, 35, 22, 0.14) 30%,
+    rgba(6, 35, 22, 0.40) 52%,
+    rgba(6, 35, 22, 0.76) 75%,
+    rgba(6, 35, 22, 0.94) 90%,
+    #062316 100%
+  );
+  pointer-events: none;
+  z-index: 2;
 }
 
 .farm-to-fork-wrap .container {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .farm-to-fork-wrap h2 {
@@ -2866,7 +2883,8 @@ body:has(.dual-presence-wrap) .footer::after,
 body:has(.awards-press-section) .footer::after,
 body:has(.org-hierarchy-section) .footer::after,
 body:has(.sustainability-unified-canvas) .footer::after,
-body:has(.esg-pillars-wrap) .footer::after {
+body:has(.esg-pillars-wrap) .footer::after,
+body:has(.farm-to-fork-wrap) .footer::after {
   display: none !important;
 }
 

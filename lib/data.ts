@@ -218,7 +218,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     tag: "Industrial Milling & Food Safety",
     title: "Crush, process & sterilise",
     body: "Precision micro-milling and continuous automated steam sterilisation.",
-    image: "/img/facility/sterilization.png",
+    image: "/img/farm-to-fork/step-04-milling.png",
     imageAlt: "World-class industrial milling, pulverizing and continuous steam sterilisation line",
     caption: "3,000 MT annual plant capacity with automated continuous steam sterilisation.",
   },
