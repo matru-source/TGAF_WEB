@@ -22,8 +22,33 @@ export type UIProduct = {
   asta?: string | null;
   scoville?: string | null;
   usage?: string | null;
+  packaging?: string | null;
   featured?: boolean;
 };
+
+export function getProductPackaging(p: { slug?: string; packaging?: string | null; segment?: string; name?: string }): string {
+  if (p.packaging) return p.packaging;
+  const s = (p.slug || p.name || "").toLowerCase();
+  if (s.includes("atarodo")) {
+    return "10 sachets/roll · 100 rolls/carton";
+  }
+  if (s.includes("cameroon")) {
+    return "10 sachets/roll · Stand-up retail pouches";
+  }
+  if (s.includes("hot-peppe")) {
+    return "10 sachets/roll · 100 rolls/carton · Supa Pack";
+  }
+  if (s.includes("turmeric")) {
+    return "10 sachets/roll · 100 rolls/carton · Pouches";
+  }
+  if (s.includes("ginger")) {
+    return "10 sachets/roll · 100 rolls/carton · Pouches";
+  }
+  if (p.segment === "B2B") {
+    return "25kg & 50kg multi-wall Kraft sacks";
+  }
+  return "10 sachets/roll · 100 rolls/carton";
+}
 
 export const accentClass = (a: AccentKey) => ({
   well: `well--${a}`,
@@ -406,6 +431,7 @@ export const CERTS: { abbr: string; full: string; logo?: string }[] = [
   { abbr: "MAN", full: "Manufacturers Association of Nigeria", logo: "/img/certs/man.png" },
   { abbr: "NEPC", full: "Nigerian Export Promotion Council", logo: "/img/certs/nepc.png" },
   { abbr: "FSSC 22000", full: "Food Safety System Certification", logo: "/img/certs/fssc-22000.png" },
+  { abbr: "Leading Spices", full: "Nigeria's Leading Spice Manufacturers", logo: "/img/certs/nigerias-leading-spice-manufacturers.png" },
 ];
 
 // ---- Value props (why Naija families trust us) ----

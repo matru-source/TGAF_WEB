@@ -17,6 +17,15 @@ export default function Certifications() {
 
       <div className="container">
         <div className="section-head center reveal">
+          <div className="quality-prestige-badge">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/certs/nigerias-leading-spice-manufacturers-clean.png"
+              alt="Nigeria's Leading Spice Manufacturers"
+              className="quality-prestige-img"
+              loading="lazy"
+            />
+          </div>
           <span className="eyebrow center">Quality assurance</span>
           <p className="muted" style={{ marginTop: "0.85rem", fontSize: "1.04rem", lineHeight: 1.68 }}>
             Our processing facility and food-safety management systems are independently audited and accredited

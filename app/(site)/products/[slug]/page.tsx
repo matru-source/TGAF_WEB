@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProducts } from "@/lib/queries";
-import { accentClass } from "@/lib/data";
+import { accentClass, getProductPackaging } from "@/lib/data";
 import ProductGallery from "@/components/site/ProductGallery";
 
 export const dynamic = "force-dynamic";
@@ -23,12 +23,14 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const gallery = [...new Set([product.image, ...(product.images ?? [])].filter(Boolean) as string[])].filter(
     (src) => !src.includes("-studio.jpg"),
   );
+  const packaging = getProductPackaging(product);
   const specs = [
     ["Colour", product.colour],
     ["ASTA", product.asta && product.asta !== "-" ? product.asta : null],
     ["Scoville", product.scoville],
     ["Category", product.marketCategory],
     ["Best for", product.usage],
+    ["Packaging & Carton Rolls", packaging],
   ].filter(([, v]) => Boolean(v)) as [string, string][];
 
   return (

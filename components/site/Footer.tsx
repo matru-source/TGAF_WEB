@@ -45,7 +45,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Capabilities</h4>
+            <h4>Our Expertise</h4>
             <ul>
               <li><Link href="/farm-to-fork">Farm-to-Fork</Link></li>
               <li><Link href="/manufacturing">Manufacturing</Link></li>
