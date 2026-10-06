@@ -2884,7 +2884,8 @@ body:has(.awards-press-section) .footer::after,
 body:has(.org-hierarchy-section) .footer::after,
 body:has(.sustainability-unified-canvas) .footer::after,
 body:has(.esg-pillars-wrap) .footer::after,
-body:has(.farm-to-fork-wrap) .footer::after {
+body:has(.farm-to-fork-wrap) .footer::after,
+body:has(.manufacturing-machinery-wrap) .footer::after {
   display: none !important;
 }
 
@@ -5165,7 +5166,7 @@ img { -webkit-user-drag: none; }
   background-position: center top;
   background-repeat: no-repeat;
   padding-top: clamp(76px, 8.5vw, 118px);
-  padding-bottom: clamp(96px, 10.5vw, 142px);
+  padding-bottom: clamp(120px, 15vw, 200px);
   overflow: hidden;
   color: var(--ink);
 }
@@ -5175,14 +5176,31 @@ img { -webkit-user-drag: none; }
   display: none;
 }
 
-/* Removed floating dark bar: clean transition into footer */
+/* Seamless exponential gradient blend into dark-green footer (#062316) */
 .manufacturing-machinery-wrap::after {
-  display: none;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(150px, 20vw, 260px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 35, 22, 0.03) 14%,
+    rgba(6, 35, 22, 0.14) 30%,
+    rgba(6, 35, 22, 0.40) 52%,
+    rgba(6, 35, 22, 0.76) 75%,
+    rgba(6, 35, 22, 0.94) 90%,
+    #062316 100%
+  );
+  pointer-events: none;
+  z-index: 2;
 }
 
 .manufacturing-machinery-wrap .container {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .manufacturing-machinery-wrap .section-head h2 {
