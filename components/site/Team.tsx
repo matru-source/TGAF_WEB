@@ -26,9 +26,20 @@ export default async function Team() {
         <div className="section-head reveal center" style={{ textAlign: "center", marginBottom: "48px" }}>
           <span className="eyebrow center">Governance &amp; Operational Command</span>
           <h2 style={{ fontSize: "clamp(2rem, 3.5vw, 2.8rem)", marginBottom: "12px" }}>Corporate Hierarchy</h2>
-          <p className="lead center" style={{ maxWidth: "720px", margin: "0 auto", color: "var(--ink-2)" }}>
-            Clear executive accountability steering strategic governance, sterile agro-industrial manufacturing, 
-            disciplined financial control, and pan-Nigerian commercial distribution.
+          <p
+            className="lead center"
+            style={{
+              maxWidth: "760px",
+              margin: "0 auto",
+              color: "var(--ink-2)",
+              textAlign: "justify",
+              textJustify: "inter-word",
+              hyphens: "none",
+            }}
+          >
+            Clear executive leadership and operational accountability steering strategic corporate governance,
+            modern agro-industrial spice processing, disciplined financial control, and pan-Nigerian commercial
+            distribution.
           </p>
         </div>
 
@@ -57,13 +68,6 @@ export default async function Team() {
                     <div className="org-card-role-title">{deepak.role}</div>
                     <div className="org-card-division">Board of Directors</div>
                     {deepak.bio && <p className="org-card-bio">{deepak.bio}</p>}
-                    {deepak.bullets && deepak.bullets.length > 0 && (
-                      <ul className="org-card-bullets">
-                        {deepak.bullets.map((b, idx) => (
-                          <li key={idx}>{b}</li>
-                        ))}
-                      </ul>
-                    )}
                   </div>
                 </div>
               </article>
@@ -85,27 +89,10 @@ export default async function Team() {
                     <div className="org-card-role-title">{swatanter.role}</div>
                     <div className="org-card-division">Executive Management &amp; Board</div>
                     {swatanter.bio && <p className="org-card-bio">{swatanter.bio}</p>}
-                    {swatanter.bullets && swatanter.bullets.length > 0 && (
-                      <ul className="org-card-bullets">
-                        {swatanter.bullets.map((b, idx) => (
-                          <li key={idx}>{b}</li>
-                        ))}
-                      </ul>
-                    )}
                   </div>
                 </div>
               </article>
 
-            </div>
-          </div>
-
-          {/* Connector Stem: Tier 1 -> Tier 2 (3 Columns) */}
-          <div className="org-tree-branch-connector" aria-hidden="true">
-            <span className="org-branch-stem-down"></span>
-            <div className="org-branch-crossbar">
-              <span className="org-branch-node org-branch-node--left"></span>
-              <span className="org-branch-node org-branch-node--mid"></span>
-              <span className="org-branch-node org-branch-node--right"></span>
             </div>
           </div>
 
@@ -116,7 +103,6 @@ export default async function Team() {
 
               {/* 1. GM Sales: Amit Gautam */}
               <div className="org-tree-col">
-                <span className="org-col-drop-line" aria-hidden="true"></span>
                 <article className="org-card org-card--functional org-card--active reveal d1">
                   <div className="org-card-badge org-card-badge--amber">
                     <span>GM Sales</span>
@@ -144,7 +130,6 @@ export default async function Team() {
 
               {/* 2. GM Factory: Jagdeep Rana */}
               <div className="org-tree-col">
-                <span className="org-col-drop-line" aria-hidden="true"></span>
                 <article className="org-card org-card--functional org-card--blank reveal d2">
                   <div className="org-card-badge org-card-badge--grey">
                     <span>GM Factory</span>
@@ -168,7 +153,6 @@ export default async function Team() {
 
               {/* 3. CFO: Yoganand Raj */}
               <div className="org-tree-col">
-                <span className="org-col-drop-line" aria-hidden="true"></span>
                 <article className="org-card org-card--functional org-card--blank reveal d3">
                   <div className="org-card-badge org-card-badge--grey">
                     <span>Chief Financial Officer</span>
@@ -193,15 +177,6 @@ export default async function Team() {
             </div>
           </div>
 
-          {/* Connector Stem: Tier 2 -> Tier 3 (2 Columns) */}
-          <div className="org-tree-branch-connector org-tree-branch-connector--duo" aria-hidden="true">
-            <span className="org-branch-stem-down"></span>
-            <div className="org-branch-crossbar org-branch-crossbar--duo">
-              <span className="org-branch-node org-branch-node--left"></span>
-              <span className="org-branch-node org-branch-node--right"></span>
-            </div>
-          </div>
-
           {/* TIER 3: Stella & Fred Together (Marketing & Sales Coordination) */}
           <div className="org-tree-level org-tree-level--duo-bottom">
             <div className="org-level-tag">Commercial Operations &amp; Marketing Execution</div>
@@ -209,7 +184,6 @@ export default async function Team() {
               
               {/* Stella Ikpe - Sales & Marketing Coordinator */}
               <div className="org-tree-col">
-                <span className="org-col-drop-line" aria-hidden="true"></span>
                 <article className="org-card org-card--coord reveal d1">
                   <div className="org-card-badge org-card-badge--green">
                     <span>Sales &amp; Marketing Coordinator</span>
@@ -237,7 +211,6 @@ export default async function Team() {
 
               {/* Fred Nze - Head of Marketing */}
               <div className="org-tree-col">
-                <span className="org-col-drop-line" aria-hidden="true"></span>
                 <article className="org-card org-card--coord reveal d2">
                   <div className="org-card-badge org-card-badge--chilli">
                     <span>Head of Marketing</span>

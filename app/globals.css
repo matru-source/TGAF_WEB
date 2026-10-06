@@ -9390,6 +9390,7 @@ img { -webkit-user-drag: none; }
   flex-direction: column;
   align-items: center;
   position: relative;
+  gap: clamp(40px, 5.5vw, 64px);
 }
 
 /* Level Labels & Cards */
@@ -9541,7 +9542,7 @@ img { -webkit-user-drag: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center top;
   display: block;
 }
 
@@ -9611,67 +9612,13 @@ img { -webkit-user-drag: none; }
   align-self: flex-start;
 }
 
-/* Connectors */
-.org-tree-branch-connector {
-  width: 100%;
-  max-width: 1080px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  margin: 0 auto;
-}
-
-.org-branch-stem-down {
-  width: 2px;
-  height: 32px;
-  background: #CBD5E1;
-}
-
-.org-branch-crossbar {
-  width: calc(66.666% + 32px);
-  height: 2px;
-  background: #CBD5E1;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-}
-
-.org-branch-crossbar--duo {
-  width: calc(50% + 24px);
-  max-width: 540px;
-}
-
-.org-branch-node {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #64748B;
-  box-shadow: 0 0 0 3px #FFFFFF;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.org-branch-node--left {
-  left: 0;
-}
-
-.org-branch-node--mid {
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.org-branch-node--right {
-  right: 0;
-}
-
+/* Connectors disabled: clean tiered hierarchy without lines */
+.org-tree-branch-connector,
+.org-branch-stem-down,
+.org-branch-crossbar,
+.org-branch-node,
 .org-col-drop-line {
-  display: block;
-  width: 2px;
-  height: 24px;
-  background: #CBD5E1;
-  margin: 0 auto;
+  display: none !important;
 }
 
 /* Tier 2: Trio Grid (GM Sales, GM Factory, CFO) */
