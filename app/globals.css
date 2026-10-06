@@ -2933,7 +2933,11 @@ body:has(.farm-to-fork-wrap) .footer::after,
 body:has(.manufacturing-machinery-wrap) .footer::after,
 body:has(#machinery) .footer::after,
 body:has(.quality-cert-wrap) .footer::after,
-body:has(#certifications) .footer::after {
+body:has(#certifications) .footer::after,
+body:has(.career-apply-section) .footer::after,
+body:has(#apply) .footer::after,
+body:has(.news-section-wrap) .footer::after,
+body:has(.news-grid) .footer::after {
   display: none !important;
 }
 
@@ -3872,6 +3876,89 @@ img { -webkit-user-drag: none; }
   z-index: -1;
 }
 
+/* ---- Manufacturing Page Hero: Panoramic Processing Line Artwork with Feathered Blur Blend ---- */
+.ph-manufacturing {
+  background-color: #121e14;
+  background-image: url('/img/manufacturing-hero-bg.jpg');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* Atmospheric feathered blur behind the text portion for manufacturing */
+.ph-manufacturing-blur-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/manufacturing-hero-bg-blur.jpg');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.96) 28%,
+    rgba(0, 0, 0, 0.72) 48%,
+    rgba(0, 0, 0, 0.28) 68%,
+    rgba(0, 0, 0, 0.05) 82%,
+    transparent 92%
+  );
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.96) 28%,
+    rgba(0, 0, 0, 0.72) 48%,
+    rgba(0, 0, 0, 0.28) 68%,
+    rgba(0, 0, 0, 0.05) 82%,
+    transparent 92%
+  );
+}
+
+/* Elegant dark vignette & contrast gradient over text, plus bottom transition into Plant section */
+.ph-manufacturing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(
+      to right,
+      rgba(9, 22, 14, 0.88) 0%,
+      rgba(9, 22, 14, 0.75) 35%,
+      rgba(9, 22, 14, 0.38) 58%,
+      rgba(9, 22, 14, 0.10) 78%,
+      transparent 95%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 70%,
+      rgba(250, 248, 245, 0.4) 92%,
+      #FAF8F5 100%
+    );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Localized runtime backdrop-filter behind the text block for micro-refinement */
+.ph-manufacturing .ph-content {
+  position: relative;
+  z-index: 3;
+}
+.ph-manufacturing .ph-content::before {
+  content: "";
+  position: absolute;
+  inset: -28px -40px;
+  border-radius: 28px;
+  background: radial-gradient(ellipse at 35% 50%, rgba(9, 24, 16, 0.42) 0%, rgba(9, 24, 16, 0.12) 65%, transparent 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  -webkit-mask-image: radial-gradient(ellipse at 40% 50%, black 40%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+  mask-image: radial-gradient(ellipse at 40% 50%, black 40%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 @media (max-width: 768px) {
   .page-hero {
     background-position: 75% center;
@@ -3997,6 +4084,33 @@ img { -webkit-user-drag: none; }
         rgba(5, 30, 20, 0.88) 0%,
         rgba(5, 30, 20, 0.72) 75%,
         #052619 100%
+      );
+  }
+  .ph-manufacturing {
+    background-position: 70% center;
+  }
+  .ph-manufacturing-blur-backdrop {
+    background-position: 70% center;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.90) 65%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.90) 65%,
+      transparent 100%
+    );
+  }
+  .ph-manufacturing::before {
+    background: 
+      linear-gradient(
+        to bottom,
+        rgba(9, 22, 14, 0.88) 0%,
+        rgba(9, 22, 14, 0.72) 75%,
+        #FAF8F5 100%
       );
   }
 }
@@ -4897,7 +5011,36 @@ img { -webkit-user-drag: none; }
 
 /* Career Application 2-Column Section (Image Left, Form Right - Single Slide View) */
 .career-apply-section {
-  padding-block: clamp(24px, 3.8vh, 48px);
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(32px, 4.5vh, 56px) clamp(110px, 15vw, 190px);
+}
+
+/* Seamless exponential gradient blend into dark-green footer (#062316) */
+.career-apply-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(140px, 18vw, 240px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 35, 22, 0.03) 15%,
+    rgba(6, 35, 22, 0.14) 32%,
+    rgba(6, 35, 22, 0.42) 55%,
+    rgba(6, 35, 22, 0.78) 78%,
+    rgba(6, 35, 22, 0.95) 92%,
+    #062316 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.career-apply-section .container {
+  position: relative;
+  z-index: 3;
 }
 
 @media (min-width: 901px) {
@@ -4935,8 +5078,7 @@ img { -webkit-user-drag: none; }
 .career-apply-img-wrap {
   width: 100%;
   height: 100%;
-  min-height: 340px;
-  max-height: 460px;
+  min-height: 380px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 16px 40px rgba(33, 28, 22, 0.10);
@@ -4949,7 +5091,7 @@ img { -webkit-user-drag: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center bottom;
   display: block;
   transition: transform 0.6s var(--ease);
 }
@@ -5021,6 +5163,39 @@ img { -webkit-user-drag: none; }
     max-height: 320px;
     aspect-ratio: 16 / 10;
   }
+}
+
+/* News Section: Seamless exponential gradient blend into dark-green footer (#062316) */
+.news-section-wrap {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: clamp(110px, 15vw, 200px);
+}
+
+.news-section-wrap::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(140px, 18vw, 240px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 35, 22, 0.03) 15%,
+    rgba(6, 35, 22, 0.14) 32%,
+    rgba(6, 35, 22, 0.42) 55%,
+    rgba(6, 35, 22, 0.78) 78%,
+    rgba(6, 35, 22, 0.95) 92%,
+    #062316 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.news-section-wrap .container {
+  position: relative;
+  z-index: 3;
 }
 
 /* News */

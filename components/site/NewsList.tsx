@@ -9,7 +9,7 @@ const DELAY = ["", "d1", "d2"];
 
 export default function NewsList() {
   return (
-    <section className="section">
+    <section className="section news-section-wrap">
       <div className="container">
         <div className="news-grid">
           {NEWS.map((n, i) => (
