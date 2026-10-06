@@ -7,14 +7,14 @@ export default function PageHero({
   eyebrow: string;
   title: React.ReactNode;
   subtitle?: string;
-  tone?: "green" | "chilli" | "warm" | "awards" | "about";
+  tone?: "green" | "chilli" | "warm" | "awards" | "about" | "leadership";
   /** @deprecated breadcrumb removed; kept optional so existing callers compile */
   crumb?: string;
 }) {
   return (
     <section className={`page-hero ph-${tone}`}>
-      {/* If tone === 'about' or 'awards', render smooth feathered blur backdrop layer behind text */}
-      {(tone === "about" || tone === "awards") && (
+      {/* If tone === 'about' or 'awards' or 'leadership', render smooth feathered blur backdrop layer behind text */}
+      {(tone === "about" || tone === "awards" || tone === "leadership") && (
         <div className={`ph-${tone}-blur-backdrop`} aria-hidden="true" />
       )}
 
