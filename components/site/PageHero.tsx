@@ -13,9 +13,9 @@ export default function PageHero({
 }) {
   return (
     <section className={`page-hero ph-${tone}`}>
-      {/* If tone === 'about', render smooth feathered blur backdrop layer behind text */}
-      {tone === "about" && (
-        <div className="ph-about-blur-backdrop" aria-hidden="true" />
+      {/* If tone === 'about' or 'awards', render smooth feathered blur backdrop layer behind text */}
+      {(tone === "about" || tone === "awards") && (
+        <div className={`ph-${tone}-blur-backdrop`} aria-hidden="true" />
       )}
 
       {/* Atmospheric lighting and depth layers */}
