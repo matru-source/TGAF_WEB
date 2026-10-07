@@ -217,63 +217,6 @@ export default function Products({ products }: { products: UIProduct[] }) {
             </div>
           </div>
 
-          {/* Consolidated Packaging & Product Specifications Table */}
-          <div style={{ marginTop: "clamp(32px,4.5vw,56px)" }} className="reveal">
-            <h3 style={{ marginBottom: "8px" }}>Consolidated Packaging &amp; Product Specifications</h3>
-            <p className="muted" style={{ marginBottom: "22px" }}>
-              Standard pack weights, sachet counts, carton rolls, and culinary heat metrics across our retail range.
-            </p>
-            <div className="table-wrap">
-              <table className="spec-table">
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Pack Weights</th>
-                    <th>Packaging &amp; Carton Rolls</th>
-                    <th>Category</th>
-                    <th>Heat &amp; Profile</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {b2c.map((p) => {
-                    const packagingRolls = p.slug.includes("atarodo")
-                      ? "10 sachets/roll · 100 rolls/carton"
-                      : p.slug.includes("cameroon")
-                      ? "10 sachets/roll · Stand-up retail pouches"
-                      : p.slug.includes("hot-peppe")
-                      ? "10 sachets/roll · 100 rolls/carton · Supa Pack"
-                      : "Multi-layer barrier pouches · Export bags";
-
-                    return (
-                      <tr key={p.id}>
-                        <td className="prod">
-                          <Link href={`/products/${p.slug}`} style={{ color: "var(--chilli)", fontWeight: 700 }}>
-                            {p.name}
-                          </Link>
-                        </td>
-                        <td>
-                          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-                            {p.sizes.map((s) => (
-                              <span key={s} className="pdp-size" style={{ fontSize: "0.76rem" }}>
-                                {s}
-                              </span>
-                            ))}
-                          </div>
-                        </td>
-                        <td>{packagingRolls}</td>
-                        <td>{p.marketCategory || p.tagline}</td>
-                        <td>
-                          {[p.colour, p.asta && p.asta !== "-" ? `ASTA ${p.asta}` : null, p.scoville, p.usage]
-                            .filter(Boolean)
-                            .join(" · ")}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
 
         {/* B2B */}

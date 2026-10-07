@@ -16,7 +16,7 @@ export default function LeadershipPage() {
         title={<>The people steering the company</>}
         subtitle="Experienced directors and management with decades of combined FMCG and agribusiness expertise."
         crumb="Leadership"
-        tone="green"
+        tone="leadership"
       />
       <Governance />
       <Team />

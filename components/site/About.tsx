@@ -36,17 +36,19 @@ export default function About() {
           <div className="about-copy reveal d1">
             <span className="eyebrow">About us</span>
             <h2>We manage the whole journey - farm to fork.</h2>
-            <p className="lead">
-              Goodearth is headquartered in Singapore and deeply committed to Africa&apos;s
-              spice industry. We manage the entire value chain through farm-gate procurement across{" "}
-              <strong>25 aggregators</strong> and <strong>100 farmer markets</strong>, grown by over{" "}
-              <strong>50,000+ farmers</strong> and their families with <strong>10,000+ farmers trained</strong>.
-            </p>
-            <p style={{ marginTop: "1rem", color: "var(--ink-2)" }}>
-              Our Ikorodu processing plant ensures strict food safety and traceability throughout the
-              supply chain. Beyond products, our mission enriches farmers&apos; lives and communities while
-              serving customers sustainably.
-            </p>
+            <div className="about-narrative-copy">
+              <p>
+                Goodearth is headquartered in Singapore and deeply committed to Africa&apos;s
+                spice industry. We manage the entire value chain through farm-gate procurement across{" "}
+                25 aggregators and 100 farmer markets, grown by over{" "}
+                50,000+ farmers and their families with 10,000+ farmers trained.
+              </p>
+              <p>
+                Our Ikorodu processing plant ensures strict food safety and traceability throughout the
+                supply chain. Beyond products, our mission enriches farmers&apos; lives and communities while
+                serving customers sustainably.
+              </p>
+            </div>
 
             <div className="mv">
               <div className="card">

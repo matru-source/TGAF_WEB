@@ -5,7 +5,7 @@ import PhotoCarousel from "./PhotoCarousel";
 const FARM_PHOTOS = [
   "/img/photo-drying.jpg",
   "/img/photo-chilli-hand.jpg",
-  "/img/photo-sundry.jpg",
+  "/img/farm-to-fork/photo-sundry-harvest.jpg",
 ];
 
 export default function FarmToFork() {

@@ -176,7 +176,7 @@ export default function AwardsView() {
       </section>
 
       {/* National Press Coverage Section */}
-      <section className="section section--cream2" id="press-coverage">
+      <section className="section section--cream2 awards-press-section" id="press-coverage">
         <div className="container">
           <div className="section-head center">
             <span className="eyebrow center">National Press Coverage</span>

@@ -15,7 +15,7 @@ export default function ManufacturingPage() {
         title={<>World-class processing at Ikorodu</>}
         subtitle="An advanced automated plant built around every food-safety norm, with 3,000 MT annual plant capacity of finished spice."
         crumb="Manufacturing"
-        tone="green"
+        tone="manufacturing"
       />
       <Manufacturing />
     </>

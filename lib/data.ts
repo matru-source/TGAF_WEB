@@ -22,8 +22,33 @@ export type UIProduct = {
   asta?: string | null;
   scoville?: string | null;
   usage?: string | null;
+  packaging?: string | null;
   featured?: boolean;
 };
+
+export function getProductPackaging(p: { slug?: string; packaging?: string | null; segment?: string; name?: string }): string {
+  if (p.packaging) return p.packaging;
+  const s = (p.slug || p.name || "").toLowerCase();
+  if (s.includes("atarodo")) {
+    return "10 sachets/roll · 100 rolls/carton";
+  }
+  if (s.includes("cameroon")) {
+    return "10 sachets/roll · Stand-up retail pouches";
+  }
+  if (s.includes("hot-peppe")) {
+    return "10 sachets/roll · 100 rolls/carton · Supa Pack";
+  }
+  if (s.includes("turmeric")) {
+    return "10 sachets/roll · 100 rolls/carton · Pouches";
+  }
+  if (s.includes("ginger")) {
+    return "10 sachets/roll · 100 rolls/carton · Pouches";
+  }
+  if (p.segment === "B2B") {
+    return "25kg & 50kg multi-wall Kraft sacks";
+  }
+  return "10 sachets/roll · 100 rolls/carton";
+}
 
 export const accentClass = (a: AccentKey) => ({
   well: `well--${a}`,
@@ -218,7 +243,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     tag: "Industrial Milling & Food Safety",
     title: "Crush, process & sterilise",
     body: "Precision micro-milling and continuous automated steam sterilisation.",
-    image: "/img/facility/sterilization.png",
+    image: "/img/farm-to-fork/step-04-milling.png",
     imageAlt: "World-class industrial milling, pulverizing and continuous steam sterilisation line",
     caption: "3,000 MT annual plant capacity with automated continuous steam sterilisation.",
   },
@@ -286,11 +311,8 @@ export const TEAM: UITeamMember[] = [
     role: "Managing Director",
     department: "Board Leadership",
     tier: 1,
-    bio: "Appointed to the board of directors on 18th Dec 2017. He brings over 15 years of experience in international commodity markets and 10+ years steering agro-industrial manufacturing and supply chains across Nigeria.",
-    bullets: [
-      "Appointed to the board of directors on 18th Dec 2017.",
-      "15+ years in international trade and 10+ years in Nigerian FMCG & agribusiness.",
-    ],
+    bio: "Serving on the board of directors, he brings over 15 years of experience in international commodity markets and 10+ years steering agro-industrial manufacturing and supply chains across Nigeria.",
+    bullets: [],
     photo: "/img/team/deepak-portrait.jpg",
   },
   {
@@ -300,12 +322,9 @@ export const TEAM: UITeamMember[] = [
     role: "Chief Executive Officer & Director",
     department: "Executive Management",
     tier: 2,
-    bio: "Appointed COO in June 2023 and to the board of directors in Nov 2024. Over 15 years leading automated FMCG manufacturing plants across Africa, driving operations, milling technology, and engineer mentoring.",
-    bullets: [
-      "Appointed to the board of directors in Nov 2024; serving as Chief Executive Officer.",
-      "Over 15 years leading automated FMCG processing and milling plants across Africa.",
-    ],
-    photo: "/img/team/swatanter-saraswat.jpg",
+    bio: "Serving as Chief Executive Officer and director on the board, he brings over 15 years of leadership across automated FMCG manufacturing plants in Africa, driving operational excellence, milling technology, and engineer mentoring.",
+    bullets: [],
+    photo: "/img/team/swatanter-saraswat.jpg?v=20261006",
   },
   {
     id: "jr",
@@ -326,12 +345,9 @@ export const TEAM: UITeamMember[] = [
     department: "Commercial Sales & Distribution",
     credentials: "MBA · Durham Business School, UK",
     tier: 3,
-    bio: "With 22 years of FMCG experience across India and Nigeria including Unilever, ITC, VBL and SNF Foods Ltd. He brings strong expertise in sales, business development, distribution, and P&L management. He holds an MBA degree from Durham Business School, UK.",
-    bullets: [
-      "22 years FMCG leadership across India and Nigeria (Unilever, ITC, VBL, SNF Foods Ltd).",
-      "MBA from Durham Business School, UK; specialist in sales expansion, distribution, and P&L management.",
-    ],
-    photo: "/img/team/amit-gautam.jpg?v=20261005",
+    bio: "With 22 years of FMCG experience across India and Nigeria in leading multinational food enterprises, he brings strong expertise in sales, business development, distribution networks, and P&L management. He holds an MBA degree from Durham Business School, UK.",
+    bullets: [],
+    photo: "/img/team/amit-gautam.jpg?v=20261006",
   },
   {
     id: "yr",
@@ -350,13 +366,10 @@ export const TEAM: UITeamMember[] = [
     name: "Stella Ikpe",
     role: "Sales and Marketing Coordinator",
     department: "Sales Operations & Market Coordination",
-    credentials: "B.Sc. Marketing · Since June 2023",
+    credentials: "B.Sc. Marketing · Commercial Execution",
     tier: 3,
-    bio: "With over 15 years of expertise in driving sales growth, managing market operations, analyzing business performance, and using data-driven insights to support strategic decision-making.",
-    bullets: [
-      "B.Sc. Marketing; driving commercial operations and sales growth since June 2023.",
-      "15+ years expertise in business analytics, distributor operations, and strategic marketing.",
-    ],
+    bio: "With over 15 years of expertise in driving commercial sales growth, managing market operations, analyzing business performance, and leveraging data-driven insights to support strategic decision-making.",
+    bullets: [],
     photo: "/img/team/stella-ikpe.jpg?v=20261005",
   },
   {
@@ -593,7 +606,7 @@ export const NEWS: {
   {
     slug: "10000-farmers-trained",
     title: "10,000+ farmers trained across 100 markets & 25 aggregators",
-    date: "2026-03-02", category: "Community", image: "/img/photo-drying.jpg",
+    date: "2026-03-02", category: "Community", image: "/img/news/cultivation-farmers-trained.jpg",
     excerpt: "Training across 100 farmer markets and 25 aggregators lifts quality and farmer incomes for 50,000+ growers.",
     body: [
       "We continue to invest in the farmers at the heart of our supply chain, with training programmes reaching more than 10,000 farmers and supporting over 50,000 growers nationwide.",
@@ -711,17 +724,6 @@ export const GALLERY_CATEGORIES: { key: GalleryCategory; label: string }[] = [
 export const GALLERY_ITEMS: GalleryItem[] = [
   // ==================== FACTORY ====================
   {
-    id: "facility-aerial-drone",
-    title: "Good Earth Agro-Processing Complex",
-    category: "warehousing",
-    categoryLabel: "Warehousing",
-    image: "/img/gallery/goodearth-facility-aerial.png",
-    caption: "Aerial perspective of the modern Good Earth agro-processing and spice milling facility in Ikorodu, Lagos State.",
-    location: "Ikorodu, Lagos State",
-    aspect: "landscape",
-    tag: "Plant Architecture",
-  },
-  {
     id: "facility-bco-layout",
     title: "Factory Architectural Plan & Blueprint",
     category: "packaging",
@@ -754,17 +756,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     aspect: "landscape",
     tag: "Operational Workforce",
   },
-  {
-    id: "factory-staff-front",
-    title: "Operations & Packaging Personnel",
-    category: "packaging",
-    categoryLabel: "Packaging",
-    image: "/img/gallery/factory-staff-front.jpg",
-    caption: "Factory floor technicians and packaging operators outside the main facility in branded company uniforms.",
-    location: "Ikorodu Facility, Lagos",
-    aspect: "landscape",
-    tag: "Operations",
-  },
+
   {
     id: "team-qa-yellow",
     title: "Quality Assurance & Production Crew",
@@ -798,50 +790,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     aspect: "landscape",
     tag: "Grinding Mill",
   },
-  {
-    id: "machine-cyclone",
-    title: "Pneumatic Cyclone Separator & Filtration",
-    category: "packaging",
-    categoryLabel: "Packaging",
-    image: "/img/gallery/machine-10.jpg",
-    caption: "Closed-loop negative pressure conveyance separating fine spice particles under hygienic vacuum.",
-    location: "Processing Hall, Ikorodu",
-    aspect: "landscape",
-    tag: "Cyclone Separator",
-  },
-  {
-    id: "machine-ribbon-blender",
-    title: "Stainless Steel Ribbon Blender",
-    category: "packaging",
-    categoryLabel: "Packaging",
-    image: "/img/gallery/machine-14.jpg",
-    caption: "Heavy-duty helical ribbon agitators ensuring homogenous particle distribution and uniform heat levels.",
-    location: "Blending Section, Ikorodu",
-    aspect: "landscape",
-    tag: "Ribbon Blender",
-  },
-  {
-    id: "machine-vffs",
-    title: "Continuous VFFS Automated Packaging Machine",
-    category: "packaging",
-    categoryLabel: "Packaging",
-    image: "/img/gallery/machine-08.jpg",
-    caption: "Roll-fed vertical form-fill-seal unit with automated batch coding and nitrogen flushing capability.",
-    location: "Packaging Hall, Ikorodu",
-    aspect: "landscape",
-    tag: "VFFS Packaging",
-  },
-  {
-    id: "machine-grinder-mill",
-    title: "Industrial Coarse Grinder & Feeding Mill",
-    category: "packaging",
-    categoryLabel: "Packaging",
-    image: "/img/gallery/machine-01.jpg",
-    caption: "Primary intake grinder breaking whole dried chillies prior to fine micro-pulverization.",
-    location: "Intake Station, Ikorodu",
-    aspect: "landscape",
-    tag: "Primary Milling",
-  },
+
   {
     id: "machine-conveyor-unit",
     title: "Enclosed Screw Conveyor & Elevator System",
@@ -954,17 +903,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     aspect: "landscape",
     tag: "Chilli Cultivation",
   },
-  {
-    id: "farm-nursery-seedlings",
-    title: "Nursery Seedlings & Soil Propagation",
-    category: "farm",
-    categoryLabel: "Farm",
-    image: "/img/photo-seedlings.png",
-    caption: "High-yield disease-resistant chilli and ginger seedlings nurtured before distribution to outgrowers.",
-    location: "Nursery Propagation Center",
-    aspect: "landscape",
-    tag: "Seedling Nursery",
-  },
+
   {
     id: "farm-drying-beds",
     title: "Traditional Raised Sun-Drying Beds",
@@ -1143,106 +1082,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     aspect: "landscape",
     tag: "Local Trade",
   },
-  {
-    id: "award-excellence",
-    title: "Marketing Edge Brand Excellence Recognition",
-    category: "marketing",
-    categoryLabel: "Marketing",
-    image: "/img/gallery/award-01.jpg",
-    caption: "National marketing and advertising industry award honoring Good Earth as an outstanding agro-food brand.",
-    location: "Marketing Edge Awards, Lagos",
-    aspect: "landscape",
-    tag: "Brand Award",
-  },
 
-  {
-    id: "prod-atarodo-pack",
-    title: "Goodearth Pure Atarodo Retail Pack",
-    category: "packaging",
-    categoryLabel: "Packaging",
-    image: "/img/gallery/prod-atarodo-new.jpg",
-    caption: "Retail pack of 100% pure dried Scotch Bonnet (Atarodo) offering blazing fruity heat for soups and stews.",
-    location: "Retail Distribution",
-    aspect: "portrait",
-    tag: "Retail Product",
-  },
-  {
-    id: "prod-cameroon-pack",
-    title: "Goodearth Cameroon Peppe Retail Pack",
-    category: "packaging",
-    categoryLabel: "Packaging",
-    image: "/img/gallery/prod-cameroon-peppe.jpg",
-    caption: "Smoked dark pepper with pungent earthy aroma, a staple in Nigerian cooking.",
-    location: "Retail Distribution",
-    aspect: "portrait",
-    tag: "Retail Product",
-  },
-  {
-    id: "prod-hot-peppe-pack",
-    title: "Goodearth Hot Peppe Powder Retail Pack",
-    category: "packaging",
-    categoryLabel: "Packaging",
-    image: "/img/gallery/prod-hot-peppe-powder.jpg",
-    caption: "Everyday fine red pepper powder providing sharp, clean heat for Nigerian family meals.",
-    location: "Retail Distribution",
-    aspect: "portrait",
-    tag: "Retail Product",
-  },
-  {
-    id: "prod-supa-pack",
-    title: "Goodearth Hot Peppe Supa Pack",
-    category: "packaging",
-    categoryLabel: "Packaging",
-    image: "/img/gallery/prod-hot-peppe-powder-supa-pack.jpg",
-    caption: "Value family pack designed for frequent home cooking and commercial caterers.",
-    location: "Retail Distribution",
-    aspect: "portrait",
-    tag: "Supa Pack",
-  },
-  {
-    id: "prod-carton-case",
-    title: "Goodearth Master Distribution Cartons",
-    category: "loading-unloading",
-    categoryLabel: "Loading & Unloading",
-    image: "/img/gallery/prod-hot-peppe-powder-carton.jpg",
-    caption: "Corrugated master shipping cases supplying over 12,000 retail stores and supermarkets nationwide.",
-    location: "Wholesale Logistics",
-    aspect: "portrait",
-    tag: "Master Carton",
-  },
-  {
-    id: "prod-atarodo-carton-case",
-    title: "Goodearth Pure Atarodo Master Shipping Cartons",
-    category: "loading-unloading",
-    categoryLabel: "Loading & Unloading",
-    image: "/img/gallery/prod-atarodo-carton.jpg",
-    caption: "Bulk packaged corrugated master cartons of Good Earth Pure Atarodo ready for nationwide transport.",
-    location: "Central Warehouse, Lagos",
-    aspect: "portrait",
-    tag: "Wholesale Packaging",
-  },
-  {
-    id: "prod-cameroon-carton-case",
-    title: "Goodearth Cameroon Peppe Master Shipping Cartons",
-    category: "loading-unloading",
-    categoryLabel: "Loading & Unloading",
-    image: "/img/gallery/prod-cameroon-peppe-carton.jpg",
-    caption: "Factory-sealed master distribution cartons of authentic smoked Cameroon Peppe for commercial wholesale.",
-    location: "Central Warehouse, Lagos",
-    aspect: "portrait",
-    tag: "Wholesale Packaging",
-  },
-  {
-    id: "prod-supa-carton-case",
-    title: "Goodearth Hot Peppe Supa Pack Master Cartons",
-    category: "loading-unloading",
-    categoryLabel: "Loading & Unloading",
-    image: "/img/gallery/prod-hot-peppe-powder-supa-pack-carton.jpg",
-    caption: "Commercial shipping boxes containing Good Earth Hot Peppe Supa Packs for supermarket chains.",
-    location: "Logistics Fulfillment Center",
-    aspect: "portrait",
-    tag: "Wholesale Packaging",
-  },
   {
     id: "transit-brt-fleet-lagos",
     title: "Lagos Highway Fleet Transit Advertising",

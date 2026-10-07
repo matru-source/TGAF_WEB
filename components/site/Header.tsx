@@ -19,7 +19,7 @@ const NAV: Item[] = [
     ],
   },
   {
-    label: "Capabilities",
+    label: "Our expertise",
     children: [
       { label: "Farm-to-Fork", href: "/farm-to-fork" },
       { label: "Manufacturing", href: "/manufacturing" },

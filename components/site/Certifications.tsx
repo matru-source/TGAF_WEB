@@ -16,12 +16,23 @@ export default function Certifications() {
       </div>
 
       <div className="container">
-        <div className="section-head center reveal">
-          <span className="eyebrow center">Quality assurance</span>
-          <p className="muted" style={{ marginTop: "0.85rem", fontSize: "1.04rem", lineHeight: 1.68 }}>
-            Our processing facility and food-safety management systems are independently audited and accredited
-            by leading Nigerian and global regulatory authorities to guarantee purity, compliance, and consumer trust.
-          </p>
+        <div className="quality-header-row reveal">
+          <div className="quality-header-text">
+            <span className="eyebrow">Quality assurance</span>
+            <p className="muted" style={{ marginTop: "0.85rem", fontSize: "1.04rem", lineHeight: 1.68 }}>
+              Our processing facility and food-safety management systems are independently audited and accredited
+              by leading Nigerian and global regulatory authorities to guarantee purity, compliance, and consumer trust.
+            </p>
+          </div>
+          <div className="quality-header-badge" aria-label="Nigeria's Leading Spice Manufacturers">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/certs/nigerias-leading-spice-manufacturers-clean.png"
+              alt="Nigeria's Leading Spice Manufacturers"
+              className="quality-header-badge-img"
+              loading="lazy"
+            />
+          </div>
         </div>
         <div className="certs">
           {CERTS.map((c, i) => (

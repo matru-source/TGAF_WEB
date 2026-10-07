@@ -16,7 +16,7 @@ export default function SustainabilityPage() {
         title={<>Growing spices, growing communities</>}
         subtitle="No dependence on imports - strengthening rural economies, farmers and Nigeria's food security."
         crumb="Sustainability"
-        tone="green"
+        tone="sustainability"
       />
       <div className="sustainability-unified-canvas">
         <Impact />

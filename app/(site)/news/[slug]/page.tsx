@@ -24,12 +24,26 @@ export default function NewsArticle({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <section className="page-hero ph-green">
+      <section className="page-hero ph-news">
+        <div className="ph-news-blur-backdrop" aria-hidden="true" />
+        <div className="ph-code-bg" aria-hidden="true">
+          <div className="ph-sun-wash" />
+          <div className="ph-ambient-glow" />
+          <div className="ph-particles-wrap">
+            <span className="ph-particle p1" />
+            <span className="ph-particle p2" />
+            <span className="ph-particle p3" />
+            <span className="ph-particle p4" />
+            <span className="ph-particle p5" />
+          </div>
+        </div>
         <div className="container">
-          <span className="eyebrow">
-            {n.category} · {fmt(n.date)}
-          </span>
-          <h1>{n.title}</h1>
+          <div className="ph-content">
+            <span className="eyebrow ph-eyebrow">
+              {n.category} · {fmt(n.date)}
+            </span>
+            <h1>{n.title}</h1>
+          </div>
         </div>
       </section>
 
