@@ -14,20 +14,23 @@ export default function Products({ products }: { products: UIProduct[] }) {
   const [tab, setTab] = useState<"b2c" | "b2b">("b2c");
   const b2c = products.filter((p) => p.segment === "B2C");
 
-  // Complete B2C range: Flagship Nigerian peppers + Ginger + Turmeric
+  // Complete B2C range in requested order:
+  // 1- Ose di Oku, 2- Hot Peppe, 3- Atarodo, 4- Cameroon, 5- Turmeric, 6- Ginger
   const items = [...b2c]
     .sort((a, b) => {
       const rank = (slug: string) =>
-        slug.includes("hot-peppe")
+        slug.includes("ose")
           ? 0
-          : slug.includes("atarodo")
+          : slug.includes("hot-peppe")
           ? 1
-          : slug.includes("cameroon")
+          : slug.includes("atarodo")
           ? 2
-          : slug.includes("ginger")
+          : slug.includes("cameroon")
           ? 3
           : slug.includes("turmeric")
           ? 4
+          : slug.includes("ginger")
+          ? 5
           : 9;
       return rank(a.slug) - rank(b.slug);
     });
@@ -64,20 +67,20 @@ export default function Products({ products }: { products: UIProduct[] }) {
       return;
     }
 
-    // Start auto wave across all 6 products: 1.2s per card
+    // Start auto wave across all 6 products in order: 1.2s per card
     setIsAutoPlaying(true);
-    setActivePopIndex(0); // Card 1 (Hot Peppe) 0.0s - 1.2s
+    setActivePopIndex(0); // Card 1 (Ose di Oku) 0.0s - 1.2s
 
     const t1 = setTimeout(() => {
-      setActivePopIndex(1); // Card 2 (Atarodo) 1.2s - 2.4s
+      setActivePopIndex(1); // Card 2 (Hot Peppe) 1.2s - 2.4s
     }, 1200);
 
     const t2 = setTimeout(() => {
-      setActivePopIndex(2); // Card 3 (Cameroon) 2.4s - 3.6s
+      setActivePopIndex(2); // Card 3 (Atarodo) 2.4s - 3.6s
     }, 2400);
 
     const t3 = setTimeout(() => {
-      setActivePopIndex(3); // Card 4 (Ginger) 3.6s - 4.8s
+      setActivePopIndex(3); // Card 4 (Cameroon) 3.6s - 4.8s
     }, 3600);
 
     const t4 = setTimeout(() => {
@@ -85,7 +88,7 @@ export default function Products({ products }: { products: UIProduct[] }) {
     }, 4800);
 
     const t5 = setTimeout(() => {
-      setActivePopIndex(5); // Card 6 (Ose di Oku) 6.0s - 7.2s
+      setActivePopIndex(5); // Card 6 (Ginger) 6.0s - 7.2s
     }, 6000);
 
     const t6 = setTimeout(() => {

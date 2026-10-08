@@ -108,6 +108,16 @@ export const SPICES: { key: AccentKey; tag: string; name: string; hex: string; b
 // ---- B2C product fallback ----
 export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
+    id: "ose-di-oku", slug: "ose-di-oku", name: "Ose di Oku", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Southeastern Fiery Blend", image: "/Product/ose-di-oku.png",
+    images: ["/Product/ose-di-oku.png"],
+    description: "Authentic, fiery pepper blend crafted for Southeastern Nigerian culinary heritage and traditional soups like Ofe Owerri, Banga, and Nsala.",
+    sizes: ["100 g", "50 g", "10 g"], formats: ["Grounded Peppe"], featured: true,
+    marketCategory: "Regional Gourmet · Fiery Blend",
+    colour: "Fiery rich red", asta: "55–65", scoville: "65,000–75,000 SHU",
+    usage: "Perfect for Ofe Owerri, Banga, Nsala & native soups",
+  },
+  {
     id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe", segment: "B2C",
     accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hero-hot-peppe-studio.png",
     images: [
@@ -148,13 +158,6 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     usage: "For soups, stews & noodles",
   },
   {
-    id: "ginger", slug: "ginger-powder", name: "Ginger", segment: "B2C",
-    accent: "ginger", tagline: "Ginger", image: "/Product/ginger.png",
-    images: ["/Product/ginger.png"],
-    description: "Aromatic, finely grounded ginger that brings warmth and depth to soups, marinades and stews.",
-    sizes: ["100 g"], formats: ["Grounded Ginger"],
-  },
-  {
     id: "turmeric", slug: "turmeric-powder", name: "Turmeric", segment: "B2C",
     accent: "turmeric", tagline: "Turmeric", image: "/Product/turmeric.png",
     images: ["/Product/turmeric.png"],
@@ -162,14 +165,11 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     sizes: ["100 g"], formats: ["Grounded Turmeric"],
   },
   {
-    id: "ose-di-oku", slug: "ose-di-oku", name: "Ose di Oku", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Southeastern Fiery Blend", image: "/Product/ose-di-oku.png",
-    images: ["/Product/ose-di-oku.png"],
-    description: "Authentic, fiery pepper blend crafted for Southeastern Nigerian culinary heritage and traditional soups like Ofe Owerri, Banga, and Nsala.",
-    sizes: ["100 g", "50 g", "10 g"], formats: ["Grounded Peppe"], featured: true,
-    marketCategory: "Regional Gourmet · Fiery Blend",
-    colour: "Fiery rich red", asta: "55–65", scoville: "65,000–75,000 SHU",
-    usage: "Perfect for Ofe Owerri, Banga, Nsala & native soups",
+    id: "ginger", slug: "ginger-powder", name: "Ginger", segment: "B2C",
+    accent: "ginger", tagline: "Ginger", image: "/Product/ginger.png",
+    images: ["/Product/ginger.png"],
+    description: "Aromatic, finely grounded ginger that brings warmth and depth to soups, marinades and stews.",
+    sizes: ["100 g"], formats: ["Grounded Ginger"],
   },
 ];
 

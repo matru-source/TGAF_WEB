@@ -217,7 +217,19 @@ export default function FeaturedProducts({ products }: { products: UIProduct[] }
   const items = [...products.filter((p) => p.segment === "B2C")]
     .sort((a, b) => {
       const rank = (slug: string) =>
-        slug.includes("hot-peppe") ? 0 : slug.includes("atarodo") ? 1 : slug.includes("cameroon") ? 2 : 9;
+        slug.includes("ose")
+          ? 0
+          : slug.includes("hot-peppe")
+          ? 1
+          : slug.includes("atarodo")
+          ? 2
+          : slug.includes("cameroon")
+          ? 3
+          : slug.includes("turmeric")
+          ? 4
+          : slug.includes("ginger")
+          ? 5
+          : 9;
       return rank(a.slug) - rank(b.slug);
     })
     .slice(0, 3);
