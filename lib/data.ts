@@ -55,6 +55,15 @@ export const accentClass = (a: AccentKey) => ({
   card: a === "turmeric" ? "t-turmeric" : a === "ginger" ? "t-ginger" : "",
 });
 
+export function getProductStageClass(slug: string = ""): string {
+  const s = slug.toLowerCase();
+  if (s.includes("atarodo")) return "stage-atarodo";
+  if (s.includes("cameroon")) return "stage-cameroon";
+  if (s.includes("ginger")) return "stage-ginger";
+  if (s.includes("turmeric")) return "stage-turmeric";
+  return "stage-hot-peppe";
+}
+
 // ---- Hero + brand ----
 export const BRAND = {
   name: "goodearth",
@@ -99,8 +108,8 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hero-hot-peppe-studio.png",
     images: [
       "/Product/hero-hot-peppe-studio.png",
-      "/Product/hot-peppe-supa-pack.jpg",
-      "/Product/hot-peppe-carton.jpg",
+      "/Product/hot-peppe-supa-pack.png",
+      "/Product/hot-peppe-carton.png",
     ],
     description: "Rich red, premium grounded peppe to add bold heat, aroma and fresh flavour to every meal.",
     sizes: ["100 g", "5 g", "Supa Pack"], formats: ["Grounded Peppe"], featured: true,
@@ -113,7 +122,7 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/atarodo-new.png",
     images: [
       "/Product/atarodo-new.png",
-      "/Product/atarodo-carton.jpg",
+      "/Product/atarodo-carton.png",
     ],
     description: "Dark-red scotch-bonnet style grounded pepe - a mass-market staple for everyday Nigerian heat.",
     sizes: ["8 g", "3 g", "Carton"], formats: ["Grounded Pepe"], featured: true,
@@ -126,7 +135,7 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     accent: "chilli", tagline: "Chilli · Gourmet", image: "/Product/hero-cameroon-studio.png",
     images: [
       "/Product/hero-cameroon-studio.png",
-      "/Product/cameroon-carton.jpg",
+      "/Product/cameroon-carton.png",
     ],
     description: "Deep red, smoky and pungent - a gourmet, authentic grounded pepe for soups, stews & noodles.",
     sizes: ["100 g", "50 g", "3 g"], formats: ["Smoked Grounded Pepe"], featured: true,

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProducts } from "@/lib/queries";
-import { accentClass, getProductPackaging } from "@/lib/data";
+import { accentClass, getProductPackaging, getProductStageClass } from "@/lib/data";
 import ProductGallery from "@/components/site/ProductGallery";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +20,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const all = await getProducts();
   const related = all.filter((p) => p.segment === "B2C" && p.slug !== product.slug).slice(0, 3);
   const a = accentClass(product.accent);
+  const stageClass = getProductStageClass(product.slug);
   const gallery = [...new Set([product.image, ...(product.images ?? [])].filter(Boolean) as string[])].filter(
     (src) => !src.includes("-studio.jpg"),
   );
@@ -39,9 +40,10 @@ export default async function ProductDetail({ params }: { params: { slug: string
         <div className="container">
           <div className="pdp-grid">
             {gallery.length > 0 ? (
-              <ProductGallery images={gallery} alt={product.name} wellClass={a.well} />
+              <ProductGallery images={gallery} alt={product.name} stageClass={stageClass} wellClass={a.well} />
             ) : (
-              <div className={`pdp-media ${a.well}`}>
+              <div className={`pdp-media ${stageClass || a.well}`}>
+                <div className="pedestal-disc" aria-hidden="true" />
                 <span className="nophoto">{product.name.charAt(0)}</span>
               </div>
             )}

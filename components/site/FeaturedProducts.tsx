@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { type UIProduct } from "@/lib/data";
+import { type UIProduct, getProductStageClass } from "@/lib/data";
 import { motion, useMotionValue, useTransform, useSpring, useInView } from "framer-motion";
 
 export function ProductPedestalCard({
@@ -154,13 +154,7 @@ export const getProductTagline = (slug: string) => {
   return PRODUCT_TAGLINES["hot-peppe"];
 };
 
-export const getProductStageClass = (slug: string) => {
-  if (slug.includes("atarodo")) return "stage-atarodo";
-  if (slug.includes("cameroon")) return "stage-cameroon";
-  if (slug.includes("ginger")) return "stage-ginger";
-  if (slug.includes("turmeric")) return "stage-turmeric";
-  return "stage-hot-peppe";
-};
+export { getProductStageClass } from "@/lib/data";
 
 export default function FeaturedProducts({ products }: { products: UIProduct[] }) {
   const sectionRef = useRef<HTMLElement>(null);

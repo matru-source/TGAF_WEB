@@ -27,13 +27,13 @@ export type ProductInitial = {
 
 const BUNDLED = [
   "/Product/hot-peppe-studio.jpg",
-  "/Product/hot-peppe-supa-pack.jpg",
-  "/Product/hot-peppe-carton.jpg",
+  "/Product/hot-peppe-supa-pack.png",
+  "/Product/hot-peppe-carton.png",
   "/Product/atarodo-new.png",
   "/Product/atarodo-studio.jpg",
-  "/Product/atarodo-carton.jpg",
+  "/Product/atarodo-carton.png",
   "/Product/cameroon-studio.jpg",
-  "/Product/cameroon-carton.jpg",
+  "/Product/cameroon-carton.png",
   "/Product/turmeric.png",
   "/Product/ginger.png",
   "/Product/hot-pepe-1.jpeg",
