@@ -39,7 +39,7 @@ export function getProductPackaging(p: { slug?: string; packaging?: string | nul
     return "10 sachets/roll · 100 rolls/carton · Supa Pack";
   }
   if (s.includes("ose")) {
-    return "10 sachets/roll · Stand-up retail pouches";
+    return "10 sachets/roll · 100 rolls/carton";
   }
   if (s.includes("turmeric")) {
     return "10 sachets/roll · 100 rolls/carton · Pouches";
@@ -112,7 +112,7 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     accent: "chilli", tagline: "Chilli · Southeastern Fiery Blend", image: "/Product/ose-di-oku.png",
     images: ["/Product/ose-di-oku.png"],
     description: "Authentic, fiery pepper blend crafted for Southeastern Nigerian culinary heritage and traditional soups like Ofe Owerri, Banga, and Nsala.",
-    sizes: ["100 g", "50 g", "10 g"], formats: ["Grounded Peppe"], featured: true,
+    sizes: ["8 g"], formats: ["Grounded Peppe"], featured: true,
     marketCategory: "Regional Gourmet · Fiery Blend",
     colour: "Fiery rich red", asta: "55–65", scoville: "65,000–75,000 SHU",
     usage: "Perfect for Ofe Owerri, Banga, Nsala & native soups",
@@ -139,7 +139,7 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
       "/Product/atarodo-carton.png",
     ],
     description: "Dark-red scotch-bonnet style grounded pepe - a mass-market staple for everyday Nigerian heat.",
-    sizes: ["8 g", "3 g", "Carton"], formats: ["Grounded Pepe"], featured: true,
+    sizes: ["8 g"], formats: ["Grounded Pepe"], featured: true,
     marketCategory: "Scotch-bonnet · mass-market staple",
     colour: "Dark red", asta: "50–60", scoville: "~60,000 SHU",
     usage: "Adds spice to all meals",

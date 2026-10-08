@@ -26,6 +26,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
   );
   const packaging = getProductPackaging(product);
   const specs = [
+    ["Grammage", product.sizes && product.sizes.length > 0 ? product.sizes.join(" · ") : null],
     ["Colour", product.colour],
     ["ASTA", product.asta && product.asta !== "-" ? product.asta : null],
     ["Scoville", product.scoville],
