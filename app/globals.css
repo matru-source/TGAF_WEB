@@ -1246,18 +1246,34 @@ p {
   margin-bottom: 18px;
   overflow: hidden;
   perspective: 700px;
+  background-size: cover !important;
+  background-position: center bottom !important;
+  background-repeat: no-repeat !important;
 }
-.pcard .well::before { content:""; position:absolute; inset:0; opacity:.9; }
+.pcard .well .pedestal-disc {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(22, 14, 8, 0.45) 0%, rgba(22, 14, 8, 0.16) 50%, transparent 75%);
+  filter: blur(4px);
+  pointer-events: none;
+  z-index: 1;
+}
 .pcard .well img {
   position: relative;
-  height: 90%;
-  max-height: 90%;
+  z-index: 2;
+  height: 88%;
+  max-height: 88%;
   width: auto;
   max-width: 86%;
   object-fit: contain;
   transform: rotate(-3.5deg);
   transform-origin: center 65%;
-  filter: drop-shadow(6px 16px 22px rgba(22, 14, 8, 0.28)) drop-shadow(0 4px 8px rgba(22, 14, 8, 0.12));
+  filter: drop-shadow(0 14px 22px rgba(22, 14, 8, 0.32)) drop-shadow(0 4px 8px rgba(22, 14, 8, 0.14));
   transition: transform .55s cubic-bezier(0.2, 0.8, 0.2, 1), filter .55s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .pcard:nth-child(even) .well img {
@@ -1265,7 +1281,7 @@ p {
 }
 .pcard:hover .well img {
   transform: translateY(-8px) scale(1.07) rotate(0deg);
-  filter: drop-shadow(8px 24px 34px rgba(22, 14, 8, 0.36)) drop-shadow(0 6px 14px rgba(22, 14, 8, 0.18));
+  filter: drop-shadow(0 22px 32px rgba(22, 14, 8, 0.42)) drop-shadow(0 6px 14px rgba(22, 14, 8, 0.2));
 }
 .well--chilli   { background: radial-gradient(circle at 50% 30%, #fdf0ed, #fae2dc); }
 .well--turmeric { background: radial-gradient(circle at 50% 30%, var(--turmeric-soft), #fdf7e7); }

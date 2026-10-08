@@ -97,9 +97,11 @@ export default async function ProductDetail({ params }: { params: { slug: string
             <div className="product-grid">
               {related.map((p, i) => {
                 const ra = accentClass(p.accent);
+                const pStageClass = getProductStageClass(p.slug);
                 return (
                   <Link href={`/products/${p.slug}`} className={`pcard ${ra.card} reveal ${i % 3 ? (i % 3 === 1 ? "d1" : "d2") : ""}`} key={p.id}>
-                    <div className={`well ${ra.well}`}>
+                    <div className={`well ${pStageClass || ra.well}`}>
+                      <div className="pedestal-disc" aria-hidden="true" />
                       {p.image ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={p.image} alt={p.name} loading="lazy" />
