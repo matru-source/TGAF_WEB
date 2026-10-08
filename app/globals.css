@@ -634,11 +634,18 @@ p {
   }
 
   .hero-trust .t-label {
-    font-size: 0.72rem !important;
+    font-size: 0.70rem !important;
     letter-spacing: 0.16em !important;
     text-transform: uppercase !important;
-    color: #6B7280 !important;
-    font-weight: 700 !important;
+    color: #0A2E1E !important;
+    font-weight: 800 !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    padding: 3px 12px !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(10, 46, 30, 0.18) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    display: inline-flex !important;
+    align-items: center !important;
   }
 
   .hero-trust .t-list {
@@ -1706,13 +1713,79 @@ p {
   justify-content: center;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 900px) {
+  .journey-pin-track {
+    height: auto !important;
+    margin-bottom: 24px !important;
+  }
+  .journey-pinned-stage {
+    position: static !important;
+    height: auto !important;
+    min-height: auto !important;
+    padding: 10px 0 !important;
+  }
+  .journey-slide-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
   .journey-steps-col {
-    --node: 42px;
+    --node: 44px;
     --gutter: 14px;
   }
-  .j-num {
-    font-size: 1.15rem;
+  .journey-rail-track,
+  .journey-rail-fill {
+    display: none !important;
+  }
+  .journey-steps-list {
+    gap: 8px !important;
+  }
+
+  /* Keep all 5 steps normal, clean, and fully legible on mobile without dimmed inactive states */
+  .j-step,
+  .j-step:not(.is-active),
+  .j-step.is-active,
+  .j-step.is-passed {
+    opacity: 1 !important;
+    filter: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 6px 4px !important;
+  }
+  .j-step .j-node,
+  .j-step.is-active .j-node,
+  .j-step.is-passed .j-node {
+    width: var(--node) !important;
+    height: var(--node) !important;
+    border-radius: 50% !important;
+    border: 2px solid rgba(181, 18, 27, 0.35) !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+    transform: none !important;
+  }
+  .j-step .j-num,
+  .j-step.is-active .j-num,
+  .j-step.is-passed .j-num {
+    font-size: 1.15rem !important;
+    color: #B5121B !important;
+    font-weight: 700 !important;
+  }
+  .j-step .j-tag {
+    opacity: 1 !important;
+    background: rgba(181, 18, 27, 0.08) !important;
+    color: #B5121B !important;
+    border: 1px solid rgba(181, 18, 27, 0.16) !important;
+  }
+  .j-step .j-title {
+    opacity: 1 !important;
+    color: #0A2315 !important;
+    font-weight: 700 !important;
+  }
+  .j-step .j-desc {
+    opacity: 1 !important;
+    color: #2F3E33 !important;
+    -webkit-line-clamp: 2 !important;
+    line-height: 1.45 !important;
   }
 }
 
@@ -4750,6 +4823,131 @@ img { -webkit-user-drag: none; }
 .dm-pin-right .dm-label::after { left: auto; right: 14px; }
 .dm-pin-right:hover .dm-label, .dm-pin-right:focus-visible .dm-label, .dm-pin-right.is-active .dm-label { transform: translateX(0) translateY(0); }
 
+@media (max-width: 860px) {
+  .markets-presence-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .markets-presence-sidebar {
+    max-height: none !important;
+    width: 100% !important;
+    padding: 18px 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .presence-sidebar-head {
+    display: flex !important;
+    align-items: baseline !important;
+    justify-content: space-between !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .presence-sidebar-title {
+    font-size: 1.25rem !important;
+  }
+
+  .presence-sidebar-sub {
+    font-size: 0.75rem !important;
+    margin-top: 0 !important;
+  }
+
+  /* Keep states horizontally 2 or 3 in a row at the top of the map */
+  .presence-states-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+    overflow-y: visible !important;
+    max-height: none !important;
+    padding-right: 0 !important;
+  }
+
+  .presence-state-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 4px !important;
+    padding: 6px 6px !important;
+    border-radius: 8px !important;
+    background: rgba(6, 78, 59, 0.04) !important;
+    border: 1px solid rgba(6, 78, 59, 0.09) !important;
+    min-width: 0 !important;
+  }
+
+  .presence-state-item.is-active {
+    background: #FEF2F2 !important;
+    border-color: rgba(181, 18, 27, 0.35) !important;
+    box-shadow: 0 2px 8px rgba(181, 18, 27, 0.12) !important;
+  }
+
+  .presence-state-num {
+    font-size: 0.68rem !important;
+    width: auto !important;
+    color: #9CA3AF !important;
+  }
+
+  .presence-state-name {
+    font-size: 0.74rem !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .presence-state-arr {
+    display: none !important;
+  }
+
+  .presence-hub-item {
+    margin-top: 10px !important;
+    padding: 8px 12px !important;
+    width: 100% !important;
+    border-radius: 10px !important;
+  }
+
+  /* Full-width clear Nigeria map below state pills */
+  .dot-map {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 10px auto 0 !important;
+    overflow: visible !important;
+  }
+
+  .dm-label {
+    padding: 6px 10px !important;
+    border-radius: 8px !important;
+    max-width: 220px !important;
+    white-space: normal !important;
+  }
+  .dm-label-state { font-size: 0.68rem !important; }
+  .dm-label-name { font-size: 0.76rem !important; }
+  .dm-label-place { font-size: 0.68rem !important; }
+}
+
+@media (max-width: 440px) {
+  .presence-states-list {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 4px !important;
+  }
+  .presence-state-item {
+    padding: 5px 4px !important;
+    gap: 3px !important;
+  }
+  .presence-state-num {
+    font-size: 0.64rem !important;
+  }
+  .presence-state-name {
+    font-size: 0.69rem !important;
+  }
+}
+
+@media (max-width: 350px) {
+  .presence-states-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
 
 .markets-note { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 28px; padding: 22px 28px; background: var(--cream-2); border: 1px dashed var(--line-strong); border-radius: var(--radius-lg); }
 .markets-note p { font-family: var(--serif); font-style: italic; font-size: 1.12rem; color: var(--ink); }
@@ -6042,14 +6240,21 @@ img { -webkit-user-drag: none; }
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(232, 168, 56, 0.25);
 }
-@media (max-width: 900px) {
-  .facility-thumbs-strip {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.facility-carousel-holder {
+  margin-bottom: clamp(20px, 3vw, 36px);
 }
-@media (max-width: 640px) {
+
+@media (max-width: 900px) {
+  /* Remove mini thumbnails preview on Android/mobile */
+  .facility-thumbs-strip {
+    display: none !important;
+  }
+  .facility-carousel-holder {
+    margin-bottom: 12px !important;
+  }
   .facility-carousel-stage {
     aspect-ratio: 4 / 3;
+    margin-bottom: 0 !important;
   }
   .facility-caption-overlay {
     padding: 48px 18px 16px;
@@ -6066,8 +6271,17 @@ img { -webkit-user-drag: none; }
   }
   .facility-nav-btn.prev { left: 10px; }
   .facility-nav-btn.next { right: 10px; }
-  .facility-thumbs-strip {
-    display: none;
+
+  /* Collapse whitespace gap below carousel before Advanced Machinery on mobile */
+  .manufacturing-plant-wrap {
+    padding-bottom: 24px !important;
+  }
+  .facility-caps-list {
+    margin-top: 14px !important;
+    margin-bottom: 0 !important;
+  }
+  .manufacturing-machinery-wrap {
+    padding-top: 28px !important;
   }
 }
 .mfg-hero-media { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); aspect-ratio: 16/8; }
@@ -10137,19 +10351,34 @@ img { -webkit-user-drag: none; }
     font-size: 0.78rem !important;
   }
   .cta-right-pills {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 6px !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, max-content) !important;
+    justify-content: center !important;
+    gap: 8px 10px !important;
     width: 100% !important;
-    margin-top: 4px !important;
+    margin-top: 10px !important;
   }
   .cta-pill {
-    padding: 5px 10px !important;
-    font-size: 0.66rem !important;
-    gap: 5px !important;
-    background: rgba(8, 32, 20, 0.75) !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    padding: 6px 12px !important;
+    font-size: 0.70rem !important;
+    gap: 6px !important;
+    background: rgba(8, 32, 20, 0.78) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18) !important;
+    white-space: nowrap !important;
+  }
+  .cta-right-pills .cta-pill:nth-child(3) {
+    grid-column: 1 / -1 !important;
+    justify-self: center !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .cta-right-pills {
+    gap: 6px 6px !important;
+  }
+  .cta-pill {
+    padding: 5px 8px !important;
+    font-size: 0.64rem !important;
   }
 }
 
