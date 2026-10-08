@@ -8703,25 +8703,18 @@ img { -webkit-user-drag: none; }
 }
 .pedestal-grid--5 > :nth-child(1),
 .pedestal-grid--5 > :nth-child(2),
-.pedestal-grid--5 > :nth-child(3) {
+.pedestal-grid--5 > :nth-child(3),
+.pedestal-grid--5 > :nth-child(4),
+.pedestal-grid--5 > :nth-child(5),
+.pedestal-grid--5 > :nth-child(6) {
   grid-column: span 2;
-}
-.pedestal-grid--5 > :nth-child(4) {
-  grid-column: 2 / span 2;
-}
-.pedestal-grid--5 > :nth-child(5) {
-  grid-column: 4 / span 2;
 }
 @media (max-width: 1040px) {
   .pedestal-grid--5 {
     grid-template-columns: repeat(2, 1fr);
   }
-  .pedestal-grid--5 > :nth-child(1),
-  .pedestal-grid--5 > :nth-child(2),
-  .pedestal-grid--5 > :nth-child(3),
-  .pedestal-grid--5 > :nth-child(4),
-  .pedestal-grid--5 > :nth-child(5) {
-    grid-column: auto;
+  .pedestal-grid--5 > * {
+    grid-column: auto !important;
   }
 }
 @media (max-width: 680px) {
@@ -8777,6 +8770,11 @@ img { -webkit-user-drag: none; }
   border-color: rgba(224, 165, 46, 0.4);
   box-shadow: 0 28px 56px -10px rgba(224, 165, 46, 0.2), 0 0 0 1px rgba(224, 165, 46, 0.25);
 }
+.product-pedestal-card:has(.stage-ose-di-oku):hover,
+.product-pedestal-card:has(.stage-ose-di-oku).auto-popped {
+  border-color: rgba(181, 18, 27, 0.4);
+  box-shadow: 0 28px 56px -10px rgba(181, 18, 27, 0.22), 0 0 0 1px rgba(181, 18, 27, 0.25);
+}
 .pedestal-card-link {
   text-decoration: none;
   color: inherit;
@@ -8814,6 +8812,10 @@ img { -webkit-user-drag: none; }
 .stage-turmeric {
   background-color: #FAF4DF;
   background-image: url('/img/prod-bg-turmeric.png');
+}
+.stage-ose-di-oku {
+  background-color: #FDF0E8;
+  background-image: url('/img/prod-bg-ose-di-oku.png');
 }
 .pedestal-disc {
   display: block;
@@ -8879,6 +8881,11 @@ img { -webkit-user-drag: none; }
 .product-pedestal-card:has(.stage-turmeric).auto-popped .pedestal-product-asset {
   transform: scale(1.30) translateY(-40px) rotate(-3.5deg);
   filter: drop-shadow(0 36px 42px rgba(224, 165, 46, 0.38)) drop-shadow(0 14px 16px rgba(22, 14, 8, 0.32));
+}
+.product-pedestal-card:has(.stage-ose-di-oku):hover .pedestal-product-asset,
+.product-pedestal-card:has(.stage-ose-di-oku).auto-popped .pedestal-product-asset {
+  transform: scale(1.30) translateY(-40px) rotate(-4deg);
+  filter: drop-shadow(0 36px 42px rgba(181, 18, 27, 0.42)) drop-shadow(0 14px 16px rgba(22, 14, 8, 0.32));
 }
 .pedestal-weight-tag {
   position: absolute;

@@ -38,6 +38,9 @@ export function getProductPackaging(p: { slug?: string; packaging?: string | nul
   if (s.includes("hot-peppe")) {
     return "10 sachets/roll · 100 rolls/carton · Supa Pack";
   }
+  if (s.includes("ose")) {
+    return "10 sachets/roll · Stand-up retail pouches";
+  }
   if (s.includes("turmeric")) {
     return "10 sachets/roll · 100 rolls/carton · Pouches";
   }
@@ -61,6 +64,7 @@ export function getProductStageClass(slug: string = ""): string {
   if (s.includes("cameroon")) return "stage-cameroon";
   if (s.includes("ginger")) return "stage-ginger";
   if (s.includes("turmeric")) return "stage-turmeric";
+  if (s.includes("ose")) return "stage-ose-di-oku";
   return "stage-hot-peppe";
 }
 
@@ -156,6 +160,16 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     images: ["/Product/turmeric.png"],
     description: "Pure, golden grounded turmeric - rich in colour and warmth for everyday cooking.",
     sizes: ["100 g"], formats: ["Grounded Turmeric"],
+  },
+  {
+    id: "ose-di-oku", slug: "ose-di-oku", name: "Ose di Oku", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Southeastern Fiery Blend", image: "/Product/ose-di-oku.png",
+    images: ["/Product/ose-di-oku.png"],
+    description: "Authentic, fiery pepper blend crafted for Southeastern Nigerian culinary heritage and traditional soups like Ofe Owerri, Banga, and Nsala.",
+    sizes: ["100 g", "50 g", "10 g"], formats: ["Grounded Peppe"], featured: true,
+    marketCategory: "Regional Gourmet · Fiery Blend",
+    colour: "Fiery rich red", asta: "55–65", scoville: "65,000–75,000 SHU",
+    usage: "Perfect for Ofe Owerri, Banga, Nsala & native soups",
   },
 ];
 

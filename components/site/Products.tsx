@@ -64,7 +64,7 @@ export default function Products({ products }: { products: UIProduct[] }) {
       return;
     }
 
-    // Start auto wave across all 5 products: 1.2s per card
+    // Start auto wave across all 6 products: 1.2s per card
     setIsAutoPlaying(true);
     setActivePopIndex(0); // Card 1 (Hot Peppe) 0.0s - 1.2s
 
@@ -85,12 +85,16 @@ export default function Products({ products }: { products: UIProduct[] }) {
     }, 4800);
 
     const t5 = setTimeout(() => {
-      setActivePopIndex(null); // Return to rest
+      setActivePopIndex(5); // Card 6 (Ose di Oku) 6.0s - 7.2s
     }, 6000);
 
     const t6 = setTimeout(() => {
+      setActivePopIndex(null); // Return to rest
+    }, 7200);
+
+    const t7 = setTimeout(() => {
       setIsAutoPlaying(false); // Hover lock releases
-    }, 6400);
+    }, 7600);
 
     return () => {
       clearTimeout(t1);
@@ -99,6 +103,7 @@ export default function Products({ products }: { products: UIProduct[] }) {
       clearTimeout(t4);
       clearTimeout(t5);
       clearTimeout(t6);
+      clearTimeout(t7);
     };
   }, [isInView, isMobile, tab]);
 

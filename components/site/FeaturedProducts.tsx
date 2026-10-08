@@ -111,6 +111,8 @@ export function ProductPedestalCard({
                 ? "/Product/atarodo-new.png"
                 : product.slug.includes("cameroon")
                 ? "/Product/hero-cameroon-studio.png"
+                : product.slug.includes("ose")
+                ? "/Product/ose-di-oku.png"
                 : "/img/product-hot-peppe.png")
             }
             alt={product.name}
@@ -144,6 +146,7 @@ export const PRODUCT_TAGLINES: Record<string, string> = {
   "cameroon": "Earthy, exotic, and intensely aromatic.",
   "ginger": "Aromatic, finely grounded ginger bringing warmth and depth to every meal.",
   "turmeric": "Pure, golden grounded turmeric — rich in natural aroma and colour.",
+  "ose-di-oku": "Fiery traditional blend crafted for authentic Southeastern soups.",
 };
 
 export const getProductTagline = (slug: string) => {
@@ -151,6 +154,7 @@ export const getProductTagline = (slug: string) => {
   if (slug.includes("cameroon")) return PRODUCT_TAGLINES["cameroon"];
   if (slug.includes("ginger")) return PRODUCT_TAGLINES["ginger"];
   if (slug.includes("turmeric")) return PRODUCT_TAGLINES["turmeric"];
+  if (slug.includes("ose")) return PRODUCT_TAGLINES["ose-di-oku"];
   return PRODUCT_TAGLINES["hot-peppe"];
 };
 
