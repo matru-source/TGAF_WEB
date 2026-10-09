@@ -7,10 +7,12 @@ export default function ProductGallery({
   images,
   alt,
   wellClass = "",
+  stageClass = "",
 }: {
   images: string[];
   alt: string;
   wellClass?: string;
+  stageClass?: string;
 }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -80,12 +82,13 @@ export default function ProductGallery({
 
   return (
     <div
-      className={`gallery ${wellClass}`}
+      className={`gallery ${stageClass || wellClass}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
+      <div className="pedestal-disc" aria-hidden="true" />
       <div
         className="gallery-track"
         ref={trackRef}

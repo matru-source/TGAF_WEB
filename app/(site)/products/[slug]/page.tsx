@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProducts } from "@/lib/queries";
-import { accentClass, getProductPackaging } from "@/lib/data";
+import { accentClass, getProductPackaging, getProductStageClass } from "@/lib/data";
 import ProductGallery from "@/components/site/ProductGallery";
 
 export const dynamic = "force-dynamic";
@@ -20,11 +20,13 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const all = await getProducts();
   const related = all.filter((p) => p.segment === "B2C" && p.slug !== product.slug).slice(0, 3);
   const a = accentClass(product.accent);
+  const stageClass = getProductStageClass(product.slug);
   const gallery = [...new Set([product.image, ...(product.images ?? [])].filter(Boolean) as string[])].filter(
     (src) => !src.includes("-studio.jpg"),
   );
   const packaging = getProductPackaging(product);
   const specs = [
+    ["Grammage", product.sizes && product.sizes.length > 0 ? product.sizes.join(" · ") : null],
     ["Colour", product.colour],
     ["ASTA", product.asta && product.asta !== "-" ? product.asta : null],
     ["Scoville", product.scoville],
@@ -39,9 +41,10 @@ export default async function ProductDetail({ params }: { params: { slug: string
         <div className="container">
           <div className="pdp-grid">
             {gallery.length > 0 ? (
-              <ProductGallery images={gallery} alt={product.name} wellClass={a.well} />
+              <ProductGallery images={gallery} alt={product.name} stageClass={stageClass} wellClass={a.well} />
             ) : (
-              <div className={`pdp-media ${a.well}`}>
+              <div className={`pdp-media ${stageClass || a.well}`}>
+                <div className="pedestal-disc" aria-hidden="true" />
                 <span className="nophoto">{product.name.charAt(0)}</span>
               </div>
             )}
@@ -95,9 +98,11 @@ export default async function ProductDetail({ params }: { params: { slug: string
             <div className="product-grid">
               {related.map((p, i) => {
                 const ra = accentClass(p.accent);
+                const pStageClass = getProductStageClass(p.slug);
                 return (
                   <Link href={`/products/${p.slug}`} className={`pcard ${ra.card} reveal ${i % 3 ? (i % 3 === 1 ? "d1" : "d2") : ""}`} key={p.id}>
-                    <div className={`well ${ra.well}`}>
+                    <div className={`well ${pStageClass || ra.well}`}>
+                      <div className="pedestal-disc" aria-hidden="true" />
                       {p.image ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={p.image} alt={p.name} loading="lazy" />

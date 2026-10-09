@@ -68,6 +68,7 @@ export default function JourneyTimeline() {
   }, []);
 
   const jumpToStep = (index: number) => {
+    setActiveIndex(index);
     const track = pinTrackRef.current;
     if (!track) return;
     const vh = window.innerHeight || document.documentElement.clientHeight;
@@ -75,10 +76,12 @@ export default function JourneyTimeline() {
     const stage = track.querySelector<HTMLElement>(".journey-pinned-stage");
     const stageHeight = stage?.offsetHeight || (vh - pinTop);
     const pinnedDistance = track.offsetHeight - stageHeight;
-    const targetProgress = (index + 0.5) / 5;
-    const trackDocTop = window.scrollY + track.getBoundingClientRect().top;
-    const targetScrollY = trackDocTop - pinTop + targetProgress * pinnedDistance;
-    window.scrollTo({ top: Math.max(0, targetScrollY), behavior: "smooth" });
+    if (pinnedDistance > 50) {
+      const targetProgress = (index + 0.5) / 5;
+      const trackDocTop = window.scrollY + track.getBoundingClientRect().top;
+      const targetScrollY = trackDocTop - pinTop + targetProgress * pinnedDistance;
+      window.scrollTo({ top: Math.max(0, targetScrollY), behavior: "smooth" });
+    }
   };
 
   const activeStep = PROCESS_STEPS[activeIndex] || PROCESS_STEPS[0];

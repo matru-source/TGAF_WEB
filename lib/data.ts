@@ -38,6 +38,9 @@ export function getProductPackaging(p: { slug?: string; packaging?: string | nul
   if (s.includes("hot-peppe")) {
     return "10 sachets/roll · 100 rolls/carton · Supa Pack";
   }
+  if (s.includes("ose")) {
+    return "10 sachets/roll · 100 rolls/carton";
+  }
   if (s.includes("turmeric")) {
     return "10 sachets/roll · 100 rolls/carton · Pouches";
   }
@@ -54,6 +57,16 @@ export const accentClass = (a: AccentKey) => ({
   well: `well--${a}`,
   card: a === "turmeric" ? "t-turmeric" : a === "ginger" ? "t-ginger" : "",
 });
+
+export function getProductStageClass(slug: string = ""): string {
+  const s = slug.toLowerCase();
+  if (s.includes("atarodo")) return "stage-atarodo";
+  if (s.includes("cameroon")) return "stage-cameroon";
+  if (s.includes("ginger")) return "stage-ginger";
+  if (s.includes("turmeric")) return "stage-turmeric";
+  if (s.includes("ose")) return "stage-ose-di-oku";
+  return "stage-hot-peppe";
+}
 
 // ---- Hero + brand ----
 export const BRAND = {
@@ -95,12 +108,22 @@ export const SPICES: { key: AccentKey; tag: string; name: string; hex: string; b
 // ---- B2C product fallback ----
 export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
+    id: "ose-di-oku", slug: "ose-di-oku", name: "Ose di Oku", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Southeastern Fiery Blend", image: "/Product/ose-di-oku.png",
+    images: ["/Product/ose-di-oku.png"],
+    description: "Authentic, fiery pepper blend crafted for Southeastern Nigerian culinary heritage and traditional soups like Ofe Owerri, Banga, and Nsala.",
+    sizes: ["8 g"], formats: ["Grounded Peppe"], featured: true,
+    marketCategory: "Regional Gourmet · Fiery Blend",
+    colour: "Fiery rich red", asta: "55–65", scoville: "65,000–75,000 SHU",
+    usage: "Perfect for Ofe Owerri, Banga, Nsala & native soups",
+  },
+  {
     id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe", segment: "B2C",
     accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hero-hot-peppe-studio.png",
     images: [
       "/Product/hero-hot-peppe-studio.png",
-      "/Product/hot-peppe-supa-pack.jpg",
-      "/Product/hot-peppe-carton.jpg",
+      "/Product/hot-peppe-supa-pack.png",
+      "/Product/hot-peppe-carton.png",
     ],
     description: "Rich red, premium grounded peppe to add bold heat, aroma and fresh flavour to every meal.",
     sizes: ["100 g", "5 g", "Supa Pack"], formats: ["Grounded Peppe"], featured: true,
@@ -113,10 +136,10 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/atarodo-new.png",
     images: [
       "/Product/atarodo-new.png",
-      "/Product/atarodo-carton.jpg",
+      "/Product/atarodo-carton.png",
     ],
     description: "Dark-red scotch-bonnet style grounded pepe - a mass-market staple for everyday Nigerian heat.",
-    sizes: ["8 g", "3 g", "Carton"], formats: ["Grounded Pepe"], featured: true,
+    sizes: ["8 g"], formats: ["Grounded Pepe"], featured: true,
     marketCategory: "Scotch-bonnet · mass-market staple",
     colour: "Dark red", asta: "50–60", scoville: "~60,000 SHU",
     usage: "Adds spice to all meals",
@@ -126,7 +149,7 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     accent: "chilli", tagline: "Chilli · Gourmet", image: "/Product/hero-cameroon-studio.png",
     images: [
       "/Product/hero-cameroon-studio.png",
-      "/Product/cameroon-carton.jpg",
+      "/Product/cameroon-carton.png",
     ],
     description: "Deep red, smoky and pungent - a gourmet, authentic grounded pepe for soups, stews & noodles.",
     sizes: ["100 g", "50 g", "3 g"], formats: ["Smoked Grounded Pepe"], featured: true,
@@ -135,18 +158,18 @@ export const FALLBACK_PRODUCTS: UIProduct[] = [
     usage: "For soups, stews & noodles",
   },
   {
-    id: "ginger", slug: "ginger-powder", name: "Ginger", segment: "B2C",
-    accent: "ginger", tagline: "Ginger", image: "/Product/ginger.png",
-    images: ["/Product/ginger.png"],
-    description: "Aromatic, finely grounded ginger that brings warmth and depth to soups, marinades and stews.",
-    sizes: ["100 g"], formats: ["Grounded Ginger"],
-  },
-  {
     id: "turmeric", slug: "turmeric-powder", name: "Turmeric", segment: "B2C",
     accent: "turmeric", tagline: "Turmeric", image: "/Product/turmeric.png",
     images: ["/Product/turmeric.png"],
     description: "Pure, golden grounded turmeric - rich in colour and warmth for everyday cooking.",
     sizes: ["100 g"], formats: ["Grounded Turmeric"],
+  },
+  {
+    id: "ginger", slug: "ginger-powder", name: "Ginger", segment: "B2C",
+    accent: "ginger", tagline: "Ginger", image: "/Product/ginger.png",
+    images: ["/Product/ginger.png"],
+    description: "Aromatic, finely grounded ginger that brings warmth and depth to soups, marinades and stews.",
+    sizes: ["100 g"], formats: ["Grounded Ginger"],
   },
 ];
 

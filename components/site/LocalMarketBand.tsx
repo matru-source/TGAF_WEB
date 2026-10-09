@@ -112,7 +112,7 @@ export default function LocalMarketBand() {
               >
                 <video
                   ref={videoRef}
-                  src="/video/farm-sun-drying-story.mp4"
+                  src="/video/home.mp4"
                   poster="/img/farm-sun-drying-poster.jpg"
                   muted
                   loop
@@ -236,7 +236,7 @@ export default function LocalMarketBand() {
             >
               <video
                 ref={modalVideoRef}
-                src="/video/farm-sun-drying-story.mp4"
+                src="/video/home.mp4"
                 poster="/img/farm-sun-drying-poster.jpg"
                 autoPlay
                 loop

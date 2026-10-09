@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { type UIProduct } from "@/lib/data";
+import { type UIProduct, getProductStageClass } from "@/lib/data";
 import { motion, useMotionValue, useTransform, useSpring, useInView } from "framer-motion";
 
 export function ProductPedestalCard({
@@ -111,6 +111,8 @@ export function ProductPedestalCard({
                 ? "/Product/atarodo-new.png"
                 : product.slug.includes("cameroon")
                 ? "/Product/hero-cameroon-studio.png"
+                : product.slug.includes("ose")
+                ? "/Product/ose-di-oku.png"
                 : "/img/product-hot-peppe.png")
             }
             alt={product.name}
@@ -144,6 +146,7 @@ export const PRODUCT_TAGLINES: Record<string, string> = {
   "cameroon": "Earthy, exotic, and intensely aromatic.",
   "ginger": "Aromatic, finely grounded ginger bringing warmth and depth to every meal.",
   "turmeric": "Pure, golden grounded turmeric — rich in natural aroma and colour.",
+  "ose-di-oku": "Fiery traditional blend crafted for authentic Southeastern soups.",
 };
 
 export const getProductTagline = (slug: string) => {
@@ -151,16 +154,11 @@ export const getProductTagline = (slug: string) => {
   if (slug.includes("cameroon")) return PRODUCT_TAGLINES["cameroon"];
   if (slug.includes("ginger")) return PRODUCT_TAGLINES["ginger"];
   if (slug.includes("turmeric")) return PRODUCT_TAGLINES["turmeric"];
+  if (slug.includes("ose")) return PRODUCT_TAGLINES["ose-di-oku"];
   return PRODUCT_TAGLINES["hot-peppe"];
 };
 
-export const getProductStageClass = (slug: string) => {
-  if (slug.includes("atarodo")) return "stage-atarodo";
-  if (slug.includes("cameroon")) return "stage-cameroon";
-  if (slug.includes("ginger")) return "stage-ginger";
-  if (slug.includes("turmeric")) return "stage-turmeric";
-  return "stage-hot-peppe";
-};
+export { getProductStageClass } from "@/lib/data";
 
 export default function FeaturedProducts({ products }: { products: UIProduct[] }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -219,7 +217,19 @@ export default function FeaturedProducts({ products }: { products: UIProduct[] }
   const items = [...products.filter((p) => p.segment === "B2C")]
     .sort((a, b) => {
       const rank = (slug: string) =>
-        slug.includes("hot-peppe") ? 0 : slug.includes("atarodo") ? 1 : slug.includes("cameroon") ? 2 : 9;
+        slug.includes("ose")
+          ? 0
+          : slug.includes("hot-peppe")
+          ? 1
+          : slug.includes("atarodo")
+          ? 2
+          : slug.includes("cameroon")
+          ? 3
+          : slug.includes("turmeric")
+          ? 4
+          : slug.includes("ginger")
+          ? 5
+          : 9;
       return rank(a.slug) - rank(b.slug);
     })
     .slice(0, 3);

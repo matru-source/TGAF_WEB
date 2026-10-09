@@ -128,7 +128,7 @@ export default function GalleryView() {
                   src={item.image}
                   alt={item.title}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
                   className="gallery-card-img"
                   loading="lazy"
                 />

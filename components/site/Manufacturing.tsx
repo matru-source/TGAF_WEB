@@ -70,11 +70,11 @@ export default function Manufacturing() {
             </p>
           </div>
 
-          <div className="reveal" style={{ marginBottom: "clamp(24px, 3vw, 36px)" }}>
+          <div className="reveal facility-carousel-holder">
             <FacilityCarousel />
           </div>
 
-          <div className="cap-list reveal" style={{ marginTop: "24px" }}>
+          <div className="cap-list reveal facility-caps-list">
             {FACILITY_CAPS.map((c) => (
               <span key={c}>{c}</span>
             ))}
