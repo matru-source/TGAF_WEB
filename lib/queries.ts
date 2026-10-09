@@ -37,7 +37,7 @@ const mapProduct = (p: {
   asta: p.asta, scoville: p.scoville, usage: p.usage, featured: p.featured,
 });
 
-/** Published products from the DB; falls back to static data if empty/unavailable. */
+/** Published products from the DB; merges new fallback products and maintains canonical order. */
 export async function getProducts(): Promise<UIProduct[]> {
   if (DB_DISABLED) return FALLBACK_PRODUCTS;
   const rows = await withTimeout(
@@ -45,7 +45,44 @@ export async function getProducts(): Promise<UIProduct[]> {
     2500,
   );
   if (!rows || !rows.length) return FALLBACK_PRODUCTS;
-  return rows.map(mapProduct);
+
+  const dbProducts = rows.map(mapProduct);
+  const allMap = new Map<string, UIProduct>();
+
+  for (const p of dbProducts) {
+    const fb = FALLBACK_PRODUCTS.find((f) => f.slug === p.slug);
+    if (fb) {
+      allMap.set(p.slug, {
+        ...p,
+        sizes: fb.sizes && fb.sizes.length > 0 ? fb.sizes : p.sizes,
+        formats: fb.formats && fb.formats.length > 0 ? fb.formats : p.formats,
+        image: fb.image ?? p.image,
+      });
+    } else {
+      allMap.set(p.slug, p);
+    }
+  }
+
+  // Include any new products in FALLBACK_PRODUCTS (e.g. Ose di Oku) that are not yet in the DB
+  for (const p of FALLBACK_PRODUCTS) {
+    if (!allMap.has(p.slug)) {
+      allMap.set(p.slug, p);
+    }
+  }
+
+  // Order products according to the canonical sequence defined in FALLBACK_PRODUCTS
+  const ordered: UIProduct[] = [];
+  for (const fp of FALLBACK_PRODUCTS) {
+    const item = allMap.get(fp.slug);
+    if (item) {
+      ordered.push(item);
+      allMap.delete(fp.slug);
+    }
+  }
+  for (const remaining of allMap.values()) {
+    ordered.push(remaining);
+  }
+  return ordered;
 }
 
 const SLUG_ALIASES: Record<string, string> = {
