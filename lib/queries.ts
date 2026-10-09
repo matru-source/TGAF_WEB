@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { prisma } from "./prisma";
 import {
   FALLBACK_PRODUCTS,
@@ -25,20 +26,39 @@ function withTimeout<T>(p: Promise<T>, ms: number): Promise<T | null> {
   ]);
 }
 
+const sanitizeImageSrc = (src?: string | null): string => {
+  if (!src) return "";
+  // Always use transparent .png instead of .jpg to eliminate grey/white background boxes
+  return src.replace(/\.jpe?g$/i, ".png");
+};
+
 const mapProduct = (p: {
   id: string; slug: string; name: string; segment: "B2C" | "B2B"; accent: string;
   tagline: string | null; description: string; image: string | null; images: string[]; sizes: string[]; formats: string[];
   costPositioning: string | null; marketCategory: string | null; colour: string | null;
   asta: string | null; scoville: string | null; usage: string | null; featured: boolean;
-}): UIProduct => ({
-  id: p.id, slug: p.slug, name: p.name, segment: p.segment, accent: accentToKey(p.accent),
-  tagline: p.tagline, description: p.description, image: p.image, images: p.images, sizes: p.sizes, formats: p.formats,
-  costPositioning: p.costPositioning, marketCategory: p.marketCategory, colour: p.colour,
-  asta: p.asta, scoville: p.scoville, usage: p.usage, featured: p.featured,
-});
+}): UIProduct => {
+  const fb = FALLBACK_PRODUCTS.find((f) => f.slug === p.slug);
+  const cleanImage = sanitizeImageSrc(fb?.image || p.image) || null;
+  const rawImages = (fb?.images && fb.images.length > 0) ? fb.images : (p.images ?? []);
+  const cleanImages = rawImages
+    .map(sanitizeImageSrc)
+    .filter((img) => Boolean(img) && !img.includes("-studio.jpg"));
+
+  return {
+    id: p.id, slug: p.slug, name: p.name, segment: p.segment, accent: accentToKey(p.accent),
+    tagline: p.tagline, description: p.description,
+    image: cleanImage,
+    images: cleanImages.length > 0 ? cleanImages : (cleanImage ? [cleanImage] : []),
+    sizes: fb?.sizes && fb.sizes.length > 0 ? fb.sizes : p.sizes,
+    formats: fb?.formats && fb.formats.length > 0 ? fb.formats : p.formats,
+    costPositioning: p.costPositioning, marketCategory: p.marketCategory, colour: p.colour,
+    asta: p.asta, scoville: p.scoville, usage: p.usage, featured: p.featured,
+  };
+};
 
 /** Published products from the DB; merges new fallback products and maintains canonical order. */
-export async function getProducts(): Promise<UIProduct[]> {
+export const getProducts = cache(async function getProducts(): Promise<UIProduct[]> {
   if (DB_DISABLED) return FALLBACK_PRODUCTS;
   const rows = await withTimeout(
     prisma.product.findMany({ where: { published: true }, orderBy: [{ order: "asc" }, { createdAt: "asc" }] }),
@@ -57,6 +77,7 @@ export async function getProducts(): Promise<UIProduct[]> {
         sizes: fb.sizes && fb.sizes.length > 0 ? fb.sizes : p.sizes,
         formats: fb.formats && fb.formats.length > 0 ? fb.formats : p.formats,
         image: fb.image ?? p.image,
+        images: (fb.images && fb.images.length > 0) ? fb.images : p.images,
       });
     } else {
       allMap.set(p.slug, p);
@@ -83,7 +104,7 @@ export async function getProducts(): Promise<UIProduct[]> {
     ordered.push(remaining);
   }
   return ordered;
-}
+});
 
 const SLUG_ALIASES: Record<string, string> = {
   "hot-pepe-powder": "hot-peppe-powder",
@@ -99,14 +120,14 @@ const SLUG_ALIASES: Record<string, string> = {
 };
 
 /** One product by slug; falls back to static data. Returns null if not found. */
-export async function getProductBySlug(rawSlug: string): Promise<UIProduct | null> {
+export const getProductBySlug = cache(async function getProductBySlug(rawSlug: string): Promise<UIProduct | null> {
   const slug = SLUG_ALIASES[rawSlug] || rawSlug;
   if (!DB_DISABLED) {
     const p = await withTimeout(prisma.product.findUnique({ where: { slug } }), 2500);
     if (p) return mapProduct(p);
   }
   return FALLBACK_PRODUCTS.find((p) => p.slug === slug) ?? null;
-}
+});
 
 /** Published leadership team members; falls back to static data if empty/unavailable. */
 export async function getTeam(): Promise<UITeamMember[]> {

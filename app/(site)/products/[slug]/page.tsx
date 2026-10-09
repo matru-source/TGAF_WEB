@@ -5,7 +5,12 @@ import { getProductBySlug, getProducts } from "@/lib/queries";
 import { accentClass, getProductPackaging, getProductStageClass } from "@/lib/data";
 import ProductGallery from "@/components/site/ProductGallery";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const products = await getProducts();
+  return products.map((p) => ({ slug: p.slug }));
+}
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const p = await getProductBySlug(params.slug);
@@ -21,9 +26,9 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const related = all.filter((p) => p.segment === "B2C" && p.slug !== product.slug).slice(0, 3);
   const a = accentClass(product.accent);
   const stageClass = getProductStageClass(product.slug);
-  const gallery = [...new Set([product.image, ...(product.images ?? [])].filter(Boolean) as string[])].filter(
-    (src) => !src.includes("-studio.jpg"),
-  );
+  const rawList = [product.image, ...(product.images ?? [])].filter(Boolean) as string[];
+  const gallery = [...new Set(rawList.map((src) => src.replace(/\.jpe?g$/i, ".png")))]
+    .filter((src) => !src.includes("-studio.jpg"));
   const packaging = getProductPackaging(product);
   const specs = [
     ["Grammage", product.sizes && product.sizes.length > 0 ? product.sizes.join(" · ") : null],
