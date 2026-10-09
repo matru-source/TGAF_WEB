@@ -6302,12 +6302,13 @@ img { -webkit-user-drag: none; }
   .manufacturing-plant-wrap {
     padding-bottom: 24px !important;
   }
-  .facility-caps-list {
-    margin-top: 14px !important;
-    margin-bottom: 0 !important;
+  /* Completely remove the blurred capability pills/cards on Android & mobile */
+  .facility-caps-list,
+  .cap-list.facility-caps-list {
+    display: none !important;
   }
   .manufacturing-machinery-wrap {
-    padding-top: 28px !important;
+    padding-top: 24px !important;
   }
 }
 .mfg-hero-media { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); aspect-ratio: 16/8; }
