@@ -27,6 +27,7 @@ const NAV: Item[] = [
     ],
   },
   { label: "Products", href: "/products" },
+  { label: "Customer Grievance", href: "/customer-grievance" },
   { label: "Gallery", href: "/gallery" },
   { label: "Careers", href: "/careers" },
   { label: "News", href: "/news" },
@@ -67,11 +68,25 @@ export default function Header() {
                 <div
                   className={`nav-item has-dd${activeGroup(item.children) ? " active" : ""}${openIdx === idx ? " open" : ""}`}
                   key={item.label}
-                  onMouseEnter={() => setOpenIdx(idx)}
-                  onMouseLeave={() => setOpenIdx((v) => (v === idx ? null : v))}
-                  onFocus={() => setOpenIdx(idx)}
+                  onMouseEnter={() => {
+                    if (typeof window !== "undefined" && window.innerWidth > 900) {
+                      setOpenIdx(idx);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (typeof window !== "undefined" && window.innerWidth > 900) {
+                      setOpenIdx((v) => (v === idx ? null : v));
+                    }
+                  }}
+                  onFocus={() => {
+                    if (typeof window !== "undefined" && window.innerWidth > 900) {
+                      setOpenIdx(idx);
+                    }
+                  }}
                   onBlur={(e) => {
-                    if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpenIdx((v) => (v === idx ? null : v));
+                    if (typeof window !== "undefined" && window.innerWidth > 900) {
+                      if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpenIdx((v) => (v === idx ? null : v));
+                    }
                   }}
                 >
                   <button
@@ -80,7 +95,7 @@ export default function Header() {
                     aria-expanded={openIdx === idx}
                     onClick={(e) => {
                       e.preventDefault();
-                      setOpenIdx(openIdx === idx ? null : idx);
+                      setOpenIdx((current) => (current === idx ? null : idx));
                     }}
                   >
                     {item.label}

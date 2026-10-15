@@ -55,8 +55,10 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Contact</h4>
+            <h4>Contact &amp; Support</h4>
             <ul>
+              <li><Link href="/contact">Get in Touch</Link></li>
+              <li><Link href="/customer-grievance">Customer Grievance &amp; Reviews</Link></li>
               <li><a href={`mailto:${BRAND.email}`}>Email us</a></li>
               <li><a href={BRAND.website} target="_blank" rel="noopener noreferrer">Website</a></li>
               <li><Link href="/contact">Ikorodu, Lagos</Link></li>

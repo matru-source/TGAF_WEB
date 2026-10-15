@@ -15,17 +15,17 @@ export default function Products({ products }: { products: UIProduct[] }) {
   const b2c = products.filter((p) => p.segment === "B2C");
 
   // Complete B2C range in requested order:
-  // 1- Ose di Oku, 2- Hot Peppe, 3- Atarodo, 4- Cameroon, 5- Turmeric, 6- Ginger
+  // 1- Hot Peppe, 2- Atarodo, 3- Cameroon, 4- Ose Di Oku, 5- Turmeric, 6- Ginger
   const items = [...b2c]
     .sort((a, b) => {
       const rank = (slug: string) =>
-        slug.includes("ose")
+        slug.includes("hot-peppe")
           ? 0
-          : slug.includes("hot-peppe")
-          ? 1
           : slug.includes("atarodo")
-          ? 2
+          ? 1
           : slug.includes("cameroon")
+          ? 2
+          : slug.includes("ose")
           ? 3
           : slug.includes("turmeric")
           ? 4
@@ -69,18 +69,18 @@ export default function Products({ products }: { products: UIProduct[] }) {
 
     // Start auto wave across all 6 products in order: 1.2s per card
     setIsAutoPlaying(true);
-    setActivePopIndex(0); // Card 1 (Ose di Oku) 0.0s - 1.2s
+    setActivePopIndex(0); // Card 1 (Hot Peppe) 0.0s - 1.2s
 
     const t1 = setTimeout(() => {
-      setActivePopIndex(1); // Card 2 (Hot Peppe) 1.2s - 2.4s
+      setActivePopIndex(1); // Card 2 (Atarodo) 1.2s - 2.4s
     }, 1200);
 
     const t2 = setTimeout(() => {
-      setActivePopIndex(2); // Card 3 (Atarodo) 2.4s - 3.6s
+      setActivePopIndex(2); // Card 3 (Cameroon) 2.4s - 3.6s
     }, 2400);
 
     const t3 = setTimeout(() => {
-      setActivePopIndex(3); // Card 4 (Cameroon) 3.6s - 4.8s
+      setActivePopIndex(3); // Card 4 (Ose Di Oku) 3.6s - 4.8s
     }, 3600);
 
     const t4 = setTimeout(() => {

@@ -113,7 +113,7 @@ export function ProductPedestalCard({
                 ? "/Product/hero-cameroon-studio.png"
                 : product.slug.includes("ose")
                 ? "/Product/ose-di-oku.png"
-                : "/img/product-hot-peppe.png")
+                : "/Product/hero-hot-peppe-studio.png")
             }
             alt={product.name}
             className="pedestal-product-asset"
@@ -198,18 +198,23 @@ export default function FeaturedProducts({ products }: { products: UIProduct[] }
     }, 3000);
 
     const t3 = setTimeout(() => {
-      setActivePopIndex(null); // Card 3 returns to rest at 4.5s
+      setActivePopIndex(3); // Card 4 (Ose Di Oku) pops up from 4.5s to 6.0s
     }, 4500);
 
     const t4 = setTimeout(() => {
-      setIsAutoPlaying(false); // Hover lock releases at 4.9s
-    }, 4900);
+      setActivePopIndex(null); // Card 4 returns to rest at 6.0s
+    }, 6000);
+
+    const t5 = setTimeout(() => {
+      setIsAutoPlaying(false); // Hover lock releases at 6.4s
+    }, 6400);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
       clearTimeout(t4);
+      clearTimeout(t5);
     };
   }, [isInView, isMobile]);
 
@@ -217,13 +222,13 @@ export default function FeaturedProducts({ products }: { products: UIProduct[] }
   const items = [...products.filter((p) => p.segment === "B2C")]
     .sort((a, b) => {
       const rank = (slug: string) =>
-        slug.includes("ose")
+        slug.includes("hot-peppe")
           ? 0
-          : slug.includes("hot-peppe")
-          ? 1
           : slug.includes("atarodo")
-          ? 2
+          ? 1
           : slug.includes("cameroon")
+          ? 2
+          : slug.includes("ose")
           ? 3
           : slug.includes("turmeric")
           ? 4
@@ -232,7 +237,7 @@ export default function FeaturedProducts({ products }: { products: UIProduct[] }
           : 9;
       return rank(a.slug) - rank(b.slug);
     })
-    .slice(0, 3);
+    .slice(0, 4);
 
   return (
     <section ref={sectionRef} className="products-magical-section">

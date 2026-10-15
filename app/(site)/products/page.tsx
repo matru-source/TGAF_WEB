@@ -21,7 +21,7 @@ export default async function ProductsPage() {
         title={<>Peppe, turmeric &amp; ginger for everybody</>}
         subtitle="A complete range across consumer packs and bulk formats — proven quality from farm to kitchen."
         crumb="Products"
-        tone="chilli"
+        tone="products"
       />
       <Products products={products} />
       <CtaBand title="Need bulk supply for your business?" ctaLabel="Request a quote" />

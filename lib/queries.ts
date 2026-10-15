@@ -47,13 +47,24 @@ const mapProduct = (p: {
 
   return {
     id: p.id, slug: p.slug, name: p.name, segment: p.segment, accent: accentToKey(p.accent),
-    tagline: p.tagline, description: p.description,
+    tagline: fb?.tagline || p.tagline,
+    description: fb?.description || p.description,
     image: cleanImage,
     images: cleanImages.length > 0 ? cleanImages : (cleanImage ? [cleanImage] : []),
     sizes: fb?.sizes && fb.sizes.length > 0 ? fb.sizes : p.sizes,
     formats: fb?.formats && fb.formats.length > 0 ? fb.formats : p.formats,
-    costPositioning: p.costPositioning, marketCategory: p.marketCategory, colour: p.colour,
-    asta: p.asta, scoville: p.scoville, usage: p.usage, featured: p.featured,
+    costPositioning: fb?.costPositioning || p.costPositioning,
+    marketCategory: fb?.marketCategory || p.marketCategory,
+    colour: fb?.colour || p.colour,
+    asta: fb?.asta || p.asta,
+    scoville: fb?.scoville || p.scoville,
+    usage: fb?.usage || p.usage,
+    packaging: fb?.packaging,
+    technicalSpecs: fb?.technicalSpecs,
+    shelfLife: fb?.shelfLife,
+    nutritionalTraits: fb?.nutritionalTraits,
+    strengths: fb?.strengths,
+    featured: p.featured,
   };
 };
 
@@ -73,9 +84,20 @@ export const getProducts = cache(async function getProducts(): Promise<UIProduct
     const fb = FALLBACK_PRODUCTS.find((f) => f.slug === p.slug);
     if (fb) {
       allMap.set(p.slug, {
+        ...fb,
         ...p,
+        description: fb.description || p.description,
         sizes: fb.sizes && fb.sizes.length > 0 ? fb.sizes : p.sizes,
         formats: fb.formats && fb.formats.length > 0 ? fb.formats : p.formats,
+        colour: fb.colour || p.colour,
+        asta: fb.asta || p.asta,
+        scoville: fb.scoville || p.scoville,
+        usage: fb.usage || p.usage,
+        marketCategory: fb.marketCategory || p.marketCategory,
+        technicalSpecs: fb.technicalSpecs,
+        shelfLife: fb.shelfLife,
+        nutritionalTraits: fb.nutritionalTraits,
+        strengths: fb.strengths,
         image: fb.image ?? p.image,
         images: (fb.images && fb.images.length > 0) ? fb.images : p.images,
       });
@@ -84,7 +106,7 @@ export const getProducts = cache(async function getProducts(): Promise<UIProduct
     }
   }
 
-  // Include any new products in FALLBACK_PRODUCTS (e.g. Ose di Oku) that are not yet in the DB
+  // Include any new products in FALLBACK_PRODUCTS (e.g. Ose Di Oku) that are not yet in the DB
   for (const p of FALLBACK_PRODUCTS) {
     if (!allMap.has(p.slug)) {
       allMap.set(p.slug, p);

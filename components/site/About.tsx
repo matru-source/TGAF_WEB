@@ -1,3 +1,5 @@
+import PlantImageSlider from "./PlantImageSlider";
+
 export default function About() {
   return (
     <>
@@ -27,7 +29,7 @@ export default function About() {
         <div className="about-grid">
           <div className="about-media reveal">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/factory-overview.png" alt="Good Earth automated processing factory complex at Ikorodu, Lagos" />
+            <img src="/img/factory-overview.png?v=3" alt="Good Earth automated processing factory complex at Ikorodu, Lagos" />
             <div className="badge">
               <div className="n">6 yrs</div>
               <div className="l">Building Nigeria&apos;s spice supply chain</div>
@@ -171,15 +173,7 @@ export default function About() {
 
           {/* Card 2: Nigeria Plant */}
           <div className="presence-card card-ng">
-            <div className="presence-img-wrap">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/img/facility/packaging-line.jpg"
-                alt="TG Agri Farms automated high-speed sachet packaging line at Ikorodu, Lagos"
-                className="presence-img"
-              />
-              <span className="location-pill pill-ng">🇳🇬 Manufacturing &amp; Operations</span>
-            </div>
+            <PlantImageSlider />
             <div className="presence-body">
               <span className="entity-sub">TG Agri Farms Ltd</span>
               <h3>Ikorodu Plant &amp; Farm Network</h3>

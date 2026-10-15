@@ -15,7 +15,7 @@ export default function CareersPage() {
         title={<>Come grow with us</>}
         subtitle="Purpose-driven, world-class work with real room for youth and women to build careers."
         crumb="Careers"
-        tone="chilli"
+        tone="careers"
       />
       <Careers />
     </>

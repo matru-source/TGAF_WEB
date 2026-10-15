@@ -20,9 +20,9 @@ const itemVariants = {
 };
 
 const spiceImages: Record<string, string> = {
-  chilli: "/img/product-hot-peppe.png",
-  turmeric: "/img/product-turmeric.png",
-  ginger: "/img/product-ginger.png"
+  chilli: "/Product/hero-hot-peppe-studio.png",
+  turmeric: "/Product/turmeric.png",
+  ginger: "/Product/ginger.png"
 };
 
 export default function SpiceTrio() {

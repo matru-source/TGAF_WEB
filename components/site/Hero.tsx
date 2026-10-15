@@ -60,9 +60,10 @@ function AnimatedCounter({ to = 350, suffix = "+", duration = 1.8 }: { to?: numb
 }
 
 const PACK_METAS = [
+  { name: "Hot Peppe (Supa Pack)", tag: "Signature Blend" },
   { name: "Atarodo", tag: "100% Pure Pepper" },
-  { name: "Hot Peppe", tag: "Signature Blend" },
   { name: "Cameroon Peppe", tag: "Smoked Fiery Heat" },
+  { name: "Ose Di Oku", tag: "Fiery Southeastern Blend" },
 ];
 
 export default function Hero({ packs = HERO_SHOWCASE }: { packs?: string[] }) {
@@ -81,140 +82,198 @@ export default function Hero({ packs = HERO_SHOWCASE }: { packs?: string[] }) {
     offset: ["start start", "end end"],
   });
 
-  // Desktop Pack 0 (Atarodo: starts Center -> curves down-right along arc -> exits by 0.46)
-  const x0 = useTransform(scrollYProgress, [0, 0.08, 0.28, 0.46, 1.0], ["0%", "0%", "26%", "50%", "50%"]);
-  const y0 = useTransform(scrollYProgress, [0, 0.08, 0.28, 0.46, 1.0], ["0%", "0%", "12%", "28%", "28%"]);
-  const rotate0 = useTransform(scrollYProgress, [0, 0.08, 0.28, 0.46, 1.0], [-2, -2, 18, 32, 32]);
-  const scale0 = useTransform(scrollYProgress, [0, 0.08, 0.28, 0.46, 1.0], [1.0, 1.0, 0.84, 0.68, 0.68]);
-  const opacity0 = useTransform(scrollYProgress, [0, 0.08, 0.26, 0.44, 1.0], [1, 1, 0.7, 0, 0]);
+  // Desktop Pack 0 (Hot Peppe Supa Pack: starts Center -> curves down-right along arc -> exits by 0.28)
+  const x0 = useTransform(scrollYProgress, [0, 0.06, 0.18, 0.28, 1.0], ["0%", "0%", "26%", "50%", "50%"]);
+  const y0 = useTransform(scrollYProgress, [0, 0.06, 0.18, 0.28, 1.0], ["0%", "0%", "12%", "28%", "28%"]);
+  const rotate0 = useTransform(scrollYProgress, [0, 0.06, 0.18, 0.28, 1.0], [-2, -2, 18, 32, 32]);
+  const scale0 = useTransform(scrollYProgress, [0, 0.06, 0.18, 0.28, 1.0], [1.0, 1.0, 0.84, 0.68, 0.68]);
+  const opacity0 = useTransform(scrollYProgress, [0, 0.06, 0.16, 0.26, 1.0], [1, 1, 0.7, 0, 0]);
   const display0 = useTransform(opacity0, (v) => (v <= 0.005 ? "none" : "block"));
-  const zIndex0 = useTransform(scrollYProgress, (v) => (v < 0.26 ? 5 : 2));
+  const zIndex0 = useTransform(scrollYProgress, (v) => (v < 0.16 ? 5 : 2));
 
-  // Desktop Pack 1 (Hot Peppe: curves up from lower-left arc -> Center at 0.50 -> curves down-right arc -> exits by 0.92)
+  // Desktop Pack 1 (Atarodo: curves up from lower-left arc -> Center at 0.33 -> curves down-right arc -> exits by 0.60)
   const x1 = useTransform(
     scrollYProgress,
-    [0, 0.08, 0.28, 0.48, 0.54, 0.74, 0.92, 1.0],
+    [0, 0.06, 0.18, 0.33, 0.38, 0.49, 0.60, 1.0],
     ["-50%", "-50%", "-26%", "0%", "0%", "26%", "50%", "50%"]
   );
   const y1 = useTransform(
     scrollYProgress,
-    [0, 0.08, 0.28, 0.48, 0.54, 0.74, 0.92, 1.0],
+    [0, 0.06, 0.18, 0.33, 0.38, 0.49, 0.60, 1.0],
     ["28%", "28%", "12%", "0%", "0%", "12%", "28%", "28%"]
   );
   const rotate1 = useTransform(
     scrollYProgress,
-    [0, 0.08, 0.28, 0.48, 0.54, 0.74, 0.92, 1.0],
+    [0, 0.06, 0.18, 0.33, 0.38, 0.49, 0.60, 1.0],
     [-32, -32, -18, -2, -2, 18, 32, 32]
   );
   const scale1 = useTransform(
     scrollYProgress,
-    [0, 0.08, 0.28, 0.48, 0.54, 0.74, 0.92, 1.0],
+    [0, 0.06, 0.18, 0.33, 0.38, 0.49, 0.60, 1.0],
     [0.68, 0.68, 0.84, 1.0, 1.0, 0.84, 0.68, 0.68]
   );
   const opacity1 = useTransform(
     scrollYProgress,
-    [0, 0.08, 0.18, 0.44, 0.56, 0.76, 0.90, 1.0],
+    [0, 0.06, 0.14, 0.30, 0.41, 0.51, 0.58, 1.0],
     [0, 0, 0.6, 1, 1, 0.7, 0, 0]
   );
   const display1 = useTransform(opacity1, (v) => (v <= 0.005 ? "none" : "block"));
-  const zIndex1 = useTransform(scrollYProgress, (v) => (v >= 0.26 && v < 0.72 ? 5 : 3));
+  const zIndex1 = useTransform(scrollYProgress, (v) => (v >= 0.16 && v < 0.49 ? 5 : 3));
 
-  // Desktop Pack 2 (Cameroon Peppe: starts hidden lower-left -> curves up along arc -> Center at 0.92 -> holds at 1.0)
+  // Desktop Pack 2 (Cameroon Peppe: curves up from lower-left arc -> Center at 0.65 -> curves down-right arc -> exits by 0.92)
   const x2 = useTransform(
     scrollYProgress,
-    [0, 0.48, 0.54, 0.74, 0.92, 1.0],
-    ["-50%", "-50%", "-45%", "-26%", "0%", "0%"]
+    [0, 0.38, 0.50, 0.65, 0.70, 0.81, 0.92, 1.0],
+    ["-50%", "-50%", "-26%", "0%", "0%", "26%", "50%", "50%"]
   );
   const y2 = useTransform(
     scrollYProgress,
-    [0, 0.48, 0.54, 0.74, 0.92, 1.0],
-    ["28%", "28%", "24%", "12%", "0%", "0%"]
+    [0, 0.38, 0.50, 0.65, 0.70, 0.81, 0.92, 1.0],
+    ["28%", "28%", "12%", "0%", "0%", "12%", "28%", "28%"]
   );
   const rotate2 = useTransform(
     scrollYProgress,
-    [0, 0.48, 0.54, 0.74, 0.92, 1.0],
-    [-32, -32, -28, -18, -2, -2]
+    [0, 0.38, 0.50, 0.65, 0.70, 0.81, 0.92, 1.0],
+    [-32, -32, -18, -2, -2, 18, 32, 32]
   );
   const scale2 = useTransform(
     scrollYProgress,
-    [0, 0.48, 0.54, 0.74, 0.92, 1.0],
-    [0.68, 0.68, 0.72, 0.84, 1.0, 1.0]
+    [0, 0.38, 0.50, 0.65, 0.70, 0.81, 0.92, 1.0],
+    [0.68, 0.68, 0.84, 1.0, 1.0, 0.84, 0.68, 0.68]
   );
   const opacity2 = useTransform(
     scrollYProgress,
-    [0, 0.48, 0.56, 0.72, 0.90, 1.0],
-    [0, 0, 0.4, 0.8, 1, 1]
+    [0, 0.38, 0.46, 0.62, 0.73, 0.83, 0.90, 1.0],
+    [0, 0, 0.6, 1, 1, 0.7, 0, 0]
   );
   const display2 = useTransform(opacity2, (v) => (v <= 0.005 ? "none" : "block"));
-  const zIndex2 = useTransform(scrollYProgress, (v) => (v >= 0.72 ? 5 : 3));
+  const zIndex2 = useTransform(scrollYProgress, (v) => (v >= 0.49 && v < 0.81 ? 5 : 3));
+
+  // Desktop Pack 3 (Ose Di Oku: curves up from lower-left arc -> Center at 0.95 -> holds at 1.0)
+  const x3 = useTransform(
+    scrollYProgress,
+    [0, 0.70, 0.82, 0.95, 1.0],
+    ["-50%", "-50%", "-26%", "0%", "0%"]
+  );
+  const y3 = useTransform(
+    scrollYProgress,
+    [0, 0.70, 0.82, 0.95, 1.0],
+    ["28%", "28%", "12%", "0%", "0%"]
+  );
+  const rotate3 = useTransform(
+    scrollYProgress,
+    [0, 0.70, 0.82, 0.95, 1.0],
+    [-32, -32, -18, -2, -2]
+  );
+  const scale3 = useTransform(
+    scrollYProgress,
+    [0, 0.70, 0.82, 0.95, 1.0],
+    [0.68, 0.68, 0.84, 1.0, 1.0]
+  );
+  const opacity3 = useTransform(
+    scrollYProgress,
+    [0, 0.70, 0.78, 0.93, 1.0],
+    [0, 0, 0.6, 1, 1]
+  );
+  const display3 = useTransform(opacity3, (v) => (v <= 0.005 ? "none" : "block"));
+  const zIndex3 = useTransform(scrollYProgress, (v) => (v >= 0.81 ? 5 : 3));
 
   // Mobile Scroll Transforms:
-  // Pack 0 (Atarodo): starts visible in left spotlight -> curves down-right and exits by 0.38
-  const mx0 = useTransform(mobileScrollProgress, [0, 0.12, 0.38, 1.0], ["0%", "0%", "36%", "36%"]);
-  const my0 = useTransform(mobileScrollProgress, [0, 0.12, 0.38, 1.0], ["0%", "0%", "24%", "24%"]);
-  const mRotate0 = useTransform(mobileScrollProgress, [0, 0.12, 0.38, 1.0], [-2, -2, 22, 22]);
-  const mScale0 = useTransform(mobileScrollProgress, [0, 0.12, 0.38, 1.0], [1.0, 1.0, 0.72, 0.72]);
-  const mOpacity0 = useTransform(mobileScrollProgress, [0, 0.12, 0.36, 0.40, 1.0], [1, 1, 0.2, 0, 0]);
+  // Pack 0 (Hot Peppe Supa Pack): starts visible in left spotlight -> curves down-right and exits by 0.28
+  const mx0 = useTransform(mobileScrollProgress, [0, 0.08, 0.28, 1.0], ["0%", "0%", "36%", "36%"]);
+  const my0 = useTransform(mobileScrollProgress, [0, 0.08, 0.28, 1.0], ["0%", "0%", "24%", "24%"]);
+  const mRotate0 = useTransform(mobileScrollProgress, [0, 0.08, 0.28, 1.0], [-2, -2, 22, 22]);
+  const mScale0 = useTransform(mobileScrollProgress, [0, 0.08, 0.28, 1.0], [1.0, 1.0, 0.72, 0.72]);
+  const mOpacity0 = useTransform(mobileScrollProgress, [0, 0.08, 0.24, 0.29, 1.0], [1, 1, 0.2, 0, 0]);
   const mDisplay0 = useTransform(mOpacity0, (v) => (v <= 0.005 ? "none" : "block"));
-  const mZIndex0 = useTransform(mobileScrollProgress, (v) => (v < 0.30 ? 6 : 2));
+  const mZIndex0 = useTransform(mobileScrollProgress, (v) => (v < 0.20 ? 6 : 2));
 
-  // Pack 1 (Hot Peppe): curves in from lower-left (0.10->0.38) -> holds (0.38->0.58) -> curves down-right and exits (0.58->0.78)
+  // Mobile Pack 1 (Atarodo): curves in from lower-left (0.08->0.30) -> holds (0.30->0.42) -> curves down-right and exits (0.42->0.54)
   const mx1 = useTransform(
     mobileScrollProgress,
-    [0, 0.10, 0.36, 0.58, 0.78, 1.0],
+    [0, 0.08, 0.30, 0.42, 0.54, 1.0],
     ["-36%", "-36%", "0%", "0%", "36%", "36%"]
   );
   const my1 = useTransform(
     mobileScrollProgress,
-    [0, 0.10, 0.36, 0.58, 0.78, 1.0],
+    [0, 0.08, 0.30, 0.42, 0.54, 1.0],
     ["24%", "24%", "0%", "0%", "24%", "24%"]
   );
   const mRotate1 = useTransform(
     mobileScrollProgress,
-    [0, 0.10, 0.36, 0.58, 0.78, 1.0],
+    [0, 0.08, 0.30, 0.42, 0.54, 1.0],
     [-22, -22, -2, -2, 22, 22]
   );
   const mScale1 = useTransform(
     mobileScrollProgress,
-    [0, 0.10, 0.36, 0.58, 0.78, 1.0],
+    [0, 0.08, 0.30, 0.42, 0.54, 1.0],
     [0.72, 0.72, 1.0, 1.0, 0.72, 0.72]
   );
   const mOpacity1 = useTransform(
     mobileScrollProgress,
-    [0, 0.10, 0.32, 0.60, 0.76, 0.80, 1.0],
+    [0, 0.08, 0.25, 0.44, 0.52, 0.56, 1.0],
     [0, 0, 1, 1, 0.2, 0, 0]
   );
   const mDisplay1 = useTransform(mOpacity1, (v) => (v <= 0.005 ? "none" : "block"));
-  const mZIndex1 = useTransform(mobileScrollProgress, (v) => (v >= 0.30 && v < 0.72 ? 6 : 3));
+  const mZIndex1 = useTransform(mobileScrollProgress, (v) => (v >= 0.20 && v < 0.48 ? 6 : 3));
 
-  // Pack 2 (Cameroon Peppe): curves in from lower-left (0.52->0.76) -> HOLDS firmly in place (0.76->1.0)
+  // Mobile Pack 2 (Cameroon Peppe): curves in from lower-left (0.38->0.58) -> holds (0.58->0.70) -> curves down-right and exits (0.70->0.82)
   const mx2 = useTransform(
     mobileScrollProgress,
-    [0, 0.52, 0.76, 1.0],
-    ["-36%", "-36%", "0%", "0%"]
+    [0, 0.38, 0.58, 0.70, 0.82, 1.0],
+    ["-36%", "-36%", "0%", "0%", "36%", "36%"]
   );
   const my2 = useTransform(
     mobileScrollProgress,
-    [0, 0.52, 0.76, 1.0],
-    ["24%", "24%", "0%", "0%"]
+    [0, 0.38, 0.58, 0.70, 0.82, 1.0],
+    ["24%", "24%", "0%", "0%", "24%", "24%"]
   );
   const mRotate2 = useTransform(
     mobileScrollProgress,
-    [0, 0.52, 0.76, 1.0],
-    [-22, -22, -2, -2]
+    [0, 0.38, 0.58, 0.70, 0.82, 1.0],
+    [-22, -22, -2, -2, 22, 22]
   );
   const mScale2 = useTransform(
     mobileScrollProgress,
-    [0, 0.52, 0.76, 1.0],
-    [0.72, 0.72, 1.0, 1.0]
+    [0, 0.38, 0.58, 0.70, 0.82, 1.0],
+    [0.72, 0.72, 1.0, 1.0, 0.72, 0.72]
   );
   const mOpacity2 = useTransform(
     mobileScrollProgress,
-    [0, 0.52, 0.74, 1.0],
-    [0, 0, 1, 1]
+    [0, 0.38, 0.54, 0.72, 0.80, 0.84, 1.0],
+    [0, 0, 1, 1, 0.2, 0, 0]
   );
   const mDisplay2 = useTransform(mOpacity2, (v) => (v <= 0.005 ? "none" : "block"));
-  const mZIndex2 = useTransform(mobileScrollProgress, (v) => (v >= 0.70 ? 6 : 3));
+  const mZIndex2 = useTransform(mobileScrollProgress, (v) => (v >= 0.48 && v < 0.76 ? 6 : 3));
+
+  // Mobile Pack 3 (Ose Di Oku): curves in from lower-left (0.68->0.88) -> holds firmly at (0.88->1.0)
+  const mx3 = useTransform(
+    mobileScrollProgress,
+    [0, 0.68, 0.88, 1.0],
+    ["-36%", "-36%", "0%", "0%"]
+  );
+  const my3 = useTransform(
+    mobileScrollProgress,
+    [0, 0.68, 0.88, 1.0],
+    ["24%", "24%", "0%", "0%"]
+  );
+  const mRotate3 = useTransform(
+    mobileScrollProgress,
+    [0, 0.68, 0.88, 1.0],
+    [-22, -22, -2, -2]
+  );
+  const mScale3 = useTransform(
+    mobileScrollProgress,
+    [0, 0.68, 0.88, 1.0],
+    [0.72, 0.72, 1.0, 1.0]
+  );
+  const mOpacity3 = useTransform(
+    mobileScrollProgress,
+    [0, 0.68, 0.84, 1.0],
+    [0, 0, 1, 1]
+  );
+  const mDisplay3 = useTransform(mOpacity3, (v) => (v <= 0.005 ? "none" : "block"));
+  const mZIndex3 = useTransform(mobileScrollProgress, (v) => (v >= 0.76 ? 6 : 3));
 
   const [desktopActivePack, setDesktopActivePack] = useState(0);
   const [mobileActivePack, setMobileActivePack] = useState(0);
@@ -222,18 +281,20 @@ export default function Hero({ packs = HERO_SHOWCASE }: { packs?: string[] }) {
   // Desktop active pack change
   useEffect(() => {
     return scrollYProgress.on("change", (v) => {
-      if (v < 0.28) setDesktopActivePack(0);
-      else if (v < 0.72) setDesktopActivePack(1);
-      else setDesktopActivePack(2);
+      if (v < 0.20) setDesktopActivePack(0);
+      else if (v < 0.50) setDesktopActivePack(1);
+      else if (v < 0.78) setDesktopActivePack(2);
+      else setDesktopActivePack(3);
     });
   }, [scrollYProgress]);
 
   // Mobile active pack change
   useEffect(() => {
     return mobileScrollProgress.on("change", (v) => {
-      if (v < 0.35) setMobileActivePack(0);
-      else if (v < 0.70) setMobileActivePack(1);
-      else setMobileActivePack(2);
+      if (v < 0.22) setMobileActivePack(0);
+      else if (v < 0.50) setMobileActivePack(1);
+      else if (v < 0.78) setMobileActivePack(2);
+      else setMobileActivePack(3);
     });
   }, [mobileScrollProgress]);
 
@@ -253,15 +314,17 @@ export default function Hero({ packs = HERO_SHOWCASE }: { packs?: string[] }) {
     { x: x0, y: y0, rotate: rotate0, scale: scale0, opacity: opacity0, display: display0, zIndex: zIndex0 },
     { x: x1, y: y1, rotate: rotate1, scale: scale1, opacity: opacity1, display: display1, zIndex: zIndex1 },
     { x: x2, y: y2, rotate: rotate2, scale: scale2, opacity: opacity2, display: display2, zIndex: zIndex2 },
+    { x: x3, y: y3, rotate: rotate3, scale: scale3, opacity: opacity3, display: display3, zIndex: zIndex3 },
   ];
 
   const mobilePackStyles = [
     { x: mx0, y: my0, rotate: mRotate0, scale: mScale0, opacity: mOpacity0, display: mDisplay0, zIndex: mZIndex0 },
     { x: mx1, y: my1, rotate: mRotate1, scale: mScale1, opacity: mOpacity1, display: mDisplay1, zIndex: mZIndex1 },
     { x: mx2, y: my2, rotate: mRotate2, scale: mScale2, opacity: mOpacity2, display: mDisplay2, zIndex: mZIndex2 },
+    { x: mx3, y: my3, rotate: mRotate3, scale: mScale3, opacity: mOpacity3, display: mDisplay3, zIndex: mZIndex3 },
   ];
 
-  const packTargets = [0, 0.50, 0.95];
+  const packTargets = [0, 0.35, 0.68, 0.98];
 
   return (
     <div className="hero-section-wrapper">

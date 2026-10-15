@@ -13,8 +13,8 @@ export default async function Team() {
   const fred = members.find((m) => m.id === "fn" || m.name.toLowerCase().includes("fred")) || TEAM[6] || {
     id: "fn",
     name: "Fred Nze",
-    role: "Head of Marketing",
-    credentials: "Marketing Head · Brand Growth",
+    role: "Sales Capability & Market Development",
+    credentials: "Sales Capability · Market Development",
     photo: "/img/team/fred-nze.jpg",
     bio: "With over 14 years of commercial marketing leadership, driving consumer brand visibility, distributor activations, retail execution, and nationwide campaign growth.",
   };
@@ -32,9 +32,8 @@ export default async function Team() {
               maxWidth: "760px",
               margin: "0 auto",
               color: "var(--ink-2)",
-              textAlign: "justify",
-              textJustify: "inter-word",
-              hyphens: "none",
+              textAlign: "center",
+              lineHeight: "1.65",
             }}
           >
             Clear executive leadership and operational accountability steering strategic corporate governance,
@@ -105,7 +104,7 @@ export default async function Team() {
               <div className="org-tree-col">
                 <article className="org-card org-card--functional org-card--active reveal d1">
                   <div className="org-card-badge org-card-badge--amber">
-                    <span>GM Sales</span>
+                    <span>General Manager-Sales</span>
                   </div>
                   <div className="org-card-compact-body">
                     {amit.photo ? (
@@ -132,7 +131,7 @@ export default async function Team() {
               <div className="org-tree-col">
                 <article className="org-card org-card--functional org-card--blank reveal d2">
                   <div className="org-card-badge org-card-badge--grey">
-                    <span>GM Factory</span>
+                    <span>General Manager- Factory</span>
                   </div>
                   <div className="org-card-compact-body">
                     <div className="org-avatar-monogram" aria-hidden="true">
@@ -209,11 +208,11 @@ export default async function Team() {
                 </article>
               </div>
 
-              {/* Fred Nze - Head of Marketing */}
+              {/* Fred Nze - Sales Capability & Market Development */}
               <div className="org-tree-col">
                 <article className="org-card org-card--coord reveal d2">
                   <div className="org-card-badge org-card-badge--chilli">
-                    <span>Head of Marketing</span>
+                    <span>Sales Capability &amp; Market Development</span>
                   </div>
                   <div className="org-card-compact-body">
                     {fred.photo ? (
