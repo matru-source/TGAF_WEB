@@ -24,6 +24,7 @@ export type UIProduct = {
   usage?: string | null;
   technicalSpecs?: string | null;
   shelfLife?: string | null;
+  packaging?: string | null;
   nutritionalTraits?: string[] | null;
   strengths?: string[] | null;
   featured?: boolean;
