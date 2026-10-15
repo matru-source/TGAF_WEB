@@ -1,52 +1,64 @@
 const sharp = require('sharp');
 const path = require('path');
-const fs = require('fs');
 
 async function run() {
   const width = 1200;
   const height = 750;
 
-  // Supa Pack cutout
-  const supaPack = await sharp('public/Product/hot-peppe-supa-pack.png')
-    .resize({ height: 600, fit: 'inside' })
+  // 1. Trim transparent padding from supa-pack cutout so the pack itself scales to full height
+  const trimmedPouchBuffer = await sharp('public/Product/hot-peppe-supa-pack.png')
+    .trim()
+    .resize({ height: 680, fit: 'inside' })
     .toBuffer({ resolveWithObject: true });
 
-  // 1. Warm cream studio backdrop (matches retail-spice-range-launch-v2.jpg)
-  const bgSvg = `
+  // 2. Exactly the same dark radial glow backdrop as Ose Di Oku
+  const svgBackdrop = Buffer.from(`
     <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="grad" cx="50%" cy="46%" r="60%">
-          <stop offset="0%" stop-color="#FAF4EB" />
-          <stop offset="65%" stop-color="#F0E5D4" />
-          <stop offset="100%" stop-color="#E5D7C2" />
+        <radialGradient id="glow" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color="#4A180B" stop-opacity="1" />
+          <stop offset="60%" stop-color="#230A04" stop-opacity="1" />
+          <stop offset="100%" stop-color="#120401" stop-opacity="1" />
         </radialGradient>
       </defs>
-      <rect width="${width}" height="${height}" fill="url(#grad)" />
-      <ellipse cx="${width / 2 + 10}" cy="${height / 2 + 270}" rx="240" ry="36" fill="rgba(30,15,5,0.18)" />
+      <rect width="${width}" height="${height}" fill="url(#glow)" />
     </svg>
-  `;
+  `);
 
-  const bgBuffer = await sharp(Buffer.from(bgSvg)).png().toBuffer();
-  const left = Math.round((width - supaPack.info.width) / 2);
-  const top = Math.round((height - supaPack.info.height) / 2) - 15;
+  const backdrop = await sharp(svgBackdrop).png().toBuffer();
 
-  // Write directly to retail-spice-range-launch-v2.jpg and retail-spice-range-launch.jpg
-  await sharp(bgBuffer)
-    .composite([{ input: supaPack.data, left, top }])
+  const left = Math.round((width - trimmedPouchBuffer.info.width) / 2);
+  const top = Math.round((height - trimmedPouchBuffer.info.height) / 2);
+
+  // 3. Composite trimmed pouch in center of dark glow frame
+  await sharp(backdrop)
+    .composite([
+      {
+        input: trimmedPouchBuffer.data,
+        left: left,
+        top: top,
+      },
+    ])
     .jpeg({ quality: 94 })
     .toFile('public/img/news/retail-spice-range-launch-v2.jpg');
 
-  await sharp(bgBuffer)
-    .composite([{ input: supaPack.data, left, top }])
+  await sharp(backdrop)
+    .composite([
+      {
+        input: trimmedPouchBuffer.data,
+        left: left,
+        top: top,
+      },
+    ])
     .jpeg({ quality: 94 })
     .toFile('public/img/news/retail-spice-range-launch.jpg');
 
-  // Also create a WebP version
+  // Also create optimized WebP
   await sharp('public/img/news/retail-spice-range-launch-v2.jpg')
     .webp({ quality: 90 })
     .toFile('public/img/news/retail-spice-range-launch-v2.webp');
 
-  console.log('Successfully generated retail-spice-range-launch-v2.jpg with Supa Pack!');
+  console.log('Successfully generated Supa Pack banner matching Ose Di Oku backdrop and scale!');
 }
 
 run().catch(console.error);
