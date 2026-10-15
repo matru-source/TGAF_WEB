@@ -29,7 +29,7 @@ export default function About() {
         <div className="about-grid">
           <div className="about-media reveal">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/factory-overview.png?v=3" alt="Good Earth automated processing factory complex at Ikorodu, Lagos" />
+            <img src="/img/factory-overview.png?v=4" alt="Good Earth automated processing factory complex at Ikorodu, Lagos" />
             <div className="badge">
               <div className="n">6 yrs</div>
               <div className="l">Building Nigeria&apos;s spice supply chain</div>

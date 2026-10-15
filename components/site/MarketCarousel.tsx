@@ -19,7 +19,7 @@ export const MARKET_SLIDES: MarketSlide[] = [
   },
   // 2. Factory Drone Shot
   {
-    src: "/img/gallery/goodearth-facility-aerial.png",
+    src: "/img/gallery/goodearth-facility-aerial.png?v=2",
     title: "Ikorodu Agro-Processing Complex & Mill",
     location: "Ikorodu · Lagos State",
     tag: "Factory Drone Shot",

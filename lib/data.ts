@@ -710,7 +710,7 @@ export const NEWS: {
   {
     slug: "ikorodu-facility-scales-up",
     title: "Ikorodu facility scales to 3,000 MT annual capacity",
-    date: "2026-05-18", category: "Operations", image: "/img/gallery/goodearth-facility-aerial.png",
+    date: "2026-05-18", category: "Operations", image: "/img/gallery/goodearth-facility-aerial.png?v=2",
     excerpt: "Our automated processing plant reaches full stride with 3,000 MT annual plant capacity of finished spice.",
     body: [
       "Our automated processing facility in Ikorodu has reached full production stride, with an annual capacity of 3,000 metric tonnes of finished product.",
