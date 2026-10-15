@@ -26,19 +26,17 @@ export type ProductInitial = {
 };
 
 const BUNDLED = [
-  "/Product/hot-peppe-studio.jpg",
+  "/Product/hero-hot-peppe-studio.png",
   "/Product/hot-peppe-supa-pack.png",
   "/Product/hot-peppe-carton.png",
+  "/Product/hot-peppe-supa-pack-carton.png",
   "/Product/atarodo-new.png",
-  "/Product/atarodo-studio.jpg",
   "/Product/atarodo-carton.png",
-  "/Product/cameroon-studio.jpg",
+  "/Product/hero-cameroon-studio.png",
   "/Product/cameroon-carton.png",
+  "/Product/ose-di-oku.png",
   "/Product/turmeric.png",
   "/Product/ginger.png",
-  "/Product/hot-pepe-1.jpeg",
-  "/Product/Atarodo-1.jpeg",
-  "/Product/Cameroon-1.jpeg",
 ];
 
 export default function ProductForm({ initial = {} }: { initial?: ProductInitial }) {

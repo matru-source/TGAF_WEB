@@ -33,11 +33,13 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const specs = [
     ["Grammage", product.sizes && product.sizes.length > 0 ? product.sizes.join(" · ") : null],
     ["Colour", product.colour],
-    ["ASTA", product.asta && product.asta !== "-" ? product.asta : null],
+    ["ASTA", product.asta && product.asta !== "—" && product.asta !== "-" ? product.asta : null],
     ["Scoville", product.scoville],
+    ["Trade & Technical Specs", product.technicalSpecs],
+    ["Shelf Life", product.shelfLife],
     ["Category", product.marketCategory],
     ["Best for", product.usage],
-    ["Packaging & Carton Rolls", packaging],
+    ["Packaging & Carton Breakdown", packaging],
   ].filter(([, v]) => Boolean(v)) as [string, string][];
 
   return (
@@ -78,6 +80,19 @@ export default async function ProductDetail({ params }: { params: { slug: string
                     </div>
                   ))}
                 </dl>
+              )}
+
+              {product.nutritionalTraits && product.nutritionalTraits.length > 0 && (
+                <div className="pdp-traits-card">
+                  <h4>Key Nutritional &amp; Functional Traits</h4>
+                  <ul>
+                    {product.nutritionalTraits.map((trait) => (
+                      <li key={trait}>
+                        <span className="trait-bullet">✓</span> {trait}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
 
               <div className="pdp-actions">

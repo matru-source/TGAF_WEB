@@ -22,7 +22,10 @@ export type UIProduct = {
   asta?: string | null;
   scoville?: string | null;
   usage?: string | null;
-  packaging?: string | null;
+  technicalSpecs?: string | null;
+  shelfLife?: string | null;
+  nutritionalTraits?: string[] | null;
+  strengths?: string[] | null;
   featured?: boolean;
 };
 
@@ -30,27 +33,27 @@ export function getProductPackaging(p: { slug?: string; packaging?: string | nul
   if (p.packaging) return p.packaging;
   const s = (p.slug || p.name || "").toLowerCase();
   if (s.includes("atarodo")) {
-    return "10 sachets/roll · 100 rolls/carton";
+    return "8g (10 sachets × 12 strips / carton · Net wt: 960g)";
   }
   if (s.includes("cameroon")) {
-    return "10 sachets/roll · Stand-up retail pouches";
+    return "3g (10×12 strips / 360g) · 50g (5×4 strips / 1kg) · 100g (5×4 strips / 2kg)";
   }
   if (s.includes("hot-peppe")) {
-    return "10 sachets/roll · 100 rolls/carton · Supa Pack";
+    return "5g (10×12 strips / 600g) · 100g (5×12 strips / 6kg) · Supa Pack";
   }
   if (s.includes("ose")) {
-    return "10 sachets/roll · 100 rolls/carton";
+    return "8g (10 sachets × 12 strips / carton · Net wt: 960g)";
   }
   if (s.includes("turmeric")) {
-    return "10 sachets/roll · 100 rolls/carton · Pouches";
+    return "100g (5 sachets × 12 strips / carton · Net wt: 6kg)";
   }
   if (s.includes("ginger")) {
-    return "10 sachets/roll · 100 rolls/carton · Pouches";
+    return "100g (5 sachets × 12 strips / carton · Net wt: 6kg)";
   }
   if (p.segment === "B2B") {
     return "25kg & 50kg multi-wall Kraft sacks";
   }
-  return "10 sachets/roll · 100 rolls/carton";
+  return "10 sachets × 12 strips per carton";
 }
 
 export const accentClass = (a: AccentKey) => ({
@@ -73,7 +76,7 @@ export const BRAND = {
   name: "goodearth",
   legal: "TG Agri Farms Ltd",
   tagline: "Peppe wey pass peppe.",
-  email: "tgagrifarmsltd1@gmail.com",
+  email: "Info@tgagrifarms.com",
   website: "https://tgagrifarms.com",
   websiteLabel: "tgagrifarms.com",
   address: "KM 5, Itokin Road, Itamope, Ikorodu Expressway, Lagos, Nigeria",
@@ -108,76 +111,169 @@ export const SPICES: { key: AccentKey; tag: string; name: string; hex: string; b
 // ---- B2C product fallback ----
 export const FALLBACK_PRODUCTS: UIProduct[] = [
   {
-    id: "ose-di-oku", slug: "ose-di-oku", name: "Ose di Oku", segment: "B2C",
+    id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Warm · Aromatic · Versatile", image: "/Product/hero-hot-peppe-studio.png",
+    images: [
+      "/Product/hero-hot-peppe-studio.png",
+      "/Product/hot-peppe-supa-pack.png",
+      "/Product/hot-peppe-carton.png",
+      "/Product/hot-peppe-supa-pack-carton.png",
+    ],
+    description: "Bold, fiery chili powder made from high-quality red chilies.",
+    sizes: ["100 g", "5 g", "Supa Pack"], formats: ["Grounded Peppe"], featured: true,
+    marketCategory: "Mass-market staple · Everyday cooking",
+    colour: "Vibrant red", asta: "40–55", scoville: "55,000–60,000 SHU",
+    technicalSpecs: "ASTA 40–55 · Scoville 55,000–60,000 SHU · Steam sterilized",
+    shelfLife: "~24 months under dry storage",
+    packaging: "5g (10 sachets × 12 strips / 600g ctn) · 100g (5 sachets × 12 strips / 6kg ctn)",
+    usage: "Widely consumed across Nigeria, essential in everyday cooking",
+    nutritionalTraits: [
+      "Pure & natural, no additives",
+      "Rich in antioxidants",
+      "High pungency & vibrant red color",
+    ],
+    strengths: [
+      "Mass-market staple: Widely consumed across Nigeria, essential in everyday cooking.",
+      "Agri processing strength: Heat, color, granulation and quality consistency with Steam sterilization available.",
+      "Market opportunity: Affordable sachets (100g, 5g) penetrate rural and low-income segments.",
+      "Value addition: Potential for seasoning blends and ready-to-use spice packs.",
+    ],
+  },
+  {
+    id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Warm · Aromatic · Versatile", image: "/Product/atarodo-new.png",
+    images: [
+      "/Product/atarodo-new.png",
+      "/Product/atarodo-carton.png",
+    ],
+    description: "Nigerian chili (atarodo) finely blended for bold heat.",
+    sizes: ["8 g"], formats: ["Grounded Pepe"], featured: true,
+    marketCategory: "Scotch bonnet · Mass-market staple",
+    colour: "Dark red", asta: "50–60", scoville: "60,000 SHU",
+    technicalSpecs: "ASTA 50–60 · Scoville 60,000 SHU · Dried, milled, sieved, packed in cartons",
+    shelfLife: "~18–24 months under cool, dry storage",
+    packaging: "8g (10 sachets × 12 strips / 960g ctn)",
+    usage: "Scotch bonnet type, integral to Nigerian cuisine · Enhances flavor & color in meals",
+    nutritionalTraits: [
+      "Capsaicin content boosts metabolism",
+      "Rich in Vitamin C & antioxidants",
+      "Enhances flavor & color in meals",
+    ],
+    strengths: [
+      "High-heat variety: Scotch bonnet type, integral to Nigerian cuisine.",
+      "Agri processing strength: Small sachets (8g) ensure freshness and affordability.",
+      "Market opportunity: Strong uptake among street food vendors and quick-service restaurants.",
+      "Value addition: Integration into seasoning cubes and spice blends for convenience.",
+    ],
+  },
+  {
+    id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe", segment: "B2C",
+    accent: "chilli", tagline: "Chilli · Warm · Aromatic · Versatile", image: "/Product/hero-cameroon-studio.png",
+    images: [
+      "/Product/hero-cameroon-studio.png",
+      "/Product/cameroon-carton.png",
+    ],
+    description: "Dark, smoky, pungent pepper powder from dried Cameroon peppercorns.",
+    sizes: ["100 g", "50 g", "3 g"], formats: ["Smoked Grounded Pepe"], featured: true,
+    marketCategory: "Gourmet / authentic · Premium niche",
+    colour: "Deep reddish-brown", asta: "—", scoville: "90,000 SHU",
+    technicalSpecs: "Scoville 90,000 SHU · Dried, milled, sieved, packed in cartons",
+    shelfLife: "~18–24 months if properly dried & packed",
+    packaging: "3g (10×12 strips / 360g) · 50g (5×4 strips / 1kg) · 100g (5×4 strips / 2kg)",
+    usage: "Distinct aroma and flavor, highly valued in soups and stews",
+    nutritionalTraits: [
+      "Contains piperine (bioavailability enhancer)",
+      "Rich in vitamins A, C, K",
+      "Minerals: iron, potassium, magnesium",
+      "Antioxidant properties",
+    ],
+    strengths: [
+      "Premium niche product: Distinct aroma and flavor with deep reddish-brown color, highly valued in soups and stews.",
+      "Agri processing advantage: Multiple pack sizes (100g, 50g, 3g) cater to diverse consumer needs.",
+      "Market opportunity: Strong export potential as 'authentic Nigerian spice' for diaspora markets.",
+      "Value addition: Branding for gourmet and specialty food channels.",
+    ],
+  },
+  {
+    id: "ose-di-oku", slug: "ose-di-oku", name: "Ose Di Oku", segment: "B2C",
     accent: "chilli", tagline: "Chilli · Southeastern Fiery Blend", image: "/Product/ose-di-oku.png",
     images: ["/Product/ose-di-oku.png"],
     description: "Authentic, fiery pepper blend crafted for Southeastern Nigerian culinary heritage and traditional soups like Ofe Owerri, Banga, and Nsala.",
     sizes: ["8 g"], formats: ["Grounded Peppe"], featured: true,
     marketCategory: "Regional Gourmet · Fiery Blend",
     colour: "Fiery rich red", asta: "55–65", scoville: "65,000–75,000 SHU",
+    technicalSpecs: "ASTA 55–65 · Scoville 65,000–75,000 SHU · Steam sterilized",
+    shelfLife: "~18–24 months under dry storage",
+    packaging: "8g (10 sachets × 12 strips / 960g ctn)",
     usage: "Perfect for Ofe Owerri, Banga, Nsala & native soups",
-  },
-  {
-    id: "hot-peppe", slug: "hot-peppe-powder", name: "Hot Peppe", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Premium staple", image: "/Product/hero-hot-peppe-studio.png",
-    images: [
-      "/Product/hero-hot-peppe-studio.png",
-      "/Product/hot-peppe-supa-pack.png",
-      "/Product/hot-peppe-carton.png",
+    nutritionalTraits: [
+      "Authentic Southeastern fiery pepper profile",
+      "Rich in capsaicin and pungent aroma",
+      "Steam sterilized for hygienic purity",
     ],
-    description: "Rich red, premium grounded peppe to add bold heat, aroma and fresh flavour to every meal.",
-    sizes: ["100 g", "5 g", "Supa Pack"], formats: ["Grounded Peppe"], featured: true,
-    marketCategory: "Premium staple",
-    colour: "Rich red", asta: "40–55", scoville: "55,000–60,000 SHU",
-    usage: "Adds spice & flavour to all meals",
-  },
-  {
-    id: "atarodo", slug: "atarodo-peppe-powder", name: "Atarodo Peppe", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Scotch bonnet", image: "/Product/atarodo-new.png",
-    images: [
-      "/Product/atarodo-new.png",
-      "/Product/atarodo-carton.png",
+    strengths: [
+      "Regional heritage variety: Specially blended for Southeastern Nigerian culinary traditions.",
+      "Agri processing strength: Steam sterilization locks in fresh pungency without additives.",
+      "Market opportunity: Growing demand across premium regional gourmet retail.",
+      "Value addition: Ready-to-use spice blend for iconic native soups.",
     ],
-    description: "Dark-red scotch-bonnet style grounded pepe - a mass-market staple for everyday Nigerian heat.",
-    sizes: ["8 g"], formats: ["Grounded Pepe"], featured: true,
-    marketCategory: "Scotch-bonnet · mass-market staple",
-    colour: "Dark red", asta: "50–60", scoville: "~60,000 SHU",
-    usage: "Adds spice to all meals",
-  },
-  {
-    id: "cameroon", slug: "cameroon-peppe-powder", name: "Cameroon Peppe", segment: "B2C",
-    accent: "chilli", tagline: "Chilli · Gourmet", image: "/Product/hero-cameroon-studio.png",
-    images: [
-      "/Product/hero-cameroon-studio.png",
-      "/Product/cameroon-carton.png",
-    ],
-    description: "Deep red, smoky and pungent - a gourmet, authentic grounded pepe for soups, stews & noodles.",
-    sizes: ["100 g", "50 g", "3 g"], formats: ["Smoked Grounded Pepe"], featured: true,
-    marketCategory: "Gourmet / authentic · premium niche",
-    colour: "Deep red & brown", asta: "-", scoville: "~90,000 SHU",
-    usage: "For soups, stews & noodles",
   },
   {
     id: "turmeric", slug: "turmeric-powder", name: "Turmeric", segment: "B2C",
-    accent: "turmeric", tagline: "Turmeric", image: "/Product/turmeric.png",
+    accent: "turmeric", tagline: "Turmeric · Earthy · Golden · Everyday", image: "/Product/turmeric.png",
     images: ["/Product/turmeric.png"],
-    description: "Pure, golden grounded turmeric - rich in colour and warmth for everyday cooking.",
+    description: "Golden-yellow powder from Curcuma longa roots.",
     sizes: ["100 g"], formats: ["Grounded Turmeric"],
+    marketCategory: "Health & wellness · Culinary staple",
+    colour: "Golden yellow", asta: null, scoville: null,
+    technicalSpecs: "Curcuminoid 2–3% · Moisture ≤10% · Ash ≤8% · Acid Insoluble Ash ≤1.5%",
+    shelfLife: "~24 months under dry storage",
+    packaging: "100g (5 sachets × 12 strips / 6kg ctn)",
+    usage: "Popular in everyday cooking, golden milk, teas & herbal wellness",
+    nutritionalTraits: [
+      "Antioxidant & anti-inflammatory",
+      "Distinct earthy aroma & bitter flavor",
+      "High curcuminoid content (2–3%)",
+    ],
+    strengths: [
+      "Health-driven demand: Rising awareness of anti-inflammatory and immunity-boosting properties.",
+      "Agri processing advantage: Steam sterilization guarantee purity.",
+      "Market opportunity: Positioning in wellness, functional foods, and herbal supplements.",
+      "Value addition: Potential for turmeric teas, capsules, and fortified foods.",
+    ],
   },
   {
     id: "ginger", slug: "ginger-powder", name: "Ginger", segment: "B2C",
-    accent: "ginger", tagline: "Ginger", image: "/Product/ginger.png",
+    accent: "ginger", tagline: "Ginger · Warm · Aromatic · Versatile", image: "/Product/ginger.png",
     images: ["/Product/ginger.png"],
-    description: "Aromatic, finely grounded ginger that brings warmth and depth to soups, marinades and stews.",
+    description: "Ground from sun-dried Nigerian ginger roots.",
     sizes: ["100 g"], formats: ["Grounded Ginger"],
+    marketCategory: "Dual-use · Culinary & wellness",
+    colour: "Pale yellow", asta: null, scoville: null,
+    technicalSpecs: "Moisture ≤12% · Volatile oil ≥1.5% · Essential oil ≥1%",
+    shelfLife: "~24 months under dry storage",
+    packaging: "100g (5 sachets × 12 strips / 6kg ctn)",
+    usage: "Popular in both culinary and herbal medicine applications, soups, teas & beverages",
+    nutritionalTraits: [
+      "High gingerol & oleoresin content",
+      "Anti-inflammatory & antioxidant properties",
+      "Pungent aroma, pale-yellow hue",
+    ],
+    strengths: [
+      "Dual-use product: Popular in both culinary and herbal medicine applications.",
+      "Agri processing strength: Essential oil content (≥1%) preserved through hygienic processing.",
+      "Market opportunity: Growing demand in beverage industry (ginger drinks, teas).",
+      "Value addition: Expansion into nutraceuticals and wellness products.",
+    ],
   },
 ];
 
-// ---- Homepage hero showcase (scroll arc packs: 1 Atarodo -> 2 Hot Peppe -> 3 Cameroon) ----
+// ---- Homepage hero showcase (scroll arc packs: 1 Hot Peppe (Supa Pack) -> 2 Atarodo -> 3 Cameroon -> 4 Ose Di Oku) ----
 export const HERO_SHOWCASE: string[] = [
+  "/Product/hero-hot-peppe-supa-pack.png",
   "/Product/atarodo-new.png",
-  "/Product/hero-hot-peppe-studio.png",
-  "/Product/hero-cameroon-studio.png",
+  "/Product/hero-cameroon-peppe.png",
+  "/Product/hero-ose-di-oku.png",
 ];
 
 // ---- B2B portfolio (static; formats per crop) ----
@@ -353,7 +449,7 @@ export const TEAM: UITeamMember[] = [
     id: "jr",
     initials: "JR",
     name: "Jagdeep Rana",
-    role: "Factory General Manager",
+    role: "General Manager- Factory",
     department: "Plant Operations & Milling",
     tier: 3,
     bio: "",
@@ -364,7 +460,7 @@ export const TEAM: UITeamMember[] = [
     id: "ag",
     initials: "AG",
     name: "Amit Gautam",
-    role: "Sales General Manager",
+    role: "General Manager-Sales",
     department: "Commercial Sales & Distribution",
     credentials: "MBA · Durham Business School, UK",
     tier: 3,
@@ -399,9 +495,9 @@ export const TEAM: UITeamMember[] = [
     id: "fn",
     initials: "FN",
     name: "Fred Nze",
-    role: "Head of Marketing",
-    department: "Marketing & Brand Growth",
-    credentials: "Marketing Head · Brand Growth",
+    role: "Sales Capability & Market Development",
+    department: "Sales Capability & Market Development",
+    credentials: "Sales Capability · Market Development",
     tier: 3,
     bio: "With over 14 years of commercial marketing leadership, driving consumer brand visibility, distributor activations, retail execution, and nationwide campaign growth.",
     bullets: [
@@ -500,12 +596,7 @@ export const MARQUEE = [
 ];
 
 // ---- Contacts ----
-export const CONTACTS = [
-  { name: "Deepak Chainani", role: "Director", phone: "+65 9115 4069", tel: "+6591154069" },
-  { name: "Swatanter Saraswat", role: "Director", phone: "+234 904 044 3851", tel: "+2349040443851" },
-  { name: "Narendranath Swain", role: "Finance Controller", phone: "+234 902 213 8277", tel: "+2349022138277" },
-  { name: "Neha Agarwal", role: "Trade & Banking Manager", phone: "+234 912 445 4389", tel: "+2349124454389" },
-];
+export const CONTACTS: { name: string; role: string; phone?: string; tel?: string }[] = [];
 
 // ---- WhatsApp + socials ----
 export const WHATSAPP = { display: "+234 904 044 3851", href: "https://wa.me/2349040443851" };
@@ -537,7 +628,7 @@ export const ESG: { key: string; letter: string; title: string; accent: AccentKe
     title: "Social", 
     accent: "chilli", 
     points: [
-      "100% Local Sourcing: Zero import dependence across core spices.",
+      "Strengthening Value Chain: Through Nigerian farmers/ aggregator partnerships.",
       "Farmer Empowerment: 50,000+ growers & 20,000+ trained.",
       "Women-Led Distribution: Micro-sales driving family livelihoods."
     ] 
@@ -592,15 +683,15 @@ export const NEWS: {
 }[] = [
   {
     slug: "coming-soon-ose-di-oku-hot-peppe",
-    title: "Coming Soon: Goodearth unveils 'Ose Dị Ọkụ' 100% natural Hot Peppe Powder",
+    title: "Coming Soon: Goodearth unveils 'Ose Di Oku' 100% natural Hot Peppe Powder",
     date: "2026-07-15",
     category: "New Product",
     image: "/img/news/ose-di-oku-launch.jpg",
     excerpt: "A celebration of indigenous spice heritage — 100% natural, preservative-free, and crafted from farm-fresh Nigerian red chillies.",
     body: [
-      "Goodearth Foods is proud to announce the upcoming launch of its latest retail spice innovation: 'Ose Dị Ọkụ' Hot Peppe Powder, crafted specifically to satisfy Nigeria's passion for authentic, fiery heat.",
-      "Rooted in indigenous agricultural heritage, 'Ose Dị Ọkụ' (meaning 'Fiery Hot Pepper') is produced with zero artificial preservatives, zero added colourants, and 100% pure, sun-dried Nigerian red peppers sourced directly from our outgrower smallholder farmers.",
-      "Milled and steam-sterilised at our state-of-the-art automated Ikorodu processing plant, Ose Dị Ọkụ preserves natural capsaicin pungency and rich red colour in airtight, moisture-proof retail pouches.",
+      "Goodearth Foods is proud to announce the upcoming launch of its latest retail spice innovation: 'Ose Di Oku' Hot Peppe Powder, crafted specifically to satisfy Nigeria's passion for authentic, fiery heat.",
+      "Rooted in indigenous agricultural heritage, 'Ose Di Oku' (meaning 'Fiery Hot Pepper') is produced with zero artificial preservatives, zero added colourants, and 100% pure, sun-dried Nigerian red peppers sourced directly from our outgrower smallholder farmers.",
+      "Milled and steam-sterilised at our state-of-the-art automated Ikorodu processing plant, Ose Di Oku preserves natural capsaicin pungency and rich red colour in airtight, moisture-proof retail pouches.",
       "The new product will soon be available in open-air markets, neighborhood kiosks, and major retail supermarket shelves across Nigeria.",
     ],
   },
@@ -751,7 +842,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: "Factory Architectural Plan & Blueprint",
     category: "packaging",
     categoryLabel: "Packaging",
-    image: "/img/gallery/corporate-bco-overview.png",
+    image: "/img/gallery/corporate-bco-overview.png?v=2",
     caption: "Master architectural layout and engineering blueprint for the US$12M Ikorodu agro-processing plant.",
     location: "Engineering Division, Lagos",
     aspect: "landscape",
@@ -954,7 +1045,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: "Field Procurement Quality Inspection",
     category: "warehousing",
     categoryLabel: "Warehousing",
-    image: "/img/photo-sundry.jpg",
+    image: "/img/farm-to-fork/harvest-sun-dry.png",
     caption: "Field officers inspecting sun-dried chilli batches for moisture content before transport to Kaduna warehouse.",
     location: "Field Aggregation Center",
     aspect: "landscape",

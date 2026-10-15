@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { BRAND, CONTACTS } from "@/lib/data";
+import { BRAND } from "@/lib/data";
 import { Icon } from "./icons";
 
 const INTERESTS = [
@@ -45,32 +45,36 @@ export default function Contact() {
           <h2>Let&apos;s spice up Nigeria&apos;s food industry, together</h2>
         </div>
         <div className="contact-grid">
-          <div className="contact-info reveal">
-            <div className="row">
-              <div className="ico"><Icon name="pin" size={19} /></div>
-              <div>
-                <div className="k">Address</div>
-                <div className="v">{BRAND.address}</div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="ico"><Icon name="mail" size={19} /></div>
-              <div>
-                <div className="k">Email</div>
-                <a className="v" href={`mailto:${BRAND.email}`}>{BRAND.email}</a>
-              </div>
-            </div>
-            <div className="people">
-              {CONTACTS.map((c) => (
-                <div className="p" key={c.name}>
-                  <div className="nm">{c.name}</div>
-                  <div className="rl">{c.role}</div>
-                </div>
-              ))}
-            </div>
+          {/* Left Side: Get In Touch Image */}
+          <div className="contact-media-wrap reveal">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/contact-get-in-touch.png?v=2"
+              alt="Goodearth Customer Relations & Partnerships"
+              className="contact-feature-img"
+            />
           </div>
 
-          <form className="form reveal d1" onSubmit={onSubmit} noValidate>
+          {/* Right Side: Address & Email on top, Form below */}
+          <div className="contact-right-col reveal d1">
+            <div className="contact-info-top">
+              <div className="row">
+                <div className="ico"><Icon name="pin" size={19} /></div>
+                <div>
+                  <div className="k">Address</div>
+                  <div className="v">{BRAND.address}</div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="ico"><Icon name="mail" size={19} /></div>
+                <div>
+                  <div className="k">Email</div>
+                  <a className="v" href={`mailto:${BRAND.email}`}>{BRAND.email}</a>
+                </div>
+              </div>
+            </div>
+
+            <form className="form" onSubmit={onSubmit} noValidate>
             <div className="two">
               <div className="field">
                 <label htmlFor="name">Full name</label>
@@ -107,6 +111,7 @@ export default function Contact() {
               {note}
             </p>
           </form>
+          </div>
         </div>
 
         <div className="cta-band reveal" style={{ marginTop: "clamp(34px,5vw,60px)" }}>
