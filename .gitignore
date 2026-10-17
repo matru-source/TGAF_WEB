@@ -41,3 +41,7 @@ yarn-error.log*
 
 # scratch directory
 /scratch/
+
+# large raw source video files
+My assets/Gen/video/Final Home Vid.mp4
+
