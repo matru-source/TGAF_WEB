@@ -104,7 +104,10 @@ export default function TrustMetricsStrip() {
       <div className="container quality-container">
         {/* Section Header */}
         <div className="quality-magical-head">
-          <span className="eyebrow-gold">WHY CHOOSE GOODEARTH</span>
+          <span className="eyebrow-gold">
+            <span aria-hidden="true" style={{ color: "#FBBF24", fontSize: "0.82rem" }}>✦</span>
+            WHY CHOOSE GOODEARTH
+          </span>
           <h2>Certified Quality. Awarded Excellence. Built for Scale.</h2>
           <p className="lead-gold">
             From our 3,000 MT integrated processing facility to international certifications, we ensure purity, traceability, and sustainable growth at every step.
