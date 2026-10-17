@@ -11041,27 +11041,69 @@ img { -webkit-user-drag: none; }
   color: #C2410C !important;
 }
 
+/* Full-screen video mode: complete elimination of scrollbars */
+html:has(.fullscreen-video-theater),
+body:has(.fullscreen-video-theater) {
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+html:has(.fullscreen-video-theater)::-webkit-scrollbar,
+body:has(.fullscreen-video-theater)::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+:fullscreen,
+:-webkit-full-screen {
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+:fullscreen::-webkit-scrollbar,
+:-webkit-full-screen::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
 .fullscreen-video-theater {
   position: fixed;
   inset: 0;
   width: 100vw;
+  width: 100%;
   height: 100vh;
+  height: 100%;
   background: #000000;
   z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.fullscreen-video-theater::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .fullscreen-video-canvas {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   cursor: pointer;
+  overflow: hidden !important;
 }
 
 .fullscreen-video-media {

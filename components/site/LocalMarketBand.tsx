@@ -47,20 +47,51 @@ export default function LocalMarketBand() {
     };
   }, []);
 
-  // 2. Escape key listener to close full screen modal
+  // 2. Escape key and fullscreen change listener to close modal & lock scroll
   useEffect(() => {
     if (!isPlaying) return;
+
+    const origHtmlOverflow = document.documentElement.style.overflow;
+    const origBodyOverflow = document.body.style.overflow;
+    const origHtmlScrollbar = document.documentElement.style.scrollbarWidth;
+    const origBodyScrollbar = document.body.style.scrollbarWidth;
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.scrollbarWidth = "none";
+    document.body.style.scrollbarWidth = "none";
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         closeModal();
       }
     };
+
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement && isPlaying) {
+        setIsPlaying(false);
+      }
+    };
+
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+
+    return () => {
+      document.documentElement.style.overflow = origHtmlOverflow;
+      document.body.style.overflow = origBodyOverflow;
+      document.documentElement.style.scrollbarWidth = origHtmlScrollbar;
+      document.body.style.scrollbarWidth = origBodyScrollbar;
+      window.removeEventListener("keydown", onKey);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
+    };
   }, [isPlaying]);
 
   const openModal = () => {
     setIsPlaying(true);
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
     if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch(() => {});
     }
@@ -68,6 +99,8 @@ export default function LocalMarketBand() {
 
   const closeModal = () => {
     setIsPlaying(false);
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
     if (document.fullscreenElement && document.exitFullscreen) {
       document.exitFullscreen().catch(() => {});
     }
