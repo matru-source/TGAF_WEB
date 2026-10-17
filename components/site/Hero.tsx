@@ -26,7 +26,7 @@ function Words({ text, delay = 0 }: { text: string; delay?: number }) {
   );
 }
 
-function AnimatedCounter({ to = 350, suffix = "+", duration = 1.8 }: { to?: number; suffix?: string; duration?: number }) {
+function AnimatedCounter({ to = 50000, suffix = "+", duration = 1.8 }: { to?: number; suffix?: string; duration?: number }) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function AnimatedCounter({ to = 350, suffix = "+", duration = 1.8 }: { to?: numb
     };
   }, [to, duration]);
 
-  return <>{count}{suffix}</>;
+  return <>{count.toLocaleString()}{suffix}</>;
 }
 
 const PACK_METAS = [
@@ -480,9 +480,9 @@ export default function Hero({ packs = HERO_SHOWCASE }: { packs?: string[] }) {
                     whileHover={{ y: -5, boxShadow: "0 15px 30px rgba(0,0,0,0.1)" }}
                   >
                     <div className="n">
-                      <AnimatedCounter to={350} suffix="+" duration={1.8} />
+                      <AnimatedCounter to={50000} suffix="+" duration={1.8} />
                     </div>
-                    <div className="l">Farmers supported</div>
+                    <div className="l">Farmer&apos;s families supported</div>
                   </motion.div>
                 </motion.div>
               </div>
