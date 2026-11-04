@@ -49,6 +49,7 @@ export default function DistributorsView() {
   const particlesRef = useRef<Particle[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [activeModalImg, setActiveModalImg] = useState<{ src: string; title: string } | null>(null);
+  const touchStartXRef = useRef<number | null>(null);
 
   const colors = [
     "#C0262D", // Chilli Red
@@ -206,6 +207,21 @@ export default function DistributorsView() {
     setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+    const diff = touchStartXRef.current - e.changedTouches[0].clientX;
+    if (diff > 45) {
+      nextSlide();
+    } else if (diff < -45) {
+      prevSlide();
+    }
+    touchStartXRef.current = null;
+  };
+
   return (
     <div className="celebration-view-wrapper">
       {/* Paper Popper Confetti Animation (no text, pure festive paper particles) */}
@@ -217,8 +233,12 @@ export default function DistributorsView() {
           <div className="celebration-card-row">
             {/* Left Column: Two Images in Interactive Carousel */}
             <div className="celebration-carousel-side">
-              {/* Carousel Stage Box */}
-              <div className="carousel-stage">
+              {/* Carousel Stage Box with Touch Swipe */}
+              <div
+                className="carousel-stage"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+              >
                 {SLIDES.map((slide, idx) => (
                   <div
                     key={slide.id}
@@ -242,20 +262,19 @@ export default function DistributorsView() {
                   </div>
                 ))}
 
-                {/* Left Arrow Button */}
+                {/* Desktop-only floating side arrows */}
                 <button
                   type="button"
-                  className="carousel-arrow prev"
+                  className="carousel-arrow prev desktop-arrow"
                   onClick={prevSlide}
                   aria-label="Previous image"
                 >
                   ‹
                 </button>
 
-                {/* Right Arrow Button */}
                 <button
                   type="button"
-                  className="carousel-arrow next"
+                  className="carousel-arrow next desktop-arrow"
                   onClick={nextSlide}
                   aria-label="Next image"
                 >
@@ -263,23 +282,43 @@ export default function DistributorsView() {
                 </button>
               </div>
 
-              {/* Bottom Controls: Indicator Dots + Counter */}
+              {/* Bottom Controls Bar (Outside Image, clean mobile navigation) */}
               <div className="carousel-bottom-bar">
-                <div className="carousel-dots">
-                  {SLIDES.map((slide, idx) => (
-                    <button
-                      key={`dot-${slide.id}`}
-                      type="button"
-                      className={`carousel-dot ${currentSlide === idx ? "is-active" : ""}`}
-                      onClick={() => setCurrentSlide(idx)}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
+                <button
+                  type="button"
+                  className="carousel-nav-btn prev"
+                  onClick={prevSlide}
+                  aria-label="Previous image"
+                >
+                  <span className="nav-arrow">‹</span> Prev
+                </button>
+
+                <div className="carousel-dots-wrap">
+                  <div className="carousel-dots">
+                    {SLIDES.map((slide, idx) => (
+                      <button
+                        key={`dot-${slide.id}`}
+                        type="button"
+                        className={`carousel-dot ${currentSlide === idx ? "is-active" : ""}`}
+                        onClick={() => setCurrentSlide(idx)}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+
+                  <div className="carousel-counter">
+                    {currentSlide + 1} / {SLIDES.length}
+                  </div>
                 </div>
 
-                <div className="carousel-counter">
-                  {currentSlide + 1} / {SLIDES.length}
-                </div>
+                <button
+                  type="button"
+                  className="carousel-nav-btn next"
+                  onClick={nextSlide}
+                  aria-label="Next image"
+                >
+                  Next <span className="nav-arrow">›</span>
+                </button>
               </div>
             </div>
 

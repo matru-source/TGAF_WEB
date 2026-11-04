@@ -1309,6 +1309,23 @@ p.center,
 }
 
 @media (max-width: 640px) {
+  .single-card-highlights {
+    display: none !important;
+  }
+
+  .carousel-arrow.desktop-arrow {
+    display: none !important;
+  }
+
+  .carousel-bottom-bar {
+    padding: 0 4px;
+  }
+
+  .carousel-nav-btn {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+
   .plant-slider-nav {
     opacity: 0.85;
     width: 32px;
@@ -7186,6 +7203,20 @@ img { -webkit-user-drag: none; }
   color: #FFFFFF;
 }
 @media (max-width: 980px) {
+  /* Mobile: Hide floating buttons overlaying the image, keep controls outside */
+  .carousel-arrow.desktop-arrow {
+    display: none !important;
+  }
+
+  .carousel-nav-btn {
+    display: inline-flex !important;
+  }
+
+  /* Mobile: Hide the 4 highlight pills as requested */
+  .single-card-highlights {
+    display: none !important;
+  }
+
   .trust-metrics-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
@@ -14649,6 +14680,47 @@ body:has(.fullscreen-video-theater)::-webkit-scrollbar {
 }
 
 /* Bottom Controls */
+
+.carousel-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFFFFF;
+  border: 1px solid rgba(217, 119, 6, 0.28);
+  color: #78350F;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(120, 53, 15, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.carousel-nav-btn:hover,
+.carousel-nav-btn:active {
+  background: #C0262D;
+  color: #FFFFFF;
+  border-color: #C0262D;
+}
+
+.carousel-nav-btn .nav-arrow {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.carousel-dots-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (min-width: 769px) {
+  .carousel-nav-btn {
+    display: none;
+  }
+}
 .carousel-bottom-bar {
   display: flex;
   align-items: center;
