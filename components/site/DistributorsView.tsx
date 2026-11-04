@@ -18,10 +18,39 @@ interface Particle {
   wobbleSpeed: number;
 }
 
+interface Slide {
+  id: string;
+  tabLabel: string;
+  badge: string;
+  src: string;
+  alt: string;
+  title: string;
+}
+
+const SLIDES: Slide[] = [
+  {
+    id: "portrait",
+    tabLabel: "🎉 4th Nov Poster",
+    badge: "4th November · Birthday Tribute",
+    src: "/img/celebrations/madam-ifueko-ozigbo-birthday-portrait.jpg",
+    alt: "Celebrating Madam Ifueko Mabel Ozigbo, CEO Osagiodagbon Ventures - 4th November Birthday Poster",
+    title: "Madam Ifueko Mabel Ozigbo - 4th November Birthday Poster",
+  },
+  {
+    id: "card",
+    tabLabel: "🎂 Official Greeting Card",
+    badge: "Official Birthday Felicitations",
+    src: "/img/celebrations/madam-ifueko-ozigbo-birthday-card.jpg",
+    alt: "Official Birthday Card from TG Agri Farms Ltd & Good Earth to Madam Ifueko Mabel Ozigbo",
+    title: "Official Birthday Card - TG Agri Farms Ltd & Good Earth",
+  },
+];
+
 export default function DistributorsView() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animIdRef = useRef<number | null>(null);
   const particlesRef = useRef<Particle[]>([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [activeModalImg, setActiveModalImg] = useState<{ src: string; title: string } | null>(null);
 
   const colors = [
@@ -36,7 +65,7 @@ export default function DistributorsView() {
     "#E11D48", // Crimson
   ];
 
-  // Paper Popper Confetti Blast (no text, purely joyful fluttering paper particles)
+  // Paper Popper Confetti Blast (no text, pure festive paper particles)
   const triggerPopper = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -49,7 +78,7 @@ export default function DistributorsView() {
 
     // Left cannon (bursting up-right)
     for (let i = 0; i < count / 2; i++) {
-      const angle = -Math.PI / 2 + (Math.random() * 0.7 - 0.15); // -75 to -35 deg
+      const angle = -Math.PI / 2 + (Math.random() * 0.7 - 0.15);
       const speed = Math.random() * 20 + 12;
       newParticles.push({
         x: width * 0.12,
@@ -70,7 +99,7 @@ export default function DistributorsView() {
 
     // Right cannon (bursting up-left)
     for (let i = 0; i < count / 2; i++) {
-      const angle = -Math.PI / 2 - (Math.random() * 0.7 - 0.15); // -105 to -145 deg
+      const angle = -Math.PI / 2 - (Math.random() * 0.7 - 0.15);
       const speed = Math.random() * 20 + 12;
       newParticles.push({
         x: width * 0.88,
@@ -172,87 +201,140 @@ export default function DistributorsView() {
     };
   }, [triggerPopper]);
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
+  };
+
   return (
     <div className="celebration-view-wrapper">
-      {/* Paper Popper Confetti Animation (no text, pure paper particle burst) */}
+      {/* Paper Popper Confetti Animation (no text, pure festive paper particles) */}
       <canvas ref={canvasRef} className="celebration-confetti-canvas" aria-hidden="true" />
 
       <div className="container">
-        {/* Celebration Header Bar */}
-        <div className="celebration-top-bar">
-          <div className="celebration-badge-pill">
-            <span className="celebration-sparkle">🎉</span>
-            <span>Distributor Birthday Celebration · 4th November</span>
-          </div>
-
-          <button
-            type="button"
-            className="celebration-popper-btn"
-            onClick={triggerPopper}
-            title="Pop celebration confetti"
-          >
-            <span className="popper-icon" aria-hidden="true">🎉</span>
-            <span>Pop Confetti</span>
-          </button>
-        </div>
-
-        {/* Two Celebration Images with Relatable Descriptions */}
-        <div className="celebration-spotlight-grid">
-          {/* Card 1: Portrait Celebration Poster */}
-          <article className="celebration-showcase-card portrait-showcase">
-            <div
-              className="celebration-media-box"
-              onClick={() =>
-                setActiveModalImg({
-                  src: "/img/celebrations/madam-ifueko-ozigbo-birthday-portrait.jpg",
-                  title: "Celebrating Madam Ifueko Mabel Ozigbo - 4th Nov",
-                })
-              }
-              title="Click to view full image"
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  setActiveModalImg({
-                    src: "/img/celebrations/madam-ifueko-ozigbo-birthday-portrait.jpg",
-                    title: "Celebrating Madam Ifueko Mabel Ozigbo - 4th Nov",
-                  });
-                }
-              }}
-            >
-              <div className="celebration-card-badge">4th November · Birthday Tribute</div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/img/celebrations/madam-ifueko-ozigbo-birthday-portrait.jpg"
-                alt="Celebrating Madam Ifueko Mabel Ozigbo, CEO Osagiodagbon Ventures - 4th November Birthday"
-                className="celebration-card-image"
-                loading="eager"
-              />
-              <span className="media-zoom-hint">🔍 Tap to enlarge</span>
-            </div>
-
-            <div className="celebration-card-content">
-              <span className="celebration-eyebrow-tag">Key Distribution Partner</span>
-              <h2 className="celebration-person-title">Madam Ifueko Mabel Ozigbo</h2>
-              <div className="celebration-person-designation">
-                Chief Executive Officer, Osagiodagbon Ventures
+        {/* Single Showcase Card: Carousel on Left + Texts beside on Right (Single Row) */}
+        <section className="celebration-unified-card">
+          <div className="celebration-card-row">
+            {/* Left Column: Two Images in Interactive Carousel */}
+            <div className="celebration-carousel-side">
+              {/* Carousel Tab Switcher Buttons */}
+              <div className="carousel-tab-switchers" role="tablist" aria-label="Celebration Image Switcher">
+                {SLIDES.map((slide, idx) => (
+                  <button
+                    key={slide.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={currentSlide === idx}
+                    className={`carousel-tab-btn ${currentSlide === idx ? "is-active" : ""}`}
+                    onClick={() => setCurrentSlide(idx)}
+                  >
+                    {slide.tabLabel}
+                  </button>
+                ))}
               </div>
 
-              <p className="celebration-narrative">
+              {/* Carousel Stage Box */}
+              <div className="carousel-stage">
+                {SLIDES.map((slide, idx) => (
+                  <div
+                    key={slide.id}
+                    className={`carousel-slide-item ${currentSlide === idx ? "active" : ""}`}
+                    aria-hidden={currentSlide !== idx}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={slide.src}
+                      alt={slide.alt}
+                      className="carousel-img"
+                      loading="eager"
+                      onClick={() =>
+                        setActiveModalImg({
+                          src: slide.src,
+                          title: slide.title,
+                        })
+                      }
+                      title="Click to view full image in high-resolution"
+                    />
+                  </div>
+                ))}
+
+                {/* Left Arrow Button */}
+                <button
+                  type="button"
+                  className="carousel-arrow prev"
+                  onClick={prevSlide}
+                  aria-label="Previous image"
+                >
+                  ‹
+                </button>
+
+                {/* Right Arrow Button */}
+                <button
+                  type="button"
+                  className="carousel-arrow next"
+                  onClick={nextSlide}
+                  aria-label="Next image"
+                >
+                  ›
+                </button>
+              </div>
+
+              {/* Bottom Controls: Indicator Dots + Counter */}
+              <div className="carousel-bottom-bar">
+                <div className="carousel-dots">
+                  {SLIDES.map((slide, idx) => (
+                    <button
+                      key={`dot-${slide.id}`}
+                      type="button"
+                      className={`carousel-dot ${currentSlide === idx ? "is-active" : ""}`}
+                      onClick={() => setCurrentSlide(idx)}
+                      aria-label={`Go to slide ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <div className="carousel-counter">
+                  {currentSlide + 1} / {SLIDES.length}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Texts & Relatable Narrative beside Carousel in Single Row */}
+            <div className="celebration-text-side">
+              <div className="single-card-eyebrow">
+                <span className="sc-icon">🎉</span>
+                <span>DISTRIBUTOR CELEBRATION · 4TH NOVEMBER</span>
+              </div>
+
+              <h2 className="single-card-name">Madam Ifueko Mabel Ozigbo</h2>
+              <div className="single-card-role">
+                Chief Executive Officer, Osagiodagbon Ventures · Key Distribution Partner
+              </div>
+
+              <blockquote className="single-card-quote">
+                &ldquo;Wishing you a joyful birthday and a year filled with good health, happiness,
+                and continued success.&rdquo;
+                <span className="quote-author">— Official Wishes from TG Agri Farms Ltd &amp; Good Earth</span>
+              </blockquote>
+
+              <p className="single-card-desc">
                 Today, the Board, Leadership, and the entire Good Earth family joyously celebrate{" "}
                 <strong>Madam Ifueko Mabel Ozigbo</strong> on the special occasion of her birthday.
-                As the CEO of Osagiodagbon Ventures, she embodies remarkable entrepreneurial grit,
-                relentless dedication, and inspiring commercial leadership across the Nigerian spice
-                distribution landscape.
+                As the visionary CEO of Osagiodagbon Ventures, she represents the pinnacle of commercial
+                excellence, dedication, and inspiring leadership across Nigeria&apos;s food distribution landscape.
               </p>
 
-              <p className="celebration-narrative">
+              <p className="single-card-desc">
                 Through her trusted partnership, authentic Good Earth seasonings — Hot Peppe, Cameroon Peppe,
                 Atarodo, and Ose Di Oku — reach countless wholesale hubs, retail markets, and family
-                kitchens every single day. We honour her steadfast vision, market stewardship, and valued friendship.
+                kitchens every day with unbroken reliability. We honour her steadfast vision, market stewardship,
+                and treasured friendship.
               </p>
 
-              <div className="celebration-highlights-row">
+              <div className="single-card-highlights">
                 <div className="highlight-pill">
                   <span className="h-icon">🎂</span>
                   <span className="h-text">Celebration: 4th November</span>
@@ -265,84 +347,39 @@ export default function DistributorsView() {
                   <span className="h-icon">🌶️</span>
                   <span className="h-text">Good Earth Key Distributor</span>
                 </div>
-              </div>
-            </div>
-          </article>
-
-          {/* Card 2: Birthday Greeting Card */}
-          <article className="celebration-showcase-card card-showcase">
-            <div
-              className="celebration-media-box"
-              onClick={() =>
-                setActiveModalImg({
-                  src: "/img/celebrations/madam-ifueko-ozigbo-birthday-card.jpg",
-                  title: "Happy Birthday Greetings from TG Agri Farms Ltd & Good Earth",
-                })
-              }
-              title="Click to view full image"
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  setActiveModalImg({
-                    src: "/img/celebrations/madam-ifueko-ozigbo-birthday-card.jpg",
-                    title: "Happy Birthday Greetings from TG Agri Farms Ltd & Good Earth",
-                  });
-                }
-              }}
-            >
-              <div className="celebration-card-badge badge-gold">Official Birthday Card</div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/img/celebrations/madam-ifueko-ozigbo-birthday-card.jpg"
-                alt="Birthday Felicitations from TG Agri Farms Ltd & Good Earth to Madam Ifueko Mabel Ozigbo"
-                className="celebration-card-image"
-                loading="eager"
-              />
-              <span className="media-zoom-hint">🔍 Tap to enlarge</span>
-            </div>
-
-            <div className="celebration-card-content">
-              <span className="celebration-eyebrow-tag tag-gold">Official Felicitations</span>
-              <h2 className="celebration-person-title">Heartfelt Birthday Wishes</h2>
-              <div className="celebration-person-designation">
-                From All of Us at TG Agri Farms Ltd &amp; Good Earth
-              </div>
-
-              <blockquote className="celebration-quote-card">
-                &ldquo;Wishing you a joyful birthday and a year filled with good health, happiness,
-                and continued success.&rdquo;
-              </blockquote>
-
-              <p className="celebration-narrative">
-                Our distributors are not merely business associates; they are the bedrock of our
-                community and the vital bridge connecting Nigeria&apos;s farms to the nation&apos;s kitchens.
-                Madam Ifueko&apos;s enduring energy and pursuit of excellence reflect the very core of what
-                makes our distributor network thrive.
-              </p>
-
-              <p className="celebration-narrative">
-                As you step into another prosperous year, we pray that your path continues to be illuminated
-                with divine health, peaceful prosperity, and boundless commercial milestones. Happy Birthday!
-              </p>
-
-              <div className="celebration-highlights-row">
                 <div className="highlight-pill">
                   <span className="h-icon">✨</span>
-                  <span className="h-text">Good Health &amp; Happiness</span>
-                </div>
-                <div className="highlight-pill">
-                  <span className="h-icon">🌱</span>
-                  <span className="h-text">Growing Together</span>
-                </div>
-                <div className="highlight-pill">
-                  <span className="h-icon">🤝</span>
-                  <span className="h-text">TG Agri Farms Ltd Family</span>
+                  <span className="h-text">Health, Joy &amp; Success</span>
                 </div>
               </div>
+
+              <div className="single-card-actions">
+                <button
+                  type="button"
+                  className="celebration-popper-btn"
+                  onClick={triggerPopper}
+                  title="Pop celebration confetti"
+                >
+                  <span className="popper-icon" aria-hidden="true">🎉</span>
+                  <span>Pop Confetti Again</span>
+                </button>
+
+                <button
+                  type="button"
+                  className="celebration-view-full-btn"
+                  onClick={() =>
+                    setActiveModalImg({
+                      src: SLIDES[currentSlide].src,
+                      title: SLIDES[currentSlide].title,
+                    })
+                  }
+                >
+                  <span>🔍 View Full-Size Image</span>
+                </button>
+              </div>
             </div>
-          </article>
-        </div>
+          </div>
+        </section>
 
         {/* Warm Dedication Tribute Banner */}
         <div className="celebration-dedication-banner">
