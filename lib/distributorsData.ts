@@ -435,3 +435,4 @@ export const PARTNERSHIP_BENEFITS: PartnershipBenefit[] = [
     highlight: "Protected Trade Zones",
   },
 ];
+

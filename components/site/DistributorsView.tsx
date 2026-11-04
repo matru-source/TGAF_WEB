@@ -20,7 +20,6 @@ interface Particle {
 
 interface Slide {
   id: string;
-  tabLabel: string;
   badge: string;
   src: string;
   alt: string;
@@ -30,7 +29,6 @@ interface Slide {
 const SLIDES: Slide[] = [
   {
     id: "portrait",
-    tabLabel: "🎉 4th Nov Poster",
     badge: "4th November · Birthday Tribute",
     src: "/img/celebrations/madam-ifueko-ozigbo-birthday-portrait.jpg",
     alt: "Celebrating Madam Ifueko Mabel Ozigbo, CEO Osagiodagbon Ventures - 4th November Birthday Poster",
@@ -38,7 +36,6 @@ const SLIDES: Slide[] = [
   },
   {
     id: "card",
-    tabLabel: "🎂 Official Greeting Card",
     badge: "Official Birthday Felicitations",
     src: "/img/celebrations/madam-ifueko-ozigbo-birthday-card.jpg",
     alt: "Official Birthday Card from TG Agri Farms Ltd & Good Earth to Madam Ifueko Mabel Ozigbo",
@@ -220,22 +217,6 @@ export default function DistributorsView() {
           <div className="celebration-card-row">
             {/* Left Column: Two Images in Interactive Carousel */}
             <div className="celebration-carousel-side">
-              {/* Carousel Tab Switcher Buttons */}
-              <div className="carousel-tab-switchers" role="tablist" aria-label="Celebration Image Switcher">
-                {SLIDES.map((slide, idx) => (
-                  <button
-                    key={slide.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={currentSlide === idx}
-                    className={`carousel-tab-btn ${currentSlide === idx ? "is-active" : ""}`}
-                    onClick={() => setCurrentSlide(idx)}
-                  >
-                    {slide.tabLabel}
-                  </button>
-                ))}
-              </div>
-
               {/* Carousel Stage Box */}
               <div className="carousel-stage">
                 {SLIDES.map((slide, idx) => (
