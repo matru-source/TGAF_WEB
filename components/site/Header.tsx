@@ -15,7 +15,7 @@ const NAV: Item[] = [
       { label: "About Us", href: "/about" },
       { label: "Awards & Recognition", href: "/awards" },
       { label: "Leadership", href: "/leadership" },
-      { label: "Distributors & Partners", href: "/distributors" },
+      { label: "Celebrations", href: "/distributors" },
       { label: "Sustainability & ESG", href: "/sustainability" },
     ],
   },

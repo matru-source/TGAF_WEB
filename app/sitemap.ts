@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "", "/about", "/leadership", "/sustainability", "/farm-to-fork",
     "/manufacturing", "/quality", "/products", "/careers", "/news",
-    "/presence", "/distributors", "/contact",
+    "/presence", "/distributors", "/celebrations", "/contact",
   ];
   const pages: MetadataRoute.Sitemap = routes.map((r) => ({
     url: `${BASE}${r}`,

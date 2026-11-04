@@ -14056,3 +14056,481 @@ body:has(.fullscreen-video-theater)::-webkit-scrollbar {
 
 .distributors-tab-panel.is-hidden { display: none !important; }
 .distributors-tab-panel.active { display: block; animation: fadeUp 0.35s var(--ease); }
+
+
+/* ========================================================================== */
+/* DISTRIBUTOR BIRTHDAY CELEBRATIONS SPOTLIGHT                                */
+/* ========================================================================== */
+
+.celebration-view-wrapper {
+  position: relative;
+  padding: 48px 0 96px;
+  background: #FCFBF7;
+  overflow: hidden;
+}
+
+/* Fullscreen Confetti Canvas */
+.celebration-confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Header Action Row */
+.celebration-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(217, 119, 6, 0.15);
+}
+
+.celebration-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+  color: #92400E;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid #FCD34D;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+}
+
+.celebration-sparkle {
+  font-size: 1.15rem;
+  display: inline-block;
+  animation: bounceMini 2s infinite ease-in-out;
+}
+
+@keyframes bounceMini {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.15); }
+}
+
+.celebration-popper-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #C0262D;
+  color: #FFFFFF;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(192, 38, 45, 0.28);
+  transition: all 0.25s ease;
+}
+
+.celebration-popper-btn:hover {
+  background: #991B1B;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(192, 38, 45, 0.38);
+}
+
+.celebration-popper-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.popper-icon {
+  font-size: 1.2rem;
+  display: inline-block;
+}
+
+/* Two-Card Showcase Grid */
+.celebration-spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+  align-items: stretch;
+  margin-bottom: 56px;
+}
+
+/* Individual Showcase Card */
+.celebration-showcase-card {
+  background: #FFFFFF;
+  border-radius: 28px;
+  border: 1px solid rgba(217, 119, 6, 0.18);
+  box-shadow: 0 16px 40px rgba(120, 53, 15, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.celebration-showcase-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(217, 119, 6, 0.35);
+  box-shadow: 0 24px 54px rgba(120, 53, 15, 0.14), 0 6px 14px rgba(0, 0, 0, 0.04);
+}
+
+/* Media Box */
+.celebration-media-box {
+  position: relative;
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 50%, #FDE68A 100%);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(217, 119, 6, 0.12);
+}
+
+.portrait-showcase .celebration-media-box {
+  min-height: 480px;
+}
+
+.card-showcase .celebration-media-box {
+  min-height: 380px;
+}
+
+.celebration-card-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: rgba(192, 38, 45, 0.92);
+  backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+
+.celebration-card-badge.badge-gold {
+  background: rgba(180, 83, 9, 0.92);
+}
+
+.celebration-card-image {
+  max-width: 100%;
+  max-height: 440px;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-showcase .celebration-card-image {
+  max-height: 340px;
+}
+
+.celebration-media-box:hover .celebration-card-image {
+  transform: scale(1.025);
+}
+
+.media-zoom-hint {
+  position: absolute;
+  bottom: 14px;
+  right: 18px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.celebration-media-box:hover .media-zoom-hint {
+  opacity: 1;
+}
+
+/* Card Body Content */
+.celebration-card-content {
+  padding: 32px 36px 36px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.celebration-eyebrow-tag {
+  display: inline-block;
+  align-self: flex-start;
+  background: #FEE2E2;
+  color: #991B1B;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.celebration-eyebrow-tag.tag-gold {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.celebration-person-title {
+  font-family: var(--serif);
+  font-size: 1.85rem;
+  line-height: 1.22;
+  color: #1F2937;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.celebration-person-designation {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #D97706;
+  margin-bottom: 18px;
+}
+
+.celebration-quote-card {
+  margin: 0 0 18px;
+  padding: 16px 20px;
+  background: #FFFBEB;
+  border-left: 4px solid #D97706;
+  border-radius: 0 14px 14px 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.12rem;
+  line-height: 1.5;
+  color: #78350F;
+}
+
+.celebration-narrative {
+  font-size: 0.98rem;
+  line-height: 1.72;
+  color: #4B5563;
+  margin: 0 0 16px;
+}
+
+.celebration-narrative strong {
+  color: #111827;
+  font-weight: 700;
+}
+
+/* Highlights Row */
+.celebration-highlights-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.highlight-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #F3F4F6;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  color: #374151;
+  font-weight: 600;
+}
+
+.highlight-pill .h-icon {
+  font-size: 0.95rem;
+}
+
+/* Dedication Banner */
+.celebration-dedication-banner {
+  position: relative;
+  background: linear-gradient(135deg, #78350F 0%, #9A3412 50%, #B91C1C 100%);
+  border-radius: 28px;
+  padding: 48px 56px;
+  color: #FFFFFF;
+  box-shadow: 0 20px 48px rgba(154, 52, 18, 0.22);
+  overflow: hidden;
+  text-align: center;
+}
+
+.dedication-quote-mark {
+  font-family: var(--serif);
+  font-size: 6rem;
+  line-height: 0.8;
+  color: rgba(255, 255, 255, 0.18);
+  margin-bottom: -10px;
+  user-select: none;
+}
+
+.dedication-message {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  line-height: 1.6;
+  color: #FFFBEB;
+  max-width: 860px;
+  margin: 0 auto 24px;
+}
+
+.dedication-signature {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.96rem;
+}
+
+.dedication-signature strong {
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  color: #FDE68A;
+}
+
+.dedication-signature span {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.88rem;
+}
+
+/* Lightbox Modal */
+.celebration-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.25s ease;
+}
+
+.celebration-modal-container {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.celebration-modal-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.celebration-modal-close:hover {
+  background: #C0262D;
+  transform: scale(1.1);
+}
+
+.celebration-modal-image {
+  max-width: 85vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.celebration-modal-caption {
+  margin-top: 14px;
+  color: #F3F4F6;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 960px) {
+  .celebration-spotlight-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .portrait-showcase .celebration-media-box,
+  .card-showcase .celebration-media-box {
+    min-height: auto;
+    padding: 24px 16px;
+  }
+
+  .celebration-card-image,
+  .card-showcase .celebration-card-image {
+    max-height: 400px;
+  }
+
+  .celebration-dedication-banner {
+    padding: 36px 28px;
+  }
+
+  .dedication-message {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .celebration-view-wrapper {
+    padding: 32px 0 64px;
+  }
+
+  .celebration-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .celebration-badge-pill {
+    font-size: 0.82rem;
+    padding: 6px 14px;
+  }
+
+  .celebration-card-content {
+    padding: 24px 20px 28px;
+  }
+
+  .celebration-person-title {
+    font-size: 1.55rem;
+  }
+
+  .celebration-person-designation {
+    font-size: 0.92rem;
+  }
+
+  .celebration-quote-card {
+    font-size: 1rem;
+    padding: 12px 14px;
+  }
+
+  .celebration-narrative {
+    font-size: 0.92rem;
+  }
+
+  .celebration-dedication-banner {
+    padding: 28px 20px;
+    border-radius: 20px;
+  }
+
+  .dedication-message {
+    font-size: 1.02rem;
+  }
+}
