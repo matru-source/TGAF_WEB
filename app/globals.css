@@ -14949,3 +14949,228 @@ body:has(.fullscreen-video-theater)::-webkit-scrollbar {
     width: 100%;
   }
 }
+
+
+/* ========================================================================== */
+/* MULTI-POST DISTRIBUTOR CELEBRATIONS FEED STYLES                           */
+/* ========================================================================== */
+
+.celebration-feed-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  padding: 12px 18px;
+  background: #FFFFFF;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 119, 6, 0.20);
+  box-shadow: 0 4px 16px rgba(120, 53, 15, 0.05);
+}
+
+.celebration-filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.celebration-filter-pill {
+  background: transparent;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #78350F;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.celebration-filter-pill:hover {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.celebration-filter-pill.active {
+  background: #C0262D;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(192, 38, 45, 0.25);
+}
+
+.celebration-popper-top-btn {
+  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+  border: 1px solid #FCD34D;
+  color: #92400E;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.84rem;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
+}
+
+.celebration-popper-top-btn:hover {
+  background: #C0262D;
+  color: #FFFFFF;
+  border-color: #C0262D;
+}
+
+/* Post Metadata Header */
+.celebration-post-item {
+  margin-bottom: 48px;
+}
+
+.celebration-post-meta-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  padding: 0 8px;
+}
+
+.cpm-left,
+.cpm-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cpm-post-number {
+  background: #1F2937;
+  color: #FFFFFF;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.cpm-badge {
+  background: #FEF3C7;
+  color: #92400E;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid #FCD34D;
+}
+
+.cpm-date,
+.cpm-region {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4B5563;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Nominate / Future Posts Ingestion Card */
+.celebration-nominate-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px;
+  background: #FFFFFF;
+  border: 2px dashed rgba(217, 119, 6, 0.35);
+  border-radius: 28px;
+  padding: 36px 42px;
+  margin: 40px 0 48px;
+  box-shadow: 0 10px 30px rgba(120, 53, 15, 0.04);
+}
+
+.nominate-icon {
+  font-size: 3rem;
+  line-height: 1;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nominate-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #D97706;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.nominate-title {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  color: #1F2937;
+  margin: 0 0 8px;
+  line-height: 1.25;
+}
+
+.nominate-desc {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #4B5563;
+  margin: 0;
+}
+
+.nominate-action .nominate-btn {
+  white-space: nowrap;
+  padding: 14px 26px;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 900px) {
+  .celebration-nominate-card {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 28px 24px;
+  }
+
+  .nominate-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 2.2rem;
+  }
+
+  .nominate-title {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .celebration-feed-bar {
+    border-radius: 20px;
+    padding: 12px;
+  }
+
+  .celebration-filter-pills {
+    width: 100%;
+  }
+
+  .celebration-filter-pill {
+    font-size: 0.78rem;
+    padding: 6px 12px;
+  }
+
+  .cpm-post-number,
+  .cpm-badge,
+  .cpm-date,
+  .cpm-region {
+    font-size: 0.74rem;
+  }
+}

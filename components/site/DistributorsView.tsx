@@ -1,6 +1,12 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import Link from "next/link";
+import {
+  DISTRIBUTOR_CELEBRATION_POSTS,
+  type CelebrationPost,
+  type CelebrationSlide,
+} from "@/lib/celebrationsData";
 
 interface Particle {
   x: number;
@@ -18,38 +24,216 @@ interface Particle {
   wobbleSpeed: number;
 }
 
-interface Slide {
-  id: string;
-  badge: string;
-  src: string;
-  alt: string;
-  title: string;
-}
+function PostCarouselCard({
+  post,
+  onOpenModal,
+  onTriggerPopper,
+}: {
+  post: CelebrationPost;
+  onOpenModal: (slide: CelebrationSlide) => void;
+  onTriggerPopper: () => void;
+}) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const touchStartXRef = useRef<number | null>(null);
 
-const SLIDES: Slide[] = [
-  {
-    id: "portrait",
-    badge: "4th November · Birthday Tribute",
-    src: "/img/celebrations/madam-ifueko-ozigbo-birthday-portrait.jpg",
-    alt: "Celebrating Madam Ifueko Mabel Ozigbo, CEO Osagiodagbon Ventures - 4th November Birthday Poster",
-    title: "Madam Ifueko Mabel Ozigbo - 4th November Birthday Poster",
-  },
-  {
-    id: "card",
-    badge: "Official Birthday Felicitations",
-    src: "/img/celebrations/madam-ifueko-ozigbo-birthday-card.jpg",
-    alt: "Official Birthday Card from TG Agri Farms Ltd & Good Earth to Madam Ifueko Mabel Ozigbo",
-    title: "Official Birthday Card - TG Agri Farms Ltd & Good Earth",
-  },
-];
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % post.slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + post.slides.length) % post.slides.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+    const diff = touchStartXRef.current - e.changedTouches[0].clientX;
+    if (diff > 45) {
+      nextSlide();
+    } else if (diff < -45) {
+      prevSlide();
+    }
+    touchStartXRef.current = null;
+  };
+
+  const activeSlideObj = post.slides[currentSlide];
+
+  return (
+    <article className="celebration-post-item" id={post.id}>
+      {/* Post Metadata Header Bar */}
+      <div className="celebration-post-meta-header">
+        <div className="cpm-left">
+          <span className="cpm-post-number">{post.postNumber}</span>
+          <span className="cpm-badge">{post.badge}</span>
+        </div>
+        <div className="cpm-right">
+          <span className="cpm-date">📅 {post.date}</span>
+          <span className="cpm-region">{post.region}</span>
+        </div>
+      </div>
+
+      {/* Unified Single Card: Carousel on Left + Texts beside on Right (Single Row) */}
+      <div className="celebration-unified-card">
+        <div className="celebration-card-row">
+          {/* Left Column: Two Images in Interactive Carousel */}
+          <div className="celebration-carousel-side">
+            {/* Carousel Stage Box with Touch Swipe */}
+            <div
+              className="carousel-stage"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              {post.slides.map((slide, idx) => (
+                <div
+                  key={slide.id}
+                  className={`carousel-slide-item ${currentSlide === idx ? "active" : ""}`}
+                  aria-hidden={currentSlide !== idx}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    className="carousel-img"
+                    loading="eager"
+                    onClick={() => onOpenModal(slide)}
+                    title="Click to view full image in high-resolution"
+                  />
+                </div>
+              ))}
+
+              {/* Desktop-only floating side arrows */}
+              <button
+                type="button"
+                className="carousel-arrow prev desktop-arrow"
+                onClick={prevSlide}
+                aria-label="Previous image"
+              >
+                ‹
+              </button>
+
+              <button
+                type="button"
+                className="carousel-arrow next desktop-arrow"
+                onClick={nextSlide}
+                aria-label="Next image"
+              >
+                ›
+              </button>
+            </div>
+
+            {/* Bottom Controls Bar (Outside Image, clean mobile navigation) */}
+            <div className="carousel-bottom-bar">
+              <button
+                type="button"
+                className="carousel-nav-btn prev"
+                onClick={prevSlide}
+                aria-label="Previous image"
+              >
+                <span className="nav-arrow">‹</span> Prev
+              </button>
+
+              <div className="carousel-dots-wrap">
+                <div className="carousel-dots">
+                  {post.slides.map((slide, idx) => (
+                    <button
+                      key={`dot-${slide.id}`}
+                      type="button"
+                      className={`carousel-dot ${currentSlide === idx ? "is-active" : ""}`}
+                      onClick={() => setCurrentSlide(idx)}
+                      aria-label={`Go to slide ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <div className="carousel-counter">
+                  {currentSlide + 1} / {post.slides.length}
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="carousel-nav-btn next"
+                onClick={nextSlide}
+                aria-label="Next image"
+              >
+                Next <span className="nav-arrow">›</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: Texts & Relatable Narrative beside Carousel in Single Row */}
+          <div className="celebration-text-side">
+            <div className="single-card-eyebrow">
+              <span className="sc-icon">🎉</span>
+              <span>{post.categoryLabel.toUpperCase()}</span>
+            </div>
+
+            <h2 className="single-card-name">{post.personName}</h2>
+            <div className="single-card-role">{post.role}</div>
+
+            <blockquote className="single-card-quote">
+              &ldquo;{post.quote}&rdquo;
+              <span className="quote-author">— {post.quoteAuthor}</span>
+            </blockquote>
+
+            {post.paragraphs.map((p, i) => (
+              <p className="single-card-desc" key={i}>
+                {i === 0 ? (
+                  <>
+                    Today, the Board, Leadership, and the entire Good Earth family joyously celebrate{" "}
+                    <strong>{post.personName}</strong> on the special occasion of her birthday. As the visionary CEO of {post.company}, she represents the pinnacle of commercial excellence, dedication, and inspiring leadership across Nigeria&apos;s food distribution landscape.
+                  </>
+                ) : (
+                  p
+                )}
+              </p>
+            ))}
+
+            {/* 4 Highlight Pills (hidden on mobile, visible on desktop) */}
+            <div className="single-card-highlights">
+              {post.highlights.map((h, i) => (
+                <div className="highlight-pill" key={i}>
+                  <span className="h-icon">{h.icon}</span>
+                  <span className="h-text">{h.text}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="single-card-actions">
+              <button
+                type="button"
+                className="celebration-popper-btn"
+                onClick={onTriggerPopper}
+                title="Pop celebration confetti"
+              >
+                <span className="popper-icon" aria-hidden="true">🎉</span>
+                <span>Pop Confetti Again</span>
+              </button>
+
+              <button
+                type="button"
+                className="celebration-view-full-btn"
+                onClick={() => onOpenModal(activeSlideObj)}
+              >
+                <span>🔍 View Full-Size Image</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export default function DistributorsView() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animIdRef = useRef<number | null>(null);
   const particlesRef = useRef<Particle[]>([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [activeModalImg, setActiveModalImg] = useState<{ src: string; title: string } | null>(null);
-  const touchStartXRef = useRef<number | null>(null);
+  const [activeModalImg, setActiveModalImg] = useState<CelebrationSlide | null>(null);
+  const [selectedFilter, setSelectedFilter] = useState<"all" | "birthday" | "milestone">("all");
 
   const colors = [
     "#C0262D", // Chilli Red
@@ -199,28 +383,10 @@ export default function DistributorsView() {
     };
   }, [triggerPopper]);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartXRef.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartXRef.current === null) return;
-    const diff = touchStartXRef.current - e.changedTouches[0].clientX;
-    if (diff > 45) {
-      nextSlide();
-    } else if (diff < -45) {
-      prevSlide();
-    }
-    touchStartXRef.current = null;
-  };
+  const filteredPosts = DISTRIBUTOR_CELEBRATION_POSTS.filter((post) => {
+    if (selectedFilter === "all") return true;
+    return post.category === selectedFilter;
+  });
 
   return (
     <div className="celebration-view-wrapper">
@@ -228,176 +394,74 @@ export default function DistributorsView() {
       <canvas ref={canvasRef} className="celebration-confetti-canvas" aria-hidden="true" />
 
       <div className="container">
-        {/* Single Showcase Card: Carousel on Left + Texts beside on Right (Single Row) */}
-        <section className="celebration-unified-card">
-          <div className="celebration-card-row">
-            {/* Left Column: Two Images in Interactive Carousel */}
-            <div className="celebration-carousel-side">
-              {/* Carousel Stage Box with Touch Swipe */}
-              <div
-                className="carousel-stage"
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-              >
-                {SLIDES.map((slide, idx) => (
-                  <div
-                    key={slide.id}
-                    className={`carousel-slide-item ${currentSlide === idx ? "active" : ""}`}
-                    aria-hidden={currentSlide !== idx}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={slide.src}
-                      alt={slide.alt}
-                      className="carousel-img"
-                      loading="eager"
-                      onClick={() =>
-                        setActiveModalImg({
-                          src: slide.src,
-                          title: slide.title,
-                        })
-                      }
-                      title="Click to view full image in high-resolution"
-                    />
-                  </div>
-                ))}
+        {/* Celebration Navigation / Filter Bar */}
+        <div className="celebration-feed-bar">
+          <div className="celebration-filter-pills" role="tablist" aria-label="Celebration Categories">
+            <button
+              type="button"
+              className={`celebration-filter-pill ${selectedFilter === "all" ? "active" : ""}`}
+              onClick={() => setSelectedFilter("all")}
+            >
+              All Celebrations ({DISTRIBUTOR_CELEBRATION_POSTS.length})
+            </button>
+            <button
+              type="button"
+              className={`celebration-filter-pill ${selectedFilter === "birthday" ? "active" : ""}`}
+              onClick={() => setSelectedFilter("birthday")}
+            >
+              🎂 Birthday Honors
+            </button>
+            <button
+              type="button"
+              className={`celebration-filter-pill ${selectedFilter === "milestone" ? "active" : ""}`}
+              onClick={() => setSelectedFilter("milestone")}
+            >
+              🏆 Milestones &amp; Spotlights
+            </button>
+          </div>
 
-                {/* Desktop-only floating side arrows */}
-                <button
-                  type="button"
-                  className="carousel-arrow prev desktop-arrow"
-                  onClick={prevSlide}
-                  aria-label="Previous image"
-                >
-                  ‹
-                </button>
+          <div className="celebration-feed-actions">
+            <button
+              type="button"
+              className="celebration-popper-top-btn"
+              onClick={triggerPopper}
+              title="Pop celebration confetti"
+            >
+              🎉 Pop Confetti
+            </button>
+          </div>
+        </div>
 
-                <button
-                  type="button"
-                  className="carousel-arrow next desktop-arrow"
-                  onClick={nextSlide}
-                  aria-label="Next image"
-                >
-                  ›
-                </button>
-              </div>
+        {/* Dynamic Celebration Posts Feed */}
+        <div className="celebration-posts-feed">
+          {filteredPosts.map((post) => (
+            <PostCarouselCard
+              key={post.id}
+              post={post}
+              onOpenModal={setActiveModalImg}
+              onTriggerPopper={triggerPopper}
+            />
+          ))}
+        </div>
 
-              {/* Bottom Controls Bar (Outside Image, clean mobile navigation) */}
-              <div className="carousel-bottom-bar">
-                <button
-                  type="button"
-                  className="carousel-nav-btn prev"
-                  onClick={prevSlide}
-                  aria-label="Previous image"
-                >
-                  <span className="nav-arrow">‹</span> Prev
-                </button>
-
-                <div className="carousel-dots-wrap">
-                  <div className="carousel-dots">
-                    {SLIDES.map((slide, idx) => (
-                      <button
-                        key={`dot-${slide.id}`}
-                        type="button"
-                        className={`carousel-dot ${currentSlide === idx ? "is-active" : ""}`}
-                        onClick={() => setCurrentSlide(idx)}
-                        aria-label={`Go to slide ${idx + 1}`}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="carousel-counter">
-                    {currentSlide + 1} / {SLIDES.length}
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  className="carousel-nav-btn next"
-                  onClick={nextSlide}
-                  aria-label="Next image"
-                >
-                  Next <span className="nav-arrow">›</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Right Column: Texts & Relatable Narrative beside Carousel in Single Row */}
-            <div className="celebration-text-side">
-              <div className="single-card-eyebrow">
-                <span className="sc-icon">🎉</span>
-                <span>DISTRIBUTOR CELEBRATION · 4TH NOVEMBER</span>
-              </div>
-
-              <h2 className="single-card-name">Madam Ifueko Mabel Ozigbo</h2>
-              <div className="single-card-role">
-                Chief Executive Officer, Osagiodagbon Ventures · Key Distribution Partner
-              </div>
-
-              <blockquote className="single-card-quote">
-                &ldquo;Wishing you a joyful birthday and a year filled with good health, happiness,
-                and continued success.&rdquo;
-                <span className="quote-author">— Official Wishes from TG Agri Farms Ltd &amp; Good Earth</span>
-              </blockquote>
-
-              <p className="single-card-desc">
-                Today, the Board, Leadership, and the entire Good Earth family joyously celebrate{" "}
-                <strong>Madam Ifueko Mabel Ozigbo</strong> on the special occasion of her birthday.
-                As the visionary CEO of Osagiodagbon Ventures, she represents the pinnacle of commercial
-                excellence, dedication, and inspiring leadership across Nigeria&apos;s food distribution landscape.
-              </p>
-
-              <p className="single-card-desc">
-                Through her trusted partnership, authentic Good Earth seasonings — Hot Peppe, Cameroon Peppe,
-                Atarodo, and Ose Di Oku — reach countless wholesale hubs, retail markets, and family
-                kitchens every day with unbroken reliability. We honour her steadfast vision, market stewardship,
-                and treasured friendship.
-              </p>
-
-              <div className="single-card-highlights">
-                <div className="highlight-pill">
-                  <span className="h-icon">🎂</span>
-                  <span className="h-text">Celebration: 4th November</span>
-                </div>
-                <div className="highlight-pill">
-                  <span className="h-icon">🏢</span>
-                  <span className="h-text">Osagiodagbon Ventures</span>
-                </div>
-                <div className="highlight-pill">
-                  <span className="h-icon">🌶️</span>
-                  <span className="h-text">Good Earth Key Distributor</span>
-                </div>
-                <div className="highlight-pill">
-                  <span className="h-icon">✨</span>
-                  <span className="h-text">Health, Joy &amp; Success</span>
-                </div>
-              </div>
-
-              <div className="single-card-actions">
-                <button
-                  type="button"
-                  className="celebration-popper-btn"
-                  onClick={triggerPopper}
-                  title="Pop celebration confetti"
-                >
-                  <span className="popper-icon" aria-hidden="true">🎉</span>
-                  <span>Pop Confetti Again</span>
-                </button>
-
-                <button
-                  type="button"
-                  className="celebration-view-full-btn"
-                  onClick={() =>
-                    setActiveModalImg({
-                      src: SLIDES[currentSlide].src,
-                      title: SLIDES[currentSlide].title,
-                    })
-                  }
-                >
-                  <span>🔍 View Full-Size Image</span>
-                </button>
-              </div>
-            </div>
+        {/* Upcoming & Future Celebrations Ingestion Card */}
+        <section className="celebration-nominate-card">
+          <div className="nominate-icon">🌟</div>
+          <div className="nominate-content">
+            <span className="nominate-eyebrow">DISTRIBUTOR TRADE HONORS</span>
+            <h3 className="nominate-title">Celebrate Your Milestone With Good Earth</h3>
+            <p className="nominate-desc">
+              Every distributor in our nationwide network has an inspiring story worth celebrating.
+              Are you an authorized Good Earth key distributor, super-stockist, or wholesale partner marking
+              a birthday, business anniversary, or regional sales milestone? Connect with your territorial
+              sales manager or send a celebration request to be featured on our official Trade Honors page.
+            </p>
+          </div>
+          <div className="nominate-action">
+            <Link href="/contact" className="btn btn-primary nominate-btn">
+              <span>Submit a Milestone Request</span>
+              <span className="arr">→</span>
+            </Link>
           </div>
         </section>
 
@@ -405,9 +469,9 @@ export default function DistributorsView() {
         <div className="celebration-dedication-banner">
           <div className="dedication-quote-mark" aria-hidden="true">&ldquo;</div>
           <p className="dedication-message">
-            Partnership is the heartbeat of Good Earth. On this blessed day, we celebrate the passion,
-            leadership, and exemplary entrepreneurial spirit of Madam Ifueko Mabel Ozigbo. Thank you for
-            bringing authentic Nigerian spice to dinner tables across the country.
+            Partnership is the heartbeat of Good Earth. We honour the dedication, resilience, and business
+            excellence of our distributor partners across all five geopolitical zones of Nigeria.
+            Together, we nourish millions of lives and build a prosperous, sustainable agricultural future.
           </p>
           <div className="dedication-signature">
             <strong>The Board, Management &amp; Commercial Family</strong>

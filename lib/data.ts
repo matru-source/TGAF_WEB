@@ -509,7 +509,7 @@ export const TEAM: UITeamMember[] = [
   },
 ];
 
-export type ExpatLeader = {
+export type GlobalLeader = {
   name: string;
   role: string;
   division: string;
@@ -519,7 +519,9 @@ export type ExpatLeader = {
   bio: string;
 };
 
-export const EXPAT_LEADERS: ExpatLeader[] = [
+export type ExpatLeader = GlobalLeader;
+
+export const GLOBAL_LEADERS: GlobalLeader[] = [
   {
     name: "Deepak Murli Chainani",
     role: "Managing Director",
@@ -539,6 +541,8 @@ export const EXPAT_LEADERS: ExpatLeader[] = [
     bio: "Appointed COO in June 2023 and to the board in Nov 2024. Over 15 years leading automated FMCG manufacturing plants across Africa, championing technical precision, hygiene, and engineer mentoring.",
   },
 ];
+
+export const EXPAT_LEADERS: ExpatLeader[] = GLOBAL_LEADERS;
 
 // ---- Certifications ----
 // `logo` points to a file in /public/img/certs/. If the file is missing the
@@ -851,14 +855,14 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     id: "plant-mgmt-team",
-    title: "Expatriate Technical & Plant Management Team",
+    title: "Global Technical & Plant Operations Leadership",
     category: "packaging",
     categoryLabel: "Packaging",
     image: "/img/team/expat-plant-team.jpg",
-    caption: "Seasoned expatriate engineers and technical operations supervisors on-site at the Ikorodu facility.",
+    caption: "Seasoned international engineers and global technical specialists leading world-class manufacturing standards on-site at the Ikorodu facility.",
     location: "Ikorodu Plant, Lagos",
     aspect: "landscape",
-    tag: "Technical Leadership",
+    tag: "Global Technical Leadership",
   },
   {
     id: "plant-workforce-team",

@@ -3,16 +3,16 @@ import PageHero from "@/components/site/PageHero";
 import DistributorsView from "@/components/site/DistributorsView";
 
 export const metadata: Metadata = {
-  title: "Celebrations · Goodearth Foods",
+  title: "Distributor Celebrations & Trade Honors · Goodearth Foods",
   description:
-    "Celebrating Madam Ifueko Mabel Ozigbo, CEO of Osagiodagbon Ventures, on her birthday — warm felicitations and gratitude from all of us at TG Agri Farms Ltd and Good Earth.",
+    "Celebrating our nationwide distributor partners, trade champions, birthdays, and inspiring milestones across Nigeria — honours from TG Agri Farms Ltd and Good Earth.",
   keywords: [
-    "Goodearth celebrations",
+    "Goodearth distributor celebrations",
+    "distributor trade honours",
     "Madam Ifueko Mabel Ozigbo",
     "Osagiodagbon Ventures",
-    "Goodearth distributors",
-    "TG Agri Farms celebration",
-    "distributor spotlight",
+    "Goodearth distributors Nigeria",
+    "TG Agri Farms partner milestones",
   ],
 };
 
@@ -20,9 +20,9 @@ export default function DistributorsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Special Celebration · 4th November"
-        title={<>Celebrating Madam Ifueko Mabel Ozigbo</>}
-        subtitle="Warmest birthday felicitations to the CEO of Osagiodagbon Ventures and our esteemed key distribution partner — wishing you joy, sound health, and continued success from all of us at TG Agri Farms Ltd."
+        eyebrow="Nationwide Trade Network · Partner Honors & Milestones"
+        title={<>Distributor Celebrations &amp; Trade Honors</>}
+        subtitle="Honouring the birthdays, achievements, regional milestones, and inspiring stories of our valued nationwide distributor partners who bring Good Earth spices from our Ikorodu factory to millions of Nigerian tables."
         crumb="Celebrations"
         tone="distributors"
       />
