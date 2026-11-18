@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser, assertAdmin } from "@/lib/auth";
 import { teamMemberSchema, cleanTeamMember } from "@/lib/schemas";
 import { logUserActivity } from "@/lib/audit";
+import { deleteCloudinaryAsset } from "@/lib/cloudinary";
 
 export const runtime = "nodejs";
 
@@ -19,10 +20,20 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     );
   }
   try {
+    const existing = await prisma.teamMember.findUnique({
+      where: { id: params.id },
+      select: { photo: true },
+    });
+
     const updated = await prisma.teamMember.update({
       where: { id: params.id },
       data: cleanTeamMember(parsed.data),
     });
+
+    // If photo was replaced, remove old photo from Cloudinary
+    if (existing?.photo && existing.photo !== updated.photo) {
+      deleteCloudinaryAsset(existing.photo).catch(() => {});
+    }
 
     logUserActivity(
       user,
@@ -47,10 +58,15 @@ export async function DELETE(_req: Request, { params }: { params: { id: string }
   try {
     const existing = await prisma.teamMember.findUnique({
       where: { id: params.id },
-      select: { name: true },
+      select: { name: true, photo: true },
     });
 
     await prisma.teamMember.delete({ where: { id: params.id } });
+
+    // Cleanup Cloudinary photo
+    if (existing?.photo) {
+      deleteCloudinaryAsset(existing.photo).catch(() => {});
+    }
 
     logUserActivity(
       user,

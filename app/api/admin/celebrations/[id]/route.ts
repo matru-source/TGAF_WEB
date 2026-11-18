@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser, assertAdmin } from "@/lib/auth";
 import { logUserActivity } from "@/lib/audit";
+import { deleteCloudinaryAssets } from "@/lib/cloudinary";
 
 export const runtime = "nodejs";
 
@@ -13,6 +14,11 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   if (!body) return NextResponse.json({ error: "Invalid data." }, { status: 400 });
 
   try {
+    const existing = await prisma.celebrationPost.findUnique({
+      where: { id: params.id },
+      select: { images: true },
+    });
+
     const post = await prisma.celebrationPost.update({
       where: { id: params.id },
       data: {
@@ -29,6 +35,15 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         published: body.published !== undefined ? Boolean(body.published) : undefined,
       },
     });
+
+    // Cleanup removed images from Cloudinary
+    if (existing?.images && Array.isArray(existing.images)) {
+      const currentImages = new Set(post.images || []);
+      const removed = existing.images.filter((img) => !currentImages.has(img));
+      if (removed.length > 0) {
+        deleteCloudinaryAssets(removed).catch(() => {});
+      }
+    }
 
     logUserActivity(
       user,
@@ -52,10 +67,15 @@ export async function DELETE(_req: Request, { params }: { params: { id: string }
   try {
     const existing = await prisma.celebrationPost.findUnique({
       where: { id: params.id },
-      select: { celebrantName: true },
+      select: { celebrantName: true, images: true },
     });
 
     await prisma.celebrationPost.delete({ where: { id: params.id } });
+
+    // Cleanup all images from Cloudinary
+    if (existing?.images && Array.isArray(existing.images)) {
+      deleteCloudinaryAssets(existing.images).catch(() => {});
+    }
 
     logUserActivity(
       user,

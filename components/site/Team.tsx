@@ -19,6 +19,15 @@ export default async function Team() {
     bio: "With over 14 years of commercial marketing leadership, driving consumer brand visibility, distributor activations, retail execution, and nationwide campaign growth.",
   };
 
+  // Any additional team members added in the admin portal (8th, 9th member, etc.)
+  const coreIds = new Set([deepak.id, swatanter.id, jagdeep.id, amit.id, yoganand.id, stella.id, fred.id]);
+  const coreNames = ["deepak", "swatanter", "jagdeep", "amit", "yoganand", "stella", "fred"];
+  const additionalMembers = members.filter(
+    (m) =>
+      !coreIds.has(m.id) &&
+      !coreNames.some((name) => m.name.toLowerCase().includes(name))
+  );
+
   return (
     <section className="section org-hierarchy-section" id="leadership-hierarchy">
       <div className="container">
@@ -134,17 +143,28 @@ export default async function Team() {
                     <span>General Manager- Factory</span>
                   </div>
                   <div className="org-card-compact-body">
-                    <div className="org-avatar-monogram" aria-hidden="true">
-                      <span>JR</span>
-                    </div>
+                    {jagdeep.photo ? (
+                      <div className="org-card-photo-wrap org-card-photo-wrap--compact">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={jagdeep.photo} alt={jagdeep.name} loading="lazy" />
+                      </div>
+                    ) : (
+                      <div className="org-avatar-monogram" aria-hidden="true">
+                        <span>JR</span>
+                      </div>
+                    )}
                     <div className="org-card-info">
                       <h3 className="org-card-name">{jagdeep.name}</h3>
                       <div className="org-card-role-title">{jagdeep.role}</div>
                       <div className="org-card-division">Ikorodu Processing Facility</div>
-                      <div className="org-placeholder-note">
-                        <span className="org-status-pulse"></span>
-                        <span>Profile &amp; photo in progress</span>
-                      </div>
+                      {jagdeep.bio ? (
+                        <p className="org-card-bio org-card-bio--tight">{jagdeep.bio}</p>
+                      ) : (
+                        <div className="org-placeholder-note">
+                          <span className="org-status-pulse"></span>
+                          <span>Profile &amp; photo in progress</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </article>
@@ -157,17 +177,28 @@ export default async function Team() {
                     <span>Chief Financial Officer</span>
                   </div>
                   <div className="org-card-compact-body">
-                    <div className="org-avatar-monogram" aria-hidden="true">
-                      <span>YR</span>
-                    </div>
+                    {yoganand.photo ? (
+                      <div className="org-card-photo-wrap org-card-photo-wrap--compact">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={yoganand.photo} alt={yoganand.name} loading="lazy" />
+                      </div>
+                    ) : (
+                      <div className="org-avatar-monogram" aria-hidden="true">
+                        <span>YR</span>
+                      </div>
+                    )}
                     <div className="org-card-info">
                       <h3 className="org-card-name">{yoganand.name}</h3>
                       <div className="org-card-role-title">{yoganand.role}</div>
                       <div className="org-card-division">Finance, Audit &amp; Trade Capital</div>
-                      <div className="org-placeholder-note">
-                        <span className="org-status-pulse"></span>
-                        <span>Profile &amp; photo in progress</span>
-                      </div>
+                      {yoganand.bio ? (
+                        <p className="org-card-bio org-card-bio--tight">{yoganand.bio}</p>
+                      ) : (
+                        <div className="org-placeholder-note">
+                          <span className="org-status-pulse"></span>
+                          <span>Profile &amp; photo in progress</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </article>
@@ -239,6 +270,118 @@ export default async function Team() {
           </div>
 
         </div>
+
+        {/* Additional Team Members: Operations & Management Team */}
+        {additionalMembers.length > 0 && (
+          <div className="additional-team-section" style={{ marginTop: "72px" }}>
+            <div className="section-head reveal center" style={{ textAlign: "center", marginBottom: "40px" }}>
+              <span className="eyebrow center" style={{ color: "var(--chilli, #b91c1c)" }}>Key Personnel</span>
+              <h3 style={{ fontSize: "clamp(1.6rem, 2.8vw, 2.2rem)", marginBottom: "8px", fontWeight: 700 }}>
+                Operations &amp; Management Team
+              </h3>
+              <p style={{ maxWidth: "600px", margin: "0 auto", color: "var(--ink-2)", fontSize: "0.95rem" }}>
+                Experienced technical, quality, and commercial leaders executing daily factory processing, supply chain logistics, and client excellence.
+              </p>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                gap: "24px",
+                maxWidth: "1100px",
+                margin: "0 auto",
+              }}
+            >
+              {additionalMembers.map((m, idx) => (
+                <article
+                  key={m.id || idx}
+                  className="org-card org-card--functional reveal"
+                  style={{
+                    background: "#ffffff",
+                    borderRadius: "16px",
+                    border: "1px solid var(--line, #E5E7EB)",
+                    padding: "24px",
+                    boxShadow: "0 4px 14px rgba(0,0,0,0.04)",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
+                    {m.photo ? (
+                      <div
+                        style={{
+                          width: "72px",
+                          height: "72px",
+                          borderRadius: "50%",
+                          overflow: "hidden",
+                          flexShrink: 0,
+                          border: "2px solid #E5E7EB",
+                        }}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={m.photo}
+                          alt={m.name}
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                          loading="lazy"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        style={{
+                          width: "72px",
+                          height: "72px",
+                          borderRadius: "50%",
+                          background: "#F3F4F6",
+                          color: "#4B5563",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontWeight: 700,
+                          fontSize: "1.2rem",
+                          flexShrink: 0,
+                          border: "2px solid #E5E7EB",
+                        }}
+                      >
+                        {m.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .slice(0, 2)
+                          .join("")
+                          .toUpperCase()}
+                      </div>
+                    )}
+                    <div>
+                      <h4 style={{ margin: "0 0 4px", fontSize: "1.1rem", fontWeight: 700, color: "var(--ink, #111827)" }}>
+                        {m.name}
+                      </h4>
+                      <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--chilli, #b91c1c)" }}>
+                        {m.role}
+                      </div>
+                      {m.credentials && (
+                        <div
+                          style={{
+                            fontSize: "0.75rem",
+                            color: "#6B7280",
+                            marginTop: "2px",
+                          }}
+                        >
+                          {m.credentials}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {m.bio && (
+                    <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--ink-2, #4B5563)", lineHeight: "1.6" }}>
+                      {m.bio}
+                    </p>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -23,21 +23,53 @@ if (CONFIGURED) {
   });
 }
 
-function uploadBuffer(buf: Buffer): Promise<UploadApiResponse> {
+function uploadBuffer(buf: Buffer, removeBg = false): Promise<UploadApiResponse> {
   return new Promise((resolve, reject) => {
+    const uploadOptions: Record<string, unknown> = {
+      folder: FOLDER,
+      resource_type: "image",
+      unique_filename: true,
+      use_filename: false,
+      overwrite: false,
+    };
+
+    if (removeBg) {
+      // Cloudinary transparent background transformation
+      uploadOptions.transformation = [
+        { effect: "background_removal" },
+        { format: "png" },
+      ];
+    }
+
     const stream = cloudinary.uploader.upload_stream(
-      {
-        folder: FOLDER,
-        resource_type: "image",
-        // Cloudinary generates the public_id, so a client filename can never
-        // influence the stored path.
-        unique_filename: true,
-        use_filename: false,
-        overwrite: false,
-      },
+      uploadOptions,
       (err, result) => {
-        if (err || !result) reject(err ?? new Error("Upload failed"));
-        else resolve(result);
+        if (err || !result) {
+          // If background_removal add-on is unavailable on the account, retry with make_transparent
+          if (removeBg) {
+            const fallbackStream = cloudinary.uploader.upload_stream(
+              {
+                ...uploadOptions,
+                transformation: [
+                  { effect: "make_transparent:20" },
+                  { format: "png" },
+                ],
+              },
+              (fallbackErr, fallbackResult) => {
+                if (fallbackErr || !fallbackResult) {
+                  reject(fallbackErr ?? err ?? new Error("Upload failed"));
+                } else {
+                  resolve(fallbackResult);
+                }
+              },
+            );
+            fallbackStream.end(buf);
+            return;
+          }
+          reject(err ?? new Error("Upload failed"));
+        } else {
+          resolve(result);
+        }
       },
     );
     stream.end(buf);
@@ -60,6 +92,8 @@ export async function POST(req: Request) {
 
   const form = await req.formData().catch(() => null);
   const files = form?.getAll("files").filter((f): f is File => f instanceof File) ?? [];
+  const removeBg = form?.get("removeBg") === "true";
+
   if (!files.length) return NextResponse.json({ error: "No files uploaded." }, { status: 400 });
 
   const urls: string[] = [];
@@ -74,7 +108,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: `"${file.name}" is larger than 5 MB.` }, { status: 400 });
     }
     try {
-      const result = await uploadBuffer(Buffer.from(await file.arrayBuffer()));
+      const result = await uploadBuffer(Buffer.from(await file.arrayBuffer()), removeBg);
       urls.push(result.secure_url);
     } catch {
       return NextResponse.json(

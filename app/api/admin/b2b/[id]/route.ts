@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser, assertAdmin } from "@/lib/auth";
 import { logUserActivity } from "@/lib/audit";
+import { deleteCloudinaryAsset } from "@/lib/cloudinary";
 
 export const runtime = "nodejs";
 
@@ -13,6 +14,11 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   if (!body) return NextResponse.json({ error: "Invalid data." }, { status: 400 });
 
   try {
+    const existing = await prisma.b2BPartner.findUnique({
+      where: { id: params.id },
+      select: { logo: true },
+    });
+
     const partner = await prisma.b2BPartner.update({
       where: { id: params.id },
       data: {
@@ -23,6 +29,11 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         published: body.published !== undefined ? Boolean(body.published) : undefined,
       },
     });
+
+    // Cleanup old logo if replaced
+    if (existing?.logo && existing.logo !== partner.logo) {
+      deleteCloudinaryAsset(existing.logo).catch(() => {});
+    }
 
     logUserActivity(
       user,
@@ -46,10 +57,15 @@ export async function DELETE(_req: Request, { params }: { params: { id: string }
   try {
     const existing = await prisma.b2BPartner.findUnique({
       where: { id: params.id },
-      select: { name: true },
+      select: { name: true, logo: true },
     });
 
     await prisma.b2BPartner.delete({ where: { id: params.id } });
+
+    // Cleanup Cloudinary logo
+    if (existing?.logo) {
+      deleteCloudinaryAsset(existing.logo).catch(() => {});
+    }
 
     logUserActivity(
       user,

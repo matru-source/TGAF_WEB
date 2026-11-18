@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser, assertAdmin } from "@/lib/auth";
 import { productSchema, cleanProduct } from "@/lib/schemas";
 import { logUserActivity } from "@/lib/audit";
+import { deleteCloudinaryAssets } from "@/lib/cloudinary";
 
 export const runtime = "nodejs";
 
@@ -19,10 +20,25 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     );
   }
   try {
+    const existing = await prisma.product.findUnique({
+      where: { id: params.id },
+      select: { image: true, images: true },
+    });
+
     const updated = await prisma.product.update({
       where: { id: params.id },
       data: cleanProduct(parsed.data),
     });
+
+    // Cleanup orphaned Cloudinary images if replaced
+    if (existing) {
+      const oldList = [existing.image, ...(existing.images || [])].filter(Boolean) as string[];
+      const newList = new Set([updated.image, ...(updated.images || [])].filter(Boolean) as string[]);
+      const orphaned = oldList.filter((img) => !newList.has(img));
+      if (orphaned.length > 0) {
+        deleteCloudinaryAssets(orphaned).catch(() => {});
+      }
+    }
 
     logUserActivity(
       user,
@@ -51,10 +67,18 @@ export async function DELETE(_req: Request, { params }: { params: { id: string }
   try {
     const existing = await prisma.product.findUnique({
       where: { id: params.id },
-      select: { name: true, slug: true },
+      select: { name: true, slug: true, image: true, images: true },
     });
 
     await prisma.product.delete({ where: { id: params.id } });
+
+    // Cleanup Cloudinary images permanently
+    if (existing) {
+      const toDelete = [existing.image, ...(existing.images || [])].filter(Boolean) as string[];
+      if (toDelete.length > 0) {
+        deleteCloudinaryAssets(toDelete).catch(() => {});
+      }
+    }
 
     logUserActivity(
       user,

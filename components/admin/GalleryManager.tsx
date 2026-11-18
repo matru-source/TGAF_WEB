@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useState, useMemo } from "react";
 
 export interface GalleryItemData {
   id: string;
@@ -16,12 +15,15 @@ export interface GalleryItemData {
 }
 
 const CATEGORIES = [
+  { key: "all", label: "All Categories" },
   { key: "packaging", label: "Packaging & Facilities" },
   { key: "operational", label: "Operational Workforce" },
   { key: "leadership", label: "Leadership" },
   { key: "sourcing", label: "Sourcing & Harvest" },
   { key: "marketing", label: "Marketing & Distribution" },
 ];
+
+const PAGE_SIZE = 20;
 
 export default function GalleryManager({ initialItems }: { initialItems: GalleryItemData[] }) {
   const [items, setItems] = useState<GalleryItemData[]>(initialItems);
@@ -30,6 +32,12 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
+  const [previewing, setPreviewing] = useState(false);
+
+  // Search & Filter & Pagination states
+  const [searchQuery, setSearchQuery] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Form fields
   const [title, setTitle] = useState("");
@@ -40,6 +48,38 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
   const [tag, setTag] = useState("");
   const [order, setOrder] = useState(0);
   const [published, setPublished] = useState(true);
+
+  // Filtered & Paginated items
+  const filteredItems = useMemo(() => {
+    return items.filter((item) => {
+      const matchesCategory = categoryFilter === "all" || item.category === categoryFilter;
+      const q = searchQuery.toLowerCase().trim();
+      const matchesQuery =
+        !q ||
+        item.title.toLowerCase().includes(q) ||
+        (item.caption && item.caption.toLowerCase().includes(q)) ||
+        (item.location && item.location.toLowerCase().includes(q)) ||
+        (item.tag && item.tag.toLowerCase().includes(q)) ||
+        item.category.toLowerCase().includes(q);
+      return matchesCategory && matchesQuery;
+    });
+  }, [items, categoryFilter, searchQuery]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredItems.length / PAGE_SIZE));
+  const paginatedItems = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return filteredItems.slice(start, start + PAGE_SIZE);
+  }, [filteredItems, currentPage]);
+
+  const handleSearchChange = (val: string) => {
+    setSearchQuery(val);
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (val: string) => {
+    setCategoryFilter(val);
+    setCurrentPage(1);
+  };
 
   const openCreateModal = () => {
     setIsNew(true);
@@ -53,6 +93,7 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
     setOrder(items.length);
     setPublished(true);
     setError("");
+    setPreviewing(false);
   };
 
   const openEditModal = (item: GalleryItemData) => {
@@ -67,12 +108,14 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
     setOrder(item.order);
     setPublished(item.published);
     setError("");
+    setPreviewing(false);
   };
 
   const closeModal = () => {
     setIsNew(false);
     setEditingItem(null);
     setError("");
+    setPreviewing(false);
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,12 +168,8 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
           body: JSON.stringify(payload),
         });
         const data = await res.json();
-        if (!res.ok) {
-          setError(data.error || "Failed to create gallery item.");
-        } else {
-          setItems([data.item, ...items]);
-          closeModal();
-        }
+        if (!res.ok) throw new Error(data.error || "Failed to create photo item.");
+        setItems((prev) => [...prev, data.item]);
       } else if (editingItem) {
         const res = await fetch(`/api/admin/gallery/${editingItem.id}`, {
           method: "PUT",
@@ -138,32 +177,31 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
           body: JSON.stringify(payload),
         });
         const data = await res.json();
-        if (!res.ok) {
-          setError(data.error || "Failed to update gallery item.");
-        } else {
-          setItems(items.map((it) => (it.id === editingItem.id ? data.item : it)));
-          closeModal();
-        }
+        if (!res.ok) throw new Error(data.error || "Failed to update photo item.");
+        setItems((prev) => prev.map((item) => (item.id === editingItem.id ? data.item : item)));
       }
-    } catch {
-      setError("Error saving item.");
+      closeModal();
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Error saving photo.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async (id: string, itemTitle: string) => {
-    if (!confirm(`Are you sure you want to delete "${itemTitle}"?`)) return;
+  const handleDelete = async (item: GalleryItemData) => {
+    if (!confirm(`Are you sure you want to delete "${item.title}"? This will also remove the photo from Cloudinary.`)) {
+      return;
+    }
     try {
-      const res = await fetch(`/api/admin/gallery/${id}`, { method: "DELETE" });
-      if (res.ok) {
-        setItems(items.filter((it) => it.id !== id));
-      } else {
+      const res = await fetch(`/api/admin/gallery/${item.id}`, { method: "DELETE" });
+      if (!res.ok) {
         const data = await res.json();
-        alert(data.error || "Could not delete item.");
+        alert(data.error || "Failed to delete item.");
+        return;
       }
+      setItems((prev) => prev.filter((i) => i.id !== item.id));
     } catch {
-      alert("Error deleting item.");
+      alert("Network error while deleting item.");
     }
   };
 
@@ -174,136 +212,290 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ published: !item.published }),
       });
-      if (res.ok) {
-        setItems(items.map((it) => (it.id === item.id ? { ...it, published: !it.published } : it)));
-      }
-    } catch {
-      alert("Could not update publish state.");
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to update status.");
+      setItems((prev) => prev.map((i) => (i.id === item.id ? { ...i, published: !item.published } : i)));
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : "Error updating status.");
     }
   };
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
-        <p style={{ margin: 0, color: "var(--ink-2)", fontSize: "0.95rem" }}>
-          Showing <strong>{items.length}</strong> gallery photos. Uploaded images appear on the public <code>/gallery</code> page.
-        </p>
+      <div className="admin-head" style={{ marginBottom: "20px" }}>
+        <div>
+          <h1>Industrial Photo Gallery</h1>
+          <p>Manage processing factory, workforce, harvest, and distribution photos displayed on the /gallery page.</p>
+        </div>
         <button onClick={openCreateModal} className="abtn abtn-primary">
           + Add New Photo
         </button>
       </div>
 
-      {/* Gallery Cards Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "20px" }}>
-        {items.map((item) => (
-          <div
-            key={item.id}
+      {/* SEARCH & FILTER CONTROLS */}
+      <div
+        style={{
+          background: "#fff",
+          padding: "16px",
+          borderRadius: "12px",
+          border: "1px solid var(--line)",
+          marginBottom: "24px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "14px",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        {/* Search Bar */}
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", flex: "1 1 260px" }}>
+          <span style={{ fontSize: "1.1rem", color: "#6B7280" }}>🔍</span>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => handleSearchChange(e.target.value)}
+            placeholder="Search by title, location, tag, caption..."
             style={{
-              background: "#fff",
+              width: "100%",
+              padding: "8px 12px",
+              borderRadius: "8px",
               border: "1px solid var(--line)",
-              borderRadius: "12px",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-              opacity: item.published ? 1 : 0.65,
+              fontSize: "0.88rem",
             }}
-          >
-            <div style={{ position: "relative", width: "100%", height: "180px", background: "#111" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.image}
-                alt={item.title}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  top: "10px",
-                  left: "10px",
-                  background: "rgba(0,0,0,0.75)",
-                  color: "#fff",
-                  fontSize: "0.72rem",
-                  padding: "4px 8px",
-                  borderRadius: "6px",
-                  textTransform: "uppercase",
-                  fontWeight: 600,
-                }}
-              >
-                {item.category}
-              </span>
-              {!item.published && (
+          />
+          {searchQuery && (
+            <button
+              onClick={() => handleSearchChange("")}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "#9CA3AF" }}
+            >
+              ✕
+            </button>
+          )}
+        </div>
+
+        {/* Category Filter Pills */}
+        <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", alignItems: "center" }}>
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.key}
+              type="button"
+              onClick={() => handleCategoryChange(cat.key)}
+              style={{
+                padding: "6px 12px",
+                borderRadius: "20px",
+                border: "1px solid",
+                borderColor: categoryFilter === cat.key ? "var(--chilli, #b91c1c)" : "#E5E7EB",
+                background: categoryFilter === cat.key ? "var(--chilli, #b91c1c)" : "#F9FAFB",
+                color: categoryFilter === cat.key ? "#fff" : "#4B5563",
+                fontSize: "0.78rem",
+                fontWeight: 600,
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Results Count */}
+      <div style={{ marginBottom: "16px", fontSize: "0.85rem", color: "#6B7280", display: "flex", justifyContent: "space-between" }}>
+        <span>
+          Showing <strong>{paginatedItems.length}</strong> of <strong>{filteredItems.length}</strong> photos
+          {searchQuery && ` matching "${searchQuery}"`}
+        </span>
+        <span>Page {currentPage} of {totalPages}</span>
+      </div>
+
+      {/* Gallery Cards Grid */}
+      {paginatedItems.length === 0 ? (
+        <div style={{ padding: "48px 24px", textAlign: "center", background: "#fff", borderRadius: "12px", border: "1px solid var(--line)" }}>
+          <div style={{ fontSize: "2rem", marginBottom: "8px" }}>📷</div>
+          <p style={{ fontWeight: 600, color: "#374151", margin: "0 0 4px" }}>No photos found</p>
+          <p style={{ fontSize: "0.85rem", color: "#6B7280", margin: 0 }}>
+            {searchQuery ? "Try clearing your search query or choosing another category." : "Add your first photo to get started."}
+          </p>
+        </div>
+      ) : (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "20px" }}>
+          {paginatedItems.map((item) => (
+            <div
+              key={item.id}
+              style={{
+                background: "#fff",
+                border: "1px solid var(--line)",
+                borderRadius: "12px",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                opacity: item.published ? 1 : 0.65,
+              }}
+            >
+              <div style={{ position: "relative", width: "100%", height: "180px", background: "#111" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
                 <span
                   style={{
                     position: "absolute",
                     top: "10px",
-                    right: "10px",
-                    background: "#EF4444",
+                    left: "10px",
+                    background: "rgba(0,0,0,0.75)",
                     color: "#fff",
                     fontSize: "0.72rem",
-                    padding: "3px 8px",
+                    padding: "4px 8px",
                     borderRadius: "6px",
-                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    fontWeight: 600,
                   }}
                 >
-                  HIDDEN
+                  {item.category}
                 </span>
-              )}
-            </div>
+                {!item.published && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "10px",
+                      background: "#EF4444",
+                      color: "#fff",
+                      fontSize: "0.72rem",
+                      padding: "3px 8px",
+                      borderRadius: "6px",
+                      fontWeight: 700,
+                    }}
+                  >
+                    HIDDEN
+                  </span>
+                )}
+              </div>
 
-            <div style={{ padding: "16px", flex: 1, display: "flex", flexDirection: "column" }}>
-              <h4 style={{ margin: "0 0 6px 0", fontSize: "1rem", color: "var(--ink)" }}>{item.title}</h4>
-              {item.caption && (
-                <p style={{ margin: "0 0 12px 0", fontSize: "0.85rem", color: "#6B7280", lineHeight: 1.4, flex: 1 }}>
-                  {item.caption.length > 90 ? item.caption.slice(0, 90) + "..." : item.caption}
-                </p>
-              )}
-              {item.location && (
-                <span style={{ fontSize: "0.78rem", color: "#9CA3AF", marginBottom: "14px" }}>
-                  📍 {item.location}
-                </span>
-              )}
+              <div style={{ padding: "16px", display: "flex", flexDirection: "column", flex: 1 }}>
+                <h3 style={{ margin: "0 0 6px", fontSize: "1rem", fontWeight: 700, color: "var(--ink)" }}>
+                  {item.title}
+                </h3>
+                {item.location && (
+                  <div style={{ fontSize: "0.78rem", color: "var(--ink-2)", marginBottom: "6px" }}>
+                    📍 {item.location}
+                  </div>
+                )}
+                {item.tag && (
+                  <div style={{ fontSize: "0.75rem", color: "var(--chilli)", fontWeight: 600, marginBottom: "8px" }}>
+                    🏷️ {item.tag}
+                  </div>
+                )}
+                {item.caption && (
+                  <p
+                    style={{
+                      margin: "0 0 12px",
+                      fontSize: "0.82rem",
+                      color: "var(--ink-2)",
+                      lineHeight: "1.4",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {item.caption}
+                  </p>
+                )}
 
-              <div style={{ display: "flex", gap: "8px", marginTop: "auto", borderTop: "1px solid #F3F4F6", paddingTop: "12px" }}>
-                <button
-                  type="button"
-                  onClick={() => openEditModal(item)}
-                  className="abtn"
-                  style={{ flex: 1, fontSize: "0.82rem", padding: "6px" }}
+                <div
+                  style={{
+                    marginTop: "auto",
+                    paddingTop: "12px",
+                    borderTop: "1px solid var(--line)",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
                 >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleTogglePublish(item)}
-                  className="abtn"
-                  style={{ fontSize: "0.82rem", padding: "6px 10px" }}
-                  title={item.published ? "Hide from website" : "Show on website"}
-                >
-                  {item.published ? "Hide" : "Show"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDelete(item.id, item.title)}
-                  className="abtn"
-                  style={{ color: "#DC2626", borderColor: "#FCA5A5", fontSize: "0.82rem", padding: "6px 10px" }}
-                >
-                  ✕
-                </button>
+                  <button
+                    onClick={() => handleTogglePublish(item)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: "0.78rem",
+                      fontWeight: 600,
+                      color: item.published ? "#10B981" : "#6B7280",
+                    }}
+                  >
+                    {item.published ? "● Visible" : "○ Hidden"}
+                  </button>
+
+                  <div style={{ display: "flex", gap: "8px" }}>
+                    <button
+                      onClick={() => openEditModal(item)}
+                      className="abtn abtn-sm abtn-ghost"
+                      style={{ padding: "4px 8px", fontSize: "0.78rem" }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item)}
+                      className="abtn abtn-sm abtn-danger"
+                      style={{ padding: "4px 8px", fontSize: "0.78rem" }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
-      {/* Add / Edit Modal */}
+      {/* PAGINATION CONTROLS */}
+      {totalPages > 1 && (
+        <div
+          style={{
+            marginTop: "32px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            className="abtn abtn-ghost"
+            style={{ padding: "6px 14px", fontSize: "0.85rem", opacity: currentPage === 1 ? 0.5 : 1 }}
+          >
+            ◀ Previous
+          </button>
+          <span style={{ fontSize: "0.88rem", fontWeight: 600, color: "#374151" }}>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+            className="abtn abtn-ghost"
+            style={{ padding: "6px 14px", fontSize: "0.85rem", opacity: currentPage === totalPages ? 0.5 : 1 }}
+          >
+            Next ▶
+          </button>
+        </div>
+      )}
+
+      {/* CREATE / EDIT MODAL */}
       {(isNew || editingItem) && (
         <div
           style={{
             position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,0.55)",
-            backdropFilter: "blur(4px)",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0,0,0,0.5)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -315,32 +507,27 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
             style={{
               background: "#fff",
               borderRadius: "16px",
-              padding: "28px",
+              maxWidth: "600px",
               width: "100%",
-              maxWidth: "540px",
               maxHeight: "90vh",
               overflowY: "auto",
-              boxShadow: "0 20px 40px rgba(0,0,0,0.25)",
+              padding: "24px",
+              boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-              <h3 style={{ margin: 0, fontSize: "1.3rem" }}>
-                {isNew ? "+ Add New Gallery Photo" : "Edit Gallery Photo"}
-              </h3>
+              <h2 style={{ margin: 0, fontSize: "1.25rem", fontWeight: 700 }}>
+                {isNew ? "Add Industrial Photo" : "Edit Photo Details"}
+              </h2>
               <button
-                type="button"
                 onClick={closeModal}
-                style={{ background: "none", border: "none", fontSize: "1.4rem", cursor: "pointer", color: "#6B7280" }}
+                style={{ background: "none", border: "none", fontSize: "1.2rem", cursor: "pointer", color: "var(--ink-2)" }}
               >
                 ✕
               </button>
             </div>
 
-            {error && (
-              <div style={{ background: "#FEE2E2", color: "#991B1B", padding: "10px 14px", borderRadius: "8px", marginBottom: "16px", fontSize: "0.88rem" }}>
-                {error}
-              </div>
-            )}
+            {error && <div className="alert alert-err" style={{ marginBottom: "16px" }}>{error}</div>}
 
             <form onSubmit={handleSave}>
               <div style={{ marginBottom: "16px" }}>
@@ -351,7 +538,7 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="e.g. Master Packaging Line & Quality Depot"
+                  placeholder="e.g. Modern Spice Grinding Line"
                   required
                   style={{ width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid var(--line)" }}
                 />
@@ -360,23 +547,24 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px", marginBottom: "16px" }}>
                 <div>
                   <label style={{ display: "block", fontWeight: 600, fontSize: "0.88rem", marginBottom: "6px" }}>
-                    Category Filter
+                    Category *
                   </label>
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     style={{ width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid var(--line)" }}
                   >
-                    {CATEGORIES.map((c) => (
-                      <option key={c.key} value={c.key}>
-                        {c.label}
+                    {CATEGORIES.filter((c) => c.key !== "all").map((cat) => (
+                      <option key={cat.key} value={cat.key}>
+                        {cat.label}
                       </option>
                     ))}
                   </select>
                 </div>
+
                 <div>
                   <label style={{ display: "block", fontWeight: 600, fontSize: "0.88rem", marginBottom: "6px" }}>
-                    Tag / Label
+                    Highlight Tag
                   </label>
                   <input
                     type="text"
@@ -470,13 +658,53 @@ export default function GalleryManager({ initialItems }: { initialItems: Gallery
                 </label>
               </div>
 
-              <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
-                <button type="button" onClick={closeModal} className="abtn">
-                  Cancel
+              {/* DRAFT PREVIEW CARD IN MODAL */}
+              {previewing && (
+                <div style={{ marginBottom: "20px", padding: "16px", background: "#F3F4F6", borderRadius: "12px", border: "1px solid #E5E7EB" }}>
+                  <div style={{ fontWeight: 700, fontSize: "0.82rem", color: "#6B7280", marginBottom: "10px", textTransform: "uppercase" }}>
+                    Card Preview on /gallery
+                  </div>
+                  <div style={{ background: "#fff", borderRadius: "10px", overflow: "hidden", border: "1px solid #E5E7EB", maxWidth: "300px" }}>
+                    <div style={{ height: "160px", background: "#111", position: "relative" }}>
+                      {image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={image} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      ) : (
+                        <div style={{ display: "flex", height: "100%", alignItems: "center", justifyContent: "center", color: "#6B7280", fontSize: "0.8rem" }}>
+                          No image
+                        </div>
+                      )}
+                      <span style={{ position: "absolute", top: 8, left: 8, background: "rgba(0,0,0,0.75)", color: "#fff", fontSize: "0.68rem", padding: "2px 6px", borderRadius: 4, textTransform: "uppercase" }}>
+                        {category}
+                      </span>
+                    </div>
+                    <div style={{ padding: "12px" }}>
+                      <div style={{ fontWeight: 700, fontSize: "0.92rem", marginBottom: "4px" }}>{title || "Untitled Photo"}</div>
+                      {location && <div style={{ fontSize: "0.75rem", color: "#6B7280" }}>📍 {location}</div>}
+                      {tag && <div style={{ fontSize: "0.72rem", color: "var(--chilli)", fontWeight: 600 }}>🏷️ {tag}</div>}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <button
+                  type="button"
+                  onClick={() => setPreviewing(!previewing)}
+                  className="abtn abtn-ghost"
+                  style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}
+                >
+                  👁️ {previewing ? "Hide Preview" : "Preview Card"}
                 </button>
-                <button type="submit" disabled={loading || uploading} className="abtn abtn-primary">
-                  {loading ? "Saving..." : isNew ? "Add Photo" : "Save Changes"}
-                </button>
+
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <button type="button" onClick={closeModal} className="abtn">
+                    Cancel
+                  </button>
+                  <button type="submit" disabled={loading || uploading} className="abtn abtn-primary">
+                    {loading ? "Saving..." : isNew ? "Add Photo" : "Save Changes"}
+                  </button>
+                </div>
               </div>
             </form>
           </div>
