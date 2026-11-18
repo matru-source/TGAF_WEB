@@ -15174,3 +15174,12 @@ body:has(.fullscreen-video-theater)::-webkit-scrollbar {
     font-size: 0.74rem;
   }
 }
+
+/* Admin Audit Trail Badges */
+.audit-badge.badge-create { background: #DCFCE7; color: #166534; }
+.audit-badge.badge-update { background: #DBEAFE; color: #1E40AF; }
+.audit-badge.badge-delete { background: #FEE2E2; color: #991B1B; }
+.audit-badge.badge-login-ok { background: #DCFCE7; color: #166534; }
+.audit-badge.badge-login-fail { background: #FEE2E2; color: #991B1B; }
+.audit-badge.badge-settings { background: #F3E8FF; color: #6B21A8; }
+.audit-badge.badge-default { background: #F3F4F6; color: #374151; }

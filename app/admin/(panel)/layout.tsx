@@ -17,7 +17,22 @@ export default async function PanelLayout({ children }: { children: React.ReactN
           <Brand variant="invert" />
           <AdminNav />
           <div className="foot">
-            <div className="who">{user.name}</div>
+            <div className="who" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
+              <span>{user.name}</span>
+              <span
+                style={{
+                  fontSize: "0.7rem",
+                  padding: "2px 8px",
+                  borderRadius: "999px",
+                  background: user.role === "ADMIN" ? "#DC2626" : "#4B5563",
+                  color: "#FFFFFF",
+                  fontWeight: 700,
+                  letterSpacing: "0.04em",
+                }}
+              >
+                {user.role}
+              </span>
+            </div>
             <div>{user.email}</div>
             <LogoutButton />
           </div>

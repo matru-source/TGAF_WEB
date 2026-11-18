@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { teamMemberSchema, cleanTeamMember } from "@/lib/schemas";
+import { logUserActivity } from "@/lib/audit";
 
 export const runtime = "nodejs";
 
@@ -28,6 +29,15 @@ export async function POST(req: Request) {
   }
   try {
     const created = await prisma.teamMember.create({ data: cleanTeamMember(parsed.data) });
+
+    logUserActivity(
+      user,
+      "CREATE",
+      "TeamMember",
+      created.id,
+      `Created new team member "${created.name}" (${created.role})`,
+    ).catch(() => {});
+
     return NextResponse.json({ ok: true, id: created.id }, { status: 201 });
   } catch {
     return NextResponse.json({ error: "Could not create team member." }, { status: 400 });

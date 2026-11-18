@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/auth";
+import { assertAdmin } from "@/lib/auth";
+import { logUserActivity } from "@/lib/audit";
 
 export const runtime = "nodejs";
 
@@ -10,8 +11,10 @@ const schema = z.object({
 });
 
 export async function POST(req: Request) {
-  const user = await getCurrentUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // Enforce ADMIN-only settings modification (RBAC)
+  const auth = await assertAdmin();
+  if ("errorResponse" in auth) return auth.errorResponse;
+  const { user } = auth;
 
   const body = await req.json().catch(() => null);
   const parsed = schema.safeParse(body);
@@ -25,6 +28,15 @@ export async function POST(req: Request) {
         prisma.setting.upsert({ where: { key }, update: { value }, create: { key, value } }),
       ),
     );
+
+    logUserActivity(
+      user,
+      "SETTINGS_UPDATE",
+      "Setting",
+      null,
+      `Updated ${entries.length} site settings keys (${entries.map(([k]) => k).join(", ")})`,
+    ).catch(() => {});
+
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ error: "Could not save settings." }, { status: 503 });

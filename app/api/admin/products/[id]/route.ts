@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser, assertAdmin } from "@/lib/auth";
 import { productSchema, cleanProduct } from "@/lib/schemas";
+import { logUserActivity } from "@/lib/audit";
 
 export const runtime = "nodejs";
 
@@ -18,7 +19,19 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     );
   }
   try {
-    await prisma.product.update({ where: { id: params.id }, data: cleanProduct(parsed.data) });
+    const updated = await prisma.product.update({
+      where: { id: params.id },
+      data: cleanProduct(parsed.data),
+    });
+
+    logUserActivity(
+      user,
+      "UPDATE",
+      "Product",
+      params.id,
+      `Updated product "${updated.name}" (${updated.slug})`,
+    ).catch(() => {});
+
     return NextResponse.json({ ok: true });
   } catch (e: unknown) {
     const msg =
@@ -30,10 +43,27 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 }
 
 export async function DELETE(_req: Request, { params }: { params: { id: string } }) {
-  const user = await getCurrentUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // Enforce ADMIN-only deletion (RBAC)
+  const auth = await assertAdmin();
+  if ("errorResponse" in auth) return auth.errorResponse;
+  const { user } = auth;
+
   try {
+    const existing = await prisma.product.findUnique({
+      where: { id: params.id },
+      select: { name: true, slug: true },
+    });
+
     await prisma.product.delete({ where: { id: params.id } });
+
+    logUserActivity(
+      user,
+      "DELETE",
+      "Product",
+      params.id,
+      `Deleted product "${existing?.name || params.id}"`,
+    ).catch(() => {});
+
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ error: "Could not delete product." }, { status: 400 });

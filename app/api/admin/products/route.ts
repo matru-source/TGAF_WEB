@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { productSchema, cleanProduct } from "@/lib/schemas";
+import { logUserActivity } from "@/lib/audit";
 
 export const runtime = "nodejs";
 
@@ -28,6 +29,15 @@ export async function POST(req: Request) {
   }
   try {
     const created = await prisma.product.create({ data: cleanProduct(parsed.data) });
+
+    logUserActivity(
+      user,
+      "CREATE",
+      "Product",
+      created.id,
+      `Created new product "${created.name}" (${created.slug})`,
+    ).catch(() => {});
+
     return NextResponse.json({ ok: true, id: created.id }, { status: 201 });
   } catch (e: unknown) {
     const msg =

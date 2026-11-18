@@ -126,3 +126,21 @@ model Setting {
   value     String
   updatedAt DateTime @updatedAt
 }
+
+/// Audit trail tracking administrator actions, mutations and security events.
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  userName  String   @default("System")
+  userEmail String
+  action    String   // CREATE | UPDATE | DELETE | LOGIN_SUCCESS | LOGIN_FAILED | SETTINGS_UPDATE
+  entity    String   // Product | TeamMember | Enquiry | Setting | Auth
+  entityId  String?
+  details   String
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@index([action])
+  @@index([entity])
+  @@index([createdAt])
+}

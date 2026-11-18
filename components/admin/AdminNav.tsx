@@ -8,6 +8,7 @@ const ITEMS = [
   ["Team", "/admin/team"],
   ["Enquiries", "/admin/enquiries"],
   ["Settings", "/admin/settings"],
+  ["Activity Logs", "/admin/activity"],
 ];
 
 export default function AdminNav() {
