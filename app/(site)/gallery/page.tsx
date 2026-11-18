@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/site/PageHero";
 import GalleryView from "@/components/site/GalleryView";
+import { getGalleryItems } from "@/lib/queries";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Visual Gallery & Operations · Goodearth Foods",
@@ -8,7 +11,8 @@ export const metadata: Metadata = {
     "Explore Goodearth's authentic journey in pictures: from Nigerian outgrower farm communities and harvest depots to modern Ikorodu processing facilities and metropolitan Lagos transit campaigns.",
 };
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  const items = await getGalleryItems();
   return (
     <>
       <PageHero
@@ -18,7 +22,7 @@ export default function GalleryPage() {
         crumb="Gallery"
         tone="warm"
       />
-      <GalleryView />
+      <GalleryView items={items} />
     </>
   );
 }

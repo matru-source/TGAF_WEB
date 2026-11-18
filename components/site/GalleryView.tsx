@@ -6,16 +6,18 @@ import {
   GALLERY_CATEGORIES,
   GALLERY_ITEMS,
   type GalleryCategory,
+  type GalleryItem,
 } from "@/lib/data";
 
-export default function GalleryView() {
+export default function GalleryView({ items = GALLERY_ITEMS }: { items?: GalleryItem[] }) {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>("all");
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
+  const allItems = items && items.length > 0 ? items : GALLERY_ITEMS;
   const filteredItems =
     activeCategory === "all"
-      ? GALLERY_ITEMS
-      : GALLERY_ITEMS.filter((item) => item.category === activeCategory);
+      ? allItems
+      : allItems.filter((item) => item.category === activeCategory);
 
   const activeItem = selectedIdx !== null ? filteredItems[selectedIdx] : null;
 

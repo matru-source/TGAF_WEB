@@ -145,3 +145,59 @@ model AuditLog {
   @@index([entity])
   @@index([createdAt])
 }
+
+/// Visual gallery items for the /gallery page.
+model GalleryItem {
+  id        String   @id @default(cuid())
+  title     String
+  category  String   // sourcing | processing | quality | community | transit
+  image     String
+  caption   String?
+  location  String?
+  tag       String?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([order])
+  @@index([published])
+}
+
+/// Key distributor celebrations, milestones and birthday honors.
+model CelebrationPost {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  celebrantName String
+  role          String
+  company       String
+  date          String
+  category      String   @default("BIRTHDAY") // BIRTHDAY | MILESTONE | TRADE_HONORS
+  quote         String?
+  bodyText      String?
+  images        String[]
+  badges        String[]
+  order         Int      @default(0)
+  published     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([order])
+  @@index([published])
+}
+
+/// B2B institutional clients and trusted brand partners.
+model B2BPartner {
+  id        String   @id @default(cuid())
+  name      String
+  logo      String
+  category  String?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
+  @@index([published])
+}

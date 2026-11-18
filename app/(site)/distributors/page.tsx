@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/site/PageHero";
 import DistributorsView from "@/components/site/DistributorsView";
+import { getCelebrationPosts } from "@/lib/queries";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Distributor Celebrations & Trade Honors · Goodearth Foods",
@@ -16,7 +19,8 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function DistributorsPage() {
+export default async function DistributorsPage() {
+  const posts = await getCelebrationPosts();
   return (
     <>
       <PageHero
@@ -26,7 +30,7 @@ export default function DistributorsPage() {
         crumb="Celebrations"
         tone="distributors"
       />
-      <DistributorsView />
+      <DistributorsView posts={posts} />
     </>
   );
 }

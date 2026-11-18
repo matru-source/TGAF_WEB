@@ -228,7 +228,11 @@ function PostCarouselCard({
   );
 }
 
-export default function DistributorsView() {
+export default function DistributorsView({
+  posts = DISTRIBUTOR_CELEBRATION_POSTS,
+}: {
+  posts?: CelebrationPost[];
+}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animIdRef = useRef<number | null>(null);
   const particlesRef = useRef<Particle[]>([]);
@@ -383,7 +387,8 @@ export default function DistributorsView() {
     };
   }, [triggerPopper]);
 
-  const filteredPosts = DISTRIBUTOR_CELEBRATION_POSTS.filter((post) => {
+  const allPosts = posts && posts.length > 0 ? posts : DISTRIBUTOR_CELEBRATION_POSTS;
+  const filteredPosts = allPosts.filter((post) => {
     if (selectedFilter === "all") return true;
     return post.category === selectedFilter;
   });
@@ -402,7 +407,7 @@ export default function DistributorsView() {
               className={`celebration-filter-pill ${selectedFilter === "all" ? "active" : ""}`}
               onClick={() => setSelectedFilter("all")}
             >
-              All Celebrations ({DISTRIBUTOR_CELEBRATION_POSTS.length})
+              All Celebrations ({allPosts.length})
             </button>
             <button
               type="button"

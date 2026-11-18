@@ -10,7 +10,13 @@ import {
   getProductStageClass,
 } from "@/components/site/FeaturedProducts";
 
-export default function Products({ products }: { products: UIProduct[] }) {
+export default function Products({
+  products,
+  partners = B2B_CUSTOMERS,
+}: {
+  products: UIProduct[];
+  partners?: { name: string; logo: string }[];
+}) {
   const [tab, setTab] = useState<"b2c" | "b2b">("b2c");
   const b2c = products.filter((p) => p.segment === "B2C");
 
@@ -255,7 +261,7 @@ export default function Products({ products }: { products: UIProduct[] }) {
             <div className="b2b-customers reveal d1">
               <h3 className="b2b-col-title">Trusted B2B Partners</h3>
               <div className="b2b-partner-grid">
-                {B2B_CUSTOMERS.map((cu) => (
+                {(partners && partners.length > 0 ? partners : B2B_CUSTOMERS).map((cu) => (
                   <div className="b2b-partner-card" key={cu.name}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={cu.logo} alt={cu.name} loading="lazy" />

@@ -5,10 +5,14 @@ import {
   FALLBACK_PRODUCTS,
   DEFAULT_STATS,
   TEAM,
+  GALLERY_ITEMS,
+  B2B_CUSTOMERS,
   type UIProduct,
   type UITeamMember,
   type AccentKey,
+  type GalleryItem,
 } from "./data";
+import { DISTRIBUTOR_CELEBRATION_POSTS, type CelebrationPost } from "./celebrationsData";
 
 const accentToKey = (a: string): AccentKey =>
   a === "TURMERIC" ? "turmeric" : a === "GINGER" ? "ginger" : "chilli";
@@ -195,5 +199,94 @@ export async function getStats(): Promise<StatItem[]> {
   return DEFAULT_STATS.map((s) => ({
     ...s,
     value: overrides.has(s.key) && !Number.isNaN(overrides.get(s.key)!) ? overrides.get(s.key)! : s.value,
+  }));
+}
+
+/** Published gallery photos from DB; falls back to static items if DB is unconfigured/empty. */
+export async function getGalleryItems(): Promise<GalleryItem[]> {
+  if (DB_DISABLED) return GALLERY_ITEMS;
+  const rows = await withTimeout(
+    prisma.galleryItem.findMany({ where: { published: true }, orderBy: [{ order: "asc" }, { createdAt: "desc" }] }),
+    2500,
+  );
+  if (!rows || !rows.length) return GALLERY_ITEMS;
+  return rows.map((r) => ({
+    id: r.id,
+    title: r.title,
+    category: (r.category as GalleryItem["category"]) || "packaging",
+    categoryLabel: r.category.charAt(0).toUpperCase() + r.category.slice(1),
+    image: r.image,
+    caption: r.caption || "",
+    location: r.location || "Ikorodu Facility, Lagos",
+    aspect: "landscape",
+    tag: r.tag || undefined,
+  }));
+}
+
+/** Published distributor celebration posts from DB; falls back to static posts. */
+export async function getCelebrationPosts(): Promise<CelebrationPost[]> {
+  if (DB_DISABLED) return DISTRIBUTOR_CELEBRATION_POSTS;
+  const rows = await withTimeout(
+    prisma.celebrationPost.findMany({ where: { published: true }, orderBy: [{ order: "asc" }, { createdAt: "desc" }] }),
+    2500,
+  );
+  if (!rows || !rows.length) return DISTRIBUTOR_CELEBRATION_POSTS;
+
+  return rows.map((r, idx) => {
+    const rawParagraphs = r.bodyText ? r.bodyText.split("\n\n").map((p) => p.trim()).filter(Boolean) : [];
+    const highlights = r.badges.map((b) => {
+      const parts = b.split(" ");
+      const icon = parts[0] || "✨";
+      const text = parts.slice(1).join(" ") || b;
+      return { icon, text };
+    });
+
+    const slides = r.images.map((img, sIdx) => ({
+      id: `${r.id}-slide-${sIdx}`,
+      src: img,
+      alt: `${r.celebrantName} - ${r.company}`,
+      title: `${r.celebrantName} - Slide ${sIdx + 1}`,
+      badge: `${r.date} · Celebration`,
+    }));
+
+    return {
+      id: r.slug,
+      postNumber: `POST #${String(idx + 1).padStart(2, "0")}`,
+      category: (r.category.toLowerCase() as CelebrationPost["category"]) || "birthday",
+      categoryLabel: r.category === "BIRTHDAY" ? "Birthday Celebration Spotlight" : "Trade Honor Spotlight",
+      date: r.date,
+      badge: `🎉 ${r.date} Celebration`,
+      personName: r.celebrantName,
+      role: r.role,
+      company: r.company,
+      region: "Distribution Network",
+      quote: r.quote || "",
+      quoteAuthor: `Official Wishes from TG Agri Farms Ltd & Good Earth`,
+      paragraphs: rawParagraphs.length > 0 ? rawParagraphs : [r.quote || ""],
+      highlights: highlights.length > 0 ? highlights : [{ icon: "✨", text: r.company }],
+      slides: slides.length > 0 ? slides : [
+        {
+          id: `${r.id}-placeholder`,
+          src: "/img/celebrations/madam-ifueko-ozigbo-birthday-portrait.jpg",
+          alt: r.celebrantName,
+          title: r.celebrantName,
+        },
+      ],
+      isFeatured: idx === 0,
+    };
+  });
+}
+
+/** Published B2B partner customer logos from DB; falls back to static logos. */
+export async function getB2BPartners(): Promise<{ name: string; logo: string }[]> {
+  if (DB_DISABLED) return B2B_CUSTOMERS;
+  const rows = await withTimeout(
+    prisma.b2BPartner.findMany({ where: { published: true }, orderBy: [{ order: "asc" }, { createdAt: "desc" }] }),
+    2500,
+  );
+  if (!rows || !rows.length) return B2B_CUSTOMERS;
+  return rows.map((r) => ({
+    name: r.name,
+    logo: r.logo,
   }));
 }

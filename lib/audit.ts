@@ -14,7 +14,16 @@ export interface LogActivityParams {
     | "LOGIN_FAILED"
     | "SETTINGS_UPDATE"
     | "STATUS_CHANGE";
-  entity: "Product" | "TeamMember" | "Enquiry" | "Setting" | "Auth" | "Media";
+  entity:
+    | "Product"
+    | "TeamMember"
+    | "Enquiry"
+    | "Setting"
+    | "Auth"
+    | "Media"
+    | "GalleryItem"
+    | "CelebrationPost"
+    | "B2BPartner";
   entityId?: string | null;
   details: string;
   ipAddress?: string | null;

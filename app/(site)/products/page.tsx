@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/site/PageHero";
 import Products from "@/components/site/Products";
 import CtaBand from "@/components/site/CtaBand";
-import { getProducts } from "@/lib/queries";
+import { getProducts, getB2BPartners } from "@/lib/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ProductsPage() {
-  const products = await getProducts();
+  const [products, partners] = await Promise.all([getProducts(), getB2BPartners()]);
   return (
     <>
       <PageHero
@@ -23,7 +23,7 @@ export default async function ProductsPage() {
         crumb="Products"
         tone="products"
       />
-      <Products products={products} />
+      <Products products={products} partners={partners} />
       <CtaBand title="Need bulk supply for your business?" ctaLabel="Request a quote" />
     </>
   );

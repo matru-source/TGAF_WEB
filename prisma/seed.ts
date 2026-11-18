@@ -1,6 +1,7 @@
 import { PrismaClient, type Accent, type Segment } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { FALLBACK_PRODUCTS, TEAM } from "../lib/data";
+import { FALLBACK_PRODUCTS, TEAM, GALLERY_ITEMS, B2B_CUSTOMERS } from "../lib/data";
+import { DISTRIBUTOR_CELEBRATION_POSTS } from "../lib/celebrationsData";
 
 const prisma = new PrismaClient();
 
@@ -105,6 +106,76 @@ async function main() {
     await prisma.setting.upsert({ where: { key }, update: { value }, create: { key, value } });
   }
   console.log(`✓ settings ready`);
+
+  // ---- Gallery Items ----
+  let galleryOrder = 0;
+  for (const item of GALLERY_ITEMS) {
+    const existing = await prisma.galleryItem.findFirst({ where: { title: item.title } });
+    if (!existing) {
+      await prisma.galleryItem.create({
+        data: {
+          title: item.title,
+          category: item.category,
+          image: item.image,
+          caption: item.caption ?? null,
+          location: item.location ?? null,
+          tag: item.tag ?? null,
+          order: galleryOrder++,
+          published: true,
+        },
+      });
+    }
+  }
+  console.log(`✓ ${GALLERY_ITEMS.length} gallery items seeded`);
+
+  // ---- Distributor Celebrations ----
+  for (const post of DISTRIBUTOR_CELEBRATION_POSTS) {
+    await prisma.celebrationPost.upsert({
+      where: { slug: post.id },
+      update: {
+        celebrantName: post.personName,
+        role: post.role,
+        company: post.company,
+        date: post.date,
+        quote: post.quote,
+        bodyText: post.paragraphs.join("\n\n"),
+        images: post.slides.map((s) => s.src),
+        badges: post.highlights.map((h) => `${h.icon} ${h.text}`),
+      },
+      create: {
+        slug: post.id,
+        celebrantName: post.personName,
+        role: post.role,
+        company: post.company,
+        date: post.date,
+        category: post.category.toUpperCase(),
+        quote: post.quote,
+        bodyText: post.paragraphs.join("\n\n"),
+        images: post.slides.map((s) => s.src),
+        badges: post.highlights.map((h) => `${h.icon} ${h.text}`),
+        order: 0,
+        published: true,
+      },
+    });
+  }
+  console.log(`✓ ${DISTRIBUTOR_CELEBRATION_POSTS.length} celebration posts seeded`);
+
+  // ---- B2B Partners ----
+  let partnerOrder = 0;
+  for (const p of B2B_CUSTOMERS) {
+    const existing = await prisma.b2BPartner.findFirst({ where: { name: p.name } });
+    if (!existing) {
+      await prisma.b2BPartner.create({
+        data: {
+          name: p.name,
+          logo: p.logo,
+          order: partnerOrder++,
+          published: true,
+        },
+      });
+    }
+  }
+  console.log(`✓ ${B2B_CUSTOMERS.length} B2B partners seeded`);
 }
 
 main()
