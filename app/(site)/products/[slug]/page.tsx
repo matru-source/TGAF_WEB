@@ -27,8 +27,14 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const a = accentClass(product.accent);
   const stageClass = getProductStageClass(product.slug);
   const rawList = [product.image, ...(product.images ?? [])].filter(Boolean) as string[];
-  const gallery = [...new Set(rawList.map((src) => src.replace(/\.jpe?g$/i, ".png")))]
-    .filter((src) => !src.includes("-studio.jpg"));
+  const gallery = [
+    ...new Set(
+      rawList.map((src) => {
+        if (src.startsWith("http://") || src.startsWith("https://")) return src;
+        return src.replace(/\.jpe?g$/i, ".png");
+      })
+    ),
+  ].filter((src) => !src.includes("-studio.jpg"));
   const packaging = getProductPackaging(product);
   const specs = [
     ["Grammage", product.sizes && product.sizes.length > 0 ? product.sizes.join(" · ") : null],

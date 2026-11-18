@@ -28,7 +28,9 @@ function withTimeout<T>(p: Promise<T>, ms: number): Promise<T | null> {
 
 const sanitizeImageSrc = (src?: string | null): string => {
   if (!src) return "";
-  // Always use transparent .png instead of .jpg to eliminate grey/white background boxes
+  // Do not alter remote Cloudinary or external HTTPS URLs
+  if (src.startsWith("http://") || src.startsWith("https://")) return src;
+  // Always use transparent .png instead of .jpg for local bundled assets
   return src.replace(/\.jpe?g$/i, ".png");
 };
 
@@ -39,26 +41,26 @@ const mapProduct = (p: {
   asta: string | null; scoville: string | null; usage: string | null; featured: boolean;
 }): UIProduct => {
   const fb = FALLBACK_PRODUCTS.find((f) => f.slug === p.slug);
-  const cleanImage = sanitizeImageSrc(fb?.image || p.image) || null;
-  const rawImages = (fb?.images && fb.images.length > 0) ? fb.images : (p.images ?? []);
+  const cleanImage = p.image || (fb?.image ? sanitizeImageSrc(fb.image) : null);
+  const rawImages = (p.images && p.images.length > 0) ? p.images : (fb?.images ?? []);
   const cleanImages = rawImages
     .map(sanitizeImageSrc)
     .filter((img) => Boolean(img) && !img.includes("-studio.jpg"));
 
   return {
     id: p.id, slug: p.slug, name: p.name, segment: p.segment, accent: accentToKey(p.accent),
-    tagline: fb?.tagline || p.tagline,
-    description: fb?.description || p.description,
+    tagline: p.tagline || fb?.tagline,
+    description: p.description || fb?.description || "",
     image: cleanImage,
     images: cleanImages.length > 0 ? cleanImages : (cleanImage ? [cleanImage] : []),
-    sizes: fb?.sizes && fb.sizes.length > 0 ? fb.sizes : p.sizes,
-    formats: fb?.formats && fb.formats.length > 0 ? fb.formats : p.formats,
-    costPositioning: fb?.costPositioning || p.costPositioning,
-    marketCategory: fb?.marketCategory || p.marketCategory,
-    colour: fb?.colour || p.colour,
-    asta: fb?.asta || p.asta,
-    scoville: fb?.scoville || p.scoville,
-    usage: fb?.usage || p.usage,
+    sizes: p.sizes && p.sizes.length > 0 ? p.sizes : (fb?.sizes ?? []),
+    formats: p.formats && p.formats.length > 0 ? p.formats : (fb?.formats ?? []),
+    costPositioning: p.costPositioning || fb?.costPositioning,
+    marketCategory: p.marketCategory || fb?.marketCategory,
+    colour: p.colour || fb?.colour,
+    asta: p.asta || fb?.asta,
+    scoville: p.scoville || fb?.scoville,
+    usage: p.usage || fb?.usage,
     packaging: fb?.packaging,
     technicalSpecs: fb?.technicalSpecs,
     shelfLife: fb?.shelfLife,
@@ -86,20 +88,20 @@ export const getProducts = cache(async function getProducts(): Promise<UIProduct
       allMap.set(p.slug, {
         ...fb,
         ...p,
-        description: fb.description || p.description,
-        sizes: fb.sizes && fb.sizes.length > 0 ? fb.sizes : p.sizes,
-        formats: fb.formats && fb.formats.length > 0 ? fb.formats : p.formats,
-        colour: fb.colour || p.colour,
-        asta: fb.asta || p.asta,
-        scoville: fb.scoville || p.scoville,
-        usage: fb.usage || p.usage,
-        marketCategory: fb.marketCategory || p.marketCategory,
+        description: p.description || fb.description,
+        sizes: p.sizes && p.sizes.length > 0 ? p.sizes : fb.sizes,
+        formats: p.formats && p.formats.length > 0 ? p.formats : fb.formats,
+        colour: p.colour || fb.colour,
+        asta: p.asta || fb.asta,
+        scoville: p.scoville || fb.scoville,
+        usage: p.usage || fb.usage,
+        marketCategory: p.marketCategory || fb.marketCategory,
         technicalSpecs: fb.technicalSpecs,
         shelfLife: fb.shelfLife,
         nutritionalTraits: fb.nutritionalTraits,
         strengths: fb.strengths,
-        image: fb.image ?? p.image,
-        images: (fb.images && fb.images.length > 0) ? fb.images : p.images,
+        image: p.image || fb.image,
+        images: (p.images && p.images.length > 0) ? p.images : fb.images,
       });
     } else {
       allMap.set(p.slug, p);
@@ -174,7 +176,7 @@ export async function getTeam(): Promise<UITeamMember[]> {
       bio: m.bio,
       bullets: fallback?.bullets,
       initials: m.initials,
-      photo: fallback?.photo || m.photo,
+      photo: m.photo || fallback?.photo,
     };
   });
 }
