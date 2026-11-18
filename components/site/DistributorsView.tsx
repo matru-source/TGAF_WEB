@@ -444,26 +444,6 @@ export default function DistributorsView() {
           ))}
         </div>
 
-        {/* Upcoming & Future Celebrations Ingestion Card */}
-        <section className="celebration-nominate-card">
-          <div className="nominate-icon">🌟</div>
-          <div className="nominate-content">
-            <span className="nominate-eyebrow">DISTRIBUTOR TRADE HONORS</span>
-            <h3 className="nominate-title">Celebrate Your Milestone With Good Earth</h3>
-            <p className="nominate-desc">
-              Every distributor in our nationwide network has an inspiring story worth celebrating.
-              Are you an authorized Good Earth key distributor, super-stockist, or wholesale partner marking
-              a birthday, business anniversary, or regional sales milestone? Connect with your territorial
-              sales manager or send a celebration request to be featured on our official Trade Honors page.
-            </p>
-          </div>
-          <div className="nominate-action">
-            <Link href="/contact" className="btn btn-primary nominate-btn">
-              <span>Submit a Milestone Request</span>
-              <span className="arr">→</span>
-            </Link>
-          </div>
-        </section>
 
         {/* Warm Dedication Tribute Banner */}
         <div className="celebration-dedication-banner">
